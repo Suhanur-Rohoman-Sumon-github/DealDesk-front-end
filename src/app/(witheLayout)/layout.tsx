@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body
-        className="antialiased   font-poppins"
+        className="antialiased bg-no-repeat  font-poppins bg-[#16142a]"
         style={{
           backgroundImage: "url('https://centure.volkovdesign.com/img/bg.png')",
         }}
@@ -31,7 +31,6 @@ export default function RootLayout({
         <Providers>
           <div className="flex flex-col min-h-screen">
             <MainNavbar />
-            <div className="bg-[#f85606]"></div>
 
             <main className="container mx-auto max-w-7xl flex-grow">
               {children}

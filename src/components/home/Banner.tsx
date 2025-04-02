@@ -1,6 +1,6 @@
 "use client";
 import { Typewriter } from "react-simple-typewriter";
-
+import { FaArrowRightLong } from "react-icons/fa6";
 const Banner = () => {
   return (
     <div className="relative w-full h-[800px] flex flex-col md:flex-row items-center justify-between text-center pt-8 px-4">
@@ -32,12 +32,14 @@ const Banner = () => {
           Build modern, scalable, and high-performance websites that captivate
           your audience and drive business growth.
         </p>
-        <button className="relative px-14 py-4 text-[#ffffff] rounded-md bg-gradient-to-r from-[#572c7c] to-[#9133df] mt-4">
-          Get Started
-        </button>
-        <button className="relative px-14 py-4  rounded-md border border-[#5f5d72] text-[#ffffff] bg-transparent mt-4 ml-4 hover:border-[#9133df] transition duration-300">
-          visit marketplace
-        </button>
+        <div className="flex items-center">
+          <button className=" px-14 py-4 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] mt-4 flex items-center   hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
+            Get Started <FaArrowRightLong />
+          </button>
+          <button className="relative px-14 py-4  rounded-md border border-[#5f5d72] text-[#ffffff] bg-transparent mt-4 ml-4 hover:border-[#9133df] transition duration-300">
+            visit marketplace
+          </button>
+        </div>
       </div>
 
       {/* Right Section */}

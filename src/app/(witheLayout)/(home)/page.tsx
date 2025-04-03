@@ -1,21 +1,21 @@
 import Banner from "@/components/home/Banner";
+import CallToAction from "@/components/home/CallToAction";
+import ClientReviews from "@/components/home/ClientReviews";
 import AgencyStats from "@/components/home/CompanyState";
+import OurTeam from "@/components/home/OurTeam";
+import PopularServices from "@/components/home/PopularServices";
 import React from "react";
 
 const page = () => {
   return (
-    <div className=" bg-no-repeat  ">
+    <div className=" ">
       <Banner />
       <AgencyStats />
-      <div
-        className="bg-no-repeat bg-cover bg-center bg-[#16142a]"
-        style={{
-          backgroundImage: "url('https://centure.volkovdesign.com/img/bg.png)",
-        }}
-      >
-        <Banner />
-        <Banner />
-      </div>
+
+      <PopularServices />
+      <ClientReviews />
+      <OurTeam />
+      <CallToAction />
     </div>
   );
 };

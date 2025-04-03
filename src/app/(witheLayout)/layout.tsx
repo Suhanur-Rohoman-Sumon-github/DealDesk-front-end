@@ -22,20 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
-      <body
-        className="antialiased bg-no-repeat  font-poppins bg-[#16142a]"
-        style={{
-          backgroundImage: "url('https://centure.volkovdesign.com/img/bg.png')",
-        }}
-      >
+      <body className="antialiased  font-poppins bg-[#16142a]">
         <Providers>
           <div className="flex flex-col min-h-screen">
             <MainNavbar />
 
-            <main className="container mx-auto max-w-7xl flex-grow">
+            <main className=" ">
               {children}
 
-              {/* <MainFooter /> */}
+              <MainFooter />
             </main>
           </div>
         </Providers>

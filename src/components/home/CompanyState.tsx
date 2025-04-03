@@ -54,10 +54,10 @@ const AgencyStats = () => {
   }, []);
 
   return (
-    <div className="w-full  flex justify-center">
+    <div className="w-full  flex justify-center -mt-8 ">
       <div
         ref={statsRef}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full"
       >
         {stats.map((stat, index) => (
           <div

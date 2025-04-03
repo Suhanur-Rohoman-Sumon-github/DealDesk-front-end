@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const AboutUs = () => {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12 text-gray-800">
+    <div className="max-w-7xl mx-auto px-6 py-12 text-gray-800">
       {/* Header Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900">

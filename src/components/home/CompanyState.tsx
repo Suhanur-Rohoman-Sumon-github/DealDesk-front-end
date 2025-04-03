@@ -1,12 +1,44 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 const AgencyStats = () => {
   const stats = [
-    { value: 5, suffix: "+ Years", label: "Delivering Digital Excellence" },
-    { value: 5800, suffix: "+", label: "Businesses We’ve Helped" },
-    { value: 374000, suffix: "+", label: "Revenue Boosted for Clients" },
-    { value: 100000, suffix: "+", label: "Marketing Budget Managed" },
+    {
+      value: 5,
+      suffix: "+ Years",
+      label: "Delivering Digital Excellence",
+      leftImage:
+        "https://centure.volkovdesign.com/img/dodgers/stats--purple.svg",
+      rightImage:
+        "https://centure.volkovdesign.com/img/dodgers/stats--purple.svg",
+    },
+    {
+      value: 5800,
+      suffix: "+",
+      label: "Businesses We’ve Helped",
+      leftImage:
+        "https://centure.volkovdesign.com/img/dodgers/stats--orange.svg",
+      rightImage:
+        "https://centure.volkovdesign.com/img/dodgers/stats--orange.svg",
+    },
+    {
+      value: 374000,
+      suffix: "+",
+      label: "Revenue Boosted for Clients",
+      leftImage:
+        "https://centure.volkovdesign.com/img/dodgers/stats--green.svg",
+      rightImage:
+        "https://centure.volkovdesign.com/img/dodgers/stats--green.svg",
+    },
+    {
+      value: 100000,
+      suffix: "+",
+      label: "Marketing Budget Managed",
+      leftImage: "https://centure.volkovdesign.com/img/dodgers/stats--blue.svg",
+      rightImage:
+        "https://centure.volkovdesign.com/img/dodgers/stats--blue.svg",
+    },
   ];
 
   const [counts, setCounts] = useState(stats.map(() => 0));
@@ -54,7 +86,7 @@ const AgencyStats = () => {
   }, []);
 
   return (
-    <div className="w-full  flex justify-center -mt-8 ">
+    <div className="w-full flex justify-center -mt-8">
       <div
         ref={statsRef}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full"
@@ -62,13 +94,32 @@ const AgencyStats = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="p-8 rounded-md  backdrop-blur-md border border-white/20 shadow-lg text-center"
+            className="relative p-8 rounded-md backdrop-blur-3xl bg-white/10 border border-white/20 shadow-lg text-center"
           >
+            {/* Left Image */}
+            <Image
+              src={stat.leftImage}
+              alt="Left Decoration"
+              width={20}
+              height={20}
+              className="absolute left-2 top-2 transform "
+            />
+
+            {/* Stats */}
             <h3 className="text-4xl font-bold text-white">
               {counts[index].toLocaleString()}
               {stat.suffix}
             </h3>
             <p className="text-lg text-gray-300 mt-2">{stat.label}</p>
+
+            {/* Right Image */}
+            <Image
+              src={stat.rightImage}
+              alt="Right Decoration"
+              width={20}
+              height={20}
+              className="absolute  top-2 transform  right-2"
+            />
           </div>
         ))}
       </div>

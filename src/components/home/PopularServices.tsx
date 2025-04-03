@@ -7,6 +7,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import Title from "../title/Title";
 import ServiceCard from "./ServiceCard";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const services = [
   {
@@ -60,6 +61,9 @@ const PopularServices = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <button className="float-right mt-8 px-14 py-4 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df]  flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
+        Vew all services <FaArrowRightLong />
+      </button>
     </div>
   );
 };

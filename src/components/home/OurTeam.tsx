@@ -47,17 +47,38 @@ const teamMembers = [
   },
 ];
 
+
+const decorations = [
+  "https://centure.volkovdesign.com/img/dodgers/dots--green.svg",
+  "https://centure.volkovdesign.com/img/dodgers/dots--blue.svg",
+  "https://centure.volkovdesign.com/img/dodgers/dots--red.svg",
+  "https://centure.volkovdesign.com/img/dodgers/dots--yellow.svg",
+  "https://centure.volkovdesign.com/img/dodgers/dots--purple.svg",
+  "https://centure.volkovdesign.com/img/dodgers/dots--orange.svg",
+];
+
 const OurTeam = () => {
   return (
-    <div className="max-w-7xl mx-auto py-10  text-white text-center">
+    <div className="max-w-7xl mx-auto py-10 text-white text-center">
       <Title title="our team" subTitle="meet our whole team" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-        {teamMembers.map((member) => (
+        {teamMembers.map((member, index) => (
           <div
             key={member.id}
-            className="relative  border border-white/30 p-6 rounded-lg shadow-lg backdrop-blur-md transition-all hover:scale-105"
+            className="relative backdrop-blur-3xl bg-white/10 border border-white/30 p-6 rounded-lg shadow-lg transition-all hover:scale-105"
           >
+          
+            <div className="absolute top-4 left-4 w-20 h-20 opacity-80">
+              <Image
+                src={decorations[index % decorations.length]} 
+                alt="Decoration"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
             <Image
               src={member.image}
               alt={member.name}

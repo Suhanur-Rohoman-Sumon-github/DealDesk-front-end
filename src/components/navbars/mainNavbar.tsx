@@ -93,7 +93,7 @@ const MainNavbar = () => {
             {" "}
             {/* Add space between items */}
             <Link
-              href="/contact"
+              href="/login"
               onClick={() => handleLinkClick("contact")}
               className={`${
                 activeLink === "contact" ? "text-gray-400" : "text-white"
@@ -101,7 +101,7 @@ const MainNavbar = () => {
             >
               Login
             </Link>
-            <Link href="/login">
+            <Link href="/signup">
               <button className="px-8 py-2 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
                 Join <IoLogInOutline className="text-2xl" />
               </button>

@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-
+import Image from "next/image";
+import { IoLogInOutline } from "react-icons/io5";
 const MainNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string>(""); // State to track active link
@@ -18,10 +19,32 @@ const MainNavbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]">
-            <Link href="/" onClick={() => handleLinkClick("home")}>
+          <div className="flex items-center space-x-3 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md">
+            <Image
+              src={
+                "https://centure.volkovdesign.com/img/dodgers/title--left.svg"
+              }
+              alt="Left Arrow"
+              className="w-4 h-4 md:w-4 md:h-4"
+              width={40}
+              height={40}
+            />
+            <Link
+              className=" font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
+              href="/"
+              onClick={() => handleLinkClick("home")}
+            >
               Deal-Desk
             </Link>
+            <Image
+              src={
+                "https://centure.volkovdesign.com/img/dodgers/title--right.svg"
+              }
+              alt="Right Arrow"
+              className="w-8 h-8 md:w-4 md:h-4"
+              width={40}
+              height={40}
+            />
           </div>
 
           {/* Center Nav Links (Desktop) */}
@@ -65,10 +88,21 @@ const MainNavbar = () => {
           </div>
 
           {/* Login Button (Desktop) */}
-          <div className="hidden md:flex">
+          <div className="hidden md:flex items-center space-x-4">
+            {" "}
+            {/* Add space between items */}
+            <Link
+              href="/contact"
+              onClick={() => handleLinkClick("contact")}
+              className={`${
+                activeLink === "contact" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
+              Login
+            </Link>
             <Link href="/login">
-              <button className="px-14 py-4 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] mt-4 flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
-                Login
+              <button className="px-8 py-2 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
+                Join <IoLogInOutline className="text-2xl" />
               </button>
             </Link>
           </div>

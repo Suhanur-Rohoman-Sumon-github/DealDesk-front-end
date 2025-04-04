@@ -19,7 +19,7 @@ const MainNavbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-3 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md">
+          <div className="flex items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md">
             <Image
               src={
                 "https://centure.volkovdesign.com/img/dodgers/title--left.svg"
@@ -30,12 +30,13 @@ const MainNavbar = () => {
               height={40}
             />
             <Link
-              className=" font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
+              className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
               href="/"
               onClick={() => handleLinkClick("home")}
             >
-              Deal^Desk
+              Deal^Desk <span className="text-sm">™</span>
             </Link>
+
             <Image
               src={
                 "https://centure.volkovdesign.com/img/dodgers/title--right.svg"

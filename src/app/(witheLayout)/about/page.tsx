@@ -92,9 +92,6 @@ const AboutUs = () => {
 
         {/* Swiper Carousel with Additional Images */}
         <div className="mt-10">
-          <h3 className="text-2xl text-white text-center mb-6">
-            Our Work Gallery
-          </h3>
           <Swiper
             slidesPerView={3}
             spaceBetween={20}
@@ -128,7 +125,10 @@ const AboutUs = () => {
       {/* Our Values */}
       <div className="mt-12 py-12">
         {/* Section Title */}
-        <Title subTitle="What we stand for and believe in" title="Our Values" />
+        <Title
+          subTitle=" We are committed to delivering the best quality with integrity, fostering creativity, and putting people first in everything we do."
+          title="Our Values"
+        />
 
         {/* Icons + Text */}
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 ">

@@ -20,7 +20,7 @@ const Title = ({
           width={40}
           height={40}
         />
-        <p className="text-center text-[#FFFFFF] text-xl md:text-2xl lg:text-3xl uppercase">
+        <p className="text-4xl ext-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7] text-center">
           {title}
         </p>
         <Image

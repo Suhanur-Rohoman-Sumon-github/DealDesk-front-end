@@ -47,7 +47,6 @@ const teamMembers = [
   },
 ];
 
-
 const decorations = [
   "https://centure.volkovdesign.com/img/dodgers/dots--green.svg",
   "https://centure.volkovdesign.com/img/dodgers/dots--blue.svg",
@@ -60,7 +59,12 @@ const decorations = [
 const OurTeam = () => {
   return (
     <div className="max-w-7xl mx-auto py-10 text-white text-center">
-      <Title title="our team" subTitle="meet our whole team" />
+      <Title
+        title="Meet Our Team"
+        subTitle=" Our team consists of experienced web developers, digital marketing
+          experts, and creative professionals who are passionate about helping
+          your business succeed in the digital landscape."
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
         {teamMembers.map((member, index) => (
@@ -68,10 +72,9 @@ const OurTeam = () => {
             key={member.id}
             className="relative backdrop-blur-3xl bg-white/10 border border-white/30 p-6 rounded-lg shadow-lg transition-all hover:scale-105"
           >
-          
             <div className="absolute top-4 left-4 w-20 h-20 opacity-80">
               <Image
-                src={decorations[index % decorations.length]} 
+                src={decorations[index % decorations.length]}
                 alt="Decoration"
                 width={48}
                 height={48}

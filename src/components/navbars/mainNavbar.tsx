@@ -6,35 +6,76 @@ import { Menu, X } from "lucide-react";
 
 const MainNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState<string>(""); // State to track active link
+
+  // Function to handle active link
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link);
+  };
 
   return (
-    <nav className="shadow-md w-full fixed top-0 left-0 z-50 backdrop-blur-md py-3  border-b bg-white/10 border border-white/20 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 ">
+    <nav className="shadow-md w-full fixed top-0 left-0 z-50 backdrop-blur-md py-3 border-b bg-[#16142a]/70 border-white/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="text-2xl font-bold text-[#ffffff]">
-            <Link href="/">TypoTech</Link>
+          <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]">
+            <Link href="/" onClick={() => handleLinkClick("home")}>
+              Deal-Desk
+            </Link>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6">
-            <Link href="/about" className="text-[#ffffff] ">
+          {/* Center Nav Links (Desktop) */}
+          <div className="hidden md:flex space-x-8 text-white text-base font-medium">
+            <Link
+              href="/"
+              onClick={() => handleLinkClick("home")}
+              className={`${
+                activeLink === "home" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              onClick={() => handleLinkClick("about")}
+              className={`${
+                activeLink === "about" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
               About
             </Link>
-            <Link href="/services" className="text-[#ffffff] ">
+            <Link
+              href="/services"
+              onClick={() => handleLinkClick("services")}
+              className={`${
+                activeLink === "services" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
               Services
             </Link>
-            <Link href="/contact" className="text-[#ffffff] ">
+            <Link
+              href="/contact"
+              onClick={() => handleLinkClick("contact")}
+              className={`${
+                activeLink === "contact" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
               Contact
+            </Link>
+          </div>
+
+          {/* Login Button (Desktop) */}
+          <div className="hidden md:flex">
+            <Link href="/login">
+              <button className="px-14 py-4 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] mt-4 flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
+                Login
+              </button>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-800"
-            >
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white">
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -43,15 +84,48 @@ const MainNavbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white/30 backdrop-blur-md shadow-lg px-4 py-3 space-y-2 border border-white/20">
-          <Link href="/about" className="block text-[#ffffff] ">
+        <div className="md:hidden bg-[#16142a]/90 backdrop-blur-md shadow-lg px-4 py-3 space-y-3 border-t border-white/10">
+          <Link
+            href="/"
+            onClick={() => handleLinkClick("home")}
+            className={`${
+              activeLink === "home" ? "text-gray-400" : "text-white"
+            } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => handleLinkClick("about")}
+            className={`${
+              activeLink === "about" ? "text-gray-400" : "text-white"
+            } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+          >
             About
           </Link>
-          <Link href="/services" className="block text-[#ffffff] ">
+          <Link
+            href="/services"
+            onClick={() => handleLinkClick("services")}
+            className={`${
+              activeLink === "services" ? "text-gray-400" : "text-white"
+            } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+          >
             Services
           </Link>
-          <Link href="/contact" className="block text-[#ffffff] ">
+          <Link
+            href="/contact"
+            onClick={() => handleLinkClick("contact")}
+            className={`${
+              activeLink === "contact" ? "text-gray-400" : "text-white"
+            } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+          >
             Contact
+          </Link>
+          <Link
+            href="/login"
+            className="block text-white font-semibold pt-2 hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition"
+          >
+            Login
           </Link>
         </div>
       )}

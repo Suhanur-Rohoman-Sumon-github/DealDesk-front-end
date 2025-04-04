@@ -34,7 +34,7 @@ const MainNavbar = () => {
               href="/"
               onClick={() => handleLinkClick("home")}
             >
-              Deal-Desk
+              Deal^Desk
             </Link>
             <Image
               src={

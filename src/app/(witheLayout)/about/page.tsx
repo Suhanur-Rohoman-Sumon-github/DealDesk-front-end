@@ -8,30 +8,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { ourStoryImages } from "@/data/data";
 
 const AboutUs = () => {
-  const ourStoryImages = [
-    {
-      image:
-        "https://media.licdn.com/dms/image/v2/D4E12AQHgMxo-g7BYsw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1658422953944?e=2147483647&v=beta&t=Z2tA86SPCvcG9ieACH8jr4SSL47dclFPchqYJIPI4gY",
-    },
-    {
-      image:
-        "https://coworker.imgix.net/photos/united-states/texas/tyler/61900-boxer-property/AdobeStock_291543490.jpeg?w=370&h=280&q=90&auto=format,compress&fit=crop&mark=/template/img/wm_icon.png&markscale=5&markalign=center,middle",
-    },
-    {
-      image:
-        "https://www.storytellingpeople.nl/images/image/3350e28a-459f-4ce1-80ca-d9657bee884d/storytelling-tips-leider-manager-ondernemer-presentatie?v=17",
-    },
-    {
-      image:
-        "https://www.corporatestory.nl/images/image/a1b10149-980d-4546-b2de-3b5af0f9a146/het-begint-met-waarom?v=19",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmDgnxUqsS2GCxE7NxpOnCeiFfyeUlSPEjlifL2WXMQ5EoWjhtg5ryQ8SgqTvhDojlR24&usqp=CAU",
-    },
-  ];
+ 
 
   return (
     <div className="max-w-7xl mx-auto px-6 text-gray-800 py-32">

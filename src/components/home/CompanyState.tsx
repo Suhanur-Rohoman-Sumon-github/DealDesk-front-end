@@ -1,46 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { stats } from "@/data/data";
 
 const AgencyStats = () => {
-  const stats = [
-    {
-      value: 5,
-      suffix: "+ Years",
-      label: "Delivering Digital Excellence",
-      leftImage:
-        "https://centure.volkovdesign.com/img/dodgers/stats--purple.svg",
-      rightImage:
-        "https://centure.volkovdesign.com/img/dodgers/stats--purple.svg",
-    },
-    {
-      value: 5800,
-      suffix: "+",
-      label: "Businesses We’ve Helped",
-      leftImage:
-        "https://centure.volkovdesign.com/img/dodgers/stats--orange.svg",
-      rightImage:
-        "https://centure.volkovdesign.com/img/dodgers/stats--orange.svg",
-    },
-    {
-      value: 374000,
-      suffix: "+",
-      label: "Revenue Boosted for Clients",
-      leftImage:
-        "https://centure.volkovdesign.com/img/dodgers/stats--green.svg",
-      rightImage:
-        "https://centure.volkovdesign.com/img/dodgers/stats--green.svg",
-    },
-    {
-      value: 100000,
-      suffix: "+",
-      label: "Marketing Budget Managed",
-      leftImage: "https://centure.volkovdesign.com/img/dodgers/stats--blue.svg",
-      rightImage:
-        "https://centure.volkovdesign.com/img/dodgers/stats--blue.svg",
-    },
-  ];
-
   const [counts, setCounts] = useState(stats.map(() => 0));
   const statsRef = useRef<HTMLDivElement | null>(null);
 

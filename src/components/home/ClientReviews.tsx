@@ -3,33 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import Title from "../title/Title";
-
-const videoData = [
-  {
-    id: 1,
-    url: "https://youtu.be/tOwjEOt1zYU",
-    thumbnail:
-      "https://cdn.create.vista.com/downloads/f06acb57-1015-4adc-a778-0a7facefcbb2_1024.jpeg",
-  },
-  {
-    id: 2,
-    url: "https://youtu.be/DBY6DQ5YvHk",
-    thumbnail:
-      "https://cdn.create.vista.com/downloads/d383db99-b761-4641-91c3-06b82af6ce45_640.jpeg",
-  },
-  {
-    id: 3,
-    url: "https://youtu.be/WxE9_ixukpM",
-    thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR72rqgnQhtg0aCPWTy5dRHNsK1l70iUhauEg&s",
-  },
-  {
-    id: 4,
-    url: "https://youtu.be/Krhu8XjVF9I",
-    thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_feck95KHX9PU8-t8xAYWhuuDMPYwmJ4y58k8MsELK0gtUE2TzDixL2RS821m65nrA2U&usqp=CAU",
-  },
-];
+import { videoData } from "@/data/data";
 
 const ClientReviews = () => {
   const [selectedVideo, setSelectedVideo] = useState(videoData[0].url);

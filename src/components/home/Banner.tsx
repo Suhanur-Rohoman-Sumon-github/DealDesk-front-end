@@ -1,6 +1,5 @@
-"use client";
-import { Typewriter } from "react-simple-typewriter";
 import { FaArrowRightLong } from "react-icons/fa6";
+import TypeWriter from "./TypeWriter";
 
 const Banner = () => {
   return (
@@ -17,30 +16,7 @@ const Banner = () => {
       <div className="relative flex flex-col md:flex-row items-center justify-between text-center px-4 max-w-7xl w-full">
         {/* Left Section */}
         <div className="max-w-3xl text-left md:w-1/2 mb-8 md:mb-0">
-          <h1 className="text-5xl text-[#ffffff]">
-            <span className="font-bold">
-              Transform Your Online Presence with
-            </span>{" "}
-            <br />
-            <span>
-              <Typewriter
-                words={[
-                  "Web Solutions",
-                  "Digital Marketing",
-                  "Buy & Sell",
-                  "SEO & Growth",
-                  "E-Commerce Dev",
-                  "Custom Software",
-                ]}
-                loop={0}
-                cursor
-                cursorStyle="|"
-                typeSpeed={150}
-                deleteSpeed={100}
-                delaySpeed={1500}
-              />
-            </span>
-          </h1>
+          <TypeWriter />
           <p className="text-xl text-[#c9c8ca] py-4 leading-relaxed">
             Build modern, scalable, and high-performance websites that captivate
             your audience and drive business growth.

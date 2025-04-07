@@ -1,70 +1,8 @@
 "use client";
 import { useState } from "react";
-import { FiPlus, FiMinus } from "react-icons/fi"; // Icons for expanding/collapsing
+import { FiPlus, FiMinus } from "react-icons/fi";
 import Title from "../title/Title";
-
-const faqData = [
-  {
-    id: 1,
-    question: "What services do you offer?",
-    answer:
-      "We offer web development, digital marketing, SEO, and custom software solutions.",
-  },
-  {
-    id: 2,
-    question: "How can I get started with your services?",
-    answer:
-      "Simply click on the 'Get Started' button, and we’ll guide you through the process.",
-  },
-  {
-    id: 3,
-    question: "Do you provide support after project completion?",
-    answer:
-      "Yes, we offer ongoing support and maintenance after the project is completed.",
-  },
-  {
-    id: 4,
-    question: "What is the cost of your services?",
-    answer:
-      "The cost varies based on the scope of the project. Contact us for a personalized quote.",
-  },
-  {
-    id: 5,
-    question: "How long will it take to complete a project?",
-    answer:
-      "Project timelines depend on the complexity of the work, but we always aim to deliver on time.",
-  },
-  {
-    id: 6,
-    question: "What is your refund policy?",
-    answer:
-      "We offer a refund policy for specific situations. Please contact our support team for details.",
-  },
-  {
-    id: 7,
-    question: "Can you handle large-scale projects?",
-    answer:
-      "Absolutely! We specialize in scalable solutions for businesses of all sizes.",
-  },
-  {
-    id: 8,
-    question: "How do you ensure the quality of your work?",
-    answer:
-      "We follow industry best practices, conduct regular reviews, and prioritize testing to ensure quality.",
-  },
-  {
-    id: 9,
-    question: "Do you work with international clients?",
-    answer:
-      "Yes, we have clients from all over the world and are experienced in managing remote projects.",
-  },
-  {
-    id: 10,
-    question: "Can I see examples of your previous work?",
-    answer:
-      "Definitely! Check out our portfolio for case studies and examples of our work.",
-  },
-];
+import { faqData } from "@/data/data";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

@@ -15,7 +15,7 @@ const MainNavbar = () => {
   };
 
   return (
-    <nav className="shadow-md w-full fixed top-0 left-0 z-50 backdrop-blur-md py-3 border-b bg-[#16142a]/70 border-white/20">
+    <nav className="shadow-md w-full fixed top-0 left-0 z-50 backdrop-blur-md py-1 border-b bg-[#16142a]/70 border-white/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -76,6 +76,15 @@ const MainNavbar = () => {
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
               Services
+            </Link>
+            <Link
+              href="/marketplace"
+              onClick={() => handleLinkClick("marketplace")}
+              className={`${
+                activeLink === "services" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
+              Marketplace
             </Link>
             <Link
               href="/contact"

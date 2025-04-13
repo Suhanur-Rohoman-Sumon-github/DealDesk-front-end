@@ -3,7 +3,7 @@ import TypeWriter from "./TypeWriter";
 
 const Banner = () => {
   return (
-    <div className="relative w-full h-[800px] flex items-center justify-center text-white">
+    <div className="relative  h-[800px] flex items-center justify-center text-white">
       {/* Background Image */}
       <div
         className="absolute inset-0  bg-no-repeat"

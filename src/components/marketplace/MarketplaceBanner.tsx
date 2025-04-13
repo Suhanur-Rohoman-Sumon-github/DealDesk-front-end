@@ -54,13 +54,18 @@ const MarketplaceBanner = () => {
   });
 
   return (
-    <div className="w-full fixed top-14 left-0 z-50 bg-[#1f1b37] border-b border-white/10 py-2 px-4 text-white text-sm font-medium overflow-hidden">
-      <div className="max-w-8xl mx-auto flex justify-between items-center animate-fade-in-down">
+    <div className="w-full fixed top-14 left-0 z-50 bg-[#1f1b37] border-b border-white/10 py-2 px-4 text-white text-sm font-medium">
+      <div className="mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-6 animate-fade-in-down">
         {/* Market ticker */}
-        <div className="flex items-center space-x-6 overflow-hidden">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-4  scrollbar-hide whitespace-nowrap">
           {visibleItems.map((item, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <span className="whitespace-nowrap">{item.category}</span>
+            <div
+              key={index}
+              className="flex items-center space-x-2 flex-shrink-0"
+            >
+              <span className="whitespace-nowrap text-xs sm:text-sm">
+                {item.category}
+              </span>
               <div
                 className={clsx(
                   "flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold",
@@ -81,7 +86,7 @@ const MarketplaceBanner = () => {
         </div>
 
         {/* Digital Clock */}
-        <div className="flex items-center space-x-2 px-4 py-1.5 rounded-lg backdrop-blur-md text-white bg-white/10 border border-white/20 shadow-md font-mono text-sm">
+        <div className="flex items-center space-x-2 px-4 py-1.5 rounded-lg backdrop-blur-md text-white bg-white/10 border border-white/20 shadow-md font-mono text-xs sm:text-sm">
           <div className="flex items-center space-x-1">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
             <span className="font-semibold">Live</span>

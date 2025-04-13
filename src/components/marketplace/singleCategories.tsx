@@ -1,4 +1,4 @@
-const SingleCategories = Array.from({ length: 3 }, (_, index) => ({
+const SingleCategories = Array.from({ length: 20 }, (_, index) => ({
   category: `Single Category ${index + 1}`,
   subCategories: [
     `Single Subcategory ${index + 1}A`,
@@ -6,9 +6,8 @@ const SingleCategories = Array.from({ length: 3 }, (_, index) => ({
   ],
   stockLimit: Math.floor(Math.random() * 100),
 }));
-
 export default SingleCategories;
-export const ComboCategories = Array.from({ length: 3 }, (_, index) => ({
+export const ComboCategories = Array.from({ length: 20 }, (_, index) => ({
   category: `Combo Category ${index + 1}`,
   subCategories: [
     `Combo Subcategory ${index + 1}A`,

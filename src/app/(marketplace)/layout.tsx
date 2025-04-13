@@ -26,24 +26,26 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body className="antialiased font-poppins bg-[#16142a]">
         <Providers>
-          <div className="flex flex-col min-h-screen py-16">
+          <div className="flex flex-col min-h-screen pt-16">
             <MarketplaceBanner />
-            <div className="flex min-h-screen pt-8">
+
+            {/* Layout Container */}
+            <div className="flex flex-col lg:flex-row gap-4 p-4">
               {/* Sidebar */}
-              <div className="w-[250px]  p-4">
+              <aside className="w-full lg:w-[250px]">
                 <Sidebar />
-              </div>
+              </aside>
 
-              {/* Main content area (products) */}
-              <div className="flex-1 overflow-auto p-6">
+              {/* Main Content */}
+              <section className="flex-1 w-full">
                 <MarketplaceNavbar />
-                <main>{children}</main>
-              </div>
+                <main className="mt-4">{children}</main>
+              </section>
 
-              {/* Live Chat on the right */}
-              <div className="w-[300px]  p-4">
+              {/* Live Chat */}
+              <aside className="w-full lg:w-[300px]">
                 <LiveChat />
-              </div>
+              </aside>
             </div>
           </div>
         </Providers>

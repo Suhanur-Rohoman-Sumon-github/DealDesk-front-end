@@ -14,7 +14,7 @@ const AboutUs = () => {
  
 
   return (
-    <div className="max-w-7xl mx-auto px-6 text-gray-800 py-32">
+    <div className="7xl mx-auto px-6 text-gray-800 py-32">
       {/* Header Section with Background Gradient */}
       <div className="relative text-center mb-12">
         <Title
@@ -154,7 +154,7 @@ const AboutUs = () => {
 
       {/* Contact Us */}
       <div className="mt-16 py-12 px-6 bg-[rgba(255,255,255,0.05)] backdrop-blur-md border border-white/10 rounded-xl shadow-xl">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className=" mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left: Text + Form */}
           <div>
             <h2 className="text-3xl font-semibold text-white mb-4 text-center lg:text-left">

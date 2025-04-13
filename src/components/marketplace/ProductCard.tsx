@@ -17,15 +17,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
   rating,
 }) => {
   return (
-    <div className="relative bg-white bg-opacity-10 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+    <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-3 overflow-hidden">
+      {/* Optional frosted border glow */}
+      <div className="absolute inset-0 z-0 rounded-2xl border border-white/10 pointer-events-none" />
+
       <Image
         width={300}
         height={200}
         src={image}
         alt={title}
-        className="w-full h-48 object-cover rounded-t-lg"
+        className="w-full h-48 object-cover rounded-xl"
       />
-      <div className="p-4 space-y-4">
+      <div className="p-4 space-y-2 z-10 relative">
         <h3 className="text-lg font-semibold text-white">{title}</h3>
         <p className="text-sm text-gray-200">{description}</p>
         <div className="flex justify-between items-center">
@@ -37,7 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
-                fill={index < rating ? "#ffd700" : "#d3d3d3"}
+                fill={index < rating ? "#ffd700" : "#555"}
                 viewBox="0 0 16 16"
                 className="mr-1"
               >

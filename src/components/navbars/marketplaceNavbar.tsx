@@ -12,9 +12,9 @@ const MarketplaceNavbar = () => {
 
   return (
     <nav className="shadow-sm fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#16142a]/90 border-white/20 py-1">
-      <div className="max-w-full mx-auto px-4 flex items-center justify-between h-12 gap-4">
+      <div className=" mx-auto px-4 flex items-center justify-between h-12 gap-4">
         {/* Logo */}
-        <div className="flex items-center space-x-2 border border-white/20 px-2 py-1 rounded-full bg-[#16142a]/95">
+        <div className="flex items-center space-x-2 border border-white/20  py-1 rounded-full bg-[#16142a]/95">
           <Image
             src="https://centure.volkovdesign.com/img/dodgers/title--left.svg"
             alt="Left"
@@ -38,7 +38,7 @@ const MarketplaceNavbar = () => {
         </div>
 
         {/* Glass Search Bar (Center) */}
-        <div className="relative w-full max-w-sm">
+        <div className="relative w-full max-w-3xl mx-auto flex items-center justify-center">
           <Input
             type="text"
             placeholder="Search..."

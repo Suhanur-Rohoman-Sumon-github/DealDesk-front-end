@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   rating,
 }) => {
   return (
-    <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-3 overflow-hidden">
+    <div className="relative bg-white/10 backdrop-blur-md  rounded-2xl  p-3">
       {/* Optional frosted border glow */}
       <div className="absolute inset-0 z-0 rounded-2xl border border-white/10 pointer-events-none" />
 

@@ -21,16 +21,16 @@ const Sidebar = () => {
         >
           <TabsTrigger
             value="single"
-            className="w-full py-2 flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all 
+            className="w-full py-4 mt-2  flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all 
                        data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#572c7c] data-[state=active]:to-[#9133df] 
-                       data-[state=active]:border-2 data-[state=active]:border-[#572c7c] hover:bg-gradient-to-r hover:from-[#572c7c] hover:to-[#9133df]"
+                       data-[state=active]:border-2 data-[state=active]:border-[#572c7c] hover:bg-gradient-to-r  hover:from-[#572c7c] hover:to-[#9133df]"
           >
             <FaUser className="text-base sm:text-lg" />
             <span>Single</span>
           </TabsTrigger>
           <TabsTrigger
             value="combo"
-            className="w-full py-2 flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all 
+            className="w-full py-4 mt-2 flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all 
                        data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#572c7c] data-[state=active]:to-[#9133df] 
                        data-[state=active]:border-2 data-[state=active]:border-[#572c7c] hover:bg-gradient-to-r hover:from-[#572c7c] hover:to-[#9133df]"
           >

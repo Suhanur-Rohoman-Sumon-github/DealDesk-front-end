@@ -45,7 +45,7 @@ const LiveChat = () => {
 
   useEffect(() => {
     // On first load, show 7 messages
-    const initialMessages = Array.from({ length: 5 }, () => {
+    const initialMessages = Array.from({ length: 7 }, () => {
       return messages[Math.floor(Math.random() * messages.length)];
     });
     setChatMessages(initialMessages);

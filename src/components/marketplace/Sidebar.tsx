@@ -8,7 +8,7 @@ import { FaUser, FaLayerGroup } from "react-icons/fa";
 const Sidebar = () => {
   return (
     <div
-      className="fixed top-[108px] left-0 z-50 
+      className="fixed top-[107px] left-0 z-50 
              w-full sm:w-[250px] md:w-[280px] lg:w-[280px] 
              h-[calc(100vh-108px)] 
              shadow-lg backdrop-blur-md bg-white/5 border border-white/10 text-white overflow-hidden"

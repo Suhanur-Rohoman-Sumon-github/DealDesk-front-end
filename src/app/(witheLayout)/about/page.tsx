@@ -11,10 +11,8 @@ import "swiper/css/navigation";
 import { ourStoryImages } from "@/data/data";
 
 const AboutUs = () => {
- 
-
   return (
-    <div className="7xl mx-auto px-6 text-gray-800 py-32">
+    <div className="max-w-7xl mx-auto px-6 text-gray-800 py-32">
       {/* Header Section with Background Gradient */}
       <div className="relative text-center mb-12">
         <Title

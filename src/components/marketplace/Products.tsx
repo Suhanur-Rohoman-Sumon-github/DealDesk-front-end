@@ -8,15 +8,28 @@ import {
   PaginationItem,
   PaginationLink,
 } from "@/components/ui/pagination";
-import { products } from "@/data/data";
+import { products as allProducts } from "@/data/data";
+
+import ProductsBanner from "./ProductsBanner";
 
 const itemsPerPage = 12;
 
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortOption, setSortOption] = useState("default");
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const currentProducts = products.slice(
+  const sortProducts = (products: typeof allProducts) => {
+    if (sortOption === "low-to-high") {
+      return [...products].sort((a, b) => a.price - b.price);
+    } else if (sortOption === "high-to-low") {
+      return [...products].sort((a, b) => b.price - a.price);
+    }
+    return products;
+  };
+
+  const sortedProducts = sortProducts(allProducts);
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  const currentProducts = sortedProducts.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -27,7 +40,10 @@ const Products = () => {
   };
 
   return (
-    <div className="w-full px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12">
+    <div className="w-full px-2 ">
+      {/* 🔮 Glassmorphism Header */}
+      <ProductsBanner />
+
       <div
         className="grid 
           grid-cols-1 
@@ -36,7 +52,9 @@ const Products = () => {
           lg:grid-cols-1
           xl:grid-cols-2 
           2xl:grid-cols-3
-          gap-4 sm:gap-6 md:gap-6 lg:gap-8"
+          gap-4 sm:gap-6 md:gap-6 lg:gap-8
+        
+          "
       >
         {currentProducts.map((product, index) => (
           <ProductCard
@@ -50,7 +68,7 @@ const Products = () => {
         ))}
       </div>
 
-      {/* ShadCN Pagination with Glassmorphism */}
+      {/* Pagination */}
       <div className="flex justify-center mt-10">
         <div className="backdrop-blur-xl bg-white/10 border border-white/20 shadow-xl rounded-2xl p-4">
           <Pagination>
@@ -63,7 +81,7 @@ const Products = () => {
                     className={`cursor-pointer rounded-md px-4 py-2 ${
                       currentPage === i + 1
                         ? "bg-transparent text-white"
-                        : "text-white "
+                        : "text-white"
                     } transition-colors duration-200`}
                   >
                     {i + 1}

@@ -81,7 +81,7 @@ const MainNavbar = () => {
               href="/marketplace"
               onClick={() => handleLinkClick("marketplace")}
               className={`${
-                activeLink === "services" ? "text-gray-400" : "text-white"
+                activeLink === "marketplace" ? "text-gray-400" : "text-white"
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
               Marketplace

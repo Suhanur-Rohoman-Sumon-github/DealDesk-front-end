@@ -67,7 +67,7 @@ const LiveChat = () => {
   }, [hasInitialized]);
 
   return (
-    <div className="fixed h-[calc(100vh-200px)]  -mt-1 z-50 w-full max-w-[350px] sm:max-w-[300px] md:max-w-[250px] lg:max-w-[300px] space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white  top-[110px] right-0  overflow-hidden">
+    <div className="fixed h-[calc(100vh-200px)]  -mt-1 z-50 w-full max-w-[350px] sm:max-w-[300px] md:max-w-[250px] lg:max-w-[300px] space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white  top-[70px] right-0  overflow-hidden">
       {chatMessages.map((msg, index) => (
         <div
           key={index}

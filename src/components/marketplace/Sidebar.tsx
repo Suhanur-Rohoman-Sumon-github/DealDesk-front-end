@@ -8,9 +8,9 @@ import { FaUser, FaLayerGroup } from "react-icons/fa";
 const Sidebar = () => {
   return (
     <div
-      className="fixed top-[107px] left-0 z-50 
+      className="fixed top-[65px] left-0 z-50 
              w-full sm:w-[250px] md:w-[280px] lg:w-[280px] 
-             h-[calc(100vh-108px)] 
+             h-[calc(100vh-60px)] 
              shadow-lg backdrop-blur-md bg-white/5 border border-white/10 text-white overflow-hidden"
     >
       <Tabs defaultValue="single" className="flex flex-col h-full">

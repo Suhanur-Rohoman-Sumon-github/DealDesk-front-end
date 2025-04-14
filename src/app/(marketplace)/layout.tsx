@@ -6,7 +6,6 @@ import { Poppins } from "next/font/google";
 import MarketplaceNavbar from "@/components/navbars/marketplaceNavbar";
 import Sidebar from "@/components/marketplace/Sidebar";
 import LiveChat from "@/components/marketplace/LiveChat";
-import MarketplaceBanner from "@/components/marketplace/MarketplaceBanner";
 
 export const metadata: Metadata = {
   title: "Marketplace",
@@ -26,9 +25,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body className="antialiased font-poppins bg-[#16142a]">
         <Providers>
-          <div className="flex flex-col min-h-screen pt-16">
-            <MarketplaceBanner />
-
+          <div className="flex flex-col min-h-screen pt-4">
             {/* Layout Container */}
             <div className="flex flex-col lg:flex-row gap-4 p-4">
               {/* Sidebar */}

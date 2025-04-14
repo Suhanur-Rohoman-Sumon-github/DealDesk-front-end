@@ -1,93 +1,113 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Search } from "lucide-react";
 import Image from "next/image";
+import { Menu, X, Search, ArrowUp, ArrowDown, Home } from "lucide-react";
 import { IoLogInOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
+import clsx from "clsx";
 
 const MarketplaceNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [visibleIndex, setVisibleIndex] = useState(0);
+
+  const mockData = [
+    { category: "Mechanical Keyboards", trend: "up", change: "+12%" },
+    { category: "Gaming Mice", trend: "down", change: "-5%" },
+    { category: "Keycaps", trend: "up", change: "+8%" },
+    { category: "Desk Mats", trend: "down", change: "-2%" },
+    { category: "Switches", trend: "up", change: "+15%" },
+    { category: "Wrist Rests", trend: "up", change: "+6%" },
+    { category: "Custom Cables", trend: "down", change: "-3%" },
+    { category: "Stabilizers", trend: "up", change: "+10%" },
+    { category: "Lube Kits", trend: "up", change: "+7%" },
+    { category: "Artisan Keycaps", trend: "down", change: "-4%" },
+    { category: "Keyboard Bags", trend: "up", change: "+9%" },
+    { category: "Sound Dampeners", trend: "down", change: "-1%" },
+  ];
+
+  const itemsToShow = 5; // Show fewer items for a cleaner look
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisibleIndex((prev) => (prev + 1) % mockData.length);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const visibleItems = mockData
+    .slice(visibleIndex, visibleIndex + itemsToShow)
+    .concat(
+      visibleIndex + itemsToShow > mockData.length
+        ? mockData.slice(0, (visibleIndex + itemsToShow) % mockData.length)
+        : []
+    );
 
   return (
-    <nav className="shadow-sm fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#16142a]/90 border-white/20 py-1">
-      <div className=" mx-auto px-4 flex items-center justify-between h-12 gap-4">
-        {/* Logo */}
-        <div className="flex items-center space-x-2 border border-white/20  py-1 rounded-full bg-[#16142a]/95">
-          <Image
-            src="https://centure.volkovdesign.com/img/dodgers/title--left.svg"
-            alt="Left"
-            width={20}
-            height={20}
-            className="object-contain"
-          />
-          <Link
-            href="/marketplace"
-            className="font-semibold text-xs leading-none text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
-          >
-            DealDesk
-          </Link>
-          <Image
-            src="https://centure.volkovdesign.com/img/dodgers/title--right.svg"
-            alt="Right"
-            width={20}
-            height={20}
-            className="object-contain"
-          />
-        </div>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#16142a]/90 border-white/20 backdrop-blur-md shadow-sm">
+      <div className="w-full bg-[#1f1b37] border-b border-white/10 py-1 px-4 text-white text-sm font-medium">
+        <div className="flex items-center justify-between mx-auto px-4 gap-4 h-14">
+          {/* Left Side: Home Button */}
+          <div className="flex items-center gap-4">
+            <h1>thi is deal desk</h1>
+          </div>
 
-        {/* Glass Search Bar (Center) */}
-        <div className="relative w-full max-w-3xl mx-auto flex items-center justify-center">
-          <Input
-            type="text"
-            placeholder="Search..."
-            className="pl-9 pr-10  rounded-full bg-white/10 border border-white/20 text-white placeholder-white/60  backdrop-blur-md text-sm"
-          />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 h-4 w-4 pointer-events-none" />
-          <button
-            type="button"
-            className="absolute right-2 top-1 bg-[#ffffff1a] hover:bg-[#ffffff2a] text-white p-1 rounded-full transition"
-          >
-            <Search size={16} />
-          </button>
-        </div>
+          {/* Center: Live Data Ticker */}
+          <div className="hidden sm:flex flex-wrap items-center gap-4 whitespace-nowrap animate-fade-in-down justify-center">
+            <Link
+              href="/"
+              className="text-white hover:text-purple-400 transition flex items-center gap-1 bg-[#16142a]/90 border-white/20 backdrop-blur-md  p-2 rounded-full border border-white/20 hover:bg-[#16142a]/80"
+            >
+              <Home size={20} />
+              <p>back to home</p>
+            </Link>
+            {visibleItems.map((item, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <span className="text-xs">{item.category}</span>
+                <div
+                  className={clsx(
+                    "flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold",
+                    item.trend === "up"
+                      ? "bg-green-600/20 text-green-400"
+                      : "bg-red-600/20 text-red-400"
+                  )}
+                >
+                  {item.trend === "up" ? (
+                    <ArrowUp size={14} />
+                  ) : (
+                    <ArrowDown size={14} />
+                  )}
+                  <span>{item.change}</span>
+                </div>
+              </div>
+            ))}
+          </div>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-3 text-xs text-white font-medium">
-          <Link href="/" className="hover:text-gray-400 transition">
-            Home
-          </Link>
-          <Link href="/about" className="hover:text-gray-400 transition">
-            About
-          </Link>
-          <Link href="/services" className="hover:text-gray-400 transition">
-            Services
-          </Link>
-          <Link href="/contact" className="hover:text-gray-400 transition">
-            Contact
-          </Link>
-          <Link href="/login" className="hover:text-gray-400 transition">
-            Login
-          </Link>
-          <Link href="/signup">
-            <button className="text-white bg-gradient-to-r from-[#572c7c] to-[#9133df] hover:from-[#9133df] hover:to-[#572c7c] text-xs px-4 py-1 rounded flex items-center gap-1 transition">
-              Join <IoLogInOutline size={16} />
-            </button>
-          </Link>
-        </div>
+          {/* Right Side: Dashboard & Avatar */}
+          <div className="flex items-center gap-4">
+            <Image
+              src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg" // Replace with dynamic image later
+              alt="User Avatar"
+              width={32}
+              height={32}
+              className="rounded-full object-cover border border-white/20"
+            />
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-white">
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden">
+              <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown Menu */}
       {isOpen && (
-        <div className="md:hidden bg-[#16142a]/95 backdrop-blur-md border-t border-white/10 px-4 py-2 space-y-2 text-sm">
+        <div className="md:hidden bg-[#16142a]/95 backdrop-blur-md border-t border-white/10 px-4 py-2 space-y-2 text-sm mt-28">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 h-4 w-4" />
             <Input
@@ -99,6 +119,12 @@ const MarketplaceNavbar = () => {
 
           <Link href="/" className="block text-white hover:text-gray-400">
             Home
+          </Link>
+          <Link
+            href="/dashboard"
+            className="block text-white hover:text-gray-400"
+          >
+            Dashboard
           </Link>
           <Link href="/about" className="block text-white hover:text-gray-400">
             About

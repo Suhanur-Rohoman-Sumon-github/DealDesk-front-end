@@ -18,7 +18,6 @@ const messages = [
   { username: "User10", text: "Switch lubing guide, anyone?" },
 ];
 
-// Example random user images (Replace these with actual user images or dynamic URLs)
 const userImages = [
   "https://randomuser.me/api/portraits/men/1.jpg",
   "https://randomuser.me/api/portraits/women/1.jpg",
@@ -28,12 +27,10 @@ const userImages = [
   "https://randomuser.me/api/portraits/women/3.jpg",
 ];
 
-// Generate a random image for the user
 const getRandomUserImage = () => {
   return userImages[Math.floor(Math.random() * userImages.length)];
 };
 
-// Fun colorful icon (for chat)
 const getRandomColorfulIcon = () => {
   const icons = ["🔥", "💡", "✨", "🚀", "🎮", "🎧"];
   return icons[Math.floor(Math.random() * icons.length)];
@@ -42,10 +39,10 @@ const getRandomColorfulIcon = () => {
 const LiveChat = () => {
   const [chatMessages, setChatMessages] = useState<typeof messages>([]);
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [clock, setClock] = useState(new Date());
 
   useEffect(() => {
-    // On first load, show 7 messages
-    const initialMessages = Array.from({ length: 7 }, () => {
+    const initialMessages = Array.from({ length: 5 }, () => {
       return messages[Math.floor(Math.random() * messages.length)];
     });
     setChatMessages(initialMessages);
@@ -59,15 +56,40 @@ const LiveChat = () => {
       const newMsg = messages[Math.floor(Math.random() * messages.length)];
       setChatMessages((prev) => {
         const updated = [newMsg, ...prev];
-        return updated.slice(0, 7); // Keep only 7
+        return updated.slice(0, 7);
       });
-    }, 6000); // Every 6 seconds
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [hasInitialized]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setClock(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedTime = clock.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+
   return (
-    <div className="fixed h-[calc(100vh-200px)]  -mt-1 z-50 w-full max-w-[350px] sm:max-w-[300px] md:max-w-[250px] lg:max-w-[300px] space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white  top-[70px] right-0  overflow-hidden">
+    <div className="fixed h-[calc(100vh-440px)] -mt-1 z-50 w-80  space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] right-0 overflow-hidden">
+      {/* Top header: Live status & clock */}
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center gap-2 text-xs text-red-500">
+          <span className="animate-pulse font-bold">🔴 LIVE</span>
+          <span className=" flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold text-green-500">{` Started : ${new Date().getHours()} Hour${
+            new Date().getHours() !== 1 ? "s" : ""
+          }`}</span>
+        </div>
+        <div className="text-xs text-white/70"></div>
+        <div className="text-xs text-white/70">{formattedTime}</div>
+      </div>
+
       {chatMessages.map((msg, index) => (
         <div
           key={index}
@@ -90,7 +112,6 @@ const LiveChat = () => {
             </span>
             <span className="text-xs text-white/80">{msg.text}</span>
           </div>
-          {/* Adding a colorful icon somewhere */}
           <div className="flex-shrink-0 text-2xl text-yellow-400">
             {getRandomColorfulIcon()}
           </div>

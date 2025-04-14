@@ -463,3 +463,17 @@ export const products = [
   },
   // Add more products as needed
 ];
+
+export const categories = [
+  { category: "Bank" },
+  { category: "Tag" },
+  { category: "IP Proxy / Residential IP Proxy" },
+  { category: "SSN Penal" },
+  { category: "USA DL" },
+  { category: "USA Passport" },
+  { category: "Web Development" },
+  { category: "Digital Marketing" },
+  { category: "Video Editing" },
+  { category: "Graphics Designing" },
+  { category: "Token Store" },
+];

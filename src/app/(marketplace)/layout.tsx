@@ -6,6 +6,7 @@ import { Poppins } from "next/font/google";
 import MarketplaceNavbar from "@/components/navbars/marketplaceNavbar";
 import Sidebar from "@/components/marketplace/Sidebar";
 import LiveChat from "@/components/marketplace/LiveChat";
+import FeedbackForm from "@/components/marketplace/FeedbackForm";
 
 export const metadata: Metadata = {
   title: "Marketplace",
@@ -42,6 +43,7 @@ export default function RootLayout({
               {/* Live Chat */}
               <aside className="w-full lg:w-[300px]">
                 <LiveChat />
+                <FeedbackForm />
               </aside>
             </div>
           </div>

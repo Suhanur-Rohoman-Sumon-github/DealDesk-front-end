@@ -2,8 +2,9 @@
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import CategoryList from "./CategoryList";
-import SingleCategories, { ComboCategories } from "./singleCategories";
+
 import { FaUser, FaLayerGroup } from "react-icons/fa";
+import { categories } from "@/data/data";
 
 const Sidebar = () => {
   return (
@@ -42,10 +43,10 @@ const Sidebar = () => {
         {/* Scrollable Content */}
         <div className="overflow-y-auto flex-1 max-h-full mt-2 px-2 pb-4">
           <TabsContent value="single">
-            <CategoryList categories={SingleCategories} />
+            <CategoryList categories={categories} />
           </TabsContent>
           <TabsContent value="combo">
-            <CategoryList categories={ComboCategories} />
+            <CategoryList categories={categories} />
           </TabsContent>
         </div>
       </Tabs>

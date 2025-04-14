@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Search, ArrowUp, ArrowDown, Home } from "lucide-react";
+import { Menu, X, Search, ArrowUp, ArrowDown } from "lucide-react";
 import { IoLogInOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import clsx from "clsx";
@@ -46,61 +46,95 @@ const MarketplaceNavbar = () => {
     );
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#16142a]/90 border-white/20 backdrop-blur-md shadow-sm">
-      <div className="w-full bg-[#1f1b37] border-b border-white/10 py-1 px-4 text-white text-sm font-medium">
-        <div className="flex items-center justify-between mx-auto px-4 gap-4 h-14">
-          {/* Left Side: Home Button */}
-          <div className="flex items-center gap-4">
-            <h1>thi is deal desk</h1>
-          </div>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#16142a] border border-white/20 backdrop-blur-md shadow-sm">
+      <div className="flex items-center justify-between mx-auto px-4 gap-4 h-14">
+        {/* Left Side: Logo or Site Name */}
+        <div className="flex items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md">
+          <Image
+            src={"https://centure.volkovdesign.com/img/dodgers/title--left.svg"}
+            alt="Left Arrow"
+            className="w-4 h-4 md:w-4 md:h-4"
+            width={40}
+            height={40}
+          />
+          <Link
+            className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
+            href="/"
+          >
+            Deal^Desk <span className="text-sm">™</span>
+          </Link>
 
-          {/* Center: Live Data Ticker */}
-          <div className="hidden sm:flex flex-wrap items-center gap-4 whitespace-nowrap animate-fade-in-down justify-center">
-            <Link
-              href="/"
-              className="text-white hover:text-purple-400 transition flex items-center gap-1 bg-[#16142a]/90 border-white/20 backdrop-blur-md  p-2 rounded-full border border-white/20 hover:bg-[#16142a]/80"
-            >
-              <Home size={20} />
-              <p>back to home</p>
-            </Link>
-            {visibleItems.map((item, index) => (
-              <div key={index} className="flex items-center space-x-2">
-                <span className="text-xs">{item.category}</span>
-                <div
-                  className={clsx(
-                    "flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold",
-                    item.trend === "up"
-                      ? "bg-green-600/20 text-green-400"
-                      : "bg-red-600/20 text-red-400"
-                  )}
-                >
-                  {item.trend === "up" ? (
-                    <ArrowUp size={14} />
-                  ) : (
-                    <ArrowDown size={14} />
-                  )}
-                  <span>{item.change}</span>
-                </div>
+          <Image
+            src={
+              "https://centure.volkovdesign.com/img/dodgers/title--right.svg"
+            }
+            alt="Right Arrow"
+            className="w-8 h-8 md:w-4 md:h-4"
+            width={40}
+            height={40}
+          />
+        </div>
+
+        {/* Center: Live Data Ticker */}
+        <div className="hidden sm:flex flex-wrap items-center gap-4 whitespace-nowrap animate-fade-in-down justify-center">
+          {visibleItems.map((item, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <span className="text-xs text-white">{item.category}</span>
+              <div
+                className={clsx(
+                  "flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold",
+                  item.trend === "up"
+                    ? "bg-green-600/20 text-green-400"
+                    : "bg-red-600/20 text-red-400"
+                )}
+              >
+                {item.trend === "up" ? (
+                  <ArrowUp size={14} />
+                ) : (
+                  <ArrowDown size={14} />
+                )}
+                <span>{item.change}</span>
               </div>
-            ))}
-          </div>
-
-          {/* Right Side: Dashboard & Avatar */}
-          <div className="flex items-center gap-4">
-            <Image
-              src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg" // Replace with dynamic image later
-              alt="User Avatar"
-              width={32}
-              height={32}
-              className="rounded-full object-cover border border-white/20"
-            />
-
-            {/* Mobile Menu Toggle */}
-            <div className="md:hidden">
-              <button onClick={() => setIsOpen(!isOpen)} className="text-white">
-                {isOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
             </div>
+          ))}
+        </div>
+
+        {/* Right Side: Nav Links + Avatar + Mobile Menu Toggle */}
+        <div className="flex items-center gap-4">
+          {/* Add nav links here */}
+          <Link
+            href="/"
+            className="text-white hover:text-purple-400 text-sm font-medium"
+          >
+            Home
+          </Link>
+          <Link
+            href="/dashboard"
+            className="text-white hover:text-purple-400 text-sm font-medium"
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/login"
+            className="text-white hover:text-purple-400 text-sm font-medium"
+          >
+            Login
+          </Link>
+
+          {/* User Avatar */}
+          <Image
+            src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
+            alt="User Avatar"
+            width={32}
+            height={32}
+            className="rounded-full object-cover border border-white/20"
+          />
+
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
       </div>

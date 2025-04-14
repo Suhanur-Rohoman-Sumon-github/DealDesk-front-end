@@ -7,10 +7,23 @@ import { Menu, X, Search, ArrowUp, ArrowDown } from "lucide-react";
 import { IoLogInOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import clsx from "clsx";
-
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { useUser } from "@/context/userProvider";
+import { logout } from "@/services/authServices";
 const MarketplaceNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleIndex, setVisibleIndex] = useState(0);
+  const { user, isLoading } = useUser();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   const mockData = [
     { category: "Mechanical Keyboards", trend: "up", change: "+12%" },
@@ -100,43 +113,76 @@ const MarketplaceNavbar = () => {
         </div>
 
         {/* Right Side: Nav Links + Avatar + Mobile Menu Toggle */}
-        <div className="flex items-center gap-4">
-          {/* Add nav links here */}
-          <Link
-            href="/"
-            className="text-white hover:text-purple-400 text-sm font-medium"
-          >
-            Home
-          </Link>
-          <Link
-            href="/dashboard"
-            className="text-white hover:text-purple-400 text-sm font-medium"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/login"
-            className="text-white hover:text-purple-400 text-sm font-medium"
-          >
-            Login
-          </Link>
+        {isLoading ? (
+          <div className="flex items-center justify-center h-screen"></div>
+        ) : (
+          <div className="flex items-center gap-4">
+            {/* Add nav links here */}
+            <Link
+              href="/"
+              className="text-white hover:text-purple-400 text-sm font-medium"
+            >
+              Home
+            </Link>
 
-          {/* User Avatar */}
-          <Image
-            src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
-            alt="User Avatar"
-            width={32}
-            height={32}
-            className="rounded-full object-cover border border-white/20"
-          />
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="text-white hover:text-purple-400 text-sm font-medium"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="text-white hover:text-purple-400 text-sm font-medium"
+              >
+                Login
+              </Link>
+            )}
 
-          {/* Mobile Menu Toggle */}
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white">
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* User Avatar */}
+            <div className="hidden md:flex items-center space-x-4">
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="cursor-pointer">
+                      <AvatarImage src={user?.image || "/avatar.png"} />
+                      <AvatarFallback>
+                        {user?.name?.charAt(0) || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40 mt-2">
+                    <DropdownMenuItem
+                      onClick={() => (location.href = "/profile")}
+                    >
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleLogout}>
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <>
+                  <Link href="/signup">
+                    <button className="px-8 py-2 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
+                      Join <IoLogInOutline className="text-2xl" />
+                    </button>
+                  </Link>
+                </>
+              )}
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden">
+              <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Mobile Dropdown Menu */}

@@ -5,13 +5,27 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { IoLogInOutline } from "react-icons/io5";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useUser } from "@/context/userProvider";
+import { logout } from "@/services/authServices";
 const MainNavbar = () => {
+  const { user, isLoading } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string>(""); // State to track active link
 
   // Function to handle active link
   const handleLinkClick = (link: string) => {
     setActiveLink(link);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -99,22 +113,47 @@ const MainNavbar = () => {
 
           {/* Login Button (Desktop) */}
           <div className="hidden md:flex items-center space-x-4">
-            {" "}
-            {/* Add space between items */}
-            <Link
-              href="/login"
-              onClick={() => handleLinkClick("contact")}
-              className={`${
-                activeLink === "contact" ? "text-gray-400" : "text-white"
-              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
-            >
-              Login
-            </Link>
-            <Link href="/signup">
-              <button className="px-8 py-2 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
-                Join <IoLogInOutline className="text-2xl" />
-              </button>
-            </Link>
+            {isLoading ? (
+              <div className="flex items-center justify-center h-screen"></div>
+            ) : user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="cursor-pointer">
+                    <AvatarImage src={user?.image || "/avatar.png"} />
+                    <AvatarFallback>
+                      {user?.name?.charAt(0) || "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-40 mt-2">
+                  <DropdownMenuItem
+                    onClick={() => (location.href = "/profile")}
+                  >
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => handleLinkClick("contact")}
+                  className={`${
+                    activeLink === "contact" ? "text-gray-400" : "text-white"
+                  } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+                >
+                  Login
+                </Link>
+                <Link href="/signup">
+                  <button className="px-8 py-2 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
+                    Join <IoLogInOutline className="text-2xl" />
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}

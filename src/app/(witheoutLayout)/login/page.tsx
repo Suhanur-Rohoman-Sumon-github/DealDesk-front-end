@@ -1,20 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, LogIn } from "lucide-react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { CircleDollarSignIcon } from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -23,41 +12,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { toast } from "sonner";
-import { IoLogInOutline } from "react-icons/io5";
+
 import Link from "next/link";
-
-const loginSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" }),
-  rememberMe: z.boolean().optional(),
-});
-
-type LoginValues = z.infer<typeof loginSchema>;
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Input } from "@/components/ui/input";
+import { useUserLoginMutations } from "@/hooks/Auth.hook";
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-
-  const form = useForm<LoginValues>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
-  });
-
-  const onSubmit = (data: LoginValues) => {
-    // This would typically interact with an API
+  const { mutate: handleUserLogin } = useUserLoginMutations();
+  const onSubmit = (data: any) => {
     console.log("Login data:", data);
-
-    // For now, let's simulate a successful login
-    toast.success("Login successful");
-    setTimeout(() => navigate("/dashboard"), 1000);
+    handleUserLogin(data);
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-6   ">
       <div className="absolute inset-0 overflow-hidden">
@@ -67,7 +40,7 @@ export default function Login() {
       </div>
 
       <div className="w-full max-w-md z-10 text-white">
-        <Card className=" bg-[#16142a] border border-white/20 backdrop-blur-md  shadow-xl overflow-hidden">
+        <Card className=" bg-[#16142a] border border-white/20 backdrop-blur-md   overflow-hidden">
           <CardHeader className="space-y-1 text-center text-white">
             <CardTitle className="text-2xl font-bold tracking-tight">
               Welcome back
@@ -77,101 +50,83 @@ export default function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="text-white"
-                          placeholder="you@example.com"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className=" rounded-lg  w-full"
+            >
+              {/* Email Field */}
+              <div className="mb-4">
+                <label className="block text-white mb-2" htmlFor="email">
+                  Email
+                </label>
+                <Input
+                  type="email"
+                  id="email"
+                  placeholder="Enter your mail"
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+                  {...register("email", { required: "Email is required" })}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.email.message as string}
+                  </p>
+                )}
+              </div>
 
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">Password</FormLabel>
-                      <div className="relative">
-                        <FormControl>
-                          <Input
-                            type={showPassword ? "text" : "password"}
-                            placeholder="••••••••"
-                            {...field}
-                            className="text-white"
-                          />
-                        </FormControl>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          className="absolute right-0 top-0 h-full"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? (
-                            <EyeOff className="h-4 w-4" />
-                          ) : (
-                            <Eye className="h-4 w-4" />
-                          )}
-                        </Button>
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+              {/* Password Field */}
+              <div className="mb-4 relative">
+                <label className="block text-white mb-2" htmlFor="password">
+                  Password
+                </label>
+                <Input
+                  placeholder="Enter your password"
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  className="w-full  border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
                 />
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <FormField
-                      control={form.control}
-                      name="rememberMe"
-                      render={({ field }) => (
-                        <FormItem className="flex flex-row items-center space-x-2 space-y-0">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <FormLabel className="text-sm cursor-pointer text-white">
-                            Remember me
-                          </FormLabel>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <Button
-                    type="button"
-                    variant="link"
-                    className="text-sm p-0 h-auto text-white"
-                  >
-                    Forgot password?
-                  </Button>
-                </div>
-
-                <button className="px-8 justify-center py-2 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300 w-full text-center mx-auto">
-                  Login <IoLogInOutline className="text-2xl " />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-12 text-gray-600"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
-              </form>
-            </Form>
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.password.message as string}
+                  </p>
+                )}
+              </div>
+              <div className="mb-4 flex items-center justify-between">
+                <label className="flex items-center text-white space-x-2">
+                  <Input
+                    type="checkbox"
+                    className="form-checkbox h-4 w-4 text-primary border-gray-300 rounded"
+                    {...register("rememberMe")}
+                  />
+                  <span className="text-sm">Remember me</span>
+                </label>
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-white hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+              <button
+                type="submit"
+                className="button-primary w-full flex items-center"
+              >
+                Login <CircleDollarSignIcon className="font-bold text-xl" />
+              </button>
+            </form>
           </CardContent>
           <CardFooter className="flex flex-col">
             <p className="text-sm text-center text-white">
-              Don't have an account?{" "}
+              Dont have an account?{" "}
               <Link href="/signup" className="text-[#8433ca] hover:underline">
                 Sign up now
               </Link>

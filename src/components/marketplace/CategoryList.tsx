@@ -9,11 +9,11 @@ const CategoryList = ({
   }[];
 }) => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 ">
       {categories.map((category, index) => (
         <div
           key={index}
-          className="flex justify-between items-center text-center bg-[#2d2b47] text-white py-3 px-4 rounded-md shadow-md hover:bg-[#3b3a5a] transition"
+          className="flex justify-between items-center text-center cursor-pointer bg-white/10 border border-white/10  text-white py-1 px-4 rounded-md shadow-md hover:bg-[#3b3a5a] transition"
         >
           <h4 className="text-sm font-semibold text-center">
             {category.category}

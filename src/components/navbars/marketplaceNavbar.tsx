@@ -59,7 +59,7 @@ const MarketplaceNavbar = () => {
     );
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#16142a] border border-white/20 backdrop-blur-md shadow-sm">
+    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg">
       <div className="flex items-center justify-between mx-auto px-4 gap-4 h-14">
         {/* Left Side: Logo or Site Name */}
         <div className="flex items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md">

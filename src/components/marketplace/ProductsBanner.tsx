@@ -1,21 +1,50 @@
-import React from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 const ProductsBanner = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between w-full  gap-3 bg-transparent text-white z-50 pb-4">
+    <div className="flex flex-col md:flex-row items-center justify-between w-full  gap-3 text-white z-50 mb-4 -mt-3.5  bg-white/5 border border-white/10  backdrop-blur-md  px-4 h-14">
       {/* 🏆 Left Section - Top Voted Product */}
-      <div className="flex items-center gap-2 text-xs md:text-sm">
-        <FaArrowUp className="text-green-400 text-[10px]" />
-        <span className="font-medium">Mecha Pro X75</span>
-        <button className="ml-2 text-[11px] bg-green-500 hover:bg-green-600 px-2 py-[2px] rounded transition">
-          Vote Now
-        </button>
+      <div className="flex items-center justify-between gap-3 text-xs md:text-sm text-white ">
+        {/* Progress Info */}
+        <div className="flex items-center gap-2">
+          {/* Current Level */}
+          <div className="flex items-center gap-1 bg-green-500/10 border border-green-400/30 px-2 py-[2px] rounded-full">
+            <FaArrowUp className="text-green-400 text-[10px]" />
+            <span className="font-semibold text-green-300">Nova</span>
+          </div>
+
+          {/* Arrow */}
+          <span className="text-[11px] text-white/60">→</span>
+
+          {/* Next Level */}
+          <div className="flex items-center gap-1 bg-blue-500/10 border border-blue-400/30 px-2 py-[2px] rounded-full">
+            <span className="font-semibold text-blue-300">Orbit</span>
+            <span className="text-[10px] text-white/50">(62%)</span>
+          </div>
+        </div>
       </div>
 
       {/* 🔍 Middle Section - Search Bar */}
+
+      {/* 🔽 Right Section - Sorting Dropdown */}
+      <Select>
+        <SelectTrigger className="w-[140px] text-xs bg-[#ffffff1a] text-white border border-white/30 rounded px-2 py-1 focus:outline-none">
+          <SelectValue placeholder="Sort by Price:" />
+        </SelectTrigger>
+        <SelectContent className="text-xs bg-[#1a1a1a] text-white border border-white/20">
+          <SelectItem value="low-to-high"> Low to High</SelectItem>
+          <SelectItem value="high-to-low"> High to Low</SelectItem>
+        </SelectContent>
+      </Select>
+
       <div className="relative w-full max-w-xs">
         <Input
           type="text"
@@ -30,13 +59,6 @@ const ProductsBanner = () => {
           <Search size={14} />
         </button>
       </div>
-
-      {/* 🔽 Right Section - Sorting Dropdown */}
-      <select className="text-xs bg-[#ffffff1a] text-white border border-white/30 rounded px-2 py-1 focus:outline-none">
-        <option value="default">Sort by</option>
-        <option value="low-to-high">Price: Low to High</option>
-        <option value="high-to-low">Price: High to Low</option>
-      </select>
     </div>
   );
 };

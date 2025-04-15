@@ -77,7 +77,7 @@ const LiveChat = () => {
   });
 
   return (
-    <div className="fixed h-[calc(100vh-440px)] -mt-1 z-50 w-80  space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] right-0 overflow-hidden">
+    <div className="fixed h-[calc(100vh-440px)] -mt-3 z-50 w-80  space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] right-0 overflow-hidden">
       {/* Top header: Live status & clock */}
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2 text-xs text-red-500">

@@ -1,122 +1,130 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
-const messages = [
-  { username: "User1", text: "Just got my new keyboard, loving it!" },
-  { username: "User2", text: "Anyone know where I can buy custom cables?" },
-  { username: "User3", text: "These switches are awesome, highly recommend!" },
+const userNotifications = [
   {
-    username: "User4",
-    text: "Just received my order, everything looks great!",
+    username: "user12",
+    text: "made a recent purchase",
+    image:
+      "https://www.go2bank.com/retail_debit_card_today/_jcr_content/root/responsivegrid/layout_container/col2Tile1/content_card/image.coreimg.svg/1708077696133/need-a-card-hero.svg",
   },
-  { username: "User5", text: "Can anyone suggest a good wrist rest?" },
-  { username: "User6", text: "Loving the gaming mice collection!" },
-  { username: "User7", text: "Any discounts on mechanical keyboards?" },
-  { username: "User8", text: "The RGB lighting is amazing!" },
-  { username: "User9", text: "Best place for custom keycaps?" },
-  { username: "User10", text: "Switch lubing guide, anyone?" },
+  {
+    username: "user8",
+    text: "just grabbed a new custom keyboard!",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ56Rcp_cI2hTMRf51_qWNpPwcZ6zfwQvM53w&s",
+  },
+  {
+    username: "user5",
+    text: "added a cable set to their cart!",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1xbRRSDONJl1zUOUVFt0ON5l3h4up8LIVg&s",
+  },
+  {
+    username: "user19",
+    text: "is loving the new RGB wrist rest!",
+    image:
+      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
+  },
 ];
 
-const userImages = [
-  "https://randomuser.me/api/portraits/men/1.jpg",
-  "https://randomuser.me/api/portraits/women/1.jpg",
-  "https://randomuser.me/api/portraits/men/2.jpg",
-  "https://randomuser.me/api/portraits/women/2.jpg",
-  "https://randomuser.me/api/portraits/men/3.jpg",
-  "https://randomuser.me/api/portraits/women/3.jpg",
+const recentOrders = [
+  {
+    id: 1,
+    name: "Custom Keyboard",
+    price: "$129",
+  },
+  {
+    id: 2,
+    name: "RGB Wrist Rest",
+    price: "$25",
+  },
 ];
-
-const getRandomUserImage = () => {
-  return userImages[Math.floor(Math.random() * userImages.length)];
-};
-
-const getRandomColorfulIcon = () => {
-  const icons = ["🔥", "💡", "✨", "🚀", "🎮", "🎧"];
-  return icons[Math.floor(Math.random() * icons.length)];
-};
 
 const LiveChat = () => {
-  const [chatMessages, setChatMessages] = useState<typeof messages>([]);
-  const [hasInitialized, setHasInitialized] = useState(false);
-  const [clock, setClock] = useState(new Date());
+  const [notifications, setNotifications] = useState<typeof userNotifications>(
+    []
+  );
 
   useEffect(() => {
-    const initialMessages = Array.from({ length: 5 }, () => {
-      return messages[Math.floor(Math.random() * messages.length)];
-    });
-    setChatMessages(initialMessages);
-    setHasInitialized(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hasInitialized) return;
+    setNotifications([
+      userNotifications[Math.floor(Math.random() * userNotifications.length)],
+    ]);
 
     const interval = setInterval(() => {
-      const newMsg = messages[Math.floor(Math.random() * messages.length)];
-      setChatMessages((prev) => {
-        const updated = [newMsg, ...prev];
-        return updated.slice(0, 7);
+      const randomNotification =
+        userNotifications[Math.floor(Math.random() * userNotifications.length)];
+      setNotifications((prev) => {
+        const updated = [randomNotification, ...prev];
+        return updated.slice(0, 2);
       });
-    }, 6000);
+    }, 4000);
 
-    return () => clearInterval(interval);
-  }, [hasInitialized]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setClock(new Date());
-    }, 1000);
     return () => clearInterval(interval);
   }, []);
-
-  const formattedTime = clock.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
 
   return (
-    <div className="fixed h-[calc(100vh-440px)] -mt-3 z-50 w-80  space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] right-0 overflow-hidden">
-      {/* Top header: Live status & clock */}
+    <div className="fixed h-[calc(100vh-50px)] -mt-3 z-50 w-80 space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] right-0 overflow-hidden">
+      {/* Header */}
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2 text-xs text-red-500">
           <span className="animate-pulse font-bold">🔴 LIVE</span>
-          <span className=" flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold text-green-500">{` Started : ${new Date().getHours()} Hour${
-            new Date().getHours() !== 1 ? "s" : ""
-          }`}</span>
+          <span className="flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold text-green-500">
+            {`Started : ${new Date().getHours()} Hour${
+              new Date().getHours() !== 1 ? "s" : ""
+            }`}
+          </span>
         </div>
-        <div className="text-xs text-white/70"></div>
-        <div className="text-xs text-white/70">{formattedTime}</div>
+        <div className="text-xs text-white/70">
+          {new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </div>
       </div>
 
-      {chatMessages.map((msg, index) => (
+      {/* Notification Cards */}
+      {notifications.map((user, index) => (
         <div
           key={index}
-          className="flex items-start space-x-3 p-3 rounded-lg bg-white/10 border border-white/10 shadow-sm"
+          className="animate-slide-in flex flex-col items-center text-center p-4 rounded-xl bg-white/10 shadow-md transition duration-500"
         >
-          <div className="flex-shrink-0">
-            <div className="w-8 h-8 rounded-full overflow-hidden">
-              <Image
-                width={32}
-                height={32}
-                src={getRandomUserImage()}
-                alt="user"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="w-50 h-25 rounded-md overflow-hidden mb-3 ">
+            <Image
+              src={user.image}
+              alt={`product-${index}`}
+              width={400}
+              height={100}
+              className="w-[900px] h-full object-cover"
+            />
           </div>
-          <div className="flex flex-col">
-            <span className="text-xs font-semibold text-white">
-              @{msg.username}
-            </span>
-            <span className="text-xs text-white/80">{msg.text}</span>
+          <div className="text-sm font-semibold text-white">
+            @{user.username}
           </div>
-          <div className="flex-shrink-0 text-2xl text-yellow-400">
-            {getRandomColorfulIcon()}
-          </div>
+          <div className="text-xs text-white/80 mt-1">{user.text}</div>
         </div>
       ))}
+
+      {/* Recent Orders Table */}
+      <div className="mt-auto text-xs bg-white/5 rounded-md p-2 border border-white/10">
+        <div className="font-semibold text-white mb-1">Your Recent Orders</div>
+        <div className="space-y-1">
+          {recentOrders.map((order) => (
+            <div
+              key={order.id}
+              className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"
+            >
+              <span className="truncate">{order.name}</span>
+              <span className="font-semibold">{order.price}</span>
+              <Button variant="link" className="text-xs text-white/70">
+                View
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

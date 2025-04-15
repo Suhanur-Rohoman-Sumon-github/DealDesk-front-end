@@ -477,4 +477,9 @@ export const categories = [
   { category: "Graphics Designing" },
   { category: "Token Store" },
   { category: "Subscriptions" },
+  { category: "Subscriptions" },
+  { category: "Subscriptions" },
+  { category: "Subscriptions" },
+  { category: "Subscriptions" },
+  { category: "Subscriptions" },
 ];

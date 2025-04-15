@@ -1,52 +1,48 @@
 "use client";
 import React, { useState } from "react";
+import { FaSmile, FaMeh, FaFrown, FaGrinStars, FaAngry } from "react-icons/fa";
 
 const FeedbackForm = () => {
-  const [feedback, setFeedback] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [rating, setRating] = useState<number | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setFeedback(e.target.value);
+  const handleRate = (value: number) => {
+    setRating(value);
+    console.log("User rated:", value); // Replace with API call if needed
   };
 
-  const handleSubmit = () => {
-    if (feedback.trim() !== "") {
-      // Simulate sending feedback (you can replace this with your API call)
-      console.log("Feedback submitted:", feedback);
-      setIsSubmitted(true);
-    } else {
-      alert("Please provide some feedback.");
-    }
-  };
+  const icons = [
+    { icon: <FaAngry className="text-red-500" />, label: "Very Bad" },
+    { icon: <FaFrown className="text-orange-400" />, label: "Bad" },
+    { icon: <FaMeh className="text-yellow-400" />, label: "Okay" },
+    { icon: <FaSmile className="text-green-400" />, label: "Good" },
+    { icon: <FaGrinStars className="text-blue-400" />, label: "Excellent" },
+  ];
 
   return (
-    <div className="fixed top-[360px] right-0 p-4 w-80 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg">
-      <h3 className="text-lg font-semibold text-white mb-2">
-        We Value Your Feedback
+    <div className="fixed right-4 bottom-4 w-64 p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 shadow-md">
+      <h3 className="text-sm font-semibold text-white text-center mb-3">
+        Rate Your Experience
       </h3>
-      <p className="text-sm text-white/80 mb-3">
-        Tell us how we can improve our service or product.
-      </p>
-      {isSubmitted ? (
-        <div className="text-center text-green-500">
-          <p>Thank you for your feedback!</p>
+
+      {rating ? (
+        <div className="text-center text-green-400 text-sm">
+          <p>
+            Thanks for rating us {rating} star{rating > 1 ? "s" : ""}! 🌟
+          </p>
         </div>
       ) : (
-        <>
-          <textarea
-            value={feedback}
-            onChange={handleChange}
-            rows={3}
-            className="w-full p-2 text-sm border border-white/30 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/10 placeholder-white/60 text-white"
-            placeholder="Write your feedback here..."
-          />
-          <button
-            onClick={handleSubmit}
-            className="w-full button-primary -mt-2"
-          >
-            Submit Feedback
-          </button>
-        </>
+        <div className="flex justify-between items-center px-1">
+          {icons.map((item, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleRate(idx + 1)}
+              title={item.label}
+              className="text-2xl hover:scale-110 hover:drop-shadow-md transition-transform duration-200"
+            >
+              {item.icon}
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );

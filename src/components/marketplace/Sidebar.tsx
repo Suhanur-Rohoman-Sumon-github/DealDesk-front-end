@@ -5,17 +5,18 @@ import CategoryList from "./CategoryList";
 
 import { FaUser, FaLayerGroup } from "react-icons/fa";
 import { categories } from "@/data/data";
+import FeedbackForm from "./FeedbackForm";
 
 const Sidebar = () => {
   return (
     <div
       className="fixed top-[58px] left-0 z-50 
-             w-full sm:w-[250px] md:w-[280px] lg:w-[280px] 
-             h-[calc(100vh-60px)] 
-              backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white overflow-hidden"
+                 w-full sm:w-[250px] md:w-[280px] lg:w-[280px] 
+                 h-[calc(100vh-60px)] 
+                 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white overflow-hidden flex flex-col"
     >
       <Tabs defaultValue="single" className="flex flex-col h-full">
-        {/* Tabs Navigation */}
+        {/* Tabs Header */}
         <TabsList
           className="w-full flex justify-between p-0 space-x-1 flex-none 
                      sticky top-0 z-10 px-2 py-2 bg-[#1f1b37]/80 backdrop-blur-md"
@@ -40,14 +41,24 @@ const Sidebar = () => {
           </TabsTrigger>
         </TabsList>
 
-        {/* Scrollable Content */}
-        <div className="overflow-y-auto flex-1 max-h-full mt-2 px-2 pb-4">
-          <TabsContent value="single">
-            <CategoryList categories={categories} />
-          </TabsContent>
-          <TabsContent value="combo">
-            <CategoryList categories={categories} />
-          </TabsContent>
+        {/* Scrollable Category List + Sticky Feedback Form */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <div
+            className="overflow-y-auto px-2 pb-3"
+            style={{ height: "calc(100% - 120px)" }}
+          >
+            <TabsContent value="single">
+              <CategoryList categories={categories} />
+            </TabsContent>
+            <TabsContent value="combo">
+              <CategoryList categories={categories} />
+            </TabsContent>
+          </div>
+
+          {/* Fixed Feedback Form */}
+          <div className="mt-auto">
+            <FeedbackForm />
+          </div>
         </div>
       </Tabs>
     </div>

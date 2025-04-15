@@ -7,10 +7,11 @@ import { Card } from "@/components/ui/card";
 import {
   FaTelegramPlane,
   FaCheckCircle,
-  FaCreditCard,
   FaTruck,
   FaShoppingCart,
 } from "react-icons/fa";
+import { RiBtcFill } from "react-icons/ri";
+
 import Image from "next/image";
 import {
   SelectContent,
@@ -22,7 +23,7 @@ const BuyPage = () => {
   const [step, setStep] = useState(1);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
-  const icons = [FaShoppingCart, FaCreditCard, FaTruck];
+  const icons = [FaShoppingCart, RiBtcFill, FaTruck];
   const getPercentage = (step: number) => {
     return step * 25;
   };
@@ -94,7 +95,7 @@ const BuyPage = () => {
                 cy={radius}
               />
               <circle
-                stroke="#5b2d82"
+                stroke="#9033de"
                 fill="transparent"
                 strokeWidth={stroke}
                 strokeLinecap="round"
@@ -105,7 +106,7 @@ const BuyPage = () => {
                 cy={radius}
               />
             </svg>
-            <div className="absolute inset-0 flex  text-white text-xs font-bold top-8   left-3 ">
+            <div className="absolute inset-0 flex  text-white text-[10px] font-bold top-8   left-3.5 text-center">
               {progress}%
             </div>
           </div>
@@ -201,7 +202,7 @@ const BuyPage = () => {
               <SelectTrigger className="bg-white/10 text-white border border-white/20">
                 <SelectValue placeholder="Select a crypto" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="text-white bg-white/10 border border-white/20">
                 <SelectItem value="BTC">Bitcoin (BTC)</SelectItem>
                 <SelectItem value="TRC20">Tron (TRC20)</SelectItem>
                 <SelectItem value="ETH">Ethereum (ETH)</SelectItem>
@@ -216,7 +217,7 @@ const BuyPage = () => {
             </a>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg">
+          <div className="bg-white/10 text-white backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg">
             <h2 className="text-2xl font-bold text-white mb-4">
               Order Details
             </h2>
@@ -234,7 +235,7 @@ const BuyPage = () => {
               <Button
                 onClick={() => setStep(3)}
                 disabled={!transactionId}
-                className="w-full"
+                className="w-full button-primary"
               >
                 Confirm Order
               </Button>
@@ -249,12 +250,17 @@ const BuyPage = () => {
           <FaTelegramPlane size={48} className="text-blue-400 mb-4" />
           <h2 className="text-3xl font-bold text-white mb-2">Almost Done!</h2>
           <p className="text-white/80 mb-6">
-            Please keep an eye on your Telegram channel and email. We'll deliver
+            Please keep an eye on your Telegram channel and email. Well deliver
             your product as fast as possible.
           </p>
-          <Button onClick={() => setStep(1)} className="w-full">
-            Back to Home
-          </Button>
+          <a
+            href="https://t.me/+gyYVulBrJIk4N2Nl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full"
+          >
+            <Button className="w-full button-primary">Go to Telegram</Button>
+          </a>
         </div>
       )}
     </div>

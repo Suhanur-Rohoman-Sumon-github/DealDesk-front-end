@@ -14,6 +14,7 @@ import ProductCard from "../ProductCard";
 import { LightGallery } from "lightgallery/lightgallery";
 import LightGelary from "./LightGelary";
 import { products } from "@/data/data";
+import Link from "next/link";
 // make sure this exists
 
 const SingleProducts = () => {
@@ -204,12 +205,11 @@ const SingleProducts = () => {
             </p>
 
             <div className="flex space-x-4 my-4">
-              <button
-                onClick={handleAddToCart}
-                className="w-full button-primary"
-              >
-                <MdShoppingCart /> Buy Now
-              </button>
+              <Link className="w-full" href={"/marketplace/buy?productId=1"}>
+                <button className="w-full button-primary">
+                  <MdShoppingCart /> Buy Now
+                </button>
+              </Link>
             </div>
 
             <div className="flex space-x-4 my-4">

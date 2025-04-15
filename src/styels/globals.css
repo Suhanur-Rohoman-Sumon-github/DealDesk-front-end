@@ -136,3 +136,16 @@ body {
     @apply bg-[#7C3FFF]  gap-2 text-white font-bold py-[10px] ml-2 transition-all duration-200  px-[15px] rounded hover:bg-[#7C3FFF];
   }
 }
+
+@keyframes progressBarAnimation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress-bar {
+  animation: progressBarAnimation 2s ease-out forwards;
+}

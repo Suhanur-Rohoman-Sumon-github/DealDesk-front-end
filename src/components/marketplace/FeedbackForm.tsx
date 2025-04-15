@@ -11,11 +11,26 @@ const FeedbackForm = () => {
   };
 
   const icons = [
-    { icon: <FaAngry className="text-red-500" />, label: "Very Bad" },
-    { icon: <FaFrown className="text-orange-400" />, label: "Bad" },
-    { icon: <FaMeh className="text-yellow-400" />, label: "Okay" },
-    { icon: <FaSmile className="text-green-400" />, label: "Good" },
-    { icon: <FaGrinStars className="text-blue-400" />, label: "Excellent" },
+    {
+      icon: <FaAngry className="text-[#e63946]" />, 
+      label: "Very Bad",
+    },
+    {
+      icon: <FaFrown className="text-[#f4a261]" />, 
+      label: "Bad",
+    },
+    {
+      icon: <FaMeh className="text-[#f6bd60]" />, 
+      label: "Okay",
+    },
+    {
+      icon: <FaSmile className="text-[#43aa8b]" />, 
+      label: "Good",
+    },
+    {
+      icon: <FaGrinStars className="text-[#4cc9f0]" />, 
+      label: "Excellent",
+    },
   ];
 
   return (

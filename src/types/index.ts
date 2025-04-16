@@ -79,16 +79,13 @@ export type VendorPayload = {
   role?:"VENDOR"
 };
 
-export type OrderData ={
-  id?:string
+export interface OrderData {
   userId: string;
-  products: { productId: string; quantity: number }[];
+  products:   string ;
   totalAmount: number;
-  shippingAddress: string;
-  contactNumber: string;
-  created_At?: Date
-  paymentStatus?:string
-  orderStatus?:string
+  paymentType: string;
+  transactionId: string;
+  productId: string;
 }
 
 export type ReviewData = {

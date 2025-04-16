@@ -20,6 +20,8 @@ import {
 } from "@radix-ui/react-select";
 import { useSearchParams } from "next/navigation";
 import { useGetSingleProductQuery } from "@/hooks/Products.hook";
+import { useCreateOrderMutation } from "@/hooks/Order.hooks";
+import { useUser } from "@/context/userProvider";
 
 const BuyPage = () => {
   const searchParams = useSearchParams();
@@ -28,12 +30,13 @@ const BuyPage = () => {
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
   const [cryptoPrice, setCryptoPrice] = useState<number | null>(null);
-  const usdAmount = 199;
   const icons = [FaShoppingCart, RiBtcFill, FaTruck];
-
+  const { user } = useUser();
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
     productId ? productId : ""
   );
+
+  const { mutate: addOrders } = useCreateOrderMutation();
 
   useEffect(() => {
     fetchCryptoPrice(selectedCrypto);
@@ -79,6 +82,23 @@ const BuyPage = () => {
         return "tether"; // TRC20 is USDT, same as "tether"
       default:
         return "bitcoin";
+    }
+  };
+
+  const handleConfirmOrder = () => {
+    console.log("Transaction ID:", transactionId);
+    console.log("Selected Crypto:", selectedCrypto);
+    if (transactionId) {
+      const orderData = {
+        userId: user?.id as string,
+        products: productId ? productId : "",
+        totalAmount: price,
+        paymentType: selectedCrypto,
+        transactionId: transactionId,
+        productId: productId || "",
+      };
+      addOrders(orderData);
+      setStep(3);
     }
   };
 
@@ -305,7 +325,7 @@ const BuyPage = () => {
                 className="mb-4"
               />
               <Button
-                onClick={() => setStep(3)}
+                onClick={handleConfirmOrder}
                 disabled={!transactionId}
                 className="w-full button-primary"
               >

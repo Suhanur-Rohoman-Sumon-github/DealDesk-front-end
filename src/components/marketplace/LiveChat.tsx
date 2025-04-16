@@ -6,6 +6,7 @@ import { FaXmark } from "react-icons/fa6";
 import { useGetMyOrderQuery } from "@/hooks/Order.hooks";
 import { useUser } from "@/context/userProvider";
 import LiveChatSkeleton from "../skeleton/LiveChatSkeleton";
+import AnalogClock from "./AnalogClock";
 
 const userNotifications = [
   {
@@ -134,18 +135,15 @@ const LiveChat = () => {
               <FaXmark />
             </button>
             <span className="animate-pulse font-bold">🔴 LIVE</span>
-            <span className="flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold text-green-500">
-              {`Started : ${new Date().getHours()} Hour${
-                new Date().getHours() !== 1 ? "s" : ""
+            <span className="flex items-center  px-2 py-0.5 text-xs rounded-full font-semibold text-white">
+              {`Start : ${new Date().getHours()} H${
+                new Date().getHours() !== 1 ? "" : ""
               }`}
             </span>
           </div>
-          <div className="text-xs text-white/70">
-            {new Date().toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </div>
+          <span className="flex items-center gap-1  py-0.5 text-xs rounded-full font-semibold text-white">
+            Orders complete: {orders}
+          </span>
         </div>
 
         {/* Notification Cards */}

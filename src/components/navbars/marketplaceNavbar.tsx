@@ -1,21 +1,22 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Menu, X, Search, ArrowUp, ArrowDown } from 'lucide-react';
-import { IoLogInOutline } from 'react-icons/io5';
-import { Input } from '@/components/ui/input';
-import clsx from 'clsx';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, Search, ArrowUp, ArrowDown } from "lucide-react";
+import { IoLogInOutline } from "react-icons/io5";
+import { Input } from "@/components/ui/input";
+import clsx from "clsx";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
-import { useUser } from '@/context/userProvider';
-import { logout } from '@/services/authServices';
+} from "../ui/dropdown-menu";
+import { useUser } from "@/context/userProvider";
+import { logout } from "@/services/authServices";
+import AnalogClock from "../marketplace/AnalogClock";
 const MarketplaceNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleIndex, setVisibleIndex] = useState(0);
@@ -26,25 +27,25 @@ const MarketplaceNavbar = () => {
   };
 
   const mockData = [
-    { category: 'Mechanical Keyboards', trend: 'up', change: '+12%' },
-    { category: 'Gaming Mice', trend: 'down', change: '-5%' },
-    { category: 'Keycaps', trend: 'up', change: '+8%' },
-    { category: 'Desk Mats', trend: 'down', change: '-2%' },
-    { category: 'Switches', trend: 'up', change: '+15%' },
-    { category: 'Wrist Rests', trend: 'up', change: '+6%' },
-    { category: 'Custom Cables', trend: 'down', change: '-3%' },
-    { category: 'Stabilizers', trend: 'up', change: '+10%' },
-    { category: 'Lube Kits', trend: 'up', change: '+7%' },
-    { category: 'Artisan Keycaps', trend: 'down', change: '-4%' },
-    { category: 'Keyboard Bags', trend: 'up', change: '+9%' },
-    { category: 'Sound Dampeners', trend: 'down', change: '-1%' },
+    { category: "Mechanical Keyboards", trend: "up", change: "+12%" },
+    { category: "Gaming Mice", trend: "down", change: "-5%" },
+    { category: "Keycaps", trend: "up", change: "+8%" },
+    { category: "Desk Mats", trend: "down", change: "-2%" },
+    { category: "Switches", trend: "up", change: "+15%" },
+    { category: "Wrist Rests", trend: "up", change: "+6%" },
+    { category: "Custom Cables", trend: "down", change: "-3%" },
+    { category: "Stabilizers", trend: "up", change: "+10%" },
+    { category: "Lube Kits", trend: "up", change: "+7%" },
+    { category: "Artisan Keycaps", trend: "down", change: "-4%" },
+    { category: "Keyboard Bags", trend: "up", change: "+9%" },
+    { category: "Sound Dampeners", trend: "down", change: "-1%" },
   ];
 
   const itemsToShow = window.innerWidth > 1440 ? 4 : 3; // Show fewer items for a cleaner look
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setVisibleIndex(prev => (prev + 1) % mockData.length);
+      setVisibleIndex((prev) => (prev + 1) % mockData.length);
     }, 3500);
 
     return () => clearInterval(interval);
@@ -60,7 +61,7 @@ const MarketplaceNavbar = () => {
 
   return (
     <>
-      {' '}
+      {" "}
       {/* Center: Live Data Ticker for sm devaice */}
       <div className="flex lg:hidden flex-wrap items-center md:gap-2 lg:gap-4 whitespace-nowrap animate-fade-in-down justify-center">
         {visibleItems.map((item, index) => (
@@ -68,13 +69,13 @@ const MarketplaceNavbar = () => {
             <span className="text-xs text-white">{item.category}</span>
             <div
               className={clsx(
-                'flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold',
-                item.trend === 'up'
-                  ? 'bg-green-600/20 text-green-400'
-                  : 'bg-red-600/20 text-red-400'
+                "flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold",
+                item.trend === "up"
+                  ? "bg-green-600/20 text-green-400"
+                  : "bg-red-600/20 text-red-400"
               )}
             >
-              {item.trend === 'up' ? (
+              {item.trend === "up" ? (
                 <ArrowUp size={14} />
               ) : (
                 <ArrowDown size={14} />
@@ -91,13 +92,14 @@ const MarketplaceNavbar = () => {
           <div className="flex  items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md w-[200px] md:w-fit">
             <Image
               src={
-                'https://centure.volkovdesign.com/img/dodgers/title--left.svg'
+                "https://centure.volkovdesign.com/img/dodgers/title--left.svg"
               }
               alt="Left Arrow"
               className="w-4 h-4 md:w-4 md:h-4"
               width={40}
               height={40}
             />
+
             <Link
               className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
               href="/"
@@ -107,7 +109,7 @@ const MarketplaceNavbar = () => {
 
             <Image
               src={
-                'https://centure.volkovdesign.com/img/dodgers/title--right.svg'
+                "https://centure.volkovdesign.com/img/dodgers/title--right.svg"
               }
               alt="Right Arrow"
               className="w-8 h-8 md:w-4 md:h-4"
@@ -123,13 +125,13 @@ const MarketplaceNavbar = () => {
                 <span className="text-xs text-white">{item.category}</span>
                 <div
                   className={clsx(
-                    'flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold',
-                    item.trend === 'up'
-                      ? 'bg-green-600/20 text-green-400'
-                      : 'bg-red-600/20 text-red-400'
+                    "flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold",
+                    item.trend === "up"
+                      ? "bg-green-600/20 text-green-400"
+                      : "bg-red-600/20 text-red-400"
                   )}
                 >
-                  {item.trend === 'up' ? (
+                  {item.trend === "up" ? (
                     <ArrowUp size={14} />
                   ) : (
                     <ArrowDown size={14} />
@@ -175,15 +177,15 @@ const MarketplaceNavbar = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Avatar className="cursor-pointer">
-                        <AvatarImage src={user?.image || '/avatar.png'} />
+                        <AvatarImage src={user?.image || "/avatar.png"} />
                         <AvatarFallback>
-                          {user?.name?.charAt(0) || 'U'}
+                          {user?.name?.charAt(0) || "U"}
                         </AvatarFallback>
                       </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-40 mt-2">
                       <DropdownMenuItem
-                        onClick={() => (location.href = '/profile')}
+                        onClick={() => (location.href = "/profile")}
                       >
                         Profile
                       </DropdownMenuItem>

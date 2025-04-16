@@ -1,36 +1,30 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import ProductCard from './ProductCard';
+import React, { useState } from "react";
+import ProductCard from "./ProductCard";
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
+} from "@/components/ui/pagination";
+import { products as allProducts } from "@/data/data";
 
-} from '@/components/ui/pagination';
-import { products as allProducts } from '@/data/data';
-
-import ProductsBanner from './ProductsBanner';
-
-
-
+import ProductsBanner from "./ProductsBanner";
 
 import { useGetAllProductsQuery } from "@/hooks/Products.hook";
 import ProductCardSkeleton from "../skeleton/ProductCardSkeleton";
-
 
 const itemsPerPage = 12;
 
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOption, setSortOption] = useState('default');
-
+  const [sortOption, setSortOption] = useState("default");
 
   const sortProducts = (products: typeof allProducts) => {
-    if (sortOption === 'low-to-high') {
+    if (sortOption === "low-to-high") {
       return [...products].sort((a, b) => a.price - b.price);
-    } else if (sortOption === 'high-to-low') {
+    } else if (sortOption === "high-to-low") {
       return [...products].sort((a, b) => b.price - a.price);
     }
     return products;
@@ -41,7 +35,6 @@ const Products = () => {
     return <ProductCardSkeleton />;
   }
   console.log(data, "data from products");
-
 
   // const sortProducts = (products: typeof allProducts) => {
   //   if (sortOption === "low-to-high") {
@@ -61,7 +54,7 @@ const Products = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -81,17 +74,19 @@ const Products = () => {
            lg:px-8 xl:px-0
           "
       >
-        {data.map((product, index) => (
-          <ProductCard
-            key={index}
-            image={product?.images[0]}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-            rating={product.numReviews}
-            id={product._id}
-          />
-        ))}
+        {Array.from({ length: 12 })
+          .flatMap(() => data)
+          .map((product, index) => (
+            <ProductCard
+              key={index}
+              image={product?.images[0]}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              rating={product.numReviews}
+              id={product._id}
+            />
+          ))}
       </div>
 
       {/* Pagination */}

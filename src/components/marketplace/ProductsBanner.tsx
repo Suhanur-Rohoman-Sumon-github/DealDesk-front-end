@@ -1,16 +1,16 @@
-import { FaArrowUp } from "react-icons/fa";
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { FaArrowUp } from 'react-icons/fa';
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 const ProductsBanner = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between w-full  gap-3 text-white z-50 mb-4 -mt-3.5  bg-white/5 border border-white/10  backdrop-blur-md  px-4 h-14">
+    <div className="flex flex-col md:flex-row items-center justify-between w-full  gap-3 text-white z-50 mb-4 -mt-3.5  bg-white/5 border border-white/10  backdrop-blur-md  py-2 px-4 md:h-14">
       {/* 🏆 Left Section - Top Voted Product */}
       <div className="flex items-center justify-between gap-3 text-xs md:text-sm text-white ">
         {/* Progress Info */}

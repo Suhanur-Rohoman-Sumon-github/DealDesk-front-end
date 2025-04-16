@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const Title = ({
   title,
@@ -10,21 +10,21 @@ const Title = ({
   rightArrow?: string;
 }) => {
   return (
-    <div className="my-24 px-4 flex flex-col items-center">
+    <div className="my-24 text-center md:text-start px-4 flex flex-col items-center">
       {/* Title with Arrows */}
       <div className="flex items-center space-x-3">
         <Image
-          src={"https://centure.volkovdesign.com/img/dodgers/title--left.svg"}
+          src={'https://centure.volkovdesign.com/img/dodgers/title--left.svg'}
           alt="Left Arrow"
           className="w-8 h-8 md:w-10 md:h-10"
           width={40}
           height={40}
         />
-        <p className="text-4xl ext-2xl font-bold bg-clip-text text-white">
+        <p className="lg:text-4xl text-2xl font-bold bg-clip-text text-white">
           {title}
         </p>
         <Image
-          src={"https://centure.volkovdesign.com/img/dodgers/title--right.svg"}
+          src={'https://centure.volkovdesign.com/img/dodgers/title--right.svg'}
           alt="Right Arrow"
           className="w-8 h-8 md:w-10 md:h-10"
           width={40}

@@ -1,7 +1,7 @@
-"use client";
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import { stats } from "@/data/data";
+'use client';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { stats } from '@/data/data';
 
 const AgencyStats = () => {
   const [counts, setCounts] = useState(stats.map(() => 0));
@@ -9,8 +9,8 @@ const AgencyStats = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             stats.forEach((stat, index) => {
               const end = stat.value;
@@ -18,7 +18,7 @@ const AgencyStats = () => {
               const increment = Math.ceil(end / (duration / 50));
 
               const timer = setInterval(() => {
-                setCounts((prevCounts) => {
+                setCounts(prevCounts => {
                   const newCounts = [...prevCounts];
                   if (newCounts[index] < end) {
                     newCounts[index] += increment;
@@ -49,7 +49,7 @@ const AgencyStats = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center -mt-8">
+    <div className="w-full p-5 flex justify-center -mt-8">
       <div
         ref={statsRef}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full"

@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import { Providers } from "../providers";
-import "../../styels/globals.css";
+import type { Metadata } from 'next';
+import { Providers } from '../providers';
+import '../../styels/globals.css';
 
-import { Poppins } from "next/font/google";
-import MarketplaceNavbar from "@/components/navbars/marketplaceNavbar";
-import Sidebar from "@/components/marketplace/Sidebar";
-import LiveChat from "@/components/marketplace/LiveChat";
+import { Poppins } from 'next/font/google';
+import MarketplaceNavbar from '@/components/navbars/marketplaceNavbar';
+import Sidebar from '@/components/marketplace/Sidebar';
+import LiveChat from '@/components/marketplace/LiveChat';
 
 export const metadata: Metadata = {
-  title: "Marketplace",
-  description: "Live marketplace with products and live chat",
+  title: 'Marketplace',
+  description: 'Live marketplace with products and live chat',
 };
 
 const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
 });
 
 export default function RootLayout({
@@ -40,7 +40,7 @@ export default function RootLayout({
               </section>
 
               {/* Live Chat */}
-              <aside className="w-full lg:w-[300px]">
+              <aside className="w-full   lg:w-[300px]">
                 <LiveChat />
               </aside>
             </div>

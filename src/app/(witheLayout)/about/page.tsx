@@ -1,14 +1,14 @@
-"use client";
-import OurTeam from "@/components/home/OurTeam";
-import Title from "@/components/title/Title";
-import Image from "next/image";
-import { FaFaceSmile, FaLightbulb, FaUsers } from "react-icons/fa6";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { ourStoryImages } from "@/data/data";
+'use client';
+import OurTeam from '@/components/home/OurTeam';
+import Title from '@/components/title/Title';
+import Image from 'next/image';
+import { FaFaceSmile, FaLightbulb, FaUsers } from 'react-icons/fa6';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { ourStoryImages } from '@/data/data';
 
 const AboutUs = () => {
   return (
@@ -22,7 +22,7 @@ const AboutUs = () => {
       </div>
 
       {/* Company Mission */}
-      <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div className="grid md:text-start text-center md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 className="text-3xl font-semibold text-white text-center mb-4">
             Our Mission
@@ -38,7 +38,7 @@ const AboutUs = () => {
         <Image
           src="https://media.licdn.com/dms/image/v2/D4E12AQHgMxo-g7BYsw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1658422953944?e=2147483647&v=beta&t=Z2tA86SPCvcG9ieACH8jr4SSL47dclFPchqYJIPI4gY"
           alt="Our Mission"
-          className="rounded-lg shadow-lg"
+          className="rounded-lg shadow-lg md:mx-0 mx-auto"
           width={500}
           height={300}
         />
@@ -71,12 +71,14 @@ const AboutUs = () => {
         {/* Swiper Carousel with Additional Images */}
         <div className="mt-10">
           <Swiper
-            slidesPerView={3}
+            slidesPerView={1}
             spaceBetween={20}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             modules={[Autoplay, Pagination, Navigation]}
             breakpoints={{
+              0: { slidesPerView: 1 },
+              480: { slidesPerView: 1 },
               640: { slidesPerView: 1 },
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
@@ -160,7 +162,7 @@ const AboutUs = () => {
             </h2>
             <p className="text-[#c9c8ca] text-lg mb-6 text-center lg:text-left">
               Have a question or need support? Our team is ready to assist you.
-              Reach out to us via the form below or email us at{" "}
+              Reach out to us via the form below or email us at{' '}
               <span className="text-blue-500">support@dealdesk.com</span>.
             </p>
 

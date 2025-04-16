@@ -1,65 +1,74 @@
-'use client';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
-import { FaXmark } from 'react-icons/fa6';
+"use client";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { Button } from "../ui/button";
+import { FaXmark } from "react-icons/fa6";
+import { useGetMyOrderQuery } from "@/hooks/Order.hooks";
+import { useUser } from "@/context/userProvider";
+import LiveChatSkeleton from "../skeleton/LiveChatSkeleton";
 
 const userNotifications = [
   {
-    username: 'user12',
-    text: 'made a recent purchase',
+    username: "user12",
+    text: "made a recent purchase",
     image:
-      'https://www.go2bank.com/retail_debit_card_today/_jcr_content/root/responsivegrid/layout_container/col2Tile1/content_card/image.coreimg.svg/1708077696133/need-a-card-hero.svg',
+      "https://www.go2bank.com/retail_debit_card_today/_jcr_content/root/responsivegrid/layout_container/col2Tile1/content_card/image.coreimg.svg/1708077696133/need-a-card-hero.svg",
   },
   {
-    username: 'user8',
-    text: 'just grabbed a new custom keyboard!',
+    username: "user8",
+    text: "just grabbed a new custom keyboard!",
     image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ56Rcp_cI2hTMRf51_qWNpPwcZ6zfwQvM53w&s',
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ56Rcp_cI2hTMRf51_qWNpPwcZ6zfwQvM53w&s",
   },
   {
-    username: 'user5',
-    text: 'added a cable set to their cart!',
+    username: "user5",
+    text: "added a cable set to their cart!",
     image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1xbRRSDONJl1zUOUVFt0ON5l3h4up8LIVg&s',
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1xbRRSDONJl1zUOUVFt0ON5l3h4up8LIVg&s",
   },
   {
-    username: 'user19',
-    text: 'is loving the new RGB wrist rest!',
+    username: "user19",
+    text: "is loving the new RGB wrist rest!",
     image:
-      'https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png',
+      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
   },
 ];
 
-const recentOrders = [
-  {
-    id: 1,
-    name: 'Custom Keyboard',
-    price: '$129',
-  },
-  {
-    id: 2,
-    name: 'RGB Wrist Rest',
-    price: '$25',
-  },
-];
+// const recentOrders = [
+//   {
+//     id: 1,
+//     name: "Custom Keyboard",
+//     price: "$129",
+//   },
+//   {
+//     id: 2,
+//     name: "RGB Wrist Rest",
+//     price: "$25",
+//   },
+// ];
 
 const LiveChat = () => {
+  const { user } = useUser();
+  console.log(user);
   const LOCAL_STORAGE_KEY = "liveChatOrders";
   const [orders, setOrders] = useState(0);
   const [notifications, setNotifications] = useState<typeof userNotifications>(
     []
   );
   const [toggleLiveOrders, setToggleLiveOrders] = useState(false);
+
   useEffect(() => {
     setNotifications([
       userNotifications[Math.floor(Math.random() * userNotifications.length)],
     ]);
 
+    const recentOrdersData = recentOrders?.data || [];
+    console.log(recentOrdersData);
+
     const interval = setInterval(() => {
       const randomNotification =
         userNotifications[Math.floor(Math.random() * userNotifications.length)];
-      setNotifications(prev => {
+      setNotifications((prev) => {
         const updated = [randomNotification, ...prev];
         return updated.slice(0, 2);
       });
@@ -88,13 +97,18 @@ const LiveChat = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
+  const { data: recentOrders, isLoading } = useGetMyOrderQuery(user?.id || "");
+  console.log(recentOrders);
+  console.log(user?.id);
 
+  if (isLoading) return <LiveChatSkeleton />;
+
+  return (
     <>
-      {/* toggle button for mobile devaice */}
+      {/* toggle button for mobile device */}
       <div
         onClick={() => setToggleLiveOrders(!toggleLiveOrders)}
-        className=" z-10 cursor-pointer absolute top-[50px] mt-12 right-5  text-white lg:hidden items-center gap-2 flex   space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md"
+        className="z-10 cursor-pointer absolute top-[50px] mt-12 right-5 text-white lg:hidden items-center gap-2 flex space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md"
       >
         <button
           type="button"
@@ -102,34 +116,17 @@ const LiveChat = () => {
         >
           Live Activites
         </button>
-
-    <div className="fixed h-[calc(100vh-50px)] -mt-3 z-50 w-80 space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] right-0 overflow-hidden">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-2 text-xs text-red-500">
-          <span className="animate-pulse font-bold">🔴 LIVE</span>
-          <span className="flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold text-green-500">
-            {`Started : ${new Date().getHours()} H ${
-              new Date().getHours() !== 1 ? "s" : ""
-            }`}
-          </span>
-          <span className=" font-bold px-[1px] py-1  text-white ">
-            total orders <span className="text-[#FFFFFF]">({orders})</span>
-          </span>
-        </div>
-
       </div>
 
       {/* live order content */}
       <div
-        className={` transition-all duration-300 right-0 ${
-          toggleLiveOrders ? 'inline-block' : 'hidden'
-        } lg:inline-block  fixed lg:fixed h-[calc(100vh-50px)] -mt-3 z-50  space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px]  overflow-hidden w-full md:w-[300px] lg:w-[300px]`}
+        className={`transition-all duration-300 right-0 ${
+          toggleLiveOrders ? "inline-block" : "hidden"
+        } lg:inline-block fixed lg:fixed h-[calc(100vh-50px)] -mt-3 z-50 space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] overflow-hidden w-full md:w-[300px] lg:w-[300px]`}
       >
         {/* Header */}
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center gap-2 text-xs text-red-500">
-            {/* close menu button  */}
             <button
               onClick={() => setToggleLiveOrders(false)}
               className="lg:hidden cursor-pointer text-white p-2 rounded-full bg-white/10 transition-all duration-300"
@@ -139,14 +136,14 @@ const LiveChat = () => {
             <span className="animate-pulse font-bold">🔴 LIVE</span>
             <span className="flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold text-green-500">
               {`Started : ${new Date().getHours()} Hour${
-                new Date().getHours() !== 1 ? 's' : ''
+                new Date().getHours() !== 1 ? "s" : ""
               }`}
             </span>
           </div>
           <div className="text-xs text-white/70">
-            {new Date().toLocaleTimeString('en-US', {
-              hour: '2-digit',
-              minute: '2-digit',
+            {new Date().toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
             })}
           </div>
         </div>
@@ -179,18 +176,22 @@ const LiveChat = () => {
             Your Recent Orders
           </div>
           <div className="space-y-1">
-            {recentOrders.map(order => (
-              <div
-                key={order.id}
-                className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"
-              >
-                <span className="truncate">{order.name}</span>
-                <span className="font-semibold">{order.price}</span>
-                <Button variant="link" className="text-xs text-white/70">
-                  View
-                </Button>
-              </div>
-            ))}
+            {recentOrders?.length > 0 ? (
+              recentOrders.slice(0, 2).map((order) => (
+                <div
+                  key={order.id}
+                  className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"
+                >
+                  <span className="truncate">{order.products.title}</span>
+                  <span className="font-semibold">{order.products.price}</span>
+                  <Button variant="link" className="text-xs text-white/70">
+                    View
+                  </Button>
+                </div>
+              ))
+            ) : (
+              <div className="text-white/70">No recent orders</div>
+            )}
           </div>
         </div>
       </div>

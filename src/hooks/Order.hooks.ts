@@ -29,6 +29,7 @@ export const useGetAllOrdersQuery = (queryParams: {
 
 // Fetch a single order
 export const useGetMyOrderQuery = (userId: string) => {
+  console.log(userId);
   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
     queryKey: ["get-my-order", userId],
     queryFn: async () => {

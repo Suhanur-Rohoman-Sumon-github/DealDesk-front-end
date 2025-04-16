@@ -13,9 +13,9 @@ import { products as allProducts } from '@/data/data';
 
 import ProductsBanner from './ProductsBanner';
 
-} from "@/components/ui/pagination";
 
-import ProductsBanner from "./ProductsBanner";
+
+
 import { useGetAllProductsQuery } from "@/hooks/Products.hook";
 import ProductCardSkeleton from "../skeleton/ProductCardSkeleton";
 

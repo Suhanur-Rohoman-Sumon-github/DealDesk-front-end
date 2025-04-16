@@ -1,21 +1,21 @@
-import type { Metadata } from 'next';
-import { Providers } from '../providers';
-import '../../styels/globals.css';
-
-import { Poppins } from 'next/font/google';
-import MarketplaceNavbar from '@/components/navbars/marketplaceNavbar';
-import Sidebar from '@/components/marketplace/Sidebar';
-import LiveChat from '@/components/marketplace/LiveChat';
+import type { Metadata } from "next";
+import { Providers } from "../providers";
+import "../../styels/globals.css";
+import Script from "next/script";
+import { Poppins } from "next/font/google";
+import MarketplaceNavbar from "@/components/navbars/marketplaceNavbar";
+import Sidebar from "@/components/marketplace/Sidebar";
+import LiveChat from "@/components/marketplace/LiveChat";
 
 export const metadata: Metadata = {
-  title: 'Marketplace',
-  description: 'Live marketplace with products and live chat',
+  title: "Marketplace",
+  description: "Live marketplace with products and live chat",
 };
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-poppins',
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export default function RootLayout({
@@ -46,7 +46,9 @@ export default function RootLayout({
             </div>
           </div>
 
-          <script
+          <Script
+            id="tawk-to"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
       var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -60,7 +62,7 @@ export default function RootLayout({
       })();
     `,
             }}
-          ></script>
+          />
         </Providers>
       </body>
     </html>

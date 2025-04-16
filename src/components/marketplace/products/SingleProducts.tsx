@@ -13,41 +13,56 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCard from "../ProductCard";
 import { LightGallery } from "lightgallery/lightgallery";
 import LightGelary from "./LightGelary";
-import { products } from "@/data/data";
+
 import Link from "next/link";
+import { useGetSingleProductQuery } from "@/hooks/Products.hook";
+import SingleProductSkeleton from "@/components/skeleton/SingleProductSkeleton";
 // make sure this exists
 
-const SingleProducts = () => {
+const SingleProducts = ({ productId }: { productId: string }) => {
   const [quantity, setQuantity] = useState(1);
   const { user } = useUser();
   const router = useRouter();
 
+  const { data: singleProducts, isLoading } = useGetSingleProductQuery(
+    productId ? productId : ""
+  );
+
+  if (isLoading) {
+    return (
+      <div>
+        {" "}
+        <SingleProductSkeleton />
+      </div>
+    );
+  }
+  console.log(singleProducts);
   // Dummy product data
-  const singleProducts = {
-    name: "Ergo Mechanical Keyboard Pro",
-    description:
-      "A premium ergonomic mechanical keyboard with customizable RGB backlighting and hot-swappable switches. Ideal for both gaming and typing.",
-    images: ["/keyboard1.jpg", "/keyboard2.jpg", "/keyboard3.jpg"],
-    price: 199,
-    reviews: [
-      {
-        userName: "John Doe",
-        userProfilePicture:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjDGMp734S91sDuUFqL51_xRTXS15iiRoHew&s",
-        timestamp: new Date().toISOString(),
-        comment: "Amazing keyboard, great tactile feedback!",
-        ratings: 5,
-      },
-      {
-        userName: "Jane Smith",
-        userProfilePicture:
-          "https://media.istockphoto.com/id/951331682/photo/caucasian-unsure-man-make-gestures-doubtfully-with-hands-with-copy-space-uncertain-young.jpg?s=612x612&w=0&k=20&c=eYmt_-5OxHVK41xZcO0Z0yVa2_GiEmfc5Pc696c_C1A=",
-        timestamp: new Date().toISOString(),
-        comment: "Feels premium and looks stunning.",
-        ratings: 4,
-      },
-    ],
-  };
+  // const singleProducts = {
+  //   name: "Ergo Mechanical Keyboard Pro",
+  //   description:
+  //     "A premium ergonomic mechanical keyboard with customizable RGB backlighting and hot-swappable switches. Ideal for both gaming and typing.",
+  //   images: ["/keyboard1.jpg", "/keyboard2.jpg", "/keyboard3.jpg"],
+  //   price: 199,
+  //   reviews: [
+  //     {
+  //       userName: "John Doe",
+  //       userProfilePicture:
+  //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjDGMp734S91sDuUFqL51_xRTXS15iiRoHew&s",
+  //       timestamp: new Date().toISOString(),
+  //       comment: "Amazing keyboard, great tactile feedback!",
+  //       ratings: 5,
+  //     },
+  //     {
+  //       userName: "Jane Smith",
+  //       userProfilePicture:
+  //         "https://media.istockphoto.com/id/951331682/photo/caucasian-unsure-man-make-gestures-doubtfully-with-hands-with-copy-space-uncertain-young.jpg?s=612x612&w=0&k=20&c=eYmt_-5OxHVK41xZcO0Z0yVa2_GiEmfc5Pc696c_C1A=",
+  //       timestamp: new Date().toISOString(),
+  //       comment: "Feels premium and looks stunning.",
+  //       ratings: 4,
+  //     },
+  //   ],
+  // };
 
   // Dummy related products
   const relatedProducts = [
@@ -89,7 +104,16 @@ const SingleProducts = () => {
     else alert("Added to favorites!");
   };
 
-  const { images, description, name, reviews, price } = singleProducts;
+  const {
+    images,
+    description,
+    name,
+    reviews,
+    price,
+    rating,
+    shippingAndReturns,
+    category,
+  } = singleProducts;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -97,12 +121,7 @@ const SingleProducts = () => {
       <div className="flex flex-col lg:flex-row gap-8 border-b pb-8">
         <div className="lg:w-[50%] flex flex-col items-center mt-4">
           <div className="w-full p-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
-            <LightGelary
-              images={[
-                "https://www.go2bank.com/go2bank/_jcr_content/root/responsivegrid_52481908/layout_container/col2Tile1/content_card/image.coreimg.png/1738315339107/hero-banner-3x-updated.png",
-                "https://downloadr2.apkmirror.com/wp-content/uploads/2021/11/98/619819242e738.png",
-              ]}
-            />
+            <LightGelary images={images} />
           </div>
 
           <Tabs defaultValue="description" className="w-full mt-6">
@@ -132,12 +151,7 @@ const SingleProducts = () => {
               <h3 className="font-bold text-xl mb-2 text-white">
                 Product Description
               </h3>
-              <p className="text-white/90">
-                This product is the latest in tech innovation, offering high
-                performance, durability, and reliability. Perfect for anyone who
-                needs cutting-edge technology in a compact, user-friendly
-                design.
-              </p>
+              <p className="text-white/90">{description}</p>
             </TabsContent>
 
             <TabsContent
@@ -147,18 +161,14 @@ const SingleProducts = () => {
               <h3 className="font-bold text-xl mb-2 text-white">
                 Shipping Information
               </h3>
-              <p className="text-white/90">
-                We offer free standard shipping on all orders. Expect your order
-                to arrive within 5–7 business days. For expedited shipping,
-                please select your preferred option during checkout.
-              </p>
+              <p className="text-white/90">{shippingAndReturns}</p>
             </TabsContent>
           </Tabs>
         </div>
 
         <div className="md:w-1/2 p-4 h-full text-white space-y-4">
           <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20">
-            <p className="text-sm">Brand: TypoTech</p>
+            <p className="text-sm">{`Category : ${category}`}</p>
             <h1 className="text-2xl font-bold mt-1">{name}</h1>
 
             <div className="flex justify-between items-center my-4 p-4 bg-white/10 backdrop-blur-md rounded-xl shadow border border-white/20">
@@ -205,7 +215,10 @@ const SingleProducts = () => {
             </p>
 
             <div className="flex space-x-4 my-4">
-              <Link className="w-full" href={"/marketplace/buy?productId=1"}>
+              <Link
+                className="w-full"
+                href={`/marketplace/buy?productId=${productId}`}
+              >
                 <button className="w-full button-primary">
                   <MdShoppingCart /> Buy Now
                 </button>
@@ -251,11 +264,11 @@ const SingleProducts = () => {
       {/* Description */}
       <div className="mt-8 border-b pb-8">
         {/* Reviews */}
-        <div className="mt-8">
+        {/* <div className="mt-8">
           <h2 className="text-2xl font-semibold mb-4 text-white">
             Customer Reviews
           </h2>
-          {reviews.length > 0 ? (
+          {reviews.rating > 0 ? (
             <div className="space-y-4">
               {reviews.map((review, index) => (
                 <div
@@ -297,7 +310,7 @@ const SingleProducts = () => {
               No reviews available for this product.
             </p>
           )}
-        </div>
+        </div> */}
       </div>
 
       {/* Related Products */}
@@ -306,7 +319,7 @@ const SingleProducts = () => {
           More you should like
         </h2>
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.slice(0, 8).map((product, index) => (
               <ProductCard
                 key={index}
@@ -317,7 +330,7 @@ const SingleProducts = () => {
                 rating={product.rating}
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

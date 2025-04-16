@@ -12,9 +12,11 @@ interface ProductCardProps {
   description: string;
   price: string;
   rating: number;
+  id: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
+  id,
   image,
   title,
   description,
@@ -73,7 +75,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             Copy Link
           </button>
 
-          <Link href={`/marketplace/${title}`}>
+          <Link href={`/marketplace/${id}`}>
             <button
               className="text-white bg-white/10 border border-white/20 rounded-full p-2 hover:bg-white/20 transition cursor-pointer"
               title="View Details"

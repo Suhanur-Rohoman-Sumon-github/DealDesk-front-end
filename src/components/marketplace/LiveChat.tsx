@@ -45,6 +45,8 @@ const recentOrders = [
 ];
 
 const LiveChat = () => {
+  const LOCAL_STORAGE_KEY = "liveChatOrders";
+  const [orders, setOrders] = useState(0);
   const [notifications, setNotifications] = useState<typeof userNotifications>(
     []
   );
@@ -66,7 +68,28 @@ const LiveChat = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const initial = stored ? parseInt(stored, 10) : 42;
+    setOrders(initial);
+    if (!stored) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, initial.toString());
+    }
+
+    const interval = setInterval(() => {
+      const randomIncrement = Math.floor(Math.random() * 5) + 1;
+      setOrders((prev) => {
+        const updated = prev + randomIncrement;
+        localStorage.setItem(LOCAL_STORAGE_KEY, updated.toString());
+        return updated;
+      });
+    }, 1000 * 60);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
+
     <>
       {/* toggle button for mobile devaice */}
       <div
@@ -79,6 +102,22 @@ const LiveChat = () => {
         >
           Live Activites
         </button>
+
+    <div className="fixed h-[calc(100vh-50px)] -mt-3 z-50 w-80 space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] right-0 overflow-hidden">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center gap-2 text-xs text-red-500">
+          <span className="animate-pulse font-bold">🔴 LIVE</span>
+          <span className="flex items-center gap-1 px-2 py-0.5 text-xs rounded-full font-semibold text-green-500">
+            {`Started : ${new Date().getHours()} H ${
+              new Date().getHours() !== 1 ? "s" : ""
+            }`}
+          </span>
+          <span className=" font-bold px-[1px] py-1  text-white ">
+            total orders <span className="text-[#FFFFFF]">({orders})</span>
+          </span>
+        </div>
+
       </div>
 
       {/* live order content */}

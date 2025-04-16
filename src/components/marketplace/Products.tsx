@@ -7,16 +7,25 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
+
 } from '@/components/ui/pagination';
 import { products as allProducts } from '@/data/data';
 
 import ProductsBanner from './ProductsBanner';
+
+} from "@/components/ui/pagination";
+
+import ProductsBanner from "./ProductsBanner";
+import { useGetAllProductsQuery } from "@/hooks/Products.hook";
+import ProductCardSkeleton from "../skeleton/ProductCardSkeleton";
+
 
 const itemsPerPage = 12;
 
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState('default');
+
 
   const sortProducts = (products: typeof allProducts) => {
     if (sortOption === 'low-to-high') {
@@ -27,12 +36,28 @@ const Products = () => {
     return products;
   };
 
-  const sortedProducts = sortProducts(allProducts);
-  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
-  const currentProducts = sortedProducts.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const { data, isLoading, isError } = useGetAllProductsQuery();
+  if (isLoading) {
+    return <ProductCardSkeleton />;
+  }
+  console.log(data, "data from products");
+
+
+  // const sortProducts = (products: typeof allProducts) => {
+  //   if (sortOption === "low-to-high") {
+  //     return [...products].sort((a, b) => a.price - b.price);
+  //   } else if (sortOption === "high-to-low") {
+  //     return [...products].sort((a, b) => b.price - a.price);
+  //   }
+  //   return products;
+  // };
+
+  // const sortedProducts = sortProducts(allProducts);
+  // const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  // const currentProducts = sortedProducts.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage
+  // );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -56,20 +81,21 @@ const Products = () => {
            lg:px-8 xl:px-0
           "
       >
-        {currentProducts.map((product, index) => (
+        {data.map((product, index) => (
           <ProductCard
             key={index}
-            image={product.image}
+            image={product?.images[0]}
             title={product.title}
             description={product.description}
             price={product.price}
-            rating={product.rating}
+            rating={product.numReviews}
+            id={product._id}
           />
         ))}
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center mt-10">
+      {/* <div className="flex justify-center mt-10">
         <div className="backdrop-blur-xl bg-white/10 border border-white/20 shadow-xl rounded-2xl p-4">
           <Pagination>
             <PaginationContent>
@@ -91,7 +117,7 @@ const Products = () => {
             </PaginationContent>
           </Pagination>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

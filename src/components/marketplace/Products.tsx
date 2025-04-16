@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import ProductCard from "./ProductCard";
+import React, { useState } from 'react';
+import ProductCard from './ProductCard';
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
-} from "@/components/ui/pagination";
-import { products as allProducts } from "@/data/data";
+} from '@/components/ui/pagination';
+import { products as allProducts } from '@/data/data';
 
-import ProductsBanner from "./ProductsBanner";
+import ProductsBanner from './ProductsBanner';
 
 const itemsPerPage = 12;
 
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOption, setSortOption] = useState("default");
+  const [sortOption, setSortOption] = useState('default');
 
   const sortProducts = (products: typeof allProducts) => {
-    if (sortOption === "low-to-high") {
+    if (sortOption === 'low-to-high') {
       return [...products].sort((a, b) => a.price - b.price);
-    } else if (sortOption === "high-to-low") {
+    } else if (sortOption === 'high-to-low') {
       return [...products].sort((a, b) => b.price - a.price);
     }
     return products;
@@ -36,11 +36,11 @@ const Products = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="w-full px-2 ">
+    <div className=" xl:w-11/12 mx-auto lg:px-5 2xl:w-full px-2 ">
       {/* 🔮 Glassmorphism Header */}
       <ProductsBanner />
 
@@ -53,7 +53,7 @@ const Products = () => {
           xl:grid-cols-2 
           2xl:grid-cols-3
           gap-4 sm:gap-6 md:gap-6 lg:gap-8
-        
+           lg:px-8 xl:px-0
           "
       >
         {currentProducts.map((product, index) => (
@@ -80,8 +80,8 @@ const Products = () => {
                     onClick={() => handlePageChange(i + 1)}
                     className={`cursor-pointer rounded-md px-4 py-2 ${
                       currentPage === i + 1
-                        ? "bg-transparent text-white"
-                        : "text-white"
+                        ? 'bg-transparent text-white'
+                        : 'text-white'
                     } transition-colors duration-200`}
                   >
                     {i + 1}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectItem } from "@/components/ui/select";
@@ -18,15 +18,73 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@radix-ui/react-select";
+import { useSearchParams } from "next/navigation";
+import { useGetSingleProductQuery } from "@/hooks/Products.hook";
 
 const BuyPage = () => {
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("productId");
   const [step, setStep] = useState(1);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
+  const [cryptoPrice, setCryptoPrice] = useState<number | null>(null);
+  const usdAmount = 199;
   const icons = [FaShoppingCart, RiBtcFill, FaTruck];
+
+  const { data: singleProducts, isLoading } = useGetSingleProductQuery(
+    productId ? productId : ""
+  );
+
+  useEffect(() => {
+    fetchCryptoPrice(selectedCrypto);
+  }, [selectedCrypto]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-white">Loading...</p>
+      </div>
+    );
+  }
+
+  const { images, description, name, price } = singleProducts;
+
   const getPercentage = (step: number) => {
     return step * 25;
   };
+
+  const fetchCryptoPrice = async (crypto: string) => {
+    try {
+      const res = await fetch(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${getCoinGeckoId(
+          crypto
+        )}&vs_currencies=usd`
+      );
+      const data = await res.json();
+      const price = data[getCoinGeckoId(crypto)].usd;
+      setCryptoPrice(price);
+    } catch (error) {
+      console.error("Error fetching price:", error);
+      setCryptoPrice(null);
+    }
+  };
+
+  const getCoinGeckoId = (symbol: string) => {
+    switch (symbol) {
+      case "BTC":
+        return "bitcoin";
+      case "ETH":
+        return "ethereum";
+      case "TRC20":
+        return "tether"; // TRC20 is USDT, same as "tether"
+      default:
+        return "bitcoin";
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+
+  const convertedAmount = cryptoPrice ? (price / cryptoPrice).toFixed(6) : null;
 
   const StepIndicator = ({ currentStep }: { currentStep: number }) => {
     const radius = 24;
@@ -125,8 +183,8 @@ const BuyPage = () => {
         <div className="grid lg:grid-cols-2 gap-12 w-full max-w-4xl mt-6">
           <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl  border border-white/20 shadow-lg flex flex-col items-center justify-center">
             <Image
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqm0ZXguBCE7vRj5l0COssBQ1cF0PZlmCIgA&s"
-              alt="TypoTech Keyboard"
+              src={images[0]}
+              alt={name}
               width={500}
               height={500}
               className="mb-6 rounded-lg shadow-md"
@@ -134,10 +192,11 @@ const BuyPage = () => {
             <h2 className="text-2xl font-bold text-white mb-4">
               TypoTech Premium Keyboard
             </h2>
-            <p className="text-gray-300 mb-2">Price: $199</p>
+            <p className="text-gray-300 mb-2">{`Price: ${price}`}</p>
             <p className="text-gray-300 text-center">
-              Durable, aesthetic, and built for speed. Perfect for coders and
-              gamers alike.
+              {description.length > 100
+                ? description.slice(0, 100) + "..."
+                : description}
             </p>
           </div>
 
@@ -164,19 +223,19 @@ const BuyPage = () => {
             <div className="text-white space-y-3">
               <div className="flex justify-between text-sm">
                 <span>Subtotal</span>
-                <span>$179</span>
+                <span>{price}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span>Shipping</span>
-                <span>$10</span>
+                <span>$0</span>
               </div>
               <div className="flex justify-between text-sm border-b border-white/10 pb-2">
                 <span>Tax</span>
-                <span>$10</span>
+                <span>$0</span>
               </div>
               <div className="flex justify-between font-semibold text-lg pt-2">
                 <span>Total</span>
-                <span>$199</span>
+                <span>{price}</span>
               </div>
             </div>
 
@@ -198,18 +257,22 @@ const BuyPage = () => {
             <h2 className="text-2xl font-bold text-white mb-4">
               Select Payment Method
             </h2>
+
             <Select value={selectedCrypto} onValueChange={setSelectedCrypto}>
               <SelectTrigger className="bg-white/10 text-white border border-white/20">
                 <SelectValue placeholder="Select a crypto" />
               </SelectTrigger>
               <SelectContent className="text-white bg-white/10 border border-white/20">
                 <SelectItem value="BTC">Bitcoin (BTC)</SelectItem>
-                <SelectItem value="TRC20">Tron (TRC20)</SelectItem>
+                <SelectItem value="TRC20">Tron (TRC20 / USDT)</SelectItem>
                 <SelectItem value="ETH">Ethereum (ETH)</SelectItem>
               </SelectContent>
             </Select>
+
             <a
-              href={`https://coinmarketcap.com/currencies/${selectedCrypto.toLowerCase()}`}
+              href={`https://coinmarketcap.com/currencies/${getCoinGeckoId(
+                selectedCrypto
+              )}`}
               target="_blank"
               className="underline text-purple-400 text-sm"
             >
@@ -221,9 +284,18 @@ const BuyPage = () => {
             <h2 className="text-2xl font-bold text-white mb-4">
               Order Details
             </h2>
-            <Card className="p-4 bg-white/5 border border-white/10 rounded-xl">
-              <p className="text-white">TypoTech Premium Keyboard</p>
-              <p className="text-white">$199</p>
+            <Card className="px-4  bg-white/5 border border-white/10 rounded-xl">
+              <p className="text-white">{name}</p>
+              {convertedAmount && (
+                <div className=" text-white">
+                  <p>
+                    You’ll pay:{" "}
+                    <span className="font-semibold">
+                      {convertedAmount} {selectedCrypto}
+                    </span>
+                  </p>
+                </div>
+              )}
             </Card>
             <div className="mt-6">
               <Input

@@ -1,15 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import {  useState } from "react";
 import { FaBars, FaListAlt } from "react-icons/fa";
-import { FaXmark, FaCommentDots } from "react-icons/fa6";
+import { FaXmark } from "react-icons/fa6";
 
 import CategoryList from "./CategoryList";
 import FeedbackForm from "./FeedbackForm";
-import { categories } from "@/data/data";
+
+import { useGetCategoryQuery } from "@/hooks/Products.hook";
+import CategorySkeleton from "../skeleton/CategorySkeleton";
 
 const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
+  const { data: categores, isLoading } = useGetCategoryQuery();
+
+  if (isLoading) {
+    return <CategorySkeleton count={20} />;
+  }
 
   return (
     <>
@@ -49,7 +56,7 @@ const Sidebar = () => {
           className="overflow-y-auto px-4 pt-4 pb-2"
           style={{ height: "calc(100vh - 58px - 140px)" }}
         >
-          <CategoryList categories={categories} />
+          <CategoryList categories={categores} />
         </div>
 
         {/* Fixed Feedback Form with Icon */}

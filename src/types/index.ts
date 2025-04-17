@@ -113,4 +113,12 @@ export type Product = {
   name: string;
 };
 
+export type Order = {
+  id: string;
+  products: {
+    title: string;
+    price: string | number;
+  };
+};
+
 

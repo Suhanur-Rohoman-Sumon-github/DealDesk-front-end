@@ -27,7 +27,7 @@ export const getRelatedProducts = async (categoryId:string) => {
 };
 export const getCateGory = async () => {
  try {
-   const { data } = await axiosInstance.get(`/products/categories/category`);
+   const { data } = await axiosInstance.get(`/category`);
   return data.data; 
  } catch (error) {
    if (axios.isAxiosError(error)) {
@@ -36,7 +36,7 @@ export const getCateGory = async () => {
  }
 };
 export const createCategory = async (categoryData:any) => {
-  const { data } = await axiosInstance.post(`/products/category`,categoryData);
+  const { data } = await axiosInstance.post(`/category`,categoryData);
   return data.data; 
 };
 export const addReview = async (reviewData:any ,productId:string ) => {

@@ -6,7 +6,7 @@ import { FaXmark } from "react-icons/fa6";
 import { useGetMyOrderQuery } from "@/hooks/Order.hooks";
 import { useUser } from "@/context/userProvider";
 import LiveChatSkeleton from "../skeleton/LiveChatSkeleton";
-import AnalogClock from "./AnalogClock";
+import { Order } from "@/types";
 
 const userNotifications = [
   {
@@ -76,6 +76,7 @@ const LiveChat = () => {
     }, 4000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -175,7 +176,7 @@ const LiveChat = () => {
           </div>
           <div className="space-y-1">
             {recentOrders?.length > 0 ? (
-              recentOrders.slice(0, 2).map((order) => (
+              recentOrders.slice(0, 2).map((order: Order) => (
                 <div
                   key={order.id}
                   className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"

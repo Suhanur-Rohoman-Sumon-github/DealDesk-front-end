@@ -51,7 +51,7 @@ const AdminSidebar = () => {
     <Sidebar className=" border-r border border-red-50 ">
       <SidebarHeader className="px-6 py-5 border-b flex items-center">
         <Link
-          href="/"
+          href="/admin/dashboard"
           className="flex items-center gap-2 font-bold text-xl text-red-800"
         >
           <ShoppingBag className="h-6 w-6 " />
@@ -64,7 +64,7 @@ const AdminSidebar = () => {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/" className="flex items-center">
+                <Link href="/admin/dashboard" className="flex items-center">
                   <BarChart3 className="h-5 w-5 mr-3" />
                   <span>Dashboard</span>
                 </Link>
@@ -114,9 +114,12 @@ const AdminSidebar = () => {
               icon={<Package className="h-5 w-5 mr-3" />}
               label="Products"
               items={[
-                { label: "All Products", path: "/products" },
                 {
-                  label: "Add New Product",
+                  label: "All Products",
+                  path: "/admin/dashboard/products/all-products",
+                },
+                {
+                  label: "add New Product",
                   path: "/admin/dashboard/products/new",
                 },
                 {
@@ -146,7 +149,10 @@ const AdminSidebar = () => {
               icon={<ShoppingCart className="h-5 w-5 mr-3" />}
               label="Orders"
               items={[
-                { label: "All Orders", path: "/orders" },
+                {
+                  label: "All Orders",
+                  path: "/admin/dashboard/orders/orderList",
+                },
                 { label: "Pending", path: "/orders/pending" },
                 { label: "Processing", path: "/orders/processing" },
                 { label: "Completed", path: "/orders/completed" },
@@ -156,7 +162,11 @@ const AdminSidebar = () => {
             <SidebarMenu>
               {[
                 { icon: <Truck />, label: "Shipments", path: "/shipments" },
-                { icon: <CreditCard />, label: "Payments", path: "/payments" },
+                {
+                  icon: <CreditCard />,
+                  label: "Payments",
+                  path: "/admin/dashboard/PaymentPage",
+                },
               ].map(({ icon, label, path }) => (
                 <SidebarMenuItem key={path}>
                   <SidebarMenuButton asChild>
@@ -178,8 +188,11 @@ const AdminSidebar = () => {
               icon={<Users className="h-5 w-5 mr-3" />}
               label="Users"
               items={[
-                { label: "All Users", path: "/users" },
-                { label: "Add New User", path: "/users/new" },
+                { label: "All Users", path: "/admin/dashboard/user/all-user" },
+                {
+                  label: "Add New User",
+                  path: "/admin/dashboard/user/new-user",
+                },
                 { label: "User Roles", path: "/users/roles" },
                 { label: "Permissions", path: "/users/permissions" },
               ]}
@@ -236,7 +249,11 @@ const AdminSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {[
-                { icon: <Settings />, label: "Settings", path: "/settings" },
+                {
+                  icon: <Settings />,
+                  label: "Settings",
+                  path: "/admin/dashboard/settings",
+                },
                 { icon: <Globe />, label: "Store Setup", path: "/store" },
               ].map(({ icon, label, path }) => (
                 <SidebarMenuItem key={path}>

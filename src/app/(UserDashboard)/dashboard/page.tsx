@@ -125,8 +125,8 @@ const Dashboard = () => {
         <ChartCard title="Weekly Activity" icon={BarChart3}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={activityData}>
-              <XAxis dataKey="day" stroke="#ccc" />
-              <YAxis stroke="#ccc" />
+              <XAxis dataKey="day" stroke="#fff" />
+              <YAxis stroke="#fff" />
               <Tooltip />
               <Bar
                 dataKey="purchases"
@@ -140,8 +140,8 @@ const Dashboard = () => {
         <ChartCard title="Monthly Trend" icon={TrendingUp}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data}>
-              <XAxis dataKey="name" stroke="#ccc" />
-              <YAxis stroke="#ccc" />
+              <XAxis dataKey="name" stroke="#fff" />
+              <YAxis stroke="#fff" />
               <Tooltip />
               <Line
                 type="monotone"

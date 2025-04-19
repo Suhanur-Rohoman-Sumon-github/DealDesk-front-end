@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 import { FieldValues } from "react-hook-form";
-import { createCategory, getAllProducts, getCateGory, getSIngleProducts } from "@/services/products";
+import { createCategory, createProduct, getAllProducts, getCateGory, getSIngleProducts } from "@/services/products";
 
 export const useGetAllProductsQuery = () => {
 
@@ -100,20 +100,20 @@ export const useGetCategoryQuery = () => {
 
 //   return { data, refetch, isLoading, isError };
 // };
-// export const useCreateProductMutation = () => {
-//   return useMutation<any, Error, FieldValues>({
-//     mutationKey: ["create-product"],
-//     mutationFn: async (productData) => {
-//       await createProduct(productData); 
-//     },
-//     onSuccess: () => {
-//       toast.success("Product created successfully!");
-//     },
-//     onError: (error) => {
-//       toast.error(error.message || "Failed to create product.");
-//     },
-//   });
-// };
+export const useCreateProductMutation = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["create-product"],
+    mutationFn: async (productData) => {
+      await createProduct(productData); 
+    },
+    onSuccess: () => {
+      toast.success("Product created successfully!");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to create product.");
+    },
+  });
+};
 export const useCreateCategoryMutations = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["create-category"],

@@ -98,7 +98,7 @@ export type ReviewData = {
 };
 
 export type Category = {
-  id: string;
+  _id: string;
   name: string;
   isDeleted: boolean;
   created_at: string; 

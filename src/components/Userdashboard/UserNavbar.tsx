@@ -23,14 +23,7 @@ const UserNavbar = () => {
 
   return (
     <div className="glass-navbar px-6 py-3 flex items-center justify-between border-b">
-      <div className="flex items-center space-x-2">
-        <Link href="/dashboard" className="flex items-center">
-          <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center text-white font-bold">
-            G
-          </div>
-          <span className="ml-2 font-semibold text-lg">GlassUI</span>
-        </Link>
-      </div>
+      <div className="flex items-center space-x-2"></div>
 
       <div className="flex items-center gap-4">
         <DropdownMenu>

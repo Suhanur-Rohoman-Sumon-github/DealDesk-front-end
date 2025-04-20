@@ -9,15 +9,9 @@ import { addReview } from "@/services/products";
 
 
 // Fetch all orders
-export const useGetAllOrdersQuery = (queryParams: {
-  page: number;
-  limit: number;
-  status?: string;
-  sort?: string;
-  searchTerm?: string;
-}) => {
+export const useGetAllOrdersQuery = () => {
   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
-    queryKey: ["get-orders", queryParams],
+    queryKey: ["get-orders"],
     queryFn: async () => {
       const data = await getAllOrders();
       return data;

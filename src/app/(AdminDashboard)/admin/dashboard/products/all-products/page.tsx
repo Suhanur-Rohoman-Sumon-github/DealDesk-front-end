@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search } from "lucide-react";
+import { useGetAllProductsQuery } from "@/hooks/Products.hook";
 
 const mockProducts = [
   {
@@ -71,6 +72,7 @@ const getStatusColor = (status: string) => {
 };
 
 const ProductTable = () => {
+  const { data: allProduct, isLoading } = useGetAllProductsQuery();
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredProducts = mockProducts.filter(
@@ -115,20 +117,13 @@ const ProductTable = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredProducts.map((product) => (
+              {allProduct?.map((product) => (
                 <TableRow key={product.id}>
-                  <TableCell className="font-medium">{product.name}</TableCell>
+                  <TableCell className="font-medium">{product.title}</TableCell>
                   <TableCell>{product.sku}</TableCell>
                   <TableCell>${product.price.toFixed(2)}</TableCell>
                   <TableCell>{product.stock}</TableCell>
-                  <TableCell>
-                    <Badge
-                      className={getStatusColor(product.status)}
-                      variant="outline"
-                    >
-                      {product.status}
-                    </Badge>
-                  </TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               ))}
               {filteredProducts.length === 0 && (

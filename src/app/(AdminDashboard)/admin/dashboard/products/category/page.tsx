@@ -31,6 +31,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Edit, Trash2, PlusCircle, Package } from "lucide-react";
+import { useGetCategoryQuery } from "@/hooks/Products.hook";
 
 // Mock data for demonstration
 const mockCategories = [
@@ -77,6 +78,8 @@ const Categories = () => {
   const [categories, setCategories] = useState(mockCategories);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<any>(null);
+
+  const { data: allCategory } = useGetCategoryQuery();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -156,7 +159,7 @@ const Categories = () => {
 
       {/* Category Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {categories.map((category) => (
+        {allCategory?.map((category) => (
           <Card key={category.id}>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">

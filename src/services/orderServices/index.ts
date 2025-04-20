@@ -18,6 +18,7 @@ export const getAllOrders = async (
     // if (searchTerm) query.append("searchTerm", searchTerm);
 
     const { data } = await axiosInstance.get(`/orders`);
+    console.log(data);
     return data;
   } catch (error: any) {
     throw new Error(error.message);

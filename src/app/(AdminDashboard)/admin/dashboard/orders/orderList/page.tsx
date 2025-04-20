@@ -27,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useGetAllOrdersQuery } from "@/hooks/Order.hooks";
 
 const mockOrders = [
   {
@@ -76,53 +77,54 @@ const OrdersList = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [filteredOrders, setFilteredOrders] = useState(mockOrders);
 
-  const handleFilterAndSearch = (searchValue: string, statusValue: string) => {
-    let filtered = [...mockOrders];
+  const { data: allOrder } = useGetAllOrdersQuery();
 
-    if (searchValue.trim() !== "") {
-      filtered = filtered.filter(
-        (order) =>
-          order.id.toLowerCase().includes(searchValue.toLowerCase()) ||
-          order.customer.toLowerCase().includes(searchValue.toLowerCase())
-      );
-    }
+  // const handleFilterAndSearch = (searchValue: string, statusValue: string) => {
+  //   let filtered = [...mockOrders];
 
-    if (statusValue !== "all") {
-      filtered = filtered.filter(
-        (order) => order.status.toLowerCase() === statusValue.toLowerCase()
-      );
-    }
+  //   if (searchValue.trim() !== "") {
+  //     filtered = filtered.filter(
+  //       (order) =>
+  //         order.id.toLowerCase().includes(searchValue.toLowerCase()) ||
+  //         order.customer.toLowerCase().includes(searchValue.toLowerCase())
+  //     );
+  //   }
 
-    setFilteredOrders(filtered);
-  };
+  //   if (statusValue !== "all") {
+  //     filtered = filtered.filter(
+  //       (order) => order.status.toLowerCase() === statusValue.toLowerCase()
+  //     );
+  //   }
+
+  //   setFilteredOrders(filtered);
+  // };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
-    handleFilterAndSearch(value, statusFilter);
   };
 
-  const handleStatusChange = (value: string) => {
-    setStatusFilter(value);
-    handleFilterAndSearch(searchQuery, value);
-  };
+  // const handleStatusChange = (value: string) => {
+  //   setStatusFilter(value);
+  //   handleFilterAndSearch(searchQuery, value);
+  // };
 
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "completed":
-        return "bg-green-100 text-green-800 hover:bg-green-100";
-      case "processing":
-        return "bg-blue-100 text-blue-800 hover:bg-blue-100";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800 hover:bg-yellow-100";
-      case "shipped":
-        return "bg-purple-100 text-purple-800 hover:bg-purple-100";
-      case "cancelled":
-        return "bg-red-100 text-red-800 hover:bg-red-100";
-      default:
-        return "bg-gray-100 text-gray-800 hover:bg-gray-100";
-    }
-  };
+  // const getStatusColor = (status: string) => {
+  //   switch (status.toLowerCase()) {
+  //     case "completed":
+  //       return "bg-green-100 text-green-800 hover:bg-green-100";
+  //     case "processing":
+  //       return "bg-blue-100 text-blue-800 hover:bg-blue-100";
+  //     case "pending":
+  //       return "bg-yellow-100 text-yellow-800 hover:bg-yellow-100";
+  //     case "shipped":
+  //       return "bg-purple-100 text-purple-800 hover:bg-purple-100";
+  //     case "cancelled":
+  //       return "bg-red-100 text-red-800 hover:bg-red-100";
+  //     default:
+  //       return "bg-gray-100 text-gray-800 hover:bg-gray-100";
+  //   }
+  // };
 
   return (
     <div className="p-6 space-y-6">
@@ -141,7 +143,7 @@ const OrdersList = () => {
             onChange={handleSearch}
           />
         </div>
-        <Select onValueChange={handleStatusChange} defaultValue="all">
+        <Select defaultValue="all">
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
@@ -170,24 +172,17 @@ const OrdersList = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredOrders.length > 0 ? (
-              filteredOrders.map((order) => (
+            {allOrder?.data.length > 0 ? (
+              allOrder?.data.map((order) => (
                 <TableRow key={order.id}>
-                  <TableCell className="font-medium">{order.id}</TableCell>
-                  <TableCell>{order.customer}</TableCell>
+                  <TableCell className="font-medium">{order._id}</TableCell>
+                  <TableCell>{order?.userId?.username}</TableCell>
                   <TableCell>
-                    {new Date(order.date).toLocaleDateString()}
+                    {new Date(order.createdAt).toLocaleDateString()}
                   </TableCell>
-                  <TableCell>{order.items}</TableCell>
-                  <TableCell>${order.total.toFixed(2)}</TableCell>
-                  <TableCell>
-                    <Badge
-                      className={getStatusColor(order.status)}
-                      variant="outline"
-                    >
-                      {order.status}
-                    </Badge>
-                  </TableCell>
+                  <TableCell>{order?.products?.category}</TableCell>
+                  <TableCell>${order.totalAmount}</TableCell>
+                  <TableCell>{order.orderStatus}</TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>

@@ -67,8 +67,6 @@ const CreateProductPage = () => {
     console.log(data);
     const formData = new FormData();
 
-   
-
     // Add product data
     formData.append("data", JSON.stringify(data));
 
@@ -77,7 +75,7 @@ const CreateProductPage = () => {
       formData.append("images", image);
     });
 
-     console.log(formData);
+    console.log(formData);
 
     // Handle product creation
     handleCreateProduct(formData);
@@ -86,8 +84,8 @@ const CreateProductPage = () => {
   return (
     <div>
       {isPending && <Loading />}
-      <div className="min-h-screen bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 flex items-center justify-center">
-        <div className="w-full max-w-5xl p-8 bg-white rounded-lg shadow-md">
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-8xl p-8  rounded-lg ">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
             Create Product
           </h2>

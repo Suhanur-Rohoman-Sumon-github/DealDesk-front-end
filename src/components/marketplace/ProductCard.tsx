@@ -75,7 +75,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             Copy Link
           </button>
 
-          <Link href={`/marketplace/${id}`}>
+          <Link href={`/marketplaces/${id}`}>
             <button
               className="text-white bg-white/10 border border-white/20 rounded-full p-2 hover:bg-white/20 transition cursor-pointer"
               title="View Details"

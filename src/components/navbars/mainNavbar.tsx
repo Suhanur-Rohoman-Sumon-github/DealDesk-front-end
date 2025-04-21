@@ -92,13 +92,13 @@ const MainNavbar = () => {
               Services
             </Link>
             <Link
-              href="/marketplace"
-              onClick={() => handleLinkClick("marketplace")}
+              href="/marketplaces"
+              onClick={() => handleLinkClick("marketplaces")}
               className={`${
-                activeLink === "marketplace" ? "text-gray-400" : "text-white"
+                activeLink === "marketplaces" ? "text-gray-400" : "text-white"
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
-              Marketplace
+              Marketplaces
             </Link>
             <Link
               href="/contact"

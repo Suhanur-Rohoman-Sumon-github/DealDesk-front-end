@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Select, SelectItem } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
 import {
   FaTelegramPlane,
@@ -13,11 +14,7 @@ import {
 import { RiBtcFill } from "react-icons/ri";
 
 import Image from "next/image";
-import {
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from "@radix-ui/react-select";
+
 import { useSearchParams } from "next/navigation";
 import { useGetSingleProductQuery } from "@/hooks/Products.hook";
 import { useCreateOrderMutation } from "@/hooks/Order.hooks";

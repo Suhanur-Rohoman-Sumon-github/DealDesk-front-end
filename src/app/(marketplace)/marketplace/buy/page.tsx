@@ -101,7 +101,7 @@ const BuyPage = () => {
     }
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
 
   const convertedAmount = cryptoPrice ? (price / cryptoPrice).toFixed(6) : null;
 

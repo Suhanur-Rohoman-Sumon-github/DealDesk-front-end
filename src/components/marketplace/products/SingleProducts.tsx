@@ -190,7 +190,7 @@ const SingleProducts = ({ productId }: { productId: string }) => {
             <div className="flex space-x-4 my-4">
               <Link
                 className="w-full"
-                href={`/marketplace/buy?productId=${productId}`}
+                href={`/marketplaces/buy?productId=${productId}`}
               >
                 <button className="w-full button-primary">
                   <MdShoppingCart /> Buy Now

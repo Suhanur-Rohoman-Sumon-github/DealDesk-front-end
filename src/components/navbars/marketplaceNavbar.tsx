@@ -40,7 +40,19 @@ const MarketplaceNavbar = () => {
     { category: "Sound Dampeners", trend: "down", change: "-1%" },
   ];
 
-  const itemsToShow = window.innerWidth > 1440 ? 4 : 3; // Show fewer items for a cleaner look
+  const [itemsToShow, setItemsToShow] = useState(3); 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsToShow(window.innerWidth > 1440 ? 4 : 3);
+    };
+
+    handleResize(); // run on mount
+    window.addEventListener("resize", handleResize); // update on resize
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+ // Show fewer items for a cleaner look
 
   useEffect(() => {
     const interval = setInterval(() => {

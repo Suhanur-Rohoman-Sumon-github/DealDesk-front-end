@@ -64,12 +64,22 @@ const Favorites = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">My Favorites</h1>
-        <p className="text-muted-foreground">Products you have saved for later</p>
+        <p className="text-muted-foreground">
+          Products you have saved for later
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            image={""}
+            title={""}
+            description={""}
+            price={""}
+            rating={0}
+            id={""}
+          />
         ))}
       </div>
     </div>

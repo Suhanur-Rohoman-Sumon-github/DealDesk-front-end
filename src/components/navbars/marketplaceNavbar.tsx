@@ -176,7 +176,9 @@ const MarketplaceNavbar = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Avatar className="cursor-pointer">
-                        <AvatarImage src={user?.image || "/avatar.png"} />
+                        <AvatarImage
+                          src={user?.profilePicture || "/avatar.png"}
+                        />
                         <AvatarFallback>
                           {user?.name?.charAt(0) || "U"}
                         </AvatarFallback>

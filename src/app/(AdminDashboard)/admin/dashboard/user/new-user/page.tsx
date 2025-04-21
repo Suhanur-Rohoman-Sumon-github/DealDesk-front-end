@@ -15,14 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
+
 import { ArrowLeft, Save, UploadCloud } from "lucide-react";
 import Link from "next/link";
 
@@ -71,7 +64,7 @@ const NewUser = () => {
     });
 
     // Simulate API call
-   
+
     alert("User profile created!");
 
     form.reset();

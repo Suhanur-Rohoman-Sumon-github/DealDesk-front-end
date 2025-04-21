@@ -16,7 +16,6 @@ import {
 } from "../ui/dropdown-menu";
 import { useUser } from "@/context/userProvider";
 import { logout } from "@/services/authServices";
-import AnalogClock from "../marketplace/AnalogClock";
 const MarketplaceNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleIndex, setVisibleIndex] = useState(0);

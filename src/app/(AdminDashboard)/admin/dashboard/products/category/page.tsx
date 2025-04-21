@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -159,7 +160,7 @@ const Categories = () => {
 
       {/* Category Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {allCategory?.map((category) => (
+        {allCategory?.map((category:any) => (
           <Card key={category.id}>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">

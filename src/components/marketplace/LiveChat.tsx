@@ -63,7 +63,7 @@ const LiveChat = () => {
       userNotifications[Math.floor(Math.random() * userNotifications.length)],
     ]);
 
-    const recentOrdersData = recentOrders?.data || [];
+   
    
 
     const interval = setInterval(() => {

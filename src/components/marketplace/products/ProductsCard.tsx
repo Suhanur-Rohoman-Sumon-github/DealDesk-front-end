@@ -36,7 +36,7 @@ const useRemoveCardMutation = () => {
   };
 };
 
-const useGetMyCardQuery = (userId: string) => {
+const useGetMyCardQuery = () => {
   return {
     data: {
       products: [
@@ -69,8 +69,9 @@ export type TProduct = {
 const ProductCard = ({ product }: { product: TProduct }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [actionType, setActionType] = useState("");
+  console.log(actionType);
   const { user } = useUser();
-  const { data: MyCart } = useGetMyCardQuery(user?.id ?? "");
+  const { data: MyCart } = useGetMyCardQuery();
 
   const { mutate: addToCart } = useAddToCartMutation();
   const { mutate: addToWishList } = useAddWishListMutation();

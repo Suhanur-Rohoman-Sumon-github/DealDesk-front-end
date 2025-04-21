@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import React, { useState } from "react";
 import { MdShoppingCart } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
@@ -10,8 +10,7 @@ import { FaCheck } from "react-icons/fa";
 import { useUser } from "@/context/userProvider";
 import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ProductCard from "../ProductCard";
-import { LightGallery } from "lightgallery/lightgallery";
+
 import LightGelary from "./LightGelary";
 
 import Link from "next/link";
@@ -65,38 +64,12 @@ const SingleProducts = ({ productId }: { productId: string }) => {
   // };
 
   // Dummy related products
-  const relatedProducts = [
-    { id: "1", name: "Silent Keyboard", price: 89, image: "/keyboard4.jpg" },
-    {
-      id: "2",
-      name: "Gaming Keyboard RGB",
-      price: 129,
-      image: "/keyboard5.jpg",
-    },
-    {
-      id: "3",
-      name: "Minimalist Keyboard",
-      price: 75,
-      image: "/keyboard6.jpg",
-    },
-    {
-      id: "4",
-      name: "Wireless Keyboard Pro",
-      price: 149,
-      image: "/keyboard7.jpg",
-    },
-  ];
 
   const handleRedirectToLogin = (action: string) => {
     const currentPath = window.location.pathname;
     router.push(
       `/login?redirect=${encodeURIComponent(currentPath)}&action=${action}`
     );
-  };
-
-  const handleAddToCart = () => {
-    if (!user) handleRedirectToLogin("add-to-cart");
-    else alert("Added to cart!");
   };
 
   const handleFavorite = () => {
@@ -108,9 +81,9 @@ const SingleProducts = ({ productId }: { productId: string }) => {
     images,
     description,
     name,
-    reviews,
+
     price,
-    rating,
+
     shippingAndReturns,
     category,
   } = singleProducts;

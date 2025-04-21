@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState } from "react";
@@ -72,7 +73,10 @@ const getStatusColor = (status: string) => {
 };
 
 const ProductTable = () => {
-  const { data: allProduct, isLoading } = useGetAllProductsQuery();
+  const { data: allProduct } = useGetAllProductsQuery({
+    sort: "",
+    searchTerm: "",
+  });
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredProducts = mockProducts.filter(
@@ -117,7 +121,7 @@ const ProductTable = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {allProduct?.map((product) => (
+              {allProduct?.map((product: any) => (
                 <TableRow key={product.id}>
                   <TableCell className="font-medium">{product.title}</TableCell>
                   <TableCell>{product.sku}</TableCell>

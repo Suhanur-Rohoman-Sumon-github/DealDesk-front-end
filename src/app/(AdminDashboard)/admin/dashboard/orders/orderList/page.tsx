@@ -10,7 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Search, MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
@@ -29,53 +28,8 @@ import {
 } from "@/components/ui/select";
 import { useGetAllOrdersQuery } from "@/hooks/Order.hooks";
 
-const mockOrders = [
-  {
-    id: "ORD-2023-1001",
-    customer: "John Doe",
-    date: "2023-10-12",
-    items: 3,
-    total: 245.99,
-    status: "Completed",
-  },
-  {
-    id: "ORD-2023-1002",
-    customer: "Jane Smith",
-    date: "2023-10-13",
-    items: 2,
-    total: 129.49,
-    status: "Processing",
-  },
-  {
-    id: "ORD-2023-1003",
-    customer: "Robert Johnson",
-    date: "2023-10-14",
-    items: 5,
-    total: 356.75,
-    status: "Pending",
-  },
-  {
-    id: "ORD-2023-1004",
-    customer: "Lisa Brown",
-    date: "2023-10-15",
-    items: 1,
-    total: 79.99,
-    status: "Shipped",
-  },
-  {
-    id: "ORD-2023-1005",
-    customer: "Michael Garcia",
-    date: "2023-10-16",
-    items: 4,
-    total: 198.45,
-    status: "Cancelled",
-  },
-];
-
 const OrdersList = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [filteredOrders, setFilteredOrders] = useState(mockOrders);
 
   const { data: allOrder } = useGetAllOrdersQuery();
 
@@ -173,7 +127,8 @@ const OrdersList = () => {
           </TableHeader>
           <TableBody>
             {allOrder?.data.length > 0 ? (
-              allOrder?.data.map((order) => (
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              allOrder?.data.map((order: any) => (
                 <TableRow key={order.id}>
                   <TableCell className="font-medium">{order._id}</TableCell>
                   <TableCell>{order?.userId?.username}</TableCell>

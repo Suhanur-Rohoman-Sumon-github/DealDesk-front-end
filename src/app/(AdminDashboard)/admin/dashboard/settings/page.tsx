@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { Sidebar } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -44,7 +44,7 @@ const AdminSettingsPage = () => {
           <h2 className="text-2xl font-semibold mb-4">User Management</h2>
           <div>
             <h3 className="text-xl mb-2">Manage Users</h3>
-            <Button className="mb-4" variant="primary" size="sm">
+            <Button className="mb-4"  size="sm">
               Add New User
             </Button>
             {/* User Table */}
@@ -98,7 +98,7 @@ const AdminSettingsPage = () => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
-              <Button variant="primary" size="sm">
+              <Button  size="sm">
                 Save Changes
               </Button>
             </form>
@@ -130,7 +130,7 @@ const AdminSettingsPage = () => {
                   <option value="true">Enabled</option>
                 </select>
               </div>
-              <Button variant="primary" size="sm">
+              <Button  size="sm">
                 Save Security Settings
               </Button>
             </form>

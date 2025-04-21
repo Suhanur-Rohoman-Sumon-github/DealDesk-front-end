@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "../providers";
 import "../../styels/globals.css";
 import Script from "next/script";
-import { Poppins } from "next/font/google";
+
 import MarketplaceNavbar from "@/components/navbars/marketplaceNavbar";
 import Sidebar from "@/components/marketplace/Sidebar";
 import LiveChat from "@/components/marketplace/LiveChat";
@@ -12,17 +12,11 @@ export const metadata: Metadata = {
   description: "Live marketplace with products and live chat",
 };
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={poppins.variable}>
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased font-poppins bg-[#16142a]">
         <Providers>
           <div className="flex flex-col min-h-screen pt-4">

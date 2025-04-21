@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,7 +32,7 @@ const BuyPage = () => {
   const [step, setStep] = useState(1);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
-  const [cryptoPrice, setCryptoPrice] = useState<number | null>(null);
+  // const [cryptoPrice, setCryptoPrice] = useState<number | null>(null);
   const icons = [FaShoppingCart, RiBtcFill, FaTruck];
   const { user } = useUser();
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
@@ -41,9 +41,9 @@ const BuyPage = () => {
 
   const { mutate: addOrders } = useCreateOrderMutation();
 
-  useEffect(() => {
-    fetchCryptoPrice(selectedCrypto);
-  }, [selectedCrypto]);
+  // useEffect(() => {
+  //   fetchCryptoPrice(selectedCrypto);
+  // }, [selectedCrypto]);
 
   if (isLoading) {
     return (
@@ -59,21 +59,21 @@ const BuyPage = () => {
     return step * 25;
   };
 
-  const fetchCryptoPrice = async (crypto: string) => {
-    try {
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${getCoinGeckoId(
-          crypto
-        )}&vs_currencies=usd`
-      );
-      const data = await res.json();
-      const price = data[getCoinGeckoId(crypto)].usd;
-      setCryptoPrice(price);
-    } catch (error) {
-      console.error("Error fetching price:", error);
-      setCryptoPrice(null);
-    }
-  };
+  // const fetchCryptoPrice = async (crypto: string) => {
+  //   try {
+  //     const res = await fetch(
+  //       `https://api.coingecko.com/api/v3/simple/price?ids=${getCoinGeckoId(
+  //         crypto
+  //       )}&vs_currencies=usd`
+  //     );
+  //     const data = await res.json();
+  //     const price = data[getCoinGeckoId(crypto)].usd;
+  //     setCryptoPrice(price);
+  //   } catch (error) {
+  //     console.error("Error fetching price:", error);
+  //     setCryptoPrice(null);
+  //   }
+  // };
 
   const getCoinGeckoId = (symbol: string) => {
     switch (symbol) {
@@ -103,7 +103,7 @@ const BuyPage = () => {
     }
   };
 
-  const convertedAmount = cryptoPrice ? (price / cryptoPrice).toFixed(6) : null;
+  // const convertedAmount = cryptoPrice ? (price / cryptoPrice).toFixed(6) : null;
 
   const StepIndicator = ({ currentStep }: { currentStep: number }) => {
     const radius = 24;
@@ -305,16 +305,14 @@ const BuyPage = () => {
             </h2>
             <Card className="px-4  bg-white/5 border border-white/10 rounded-xl">
               <p className="text-white">{name}</p>
-              {convertedAmount && (
-                <div className=" text-white">
-                  <p>
-                    You’ll pay:{" "}
-                    <span className="font-semibold">
-                      {convertedAmount} {selectedCrypto}
-                    </span>
-                  </p>
-                </div>
-              )}
+              <div className=" text-white">
+                <p>
+                  You’ll pay:{" "}
+                  <span className="font-semibold">
+                    {"f"} {selectedCrypto}
+                  </span>
+                </p>
+              </div>
             </Card>
             <div className="mt-6">
               <Input

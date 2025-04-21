@@ -20,7 +20,7 @@ export const registerUser = async (userData: FieldValues) => {
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       
-      throw new Error('Axios error:', error.response?.data);}
+      console.log('Axios error:', error.response?.data.message);}
       
   }
 };

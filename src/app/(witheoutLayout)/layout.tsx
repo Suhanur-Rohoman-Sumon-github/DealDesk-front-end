@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased  font-poppins bg-[#16142a]">
+      <body className="antialiased  font-poppins bg-[#060b1f]">
         <Providers>
           <div className="flex flex-col min-h-screen">
             <main className=" ">{children}</main>

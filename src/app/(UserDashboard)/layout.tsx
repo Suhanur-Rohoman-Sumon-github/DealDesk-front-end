@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased font-poppins bg-[#16142a] text-white">
+      <body className="antialiased font-poppins bg-[#060b1f] text-white">
         <Providers>
           {/* Optional Top Nav */}
           {/* <MainNavbar /> */}

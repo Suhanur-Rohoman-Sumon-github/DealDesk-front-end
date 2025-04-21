@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
 import { IoLogInOutline } from "react-icons/io5";
 import {
   DropdownMenu,
@@ -29,20 +28,11 @@ const MainNavbar = () => {
   };
 
   return (
-    <nav className="shadow-md w-full fixed top-0 left-0 z-50 backdrop-blur-md py-1 border-b bg-[#16142a]/70 border-white/20">
+    <nav className="shadow-md w-full fixed top-0 left-0 z-50 backdrop-blur-md py-1 border-b  border-white/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md">
-            <Image
-              src={
-                "https://centure.volkovdesign.com/img/dodgers/title--left.svg"
-              }
-              alt="Left Arrow"
-              className="w-4 h-4 md:w-4 md:h-4"
-              width={40}
-              height={40}
-            />
+          <div className="flex items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md">
             <Link
               className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
               href="/"
@@ -50,16 +40,6 @@ const MainNavbar = () => {
             >
               Deal^Desk <span className="text-sm">™</span>
             </Link>
-
-            <Image
-              src={
-                "https://centure.volkovdesign.com/img/dodgers/title--right.svg"
-              }
-              alt="Right Arrow"
-              className="w-8 h-8 md:w-4 md:h-4"
-              width={40}
-              height={40}
-            />
           </div>
 
           {/* Center Nav Links (Desktop) */}
@@ -167,7 +147,7 @@ const MainNavbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col gap-5 items-center justify-center bg-[#16142a]/90 backdrop-blur-md shadow-lg px-4 py-3 space-y-3 border-t border-white/10">
+        <div className="md:hidden flex flex-col gap-5 items-center justify-center bg-[#060b1f]/90 backdrop-blur-md shadow-lg px-4 py-3 space-y-3 border-t border-white/10">
           <Link
             href="/"
             onClick={() => handleLinkClick("home")}

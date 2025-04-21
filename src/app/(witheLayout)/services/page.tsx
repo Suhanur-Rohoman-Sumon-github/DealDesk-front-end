@@ -1,31 +1,31 @@
-import React from 'react';
-import { Briefcase, Code, Phone, Rocket } from 'lucide-react';
-import Title from '@/components/title/Title';
-import ClientReviews from '@/components/home/ClientReviews';
-import CallToAction from '@/components/home/CallToAction';
+import React from "react";
+import { Briefcase, Code, Phone, Rocket } from "lucide-react";
+import Title from "@/components/title/Title";
+import ClientReviews from "@/components/home/ClientReviews";
+import CallToAction from "@/components/home/CallToAction";
 
 const services = [
   {
     icon: <Briefcase size={30} />,
-    title: 'Business Strategy',
+    title: "Business Strategy",
     description:
-      'We help you craft winning strategies for your business with market insights and innovation.',
+      "We help you craft winning strategies for your business with market insights and innovation.",
   },
   {
     icon: <Code size={30} />,
-    title: 'Web Development',
+    title: "Web Development",
     description:
-      'From design to deployment, we build scalable and responsive web solutions tailored for you.',
+      "From design to deployment, we build scalable and responsive web solutions tailored for you.",
   },
   {
     icon: <Phone size={30} />,
-    title: 'App Development',
+    title: "App Development",
     description:
-      'We design high-performing mobile apps that engage users and drive growth across all platforms.',
+      "We design high-performing mobile apps that engage users and drive growth across all platforms.",
   },
   {
     icon: <Rocket size={30} />,
-    title: 'Digital Marketing',
+    title: "Digital Marketing",
     description:
       "Boost your brand's reach and engagement with our data-driven marketing solutions.",
   },
@@ -33,7 +33,7 @@ const services = [
 
 const OurServicesPage = () => {
   return (
-    <div className="min-h-screen bg-[#16142a] text-white px-6 py-32">
+    <div className="min-h-screen bg-[#060b1f] text-white px-6 py-32">
       {/* Hero Section */}
       <section className="mb-20">
         <Title
@@ -68,23 +68,23 @@ const OurServicesPage = () => {
           {[
             {
               icon: <Rocket size={28} />,
-              title: 'Innovative Approach',
-              desc: 'We bring fresh ideas and cutting-edge technology to every project.',
+              title: "Innovative Approach",
+              desc: "We bring fresh ideas and cutting-edge technology to every project.",
             },
             {
               icon: <Briefcase size={28} />,
-              title: 'Experienced Team',
-              desc: 'Our experts have years of experience across industries and technologies.',
+              title: "Experienced Team",
+              desc: "Our experts have years of experience across industries and technologies.",
             },
             {
               icon: <Phone size={28} />,
-              title: '24/7 Support',
-              desc: 'We’re always here to help you, anytime you need us.',
+              title: "24/7 Support",
+              desc: "We’re always here to help you, anytime you need us.",
             },
             {
               icon: <Code size={28} />,
-              title: 'Custom Solutions',
-              desc: 'Every solution is tailored to your unique business goals.',
+              title: "Custom Solutions",
+              desc: "Every solution is tailored to your unique business goals.",
             },
           ].map((item, i) => (
             <div
@@ -109,27 +109,27 @@ const OurServicesPage = () => {
         />
         <div className="flex flex-wrap justify-center gap-4 text-gray-300">
           {[
-            'React',
-            'Next.js',
-            'Node.js',
-            'Express',
-            'MongoDB',
-            'Tailwind CSS',
-            'Firebase',
-            'Stripe',
-            'TypeScript',
-            'Zod',
-            'Redux Toolkit',
-            'React Query',
-            'PostgreSQL',
-            'Prisma',
-            'Docker',
-            'Vercel',
-            'GitHub Actions',
-            'Cloudinary',
-            'Jest',
-            'Figma',
-          ].map(tech => (
+            "React",
+            "Next.js",
+            "Node.js",
+            "Express",
+            "MongoDB",
+            "Tailwind CSS",
+            "Firebase",
+            "Stripe",
+            "TypeScript",
+            "Zod",
+            "Redux Toolkit",
+            "React Query",
+            "PostgreSQL",
+            "Prisma",
+            "Docker",
+            "Vercel",
+            "GitHub Actions",
+            "Cloudinary",
+            "Jest",
+            "Figma",
+          ].map((tech) => (
             <span
               key={tech}
               className="px-4 py-2 bg-white/10 rounded-full border border-white/10 hover:bg-white/20 transition"

@@ -26,31 +26,29 @@ export const stats = [
     value: 5,
     suffix: "+ Years",
     label: "Delivering Digital Excellence",
-    leftImage: "https://centure.volkovdesign.com/img/dodgers/stats--purple.svg",
-    rightImage:
-      "https://centure.volkovdesign.com/img/dodgers/stats--purple.svg",
+    leftImage: "https://centure.volkovdesign.com/img/dodgers/dots--purple.svg",
+    rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--blue.svg",
   },
   {
     value: 5800,
     suffix: "+",
     label: "Businesses We’ve Helped",
-    leftImage: "https://centure.volkovdesign.com/img/dodgers/stats--orange.svg",
-    rightImage:
-      "https://centure.volkovdesign.com/img/dodgers/stats--orange.svg",
+    leftImage: "https://centure.volkovdesign.com/img/dodgers/dots--red.svg",
+    rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--red.svg",
   },
   {
     value: 374000,
     suffix: "+",
     label: "Revenue Boosted for Clients",
-    leftImage: "https://centure.volkovdesign.com/img/dodgers/stats--green.svg",
-    rightImage: "https://centure.volkovdesign.com/img/dodgers/stats--green.svg",
+    leftImage: "https://centure.volkovdesign.com/img/dodgers/dots--yellow.svg",
+    rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--yellow.svg",
   },
   {
     value: 100000,
     suffix: "+",
     label: "Marketing Budget Managed",
-    leftImage: "https://centure.volkovdesign.com/img/dodgers/stats--blue.svg",
-    rightImage: "https://centure.volkovdesign.com/img/dodgers/stats--blue.svg",
+    leftImage: "https://centure.volkovdesign.com/img/dodgers/dots--purple.svg",
+    rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--purple.svg",
   },
 ];
 

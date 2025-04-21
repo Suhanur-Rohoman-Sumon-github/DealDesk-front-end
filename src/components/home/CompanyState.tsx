@@ -1,7 +1,7 @@
-'use client';
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { stats } from '@/data/data';
+"use client";
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { stats } from "@/data/data";
 
 const AgencyStats = () => {
   const [counts, setCounts] = useState(stats.map(() => 0));
@@ -9,8 +9,8 @@ const AgencyStats = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             stats.forEach((stat, index) => {
               const end = stat.value;
@@ -18,7 +18,7 @@ const AgencyStats = () => {
               const increment = Math.ceil(end / (duration / 50));
 
               const timer = setInterval(() => {
-                setCounts(prevCounts => {
+                setCounts((prevCounts) => {
                   const newCounts = [...prevCounts];
                   if (newCounts[index] < end) {
                     newCounts[index] += increment;
@@ -63,8 +63,8 @@ const AgencyStats = () => {
             <Image
               src={stat.leftImage}
               alt="Left Decoration"
-              width={20}
-              height={20}
+              width={50}
+              height={50}
               className="absolute left-2 top-2 transform "
             />
 
@@ -74,15 +74,6 @@ const AgencyStats = () => {
               {stat.suffix}
             </h3>
             <p className="text-lg text-gray-300 mt-2">{stat.label}</p>
-
-            {/* Right Image */}
-            <Image
-              src={stat.rightImage}
-              alt="Right Decoration"
-              width={20}
-              height={20}
-              className="absolute  top-2 transform  right-2"
-            />
           </div>
         ))}
       </div>

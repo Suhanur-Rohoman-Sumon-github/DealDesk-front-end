@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-import { DateRange } from "react-day-picker";
+import React from "react";
 import { subDays } from "date-fns";
 import {
   ShoppingBag,
@@ -10,7 +9,6 @@ import {
   Package,
   AlarmClock,
 } from "lucide-react";
-import { DateRangePicker } from "@/components/Admindashboard/DateRangePicker";
 import StatsCard from "@/components/Admindashboard/StatsCard";
 import SalesChart from "@/components/Admindashboard/SalesChart";
 import CategoryChart from "@/components/Admindashboard/CategoryChart";
@@ -52,21 +50,12 @@ const trafficData = [
 ];
 
 const Index = () => {
-  const [dateRange, setDateRange] = useState<DateRange | undefined>({
-    from: subDays(new Date(), 30),
-    to: new Date(),
-  });
-
   const salesData = getMockSalesData();
 
   return (
     <div className=" py-4 px-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <DateRangePicker
-          dateRange={dateRange}
-          onDateRangeChange={setDateRange}
-        />
       </div>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">

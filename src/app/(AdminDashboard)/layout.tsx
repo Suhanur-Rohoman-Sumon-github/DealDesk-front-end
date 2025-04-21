@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Providers } from "../providers";
 import "../../styels/globals.css"; // 🔥 Fixed typo: styles instead of styels
 import { Poppins } from "next/font/google";
-import Sidebar from "@/components/Userdashboard/Sidebar";
 import UserNavbar from "@/components/Userdashboard/UserNavbar";
 import UserFooter from "@/components/Userdashboard/UserFooter";
 import AdminSidebar from "@/components/Admindashboard/AdminSidebar";

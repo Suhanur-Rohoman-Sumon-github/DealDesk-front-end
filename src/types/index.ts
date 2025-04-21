@@ -107,10 +107,16 @@ export type Category = {
 
 
 export type Product = {
+  _id:string
   Id: string;
   quantity: number;
   id: string;
   name: string;
+  images:string[]
+  title:string
+  description:string
+  price:string
+  numReviews:number
 };
 
 export type Order = {

@@ -8,6 +8,7 @@ import ProductsBanner from "./ProductsBanner";
 import { useGetAllProductsQuery } from "@/hooks/Products.hook";
 import ProductCardSkeleton from "../skeleton/ProductCardSkeleton";
 import CustomPagination from "./products/CustomPgination";
+import { Product } from "@/types";
 
 const Products = () => {
   const [sortOption, setSortOption] = useState("default");
@@ -56,7 +57,7 @@ const Products = () => {
            lg:px-8 xl:px-0
           "
         >
-          {data.data?.map((product, index) => (
+          {data.data?.map((product: Product, index: number) => (
             <ProductCard
               key={index}
               image={product?.images[0]}

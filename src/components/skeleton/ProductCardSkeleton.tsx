@@ -1,7 +1,6 @@
 const ProductCardSkeleton = () => {
   return (
     <div className="w-full px-2">
-      {/* Product Skeleton Cards */}
       <div
         className="grid 
           grid-cols-1 

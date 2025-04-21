@@ -1,5 +1,5 @@
-import { FaArrowRightLong } from 'react-icons/fa6';
-import TypeWriter from './TypeWriter';
+import { FaArrowRightLong } from "react-icons/fa6";
+import TypeWriter from "./TypeWriter";
 
 const Banner = () => {
   return (
@@ -8,7 +8,8 @@ const Banner = () => {
       <div
         className="absolute inset-0  bg-no-repeat"
         style={{
-          backgroundImage: "url('https://centure.volkovdesign.com/img/bg.png')",
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1612837017391-8a3d5ffb0c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')",
         }}
       ></div>
 

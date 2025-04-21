@@ -34,15 +34,6 @@ const MainNavbar = () => {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md">
-            <Image
-              src={
-                "https://centure.volkovdesign.com/img/dodgers/title--left.svg"
-              }
-              alt="Left Arrow"
-              className="w-4 h-4 md:w-4 md:h-4"
-              width={40}
-              height={40}
-            />
             <Link
               className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
               href="/"
@@ -50,16 +41,6 @@ const MainNavbar = () => {
             >
               Deal^Desk <span className="text-sm">™</span>
             </Link>
-
-            <Image
-              src={
-                "https://centure.volkovdesign.com/img/dodgers/title--right.svg"
-              }
-              alt="Right Arrow"
-              className="w-8 h-8 md:w-4 md:h-4"
-              width={40}
-              height={40}
-            />
           </div>
 
           {/* Center Nav Links (Desktop) */}

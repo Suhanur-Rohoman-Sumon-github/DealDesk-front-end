@@ -63,8 +63,7 @@ export default function Signup() {
   });
 
   const onSubmit = (data: SignupValues) => {
-    console.log("Signup data:", data);
-
+   
     handleUserRegistration(data);
   };
 

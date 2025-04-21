@@ -7,7 +7,7 @@ const FeedbackForm = () => {
 
   const handleRate = (value: number) => {
     setRating(value);
-    console.log("User rated:", value); // Replace with API call if needed
+  
   };
 
   const icons = [

@@ -5,18 +5,23 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 import { FieldValues } from "react-hook-form";
-import { createCategory, createProduct, getAllProducts, getCateGory, getSIngleProducts } from "@/services/products";
+import { createCategory, createProduct, getALlProducts, getCateGory, getSIngleProducts } from "@/services/products";
 
-export const useGetAllProductsQuery = () => {
+export const useGetAllProductsQuery = (queryParams: {
+  category?: string;
+  rating?: number | "";
+  sort?: string | "";
+  searchTerm?:string|""
+}) => {
 
   
   
   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
     
-    queryKey: ["get-products"],
+    queryKey: ["get-products", queryParams],
     queryFn: async () => {
-      const data = await getAllProducts();
-    
+      const data = await getALlProducts(queryParams);
+     
       return data;
 
     },
@@ -25,9 +30,8 @@ export const useGetAllProductsQuery = () => {
   return { data, refetch, isLoading, isError };
 };
 
-
 export const useGetSingleProductQuery = (productId: string) => {
-  console.log("productId", productId);
+ 
     
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, refetch, isLoading, isError } = useQuery<any, Error>({

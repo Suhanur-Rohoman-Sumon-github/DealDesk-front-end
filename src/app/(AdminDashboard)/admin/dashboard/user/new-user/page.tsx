@@ -71,7 +71,7 @@ const NewUser = () => {
     });
 
     // Simulate API call
-    console.log("User Data Submitted:", values);
+   
     alert("User profile created!");
 
     form.reset();

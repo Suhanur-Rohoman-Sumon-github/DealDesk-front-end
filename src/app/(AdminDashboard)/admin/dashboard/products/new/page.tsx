@@ -29,7 +29,7 @@ const CreateProductPage = () => {
   const { mutate: handleCreateProduct, isPending } = useCreateProductMutation();
   const { data: categories } = useGetCategoryQuery();
 
-  console.log(categories);
+  
 
   // Transform category data for options
   const categoriesOptions =
@@ -64,7 +64,7 @@ const CreateProductPage = () => {
   };
 
   const handleSubmit = (data: FieldValues): void => {
-    console.log(data);
+   
     const formData = new FormData();
 
     // Add product data
@@ -75,9 +75,8 @@ const CreateProductPage = () => {
       formData.append("images", image);
     });
 
-    console.log(formData);
+   
 
-    // Handle product creation
     handleCreateProduct(formData);
   };
 

@@ -16,9 +16,9 @@ const UserNavbar = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    // Add your logout logic here, e.g. removing tokens, clearing user data, etc.
-    console.log("User logged out");
-    router.push("/login"); // Redirect to login
+    
+  
+    router.push("/login"); 
   };
 
   return (

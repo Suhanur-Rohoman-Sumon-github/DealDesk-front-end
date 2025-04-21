@@ -36,7 +36,7 @@ const SingleProducts = ({ productId }: { productId: string }) => {
       </div>
     );
   }
-  console.log(singleProducts);
+
   // Dummy product data
   // const singleProducts = {
   //   name: "Ergo Mechanical Keyboard Pro",

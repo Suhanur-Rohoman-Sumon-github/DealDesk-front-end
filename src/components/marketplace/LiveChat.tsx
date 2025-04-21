@@ -50,7 +50,7 @@ const userNotifications = [
 
 const LiveChat = () => {
   const { user } = useUser();
-  console.log(user);
+
   const LOCAL_STORAGE_KEY = "liveChatOrders";
   const [orders, setOrders] = useState(0);
   const [notifications, setNotifications] = useState<typeof userNotifications>(
@@ -64,7 +64,7 @@ const LiveChat = () => {
     ]);
 
     const recentOrdersData = recentOrders?.data || [];
-    console.log(recentOrdersData);
+   
 
     const interval = setInterval(() => {
       const randomNotification =
@@ -100,8 +100,7 @@ const LiveChat = () => {
   }, []);
 
   const { data: recentOrders, isLoading } = useGetMyOrderQuery(user?.id || "");
-  console.log(recentOrders);
-  console.log(user?.id);
+ 
 
   if (isLoading) return <LiveChatSkeleton />;
 

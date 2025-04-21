@@ -1,6 +1,6 @@
 "use client";
 
-import {  useState } from "react";
+import { useState } from "react";
 import { FaBars, FaListAlt } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
@@ -23,7 +23,7 @@ const Sidebar = () => {
       {/* Mobile Toggle Button */}
       <div
         onClick={() => setToggleSidebar(true)}
-        className="cursor-pointer w-fit lg:hidden text-white mt-16 gap-2 flex items-center space-x-1 border border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md shadow-lg"
+        className="cursor-pointer w-fit lg:hidden text-white mt-16 gap-2 flex items-center space-x-1 border border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md shadow-lg"
       >
         <span className="font-semibold text-sm flex items-center gap-2">
           <FaBars className="text-white" /> <span>Open Menu</span>

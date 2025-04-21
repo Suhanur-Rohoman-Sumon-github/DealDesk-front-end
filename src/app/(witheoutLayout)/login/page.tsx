@@ -27,10 +27,9 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: handleUserLogin } = useUserLoginMutations();
   const onSubmit = (data: any) => {
-   
     handleUserLogin(data);
   };
-  
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-6   ">
       <div className="absolute inset-0 overflow-hidden">
@@ -40,7 +39,7 @@ export default function Login() {
       </div>
 
       <div className="w-full max-w-md z-10 text-white">
-        <Card className=" bg-[#16142a] border border-white/20 backdrop-blur-md   overflow-hidden">
+        <Card className=" bg-[#060b1f] border border-white/20 backdrop-blur-md   overflow-hidden">
           <CardHeader className="space-y-1 text-center text-white">
             <CardTitle className="text-2xl font-bold tracking-tight">
               Welcome back

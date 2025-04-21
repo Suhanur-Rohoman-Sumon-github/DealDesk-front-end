@@ -63,7 +63,6 @@ export default function Signup() {
   });
 
   const onSubmit = (data: SignupValues) => {
-   
     handleUserRegistration(data);
   };
 
@@ -76,7 +75,7 @@ export default function Signup() {
       </div>
 
       <div className="w-full max-w-md z-10">
-        <Card className="bg-[#16142a] border border-white/20 backdrop-blur-md shadow-xl overflow-hidden">
+        <Card className="bg-[#060b1f] border border-white/20 backdrop-blur-md shadow-xl overflow-hidden">
           <CardHeader className="space-y-1 text-center">
             <CardTitle className="text-2xl font-bold tracking-tight text-white">
               Create your account

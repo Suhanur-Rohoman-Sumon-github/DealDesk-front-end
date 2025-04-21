@@ -8,8 +8,7 @@ const Banner = () => {
       <div
         className="absolute inset-0  bg-no-repeat"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1612837017391-8a3d5ffb0c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')",
+          backgroundImage: "url('https://i.ibb.co.com/ccNPfrvr/hero-bg-1.jpg')",
         }}
       ></div>
 

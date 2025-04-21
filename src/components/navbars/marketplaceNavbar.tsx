@@ -99,7 +99,7 @@ const MarketplaceNavbar = () => {
       <nav className="fixed py-3 lg:py-0 top-0 left-0 w-full z-50 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg">
         <div className="flex items-center justify-between mx-auto px-4 gap-4  lg:h-14">
           {/* Left Side: Logo or Site Name */}
-          <div className="flex  items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#16142a]/90 backdrop-blur-md w-[200px] md:w-fit">
+          <div className="flex  items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md w-[200px] md:w-fit">
             =
             <Link
               className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
@@ -213,7 +213,7 @@ const MarketplaceNavbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="md:hidden bg-[#16142a]/95 backdrop-blur-md border-t border-white/10 px-4 py-2 space-y-2 text-sm mt-5">
+          <div className="md:hidden bg-[#060b1f]/95 backdrop-blur-md border-t border-white/10 px-4 py-2 space-y-2 text-sm mt-5">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 h-4 w-4" />
               <Input

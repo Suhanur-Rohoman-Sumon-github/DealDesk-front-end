@@ -8,7 +8,7 @@ interface IProps extends IInput {
   descriptions?: string; 
 }
 
-export default function PTextArea({
+export default function DTextArea({
   name,
   label,
   variant = "bordered",

@@ -5,18 +5,23 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 import { FieldValues } from "react-hook-form";
-import { getAllProducts, getSIngleProducts } from "@/services/products";
+import { createCategory, createProduct, getALlProducts, getCateGory, getSIngleProducts } from "@/services/products";
 
-export const useGetAllProductsQuery = () => {
+export const useGetAllProductsQuery = (queryParams: {
+  category?: string;
+  rating?: number | "";
+  sort?: string | "";
+  searchTerm?:string|""
+}) => {
 
   
   
   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
     
-    queryKey: ["get-products"],
+    queryKey: ["get-products", queryParams],
     queryFn: async () => {
-      const data = await getAllProducts();
-    
+      const data = await getALlProducts(queryParams);
+     
       return data;
 
     },
@@ -25,9 +30,8 @@ export const useGetAllProductsQuery = () => {
   return { data, refetch, isLoading, isError };
 };
 
-
 export const useGetSingleProductQuery = (productId: string) => {
-  console.log("productId", productId);
+ 
     
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
@@ -57,20 +61,20 @@ export const useGetSingleProductQuery = (productId: string) => {
 
 //   return { data, refetch, isLoading, isError };
 // };
-// export const useGetCategoryQuery = () => {
+export const useGetCategoryQuery = () => {
     
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
-//        queryKey: ["get-related-products"],
-//     queryFn: async () => {
-//       const data = await getCateGory();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, refetch, isLoading, isError } = useQuery<any, Error>({
+       queryKey: ["get-related-products"],
+    queryFn: async () => {
+      const data = await getCateGory();
 
-//       return data;
-//     },
-//   });
+      return data;
+    },
+  });
 
-//   return { data, refetch, isLoading, isError };
-// };
+  return { data, refetch, isLoading, isError };
+};
 // export const useGetRecentProductsQuery = (userId:string) => {
     
 //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -100,34 +104,34 @@ export const useGetSingleProductQuery = (productId: string) => {
 
 //   return { data, refetch, isLoading, isError };
 // };
-// export const useCreateProductMutation = () => {
-//   return useMutation<any, Error, FieldValues>({
-//     mutationKey: ["create-product"],
-//     mutationFn: async (productData) => {
-//       await createProduct(productData); 
-//     },
-//     onSuccess: () => {
-//       toast.success("Product created successfully!");
-//     },
-//     onError: (error) => {
-//       toast.error(error.message || "Failed to create product.");
-//     },
-//   });
-// };
-// export const useCreateCategoryMutations = () => {
-//   return useMutation<any, Error, FieldValues>({
-//     mutationKey: ["create-category"],
-//     mutationFn: async (categoryData) => {
-//       await createCategory(categoryData); 
-//     },
-//     onSuccess: () => {
-//       toast.success("Category  created successfully!");
-//     },
-//     onError: (error) => {
-//       toast.error(error.message || "Failed to create category.");
-//     },
-//   });
-// };
+export const useCreateProductMutation = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["create-product"],
+    mutationFn: async (productData) => {
+      await createProduct(productData); 
+    },
+    onSuccess: () => {
+      toast.success("Product created successfully!");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to create product.");
+    },
+  });
+};
+export const useCreateCategoryMutations = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["create-category"],
+    mutationFn: async (categoryData) => {
+      await createCategory(categoryData); 
+    },
+    onSuccess: () => {
+      toast.success("Category  created successfully!");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to create category.");
+    },
+  });
+};
 // export const useDeleteCategoryMutations = () => {
 //   return useMutation<any, Error, string>({
 //     mutationKey: ["delete-category"],

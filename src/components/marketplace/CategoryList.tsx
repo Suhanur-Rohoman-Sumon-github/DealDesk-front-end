@@ -1,23 +1,25 @@
 "use client";
 import React from "react";
+import { FaChevronRight } from "react-icons/fa";
 
 const CategoryList = ({
   categories,
 }: {
   categories: {
-    category: string;
+    name: string;
   }[];
 }) => {
   return (
-    <div className="space-y-3 ">
+    <div className="space-y-3">
       {categories.map((category, index) => (
         <div
           key={index}
-          className="flex justify-between items-center text-center cursor-pointer bg-white/10 border border-white/10  text-white py-1 px-4 rounded-md shadow-md hover:bg-[#3b3a5a] transition"
+          className="flex items-center justify-between px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md transition-all cursor-pointer group"
         >
-          <h4 className="text-sm font-semibold text-center">
-            {category.category}
-          </h4>
+          <span className="text-sm font-medium text-white group-hover:translate-x-1 transition-transform duration-300">
+            {category.name}
+          </span>
+          <FaChevronRight className="text-white text-xs opacity-60 group-hover:opacity-100 transition-opacity" />
         </div>
       ))}
     </div>

@@ -8,7 +8,7 @@ const authRoutes = ["/login", "/register"];
 const protectedRoutes = {
   user: ["/cart", "/wishList"],
   vendor: ["/vendor"],
-  admin: ["/admin"],
+  
 };
 
 export async function middleware(request: NextRequest) {
@@ -32,9 +32,9 @@ export async function middleware(request: NextRequest) {
   const userRole = user?.role; 
 
   
-  if (pathname.startsWith("/admin") && userRole !== "ADMIN") {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if (pathname.startsWith("/admin") && userRole !== "ADMIN") {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   
   if (pathname.startsWith("/vendor") && !["VENDOR", "ADMIN"].includes(userRole as string)) {

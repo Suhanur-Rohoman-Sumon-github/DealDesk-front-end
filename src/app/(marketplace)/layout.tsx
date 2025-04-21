@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "../providers";
 import "../../styels/globals.css";
-
+import Script from "next/script";
 import { Poppins } from "next/font/google";
 import MarketplaceNavbar from "@/components/navbars/marketplaceNavbar";
 import Sidebar from "@/components/marketplace/Sidebar";
@@ -40,13 +40,15 @@ export default function RootLayout({
               </section>
 
               {/* Live Chat */}
-              <aside className="w-full lg:w-[300px]">
+              <aside className="w-full   lg:w-[300px]">
                 <LiveChat />
               </aside>
             </div>
           </div>
 
-          <script
+          <Script
+            id="tawk-to"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
       var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -60,7 +62,7 @@ export default function RootLayout({
       })();
     `,
             }}
-          ></script>
+          />
         </Providers>
       </body>
     </html>

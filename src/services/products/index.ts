@@ -5,11 +5,25 @@ import axiosInstance from "@/lib/AxiosInostance";
 import axios from "axios";
 
 
-export const getAllProducts = async () => {
+export const getALlProducts = async (queryParams: {
+  
+  category?: string;
+ 
+  sort?: string | "";
+  searchTerm?: string | "";
+}) => {
   try {
-    const response = await axiosInstance.get(`/products`);
-    
-    return response.data.data; 
+    const { category, sort,searchTerm } =
+      queryParams;
+
+    const query = new URLSearchParams();
+    if (category) query.append("category", category);
+    if (sort) query.append("sort", sort);
+    if (searchTerm) query.append("searchTerm", searchTerm);
+
+    const { data } = await axiosInstance.get(`/products?${query?.toString()}`);
+
+    return data;
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -17,7 +31,7 @@ export const getAllProducts = async () => {
 
 
 export const getSIngleProducts = async (productId:string) => {
-  console.log(productId);
+  
   const { data } = await axiosInstance.get(`/products/${productId}`);
   return data.data; 
 };
@@ -27,7 +41,7 @@ export const getRelatedProducts = async (categoryId:string) => {
 };
 export const getCateGory = async () => {
  try {
-   const { data } = await axiosInstance.get(`/products/categories/category`);
+   const { data } = await axiosInstance.get(`/category`);
   return data.data; 
  } catch (error) {
    if (axios.isAxiosError(error)) {
@@ -36,7 +50,7 @@ export const getCateGory = async () => {
  }
 };
 export const createCategory = async (categoryData:any) => {
-  const { data } = await axiosInstance.post(`/products/category`,categoryData);
+  const { data } = await axiosInstance.post(`/category`,categoryData);
   return data.data; 
 };
 export const addReview = async (reviewData:any ,productId:string ) => {
@@ -89,15 +103,22 @@ export const getMyFollowingShopProducts = async (userId : string  ) => {
 
 
 export const createProduct = async (productData: any) => {
- try {
-     const { data } = await axiosInstance.post('/products', productData, {
+  try {
+    const { data } = await axiosInstance.post('/products', productData, {
       headers: {
-        'Content-Type': 'multipart/form-data', 
-      }});
-  return data.data;
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return data.data;
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
-      
-      throw new Error(error.response?.data.message)}
+      console.error("Axios error response:", error.response?.data);
+      const message = error.response?.data?.message || "Failed to create product (server error)";
+      throw new Error(message);
+    }
+
+    // Catch any other unexpected error
+    console.error("Unexpected error:", error);
+    throw new Error("An unexpected error occurred.");
   }
 };

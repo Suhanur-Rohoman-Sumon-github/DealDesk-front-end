@@ -86,8 +86,7 @@ const BuyPage = () => {
   };
 
   const handleConfirmOrder = () => {
-    console.log("Transaction ID:", transactionId);
-    console.log("Selected Crypto:", selectedCrypto);
+    
     if (transactionId) {
       const orderData = {
         userId: user?.id as string,

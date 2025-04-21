@@ -98,7 +98,7 @@ export type ReviewData = {
 };
 
 export type Category = {
-  id: string;
+  _id: string;
   name: string;
   isDeleted: boolean;
   created_at: string; 
@@ -107,10 +107,24 @@ export type Category = {
 
 
 export type Product = {
+  _id:string
   Id: string;
   quantity: number;
   id: string;
   name: string;
+  images:string[]
+  title:string
+  description:string
+  price:string
+  numReviews:number
+};
+
+export type Order = {
+  id: string;
+  products: {
+    title: string;
+    price: string | number;
+  };
 };
 
 

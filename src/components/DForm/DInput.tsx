@@ -13,7 +13,7 @@ interface IProps {
   fullWidth?: boolean;
 }
 
-const PInput = ({
+const DInput = ({
   required = false,
   type = "text",
   label,
@@ -71,4 +71,4 @@ const PInput = ({
   );
 };
 
-export default PInput;
+export default DInput;

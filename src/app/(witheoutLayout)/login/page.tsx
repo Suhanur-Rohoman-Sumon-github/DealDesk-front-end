@@ -27,7 +27,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: handleUserLogin } = useUserLoginMutations();
   const onSubmit = (data: any) => {
-    console.log("Login data:", data);
+   
     handleUserLogin(data);
   };
   

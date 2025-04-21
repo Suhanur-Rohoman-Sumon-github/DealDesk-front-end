@@ -1,5 +1,6 @@
-import Products from '@/components/marketplace/Products';
-import React from 'react';
+"use client";
+import Products from "@/components/marketplace/Products";
+import React from "react";
 
 const page = () => {
   return (

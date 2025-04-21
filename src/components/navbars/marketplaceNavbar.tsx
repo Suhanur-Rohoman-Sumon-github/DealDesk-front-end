@@ -16,7 +16,6 @@ import {
 } from "../ui/dropdown-menu";
 import { useUser } from "@/context/userProvider";
 import { logout } from "@/services/authServices";
-import AnalogClock from "../marketplace/AnalogClock";
 const MarketplaceNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleIndex, setVisibleIndex] = useState(0);
@@ -177,7 +176,9 @@ const MarketplaceNavbar = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Avatar className="cursor-pointer">
-                        <AvatarImage src={user?.image || "/avatar.png"} />
+                        <AvatarImage
+                          src={user?.profilePicture || "/avatar.png"}
+                        />
                         <AvatarFallback>
                           {user?.name?.charAt(0) || "U"}
                         </AvatarFallback>

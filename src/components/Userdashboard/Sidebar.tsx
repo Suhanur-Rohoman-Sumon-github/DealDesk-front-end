@@ -3,15 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-  BarChart3,
-  Heart,
-  Home,
-  Package,
-  Settings,
-  ShoppingBasket,
-  User,
-} from "lucide-react";
+import { Heart, Home, Settings, ShoppingBasket, User } from "lucide-react";
 
 type SidebarLink = {
   icon: React.ElementType;

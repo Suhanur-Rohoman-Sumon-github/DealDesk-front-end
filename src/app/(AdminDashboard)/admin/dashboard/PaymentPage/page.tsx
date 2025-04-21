@@ -1,17 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+
+
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { useGetAllOrdersQuery } from "@/hooks/Order.hooks";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Card } from "@/components/ui/card";
+
 
 // Mock data for the payments
 const paymentData = [
@@ -49,6 +44,7 @@ const paymentData = [
 
 const PaymentPage = () => {
   const [sortedData, setSortedData] = useState(paymentData);
+  console.log(sortedData);
   const [sortDirection, setSortDirection] = useState("asc");
 
   const { data: allOrder } = useGetAllOrdersQuery();
@@ -114,7 +110,8 @@ const PaymentPage = () => {
           </TableHeader>
           <TableBody>
             {allOrder?.data?.length > 0 ? (
-              allOrder.data?.map((payment, index) => (
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              allOrder.data?.map((payment: any, index: number) => (
                 <TableRow key={index}>
                   <TableCell className="font-medium">
                     {payment?.products?.title}

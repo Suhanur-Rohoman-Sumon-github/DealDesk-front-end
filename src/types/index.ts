@@ -14,6 +14,7 @@ export interface IUser {
   profilePicture: string;
   avatar?:string
   created_at? :Date
+ 
   
 }
 

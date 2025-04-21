@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import Image from "next/image";
 import { AiOutlineClose, AiOutlineUpload } from "react-icons/ai";
-import { FieldValues, useForm } from "react-hook-form";
-
-import { useUser } from "@/context/userProvider";
+import { FieldValues } from "react-hook-form";
 
 import { Category } from "@/types";
 
@@ -21,11 +19,11 @@ import {
 import Loading from "@/components/ui/Loading";
 
 const CreateProductPage = () => {
-  const { user } = useUser();
+  
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreview, setImagePreview] = useState<string[]>([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+
   const { mutate: handleCreateProduct, isPending } = useCreateProductMutation();
   const { data: categories } = useGetCategoryQuery();
 

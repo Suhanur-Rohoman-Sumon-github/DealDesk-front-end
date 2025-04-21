@@ -18,15 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import {
-  BellRing,
-  CreditCard,
-  Globe,
-  Lock,
-  Mail,
-  ShieldCheck,
-  User,
-} from "lucide-react";
+import { BellRing, Globe, ShieldCheck } from "lucide-react";
 
 const Settings = () => {
   return (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "../providers";
 import "../../styels/globals.css";
 import Script from "next/script";
+
 import MarketplaceNavbar from "@/components/navbars/marketplaceNavbar";
 import Sidebar from "@/components/marketplace/Sidebar";
 import LiveChat from "@/components/marketplace/LiveChat";

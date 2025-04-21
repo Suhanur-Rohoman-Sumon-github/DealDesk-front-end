@@ -63,9 +63,6 @@ const LiveChat = () => {
       userNotifications[Math.floor(Math.random() * userNotifications.length)],
     ]);
 
-    const recentOrdersData = recentOrders?.data || [];
-   
-
     const interval = setInterval(() => {
       const randomNotification =
         userNotifications[Math.floor(Math.random() * userNotifications.length)];
@@ -80,11 +77,13 @@ const LiveChat = () => {
   }, []);
 
   useEffect(() => {
-    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const initial = stored ? parseInt(stored, 10) : 42;
-    setOrders(initial);
-    if (!stored) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, initial.toString());
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const initial = stored ? parseInt(stored, 10) : 42;
+      setOrders(initial);
+      if (!stored) {
+        localStorage.setItem(LOCAL_STORAGE_KEY, initial.toString());
+      }
     }
 
     const interval = setInterval(() => {
@@ -100,7 +99,6 @@ const LiveChat = () => {
   }, []);
 
   const { data: recentOrders, isLoading } = useGetMyOrderQuery(user?.id || "");
- 
 
   if (isLoading) return <LiveChatSkeleton />;
 

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 import { FaArrowUp } from "react-icons/fa";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";

@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 import { Heart, Home, Settings, ShoppingBasket, User } from "lucide-react";
 
 type SidebarLink = {
@@ -40,8 +38,6 @@ const links: SidebarLink[] = [
 ];
 
 const Sidebar = () => {
-  const pathname = usePathname();
-
   return (
     <div className="glass h-screen w-60 border-r flex flex-col p-4">
       <div className="space-y-2 flex-1">
@@ -49,12 +45,9 @@ const Sidebar = () => {
           <Link
             key={link.href}
             href={link.href}
-            className={cn(
-              "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              pathname === link.href
-                ? "bg-primary text-primary-foreground"
-                : "hover:bg-secondary"
-            )}
+            className={
+              " backdrop-blur-md bg-[#1f1b37]/90 lg:bg-white/5 border-r border-white/10 shadow-xl text-white transition-all duration-300 flex items-center gap-4 py-4 px-4"
+            }
           >
             <link.icon size={18} />
             <span>{link.label}</span>

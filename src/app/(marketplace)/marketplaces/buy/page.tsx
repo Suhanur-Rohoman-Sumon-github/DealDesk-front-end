@@ -15,8 +15,8 @@ import { useSearchParams } from "next/navigation";
 import { useGetSingleProductQuery } from "@/hooks/Products.hook";
 import { useCreateOrderMutation } from "@/hooks/Order.hooks";
 import { useUser } from "@/context/userProvider";
-import { FaShoppingCart, FaTruck, FaTelegramPlane } from "react-icons/fa";
-import { RiBtcFill } from "react-icons/ri";
+import { FaTelegramPlane } from "react-icons/fa";
+
 import { Card } from "@/components/ui/card";
 import StepIndicator from "@/components/marketplace/buy/StepIndicator";
 

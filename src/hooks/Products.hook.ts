@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 import { FieldValues } from "react-hook-form";
-import { createCategory, createProduct, getALlProducts, getCateGory, getSIngleProducts } from "@/services/products";
+import { addFavoriteProducts, createCategory, createProduct, getALlProducts, getCateGory, getFavoriteProducts, getSIngleProducts } from "@/services/products";
 
 export const useGetAllProductsQuery = (queryParams: {
   category?: string;
@@ -160,3 +160,40 @@ export const useCreateCategoryMutations = () => {
 //     },
 //   });
 // };
+
+export const useAddFavoritePostsMutations = (
+  postId: string,
+  userId: string | undefined,
+) => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, string, string>({
+    mutationKey: ["create favorite posts"],
+    mutationFn: async () => {
+      await addFavoriteProducts(postId, userId);
+    },
+    onSuccess: () => {
+      toast.success("Favorite added successfully");
+      queryClient.refetchQueries({
+        queryKey: ["get my favorite posts", userId],
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useGetAllFavoriteProductQuery = (userId: string) => {
+  const { data, refetch, isLoading } = useQuery<any, Error>({
+    queryKey: ["get my favorite products", userId],
+    queryFn: async () => {
+      const data = await getFavoriteProducts(userId);
+
+      return data?.data;
+    },
+    enabled: Boolean(userId),
+  });
+
+  return { data, refetch, isLoading };
+};

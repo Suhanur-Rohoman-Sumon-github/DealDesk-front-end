@@ -1,11 +1,12 @@
 "use client";
 
+import { useUser } from "@/context/userProvider";
+import { useAddFavoritePostsMutations } from "@/hooks/Products.hook";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
-import { toast } from "sonner";
 
 interface ProductCardProps {
   image: string;
@@ -24,16 +25,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   rating,
 }) => {
-  const handleCopyLink = () => {
-    const url = typeof window !== "undefined" ? window.location.href : "";
-    navigator.clipboard.writeText(url);
-    toast.success("Product link copied!");
+  const { user } = useUser();
+
+  const { mutate: addToFavorite } = useAddFavoritePostsMutations(id, user?.id);
+
+  const handleAddfavorite = () => {
+    addToFavorite(id);
   };
 
   return (
-    <div>
+    <div className="group relative cursor-pointer backdrop-blur-md bg-white/5 border border-white/10 shadow-lg rounded-2xl p-3 transition-all duration-300 hover:scale-[1.015] hover:shadow-2x">
       <Link href={`/marketplaces/${id}`}>
-        <div className="group relative cursor-pointer backdrop-blur-md bg-white/5 border border-white/10 shadow-lg rounded-2xl p-3 transition-all duration-300 hover:scale-[1.015] hover:shadow-2xl">
+        <div className="l">
           {/* Frosted border glow */}
           <div className="absolute inset-0 z-0 rounded-2xl border border-white/10 pointer-events-none" />
 
@@ -69,26 +72,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </div>
 
             {/* Bottom controls */}
-            <div className="flex justify-between items-center mt-4">
-              <button
-                onClick={handleCopyLink}
-                className="flex items-center gap-1 rounded-full text-white text-xs bg-white/10 border border-white/20  px-3 py-1 hover:bg-white/20 transition cursor-pointer"
-              >
-                <MdFavorite className="text-sm" />
-              </button>
-
-              <Link href={`/marketplaces/${id}`}>
-                <button
-                  className="text-white bg-white/10 border border-white/20 rounded-full p-2 hover:bg-white/20 transition cursor-pointer"
-                  title="View Details"
-                >
-                  <FaArrowRight className="text-sm" />
-                </button>
-              </Link>
-            </div>
           </div>
         </div>
       </Link>
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => handleAddfavorite()}
+          className="flex items-center gap-1 rounded-full text-white text-xs bg-white/10 border border-white/20  px-3 py-1 hover:bg-white/20 transition cursor-pointer"
+        >
+          <MdFavorite className="text-sm" />
+        </button>
+
+        <Link href={`/marketplaces/${id}`}>
+          <button
+            className="text-white bg-white/10 border border-white/20 rounded-full p-2 hover:bg-white/20 transition cursor-pointer"
+            title="View Details"
+          >
+            <FaArrowRight className="text-sm" />
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

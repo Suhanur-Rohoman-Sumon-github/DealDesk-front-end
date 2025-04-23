@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "../providers";
 import "../../styels/globals.css"; // 🔥 Fixed typo: styles instead of styels
 import Sidebar from "@/components/Userdashboard/Sidebar";
-import UserNavbar from "@/components/Userdashboard/UserNavbar";
+import UserNavbar from "@/components/navbars/UserNavbar";
 import UserFooter from "@/components/Userdashboard/UserFooter";
 
 export const metadata: Metadata = {

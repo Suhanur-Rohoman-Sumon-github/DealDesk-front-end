@@ -7,8 +7,6 @@ import { IoMdHome } from "react-icons/io";
 import { GrFavorite } from "react-icons/gr";
 import { FaCheck } from "react-icons/fa";
 
-import { useUser } from "@/context/userProvider";
-import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import LightGelary from "./LightGelary";
@@ -20,8 +18,6 @@ import SingleProductSkeleton from "@/components/skeleton/SingleProductSkeleton";
 
 const SingleProducts = ({ productId }: { productId: string }) => {
   const [quantity, setQuantity] = useState(1);
-  const { user } = useUser();
-  const router = useRouter();
 
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
     productId ? productId : ""
@@ -64,18 +60,6 @@ const SingleProducts = ({ productId }: { productId: string }) => {
   // };
 
   // Dummy related products
-
-  const handleRedirectToLogin = (action: string) => {
-    const currentPath = window.location.pathname;
-    router.push(
-      `/login?redirect=${encodeURIComponent(currentPath)}&action=${action}`
-    );
-  };
-
-  const handleFavorite = () => {
-    if (!user) handleRedirectToLogin("add-to-favorite");
-    else alert("Added to favorites!");
-  };
 
   const {
     images,
@@ -196,15 +180,6 @@ const SingleProducts = ({ productId }: { productId: string }) => {
                   <MdShoppingCart /> Buy Now
                 </button>
               </Link>
-            </div>
-
-            <div className="flex space-x-4 my-4">
-              <button
-                onClick={handleFavorite}
-                className="w-full text-center p-1 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center gap-2 border border-white/20 shadow-md"
-              >
-                <GrFavorite /> Add to Favorites
-              </button>
             </div>
 
             <div className="flex flex-col lg:flex-row justify-between mt-4 gap-4">

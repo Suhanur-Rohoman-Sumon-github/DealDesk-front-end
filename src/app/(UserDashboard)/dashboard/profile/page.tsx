@@ -14,8 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Camera, CreditCard, Mail, MapPin, Phone } from "lucide-react";
+import { useUser } from "@/context/userProvider";
+import { FaTelegram, FaTelegramPlane } from "react-icons/fa";
 
 const Profile = () => {
+  const { user } = useUser();
   return (
     <div className="space-y-6 p-4 md:p-6 text-white">
       <div>
@@ -27,7 +30,7 @@ const Profile = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Profile Card */}
-        <Card className="glass-card md:col-span-1 backdrop-blur-md bg-white/30 border border-white/20 text-white">
+        <Card className=" md:col-span-1 backdrop-blur-md bg-[#1f1b37]/90 lg:bg-white/5 border-r border-white/10 text-white">
           <CardHeader className="pb-4">
             <CardTitle>Profile</CardTitle>
             <CardDescription>Manage your public information</CardDescription>
@@ -35,8 +38,8 @@ const Profile = () => {
           <CardContent className="flex flex-col items-center space-y-4 text-white">
             <div className="relative">
               <Avatar className="h-24 w-24">
-                <AvatarImage src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80" />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarImage src={user?.profilePicture} />
+                <AvatarFallback>{user?.name}</AvatarFallback>
               </Avatar>
               <Button
                 size="icon"
@@ -47,28 +50,46 @@ const Profile = () => {
               </Button>
             </div>
             <div className="text-center text-white">
-              <h3 className="text-xl font-semibold">Jane Doe</h3>
-              <p className="text-sm text-muted-foreground">Premium Member</p>
+              <h3 className="text-xl font-semibold">{user?.name}</h3>
             </div>
             <div className="w-full space-y-3">
+              {/* Email */}
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">jane.doe@example.com</span>
+                <span className="text-sm">{user?.email}</span>
               </div>
+
+              {/* Telegram ID */}
               <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <FaTelegram className="h-4 w-4 text-[#0088cc]" />
+                <a
+                  href="https://t.me/yourTelegramUsername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-500 hover:underline"
+                >
+                  @yourTelegramUsername
+                </a>
               </div>
+
+              {/* Telegram Channel */}
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">New York, NY</span>
+                <FaTelegramPlane className="h-4 w-4 text-[#0088cc]" />
+                <a
+                  href="https://t.me/yourTelegramChannel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-500 hover:underline"
+                >
+                  t.me/yourTelegramChannel
+                </a>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Right Tabs */}
-        <Card className="glass-card md:col-span-2 backdrop-blur-md bg-white/30 border border-white/20 text-white">
+        <Card className="glass-card md:col-span-2 backdrop-blur-md bg-[#1f1b37]/90 lg:bg-white/5 border-r border-white/10 text-white">
           <Tabs defaultValue="account">
             <CardHeader>
               <div className="flex justify-between items-center">

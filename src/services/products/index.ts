@@ -122,3 +122,27 @@ export const createProduct = async (productData: any) => {
     throw new Error("An unexpected error occurred.");
   }
 };
+
+export const addFavoriteProducts = async (
+  postId: string,
+  userId: string | undefined,
+) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/products/add-favorite/${postId}/${userId}`,
+    );
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || error.message);
+  }
+};
+export const getFavoriteProducts = async (userId: string) => {
+  try {
+    const { data } = await axiosInstance.get(`/products/my-favorite/${userId}`);
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || error.message);
+  }
+};

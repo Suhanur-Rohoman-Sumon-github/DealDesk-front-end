@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -9,7 +10,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Download, EyeIcon } from "lucide-react";
+import { Download, EyeIcon, MoreHorizontal } from "lucide-react";
+import { useGetMyOrderQuery } from "@/hooks/Order.hooks";
+import { useUser } from "@/context/userProvider";
+import { Order } from "@/types";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 // Sample order data
 const orders = [
@@ -77,6 +89,8 @@ const getStatusBadge = (status: string) => {
 };
 
 const Orders = () => {
+  const { user } = useUser();
+  const { data: recentOrders, isLoading } = useGetMyOrderQuery(user?.id || "");
   return (
     <div className="space-y-6">
       <div>
@@ -93,35 +107,37 @@ const Orders = () => {
         <CardContent>
           <Table>
             <TableHeader>
-              <TableRow>
+              <TableRow className="bg-[#8b33d5] text-white">
                 <TableHead className="text-white">Order ID</TableHead>
+
                 <TableHead className="text-white">Date</TableHead>
-                <TableHead className="text-white">Product</TableHead>
-                <TableHead className="text-white">Price</TableHead>
+                <TableHead className="text-white">Items</TableHead>
+                <TableHead className="text-white">Total</TableHead>
                 <TableHead className="text-white">Status</TableHead>
-                <TableHead className="text-white">Actions</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody className="">
-              {orders.map((order) => (
-                <TableRow key={order.id}>
-                  <TableCell className="font-medium">{order.id}</TableCell>
-                  <TableCell>{order.date}</TableCell>
-                  <TableCell>{order.product}</TableCell>
-                  <TableCell>{order.price}</TableCell>
-                  <TableCell>{getStatusBadge(order.status)}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-2 text-green-600">
-                      <Button variant="outline" size="icon">
-                        <EyeIcon className="h-4 w-4" />
-                      </Button>
-                      <Button variant="outline" size="icon">
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </div>
+            <TableBody>
+              {recentOrders?.length > 0 ? (
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                recentOrders?.map((order: any) => (
+                  <TableRow key={order.id}>
+                    <TableCell className="font-medium">{order._id}</TableCell>
+
+                    <TableCell>
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>{order?.products?.category}</TableCell>
+                    <TableCell>${order.totalAmount}</TableCell>
+                    <TableCell>{order.orderStatus}</TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={7} className="h-24 text-center">
+                    No orders found.
                   </TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </CardContent>

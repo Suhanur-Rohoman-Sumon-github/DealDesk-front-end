@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "../providers";
 import "../../styels/globals.css"; // 🔥 Fixed typo: styles instead of styels
-import UserNavbar from "@/components/Userdashboard/UserNavbar";
+import UserNavbar from "@/components/navbars/UserNavbar";
 import UserFooter from "@/components/Userdashboard/UserFooter";
 import AdminSidebar from "@/components/Admindashboard/AdminSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";

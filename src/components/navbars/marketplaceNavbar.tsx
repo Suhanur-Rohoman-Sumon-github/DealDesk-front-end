@@ -15,6 +15,7 @@ import {
 } from "../ui/dropdown-menu";
 import { useUser } from "@/context/userProvider";
 import { logout } from "@/services/authServices";
+import Image from "next/image";
 const MarketplaceNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleIndex, setVisibleIndex] = useState(0);
@@ -25,18 +26,18 @@ const MarketplaceNavbar = () => {
   };
 
   const mockData = [
-    { category: "Mechanical Keyboards", trend: "up", change: "+12%" },
-    { category: "Gaming Mice", trend: "down", change: "-5%" },
-    { category: "Keycaps", trend: "up", change: "+8%" },
-    { category: "Desk Mats", trend: "down", change: "-2%" },
-    { category: "Switches", trend: "up", change: "+15%" },
-    { category: "Wrist Rests", trend: "up", change: "+6%" },
-    { category: "Custom Cables", trend: "down", change: "-3%" },
-    { category: "Stabilizers", trend: "up", change: "+10%" },
-    { category: "Lube Kits", trend: "up", change: "+7%" },
-    { category: "Artisan Keycaps", trend: "down", change: "-4%" },
-    { category: "Keyboard Bags", trend: "up", change: "+9%" },
-    { category: "Sound Dampeners", trend: "down", change: "-1%" },
+    { category: "Go2 bank", trend: "up", change: "+12%" },
+    { category: "Chime Bank", trend: "down", change: "-5%" },
+    { category: "Paypal Account", trend: "up", change: "+8%" },
+    { category: "Google Voice", trend: "down", change: "-2%" },
+    { category: "Text now", trend: "up", change: "+15%" },
+    { category: "Cash App", trend: "up", change: "+6%" },
+    { category: "Ip and Proxies", trend: "down", change: "-3%" },
+    { category: "Gmail Account", trend: "up", change: "+10%" },
+    { category: "SSN panel", trend: "up", change: "+7%" },
+    { category: "USA Dl", trend: "down", change: "-4%" },
+    { category: "Number Panel", trend: "up", change: "+9%" },
+    { category: "USA Token Store", trend: "down", change: "-1%" },
   ];
 
   const [itemsToShow, setItemsToShow] = useState(3);
@@ -99,13 +100,16 @@ const MarketplaceNavbar = () => {
       <nav className="fixed py-3 lg:py-0 top-0 left-0 w-full z-50 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg">
         <div className="flex items-center justify-between mx-auto px-4 gap-4  lg:h-14">
           {/* Left Side: Logo or Site Name */}
-          <div className="flex  items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md w-[200px] md:w-fit">
-            =
-            <Link
-              className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
-              href="/"
-            >
-              Deal^Desk <span className="text-sm">™</span>
+          <div className="">
+            <Link className="" href="/">
+              <Image
+                src={
+                  "https://i.ibb.co.com/sJMZ8zZg/Chat-GPT-Image-Apr-23-2025-09-05-47-AM-removebg-preview.png"
+                }
+                alt="logo"
+                height={100}
+                width={100}
+              />
             </Link>
           </div>
 

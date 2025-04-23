@@ -7,6 +7,7 @@ import { useGetMyOrderQuery } from "@/hooks/Order.hooks";
 import { useUser } from "@/context/userProvider";
 import LiveChatSkeleton from "../skeleton/LiveChatSkeleton";
 import { Order } from "@/types";
+import Link from "next/link";
 
 const userNotifications = [
   {
@@ -180,9 +181,14 @@ const LiveChat = () => {
                 >
                   <span className="truncate">{order.products.title}</span>
                   <span className="font-semibold">{order.products.price}</span>
-                  <Button variant="link" className="text-xs text-white/70">
-                    View
-                  </Button>
+                  <Link href={"/dashboard/orders"}>
+                    <Button
+                      variant="link"
+                      className="text-xs text-[#8b33d5] cursor-pointer"
+                    >
+                      View
+                    </Button>
+                  </Link>
                 </div>
               ))
             ) : (

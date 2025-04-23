@@ -34,6 +34,9 @@ const services = [
 const OurServicesPage = () => {
   return (
     <div className="min-h-screen bg-[#060b1f] text-white px-6 py-32">
+      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
+      <div className="absolute top-40 -right-40 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
+      <div className="absolute -bottom-40 right-20 w-80 h-80 rounded-full bg-indigo-400 opacity-20 blur-3xl"></div>
       {/* Hero Section */}
       <section className="mb-20">
         <Title

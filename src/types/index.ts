@@ -118,6 +118,7 @@ export type Product = {
   description:string
   price:string
   numReviews:number
+  categoryProps:string
 };
 
 export type Order = {

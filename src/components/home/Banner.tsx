@@ -1,5 +1,6 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import TypeWriter from "./TypeWriter";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -22,12 +23,16 @@ const Banner = () => {
             your audience and drive business growth.
           </p>
           <div className="flex items-center md:justify-start sm:justify-center">
-            <button className=" md:px-6 md:py-2 lg:px-14 lg:py-4 px-14 py-4 text-[#ffffff] rounded-md bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] mt-4 flex items-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300">
-              Get Started <FaArrowRightLong />
-            </button>
-            <button className="relative md:px-6 md:py-2 lg:px-14 lg:py-4  px-14 py-4 rounded-md border border-[#5f5d72] text-[#ffffff] bg-transparent mt-4 ml-4 hover:border-[#9133df] transition duration-300">
-              Visit Marketplace
-            </button>
+            <Link href={"/marketplaces"}>
+              <button className=" button-primary">
+                Get Started <FaArrowRightLong />
+              </button>
+            </Link>
+            <Link href={"/marketplaces"}>
+              <button className="button-secondary mt-4 ml-4">
+                Visit Marketplace
+              </button>
+            </Link>
           </div>
         </div>
 

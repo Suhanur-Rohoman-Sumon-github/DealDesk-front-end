@@ -13,6 +13,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useUser } from "@/context/userProvider";
 import { logout } from "@/services/authServices";
+import Image from "next/image";
 const MainNavbar = () => {
   const { user, isLoading } = useUser();
   const [isOpen, setIsOpen] = useState(false);
@@ -32,13 +33,16 @@ const MainNavbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md">
-            <Link
-              className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
-              href="/"
-              onClick={() => handleLinkClick("home")}
-            >
-              Deal^Desk <span className="text-sm">™</span>
+          <div className="">
+            <Link className="" href="/" onClick={() => handleLinkClick("home")}>
+              <Image
+                src={
+                  "https://i.ibb.co.com/sJMZ8zZg/Chat-GPT-Image-Apr-23-2025-09-05-47-AM-removebg-preview.png"
+                }
+                alt="logo"
+                height={100}
+                width={100}
+              />
             </Link>
           </div>
 

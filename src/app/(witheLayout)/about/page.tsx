@@ -1,18 +1,21 @@
-'use client';
-import OurTeam from '@/components/home/OurTeam';
-import Title from '@/components/title/Title';
-import Image from 'next/image';
-import { FaFaceSmile, FaLightbulb, FaUsers } from 'react-icons/fa6';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { ourStoryImages } from '@/data/data';
+"use client";
+import OurTeam from "@/components/home/OurTeam";
+import Title from "@/components/title/Title";
+import Image from "next/image";
+import { FaFaceSmile, FaLightbulb, FaUsers } from "react-icons/fa6";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { ourStoryImages } from "@/data/data";
 
 const AboutUs = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 text-gray-800 py-32">
+      <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
+      <div className="absolute top-40 -left-40 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
+      <div className="absolute -bottom-40 left-20 w-80 h-80 rounded-full bg-indigo-400 opacity-20 blur-3xl"></div>
       {/* Header Section with Background Gradient */}
       <div className="relative text-center mb-12">
         <Title
@@ -162,7 +165,7 @@ const AboutUs = () => {
             </h2>
             <p className="text-[#c9c8ca] text-lg mb-6 text-center lg:text-left">
               Have a question or need support? Our team is ready to assist you.
-              Reach out to us via the form below or email us at{' '}
+              Reach out to us via the form below or email us at{" "}
               <span className="text-blue-500">support@dealdesk.com</span>.
             </p>
 

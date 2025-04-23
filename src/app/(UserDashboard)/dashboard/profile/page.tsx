@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Camera, CreditCard, Mail, MapPin, Phone } from "lucide-react";
+import { Camera, CreditCard, Mail,  } from "lucide-react";
 import { useUser } from "@/context/userProvider";
 import { FaTelegram, FaTelegramPlane } from "react-icons/fa";
 

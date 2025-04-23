@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { MdShoppingCart } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdHome } from "react-icons/io";
-import { GrFavorite } from "react-icons/gr";
 import { FaCheck } from "react-icons/fa";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

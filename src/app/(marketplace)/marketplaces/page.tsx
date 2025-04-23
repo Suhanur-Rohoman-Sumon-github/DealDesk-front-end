@@ -1,11 +1,13 @@
 import Products from "@/components/marketplace/Products";
-import React from "react";
+import React, { Suspense } from "react";
 
 const page = () => {
   return (
-    <div className="mt-10">
-      <Products />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="mt-4">
+        <Products />
+      </div>
+    </Suspense>
   );
 };
 

@@ -5,6 +5,11 @@ import Image from "next/image";
 const ContactUs = () => {
   return (
     <div className="max-w-7xl mx-auto py-16 px-6">
+      <div>
+        <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
+        <div className="absolute top-40 -right-40 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
+        <div className="absolute -bottom-40 right-20 w-80 h-80 rounded-full bg-indigo-400 opacity-20 blur-3xl"></div>
+      </div>
       <Title title="Contact Us" subTitle="We would love to hear from you!" />
 
       {/* Contact Information */}

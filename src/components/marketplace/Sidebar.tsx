@@ -12,7 +12,7 @@ import CategorySkeleton from "../skeleton/CategorySkeleton";
 
 const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const { data: categores, isLoading } = useGetCategoryQuery();
+  const { data: categories, isLoading } = useGetCategoryQuery();
 
   if (isLoading) {
     return <CategorySkeleton count={20} />;
@@ -56,7 +56,7 @@ const Sidebar = () => {
           className="overflow-y-auto px-4 pt-4 pb-2"
           style={{ height: "calc(100vh - 58px - 140px)" }}
         >
-          <CategoryList categories={categores} />
+          <CategoryList categories={categories} />
         </div>
 
         {/* Fixed Feedback Form with Icon */}

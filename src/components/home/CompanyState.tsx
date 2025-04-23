@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { stats } from "@/data/data";
 
 const AgencyStats = () => {
@@ -59,15 +58,6 @@ const AgencyStats = () => {
             key={index}
             className="relative p-8 rounded-md backdrop-blur-3xl bg-white/10 border border-white/20 shadow-lg text-center"
           >
-            {/* Left Image */}
-            <Image
-              src={stat.leftImage}
-              alt="Left Decoration"
-              width={50}
-              height={50}
-              className="absolute left-2 top-2 transform "
-            />
-
             {/* Stats */}
             <h3 className="text-4xl font-bold text-white">
               {counts[index].toLocaleString()}

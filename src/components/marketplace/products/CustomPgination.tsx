@@ -1,7 +1,13 @@
-"use client"
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+"use client";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import React from "react";
-
 
 interface CustomPaginationProps {
   totalPages: number;
@@ -42,7 +48,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
               if (currentPage > 1) handlePrevious();
             }}
             style={{
-              backgroundColor: currentPage === 1 ? "#cccccc" : "#f85606",
+              backgroundColor: currentPage === 1 ? "#cccccc" : "#8b33d5",
               color: currentPage === 1 ? "#666666" : "white",
               pointerEvents: currentPage === 1 ? "none" : "auto",
               cursor: currentPage === 1 ? "not-allowed" : "pointer",
@@ -64,8 +70,8 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
                 onPageChange(index + 1);
               }}
               style={{
-                backgroundColor: index + 1 === currentPage ? "#f85606" : "#FFF",
-                color: index + 1 === currentPage ? "#FFF" : "#f85606",
+                backgroundColor: index + 1 === currentPage ? "#8b33d5" : "#FFF",
+                color: index + 1 === currentPage ? "#FFF" : "#8b33d5",
                 borderRadius: "5px",
                 padding: "5px 10px",
                 margin: "0 5px",

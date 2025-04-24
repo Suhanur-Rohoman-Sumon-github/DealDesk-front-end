@@ -35,7 +35,7 @@ const CategoryList = ({
         <FaChevronRight className="text-white text-xs opacity-60 group-hover:opacity-100 transition-opacity" />
       </div>
 
-      {categories.map((category, index) => (
+      {categories?.map((category, index) => (
         <div
           key={index}
           onClick={() => handleClick(category.name)}

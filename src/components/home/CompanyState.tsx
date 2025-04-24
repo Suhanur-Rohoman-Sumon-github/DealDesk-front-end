@@ -56,7 +56,7 @@ const AgencyStats = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="relative p-8 rounded-md backdrop-blur-3xl bg-white/10 border border-white/20 shadow-lg text-center"
+            className="relative bg-white/5 p-8 rounded-md backdrop-blur-3xl  border border-white/20 shadow-lg text-center"
           >
             {/* Stats */}
             <h3 className="text-4xl font-bold text-white">

@@ -1,23 +1,23 @@
 export const ourStoryImages = [
   {
     image:
-      "https://media.licdn.com/dms/image/v2/D4E12AQHgMxo-g7BYsw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1658422953944?e=2147483647&v=beta&t=Z2tA86SPCvcG9ieACH8jr4SSL47dclFPchqYJIPI4gY",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCcTJmB-yxsrPOifgw-xh6eIh4zGA0mrEVhA&s",
   },
   {
     image:
-      "https://coworker.imgix.net/photos/united-states/texas/tyler/61900-boxer-property/AdobeStock_291543490.jpeg?w=370&h=280&q=90&auto=format,compress&fit=crop&mark=/template/img/wm_icon.png&markscale=5&markalign=center,middle",
+      "https://wallpapers.com/images/hd/sales-colorful-sales-graph-hlthgz9zkq88e9u7.jpg",
   },
   {
     image:
-      "https://www.storytellingpeople.nl/images/image/3350e28a-459f-4ce1-80ca-d9657bee884d/storytelling-tips-leider-manager-ondernemer-presentatie?v=17",
+      "https://media.istockphoto.com/id/1477778736/video/3d-bar-graph-chart-with-up-arrow.jpg?s=640x640&k=20&c=J11lP3jCXXmNm__su4mhHo2tChKwuyMN9FlUYX0uO5I=",
   },
   {
     image:
-      "https://www.corporatestory.nl/images/image/a1b10149-980d-4546-b2de-3b5af0f9a146/het-begint-met-waarom?v=19",
+      "https://c0.wallpaperflare.com/preview/960/830/338/chart-graph-business-finance.jpg",
   },
   {
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmDgnxUqsS2GCxE7NxpOnCeiFfyeUlSPEjlifL2WXMQ5EoWjhtg5ryQ8SgqTvhDojlR24&usqp=CAU",
+      "https://wallpapercg.com/download/business-4k-wallpaper-3800x2660-23620.jpg",
   },
 ];
 
@@ -110,63 +110,63 @@ export const videoData = [
 export const faqData = [
   {
     id: 1,
-    question: "What services do you offer?",
+    question: "What is Deal Desk and how does it work?",
     answer:
-      "We offer web development, digital marketing, SEO, and custom software solutions.",
+      "Deal Desk is a modern Buy & Sell marketplace designed to connect trusted buyers and sellers. You can list, browse, and securely trade products with ease.",
   },
   {
     id: 2,
-    question: "How can I get started with your services?",
+    question: "Is Deal Desk safe to use for transactions?",
     answer:
-      "Simply click on the 'Get Started' button, and we’ll guide you through the process.",
+      "Absolutely! Deal Desk uses secure payment systems, verified user accounts, and built-in fraud protection to ensure safe and trustworthy transactions.",
   },
   {
     id: 3,
-    question: "Do you provide support after project completion?",
+    question: "How do I list a product for sale on Deal Desk?",
     answer:
-      "Yes, we offer ongoing support and maintenance after the project is completed.",
+      "After signing up, simply go to your dashboard and click on 'Create Listing'. Add your product details, images, and pricing to start selling.",
   },
   {
     id: 4,
-    question: "What is the cost of your services?",
+    question: "Are there any fees for using Deal Desk?",
     answer:
-      "The cost varies based on the scope of the project. Contact us for a personalized quote.",
+      "Deal Desk offers free basic listings, with optional premium features at competitive rates to boost your visibility and sales.",
   },
   {
     id: 5,
-    question: "How long will it take to complete a project?",
+    question: "How do I make a purchase on Deal Desk?",
     answer:
-      "Project timelines depend on the complexity of the work, but we always aim to deliver on time.",
+      "Browse or search for products, add items to your cart, and proceed to checkout. We support multiple secure payment methods.",
   },
   {
     id: 6,
-    question: "What is your refund policy?",
+    question: "Can I track my orders on Deal Desk?",
     answer:
-      "We offer a refund policy for specific situations. Please contact our support team for details.",
+      "Yes, once your order is placed, you can track its status and shipment from your account dashboard in real time.",
   },
   {
     id: 7,
-    question: "Can you handle large-scale projects?",
+    question: "Does Deal Desk offer support after a purchase?",
     answer:
-      "Absolutely! We specialize in scalable solutions for businesses of all sizes.",
+      "Yes, our support team is here to assist you with any post-purchase issues or questions you may have.",
   },
   {
     id: 8,
-    question: "How do you ensure the quality of your work?",
+    question: "Can I sell digital products on Deal Desk?",
     answer:
-      "We follow industry best practices, conduct regular reviews, and prioritize testing to ensure quality.",
+      "Yes! Deal Desk supports both physical and digital product listings, making it a flexible platform for all types of sellers.",
   },
   {
     id: 9,
-    question: "Do you work with international clients?",
+    question: "Is Deal Desk available in my country?",
     answer:
-      "Yes, we have clients from all over the world and are experienced in managing remote projects.",
+      "Deal Desk is available internationally. You can sign up and start buying or selling from anywhere with internet access.",
   },
   {
     id: 10,
-    question: "Can I see examples of your previous work?",
+    question: "Can I view examples of top-selling listings?",
     answer:
-      "Definitely! Check out our portfolio for case studies and examples of our work.",
+      "Yes, check out our featured section or explore trending categories to see what’s currently popular on Deal Desk.",
   },
 ];
 

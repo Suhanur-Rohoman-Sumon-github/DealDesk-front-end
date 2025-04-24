@@ -15,11 +15,11 @@ const AboutUs = () => {
     <div className="max-w-7xl mx-auto px-6 text-gray-800 py-32">
       <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
       <div className="absolute top-40 -left-40 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
-      <div className="absolute -bottom-40 left-20 w-80 h-80 rounded-full bg-indigo-400 opacity-20 blur-3xl"></div>
+
       {/* Header Section with Background Gradient */}
       <div className="relative text-center mb-12">
         <Title
-          subTitle="Empowering businesses with cutting-edge web development and digital marketing solutions."
+          subTitle="Build the future of online transactions with our secure, seamless, and scalable marketplace solutions."
           title="About Us"
         />
       </div>
@@ -31,11 +31,11 @@ const AboutUs = () => {
             Our Mission
           </h2>
           <p className="text-lg text-[#c9c8ca]">
-            At Deal Desk, we are passionate about delivering top-tier web
-            development, digital marketing strategies, and creative solutions to
-            help businesses thrive in the digital world. Our mission is to
-            provide innovative, high-quality services tailored to your business
-            needs.
+            At Deal Desk, we are revolutionizing the way people buy and sell
+            online. Our mission is to provide a secure, seamless, and
+            user-friendly marketplace for both buyers and sellers. We aim to
+            build scalable solutions that meet the evolving needs of the digital
+            economy.
           </p>
         </div>
         <Image
@@ -50,13 +50,13 @@ const AboutUs = () => {
       <div className="mt-12 py-12">
         {/* Section Title */}
         <Title
-          subTitle="Discover who we are, what drives us, and how we help businesses thrive"
+          subTitle="Learn more about our journey and what sets us apart in the marketplace."
           title="Our Story"
         />
 
         <div className="text-center">
           <Image
-            src="https://coworker.imgix.net/photos/united-states/texas/tyler/61900-boxer-property/AdobeStock_291543490.jpeg?w=370&h=280&q=90&auto=format,compress&fit=crop&mark=/template/img/wm_icon.png&markscale=5&markalign=center,middle"
+            src="https://www.shutterstock.com/image-illustration/buy-sell-gold-stock-market-600nw-2394746603.jpg"
             alt="Our Story"
             className="rounded-lg shadow-lg mx-auto mb-6"
             width={500}
@@ -65,10 +65,11 @@ const AboutUs = () => {
         </div>
 
         <p className="mt-4 text-[#c9c8ca] text-lg text-center max-w-3xl mx-auto">
-          Founded in 2020, Deal Desk was created to offer exceptional web
-          development and digital marketing services. Our team combines years of
-          expertise and creativity to build tailored solutions that help
-          businesses grow online.
+          Deal Desk was founded in 2020 with the goal of creating an efficient,
+          secure, and intuitive marketplace for users to buy and sell. We
+          combine innovative technologies with a user-first approach to offer a
+          platform that supports both small and large-scale transactions
+          seamlessly.
         </p>
 
         {/* Swiper Carousel with Additional Images */}
@@ -109,44 +110,44 @@ const AboutUs = () => {
       <div className="mt-12 py-12">
         {/* Section Title */}
         <Title
-          subTitle=" We are committed to delivering the best quality with integrity, fostering creativity, and putting people first in everything we do."
+          subTitle="Integrity, innovation, and collaboration are the driving forces behind everything we do."
           title="Our Values"
         />
 
         {/* Icons + Text */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 ">
-          <div className="flex flex-col  bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 text-[#c9c8ca]">
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="flex flex-col bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 text-[#c9c8ca]">
             <FaLightbulb size={28} p-4 className="text-[#6ce1b3] mb-3" />
             <h3 className="text-xl font-semibold text-white mb-2">
-              Creativity
+              Innovation
             </h3>
             <p>
-              We embrace innovation and think outside the box to craft unique
-              solutions for every project.
+              We foster a culture of creativity and continuously strive to push
+              the boundaries of whats possible in the digital marketplace.
             </p>
           </div>
 
-          {/* Collaboration */}
-          <div className="flex flex-col  bg-white/10  backdrop-blur-md border border-white/20 rounded-lg p-6 text-[#c9c8ca]">
+          <div className="flex flex-col bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 text-[#c9c8ca]">
             <FaUsers size={28} p-4 className="text-[#6ce1b3] mb-3" />
             <h3 className="text-xl font-semibold text-white mb-2">
               Collaboration
             </h3>
             <p>
-              Working together as a team—with clients and among
-              ourselves—ensures the best possible results.
+              By working together with our clients and partners, we ensure that
+              every solution is tailored to meet the specific needs of our
+              community.
             </p>
           </div>
 
-          {/* Customer First */}
-          <div className="flex flex-col  bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 text-[#c9c8ca]">
+          <div className="flex flex-col bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 text-[#c9c8ca]">
             <FaFaceSmile size={28} p-4 className="text-[#6ce1b3] mb-3" />
             <h3 className="text-xl font-semibold text-white mb-2">
-              Customer First
+              Customer Satisfaction
             </h3>
             <p>
-              Your satisfaction is at the heart of what we do. We tailor every
-              experience to meet your goals.
+              Our commitment to delivering the best customer experience is
+              reflected in every interaction, ensuring long-term trust and
+              satisfaction.
             </p>
           </div>
         </div>
@@ -157,14 +158,14 @@ const AboutUs = () => {
 
       {/* Contact Us */}
       <div className="mt-16 py-12 px-6 bg-[rgba(255,255,255,0.05)] backdrop-blur-md border border-white/10 rounded-xl shadow-xl">
-        <div className=" mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left: Text + Form */}
           <div>
             <h2 className="text-3xl font-semibold text-white mb-4 text-center lg:text-left">
               Contact Us
             </h2>
             <p className="text-[#c9c8ca] text-lg mb-6 text-center lg:text-left">
-              Have a question or need support? Our team is ready to assist you.
+              Have a question or need assistance? Our team is ready to help.
               Reach out to us via the form below or email us at{" "}
               <span className="text-blue-500">support@dealdesk.com</span>.
             </p>
@@ -195,10 +196,7 @@ const AboutUs = () => {
                   className="w-full px-4 py-2 rounded-md bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-white/60"
                 ></textarea>
               </div>
-              <button
-                type="submit"
-                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
-              >
+              <button type="submit" className="w-full button-primary">
                 Send Message
               </button>
             </form>

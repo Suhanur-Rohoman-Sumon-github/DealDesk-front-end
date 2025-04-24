@@ -52,10 +52,7 @@ const ContactUs = () => {
                   className="w-full px-4 py-2 rounded-md bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-white/60"
                 ></textarea>
               </div>
-              <button
-                type="submit"
-                className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition"
-              >
+              <button type="submit" className="w-full button-primary">
                 Send Message
               </button>
             </form>

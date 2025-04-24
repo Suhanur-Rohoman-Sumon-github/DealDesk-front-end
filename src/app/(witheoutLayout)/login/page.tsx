@@ -39,7 +39,7 @@ export default function Login() {
       </div>
 
       <div className="w-full max-w-md z-10 text-white">
-        <Card className=" bg-[#060b1f] border border-white/20 backdrop-blur-md   overflow-hidden">
+        <Card className=" bg-[#04091d] border border-white/20 backdrop-blur-md   overflow-hidden">
           <CardHeader className="space-y-1 text-center text-white">
             <CardTitle className="text-2xl font-bold tracking-tight">
               Welcome back

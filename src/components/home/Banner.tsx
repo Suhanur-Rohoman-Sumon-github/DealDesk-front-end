@@ -19,8 +19,8 @@ const Banner = () => {
         <div className="max-w-3xl lg:text-left  sm:text-center md:text-left md:w-1/2 mb-8 md:mb-0">
           <TypeWriter />
           <p className=" lg:text-xl md:w-full sm:w-10/12 mx-auto  text-[#c9c8ca] py-4 leading-relaxed">
-            Build modern, scalable, and high-performance websites that captivate
-            your audience and drive business growth.
+            Create powerful, scalable, and secure marketplace experiences that
+            attract users, build trust, and accelerate your business success.
           </p>
           <div className="flex items-center md:justify-start sm:justify-center">
             <Link href={"/marketplaces"}>
@@ -38,12 +38,17 @@ const Banner = () => {
 
         {/* Right Section */}
         <div className="max-w-lg md:ms-5 lg:ms-0 text-left bg-white/10 border border-white/30 p-6 rounded-lg shadow-xl md:w-1/2 backdrop-blur-md">
-          <h2 className="text-3xl font-bold text-[#ffffff]">Why Choose Us?</h2>
+          <h2 className="text-3xl font-bold text-[#ffffff]">
+            Why Choose Deal Desk
+          </h2>
           <ul className="mt-4 space-y-2 text-[#c9c8ca]">
-            <li>✅ Custom-built, scalable solutions</li>
-            <li>✅ Cutting-edge technology & modern design</li>
-            <li>✅ Speed, security, and seamless performance</li>
-            <li>✅ Dedicated support & expert guidance</li>
+            <li>
+              ✅ The first-ever marketplace built for the Buy & Sell industry
+            </li>
+            <li>✅ Safe, secure, and trustworthy platform for all users</li>
+            <li>✅ Fast performance with scalable infrastructure</li>
+
+            <li>✅ 24/7 expert support & seamless user experience</li>
           </ul>
         </div>
       </div>

@@ -128,7 +128,7 @@ export default function Page() {
                     href={`/marketplaces/buy?productId=${"6809af0b7a6ceb2b1e6b9fff"}`}
                   >
                     <button className="w-full button-primary">
-                      <MdShoppingCart /> Buy Now
+                      <MdShoppingCart /> Buy
                     </button>
                   </Link>
                 </td>

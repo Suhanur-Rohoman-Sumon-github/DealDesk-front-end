@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 import { FieldValues } from "react-hook-form";
-import { addFavoriteProducts, createCategory, createProduct, getALlProducts, getCateGory, getFavoriteProducts, getSIngleProducts } from "@/services/products";
+import { addFavoriteProducts, createCategory, createProduct, getALlProducts, getCateGory, getFavoriteProducts, getRelatedProducts, getSIngleProducts } from "@/services/products";
 
 export const useGetAllProductsQuery = (queryParams: {
   category?: string;
@@ -46,21 +46,21 @@ export const useGetSingleProductQuery = (productId: string) => {
 
   return { data, refetch, isLoading, isError };
 };
-// export const useGetRelatedProductsQuery = (categoryID: string) => {
+export const useGetRelatedProductsQuery = (categoryName: string) => {
     
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
-//        queryKey: ["get-related-products", categoryID],
-//     queryFn: async () => {
-//       const data = await getRelatedProducts(categoryID);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, refetch, isLoading, isError } = useQuery<any, Error>({
+       queryKey: ["get-related-products", categoryName],
+    queryFn: async () => {
+      const data = await getRelatedProducts(categoryName);
 
-//       return data;
-//     },
-//     enabled: Boolean(categoryID),
-//   });
+      return data;
+    },
+    enabled: Boolean(categoryName),
+  });
 
-//   return { data, refetch, isLoading, isError };
-// };
+  return { data, refetch, isLoading, isError };
+};
 export const useGetCategoryQuery = () => {
     
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -69,19 +69,24 @@ const Products = () => {
                 price={product.price}
                 rating={product.numReviews}
                 id={product._id}
+                category={product.category}
               />
             ))
           )}
         </div>
       )}
 
-      <div className="mt-6">
-        <CustomPagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
-      </div>
+      {data?.data?.length === 12 ? (
+        <div className="mt-6">
+          <CustomPagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

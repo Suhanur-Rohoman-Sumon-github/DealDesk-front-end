@@ -19,20 +19,16 @@ import {
 import Loading from "@/components/ui/Loading";
 
 const CreateProductPage = () => {
-  
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreview, setImagePreview] = useState<string[]>([]);
-
 
   const { mutate: handleCreateProduct, isPending } = useCreateProductMutation();
   const { data: categories } = useGetCategoryQuery();
 
-  
-
   // Transform category data for options
   const categoriesOptions =
     categories?.map((category: Category) => ({
-      key: category._id,
+      key: category.name,
       label: category.name,
     })) || [];
 
@@ -62,7 +58,6 @@ const CreateProductPage = () => {
   };
 
   const handleSubmit = (data: FieldValues): void => {
-   
     const formData = new FormData();
 
     // Add product data
@@ -72,8 +67,6 @@ const CreateProductPage = () => {
     imageFiles.forEach((image) => {
       formData.append("images", image);
     });
-
-   
 
     handleCreateProduct(formData);
   };

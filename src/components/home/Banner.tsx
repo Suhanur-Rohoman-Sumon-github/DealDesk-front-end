@@ -61,7 +61,9 @@ const Banner = () => {
               </button>
             </Link>
             <Link className="mt-4" href={"/marketplaces"}>
-              <button className="button-secondary ">Visit Marketplace</button>
+              <button className="button-secondary ">
+                Visit Marketplace <FaArrowRightLong />
+              </button>
             </Link>
           </div>
         </div>
@@ -81,7 +83,7 @@ const Banner = () => {
 
               {/* Heading */}
               <h2 className="text-3xl font-bold text-white upp">
-                Why Choose <span className="text-[#8b33d6]">Deal Desk?</span>
+                Why Choose <span className="text-[#FFFFFF]">Deal Desk?</span>
               </h2>
             </div>
 

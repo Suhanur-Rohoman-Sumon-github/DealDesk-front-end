@@ -7,7 +7,7 @@ const TypeWriter = () => {
     <div>
       <h1 className="text-primary text-[#ffffff]">
         <span className="font-bold uppercase text-[#ffffff]">
-          <span className="text-[#8b33d6]">Transform</span> Your Buy & Sell
+          <span className="text-[#FFFF]">Transform</span> Your Buy & Sell
           Experience With
         </span>
         <br />

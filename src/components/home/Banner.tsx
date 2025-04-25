@@ -19,8 +19,6 @@ const Banner = () => {
         }}
       />
 
-      {/* Floating Icons */}
-      {/* Floating Icons - updated placement for visual flow */}
       <div>
         <div className="absolute top-[190px] left-[870px] transform -translate-x-1/2 animate-floating-slow w-10 h-10 bg-pink-500/70 backdrop-blur-md rounded-full flex items-center justify-center text-white text-xl shadow-xl z-10">
           <SiBitcoin />

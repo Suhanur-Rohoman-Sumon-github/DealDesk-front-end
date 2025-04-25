@@ -15,7 +15,11 @@ const Sidebar = () => {
   const { data: categories, isLoading } = useGetCategoryQuery();
 
   if (isLoading) {
-    return <CategorySkeleton count={20} />;
+    return (
+      <div className="mt-14 ">
+        <CategorySkeleton count={20} />
+      </div>
+    );
   }
 
   return (
@@ -52,16 +56,8 @@ const Sidebar = () => {
         </div>
 
         {/* Scrollable Category List */}
-        <div
-          className="overflow-y-auto px-4 pt-4 pb-2"
-          style={{ height: "calc(100vh - 58px - 140px)" }}
-        >
+        <div className="overflow-y-auto px-4 pt-4 pb-2">
           <CategoryList categories={categories} />
-        </div>
-
-        {/* Fixed Feedback Form with Icon */}
-        <div className="">
-          <FeedbackForm />
         </div>
       </div>
     </>

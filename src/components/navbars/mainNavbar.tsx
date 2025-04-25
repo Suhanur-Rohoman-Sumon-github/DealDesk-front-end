@@ -75,14 +75,15 @@ const MainNavbar = () => {
             >
               Services
             </Link>
+
             <Link
-              href="/marketplaces"
-              onClick={() => handleLinkClick("marketplaces")}
+              href="/pricing"
+              onClick={() => handleLinkClick("pricing")}
               className={`${
-                activeLink === "marketplaces" ? "text-gray-400" : "text-white"
+                activeLink === "pricing" ? "text-gray-400" : "text-white"
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
-              Marketplaces
+              Pricing
             </Link>
             <Link
               href="/contact"
@@ -92,6 +93,15 @@ const MainNavbar = () => {
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
               Contact
+            </Link>
+            <Link
+              href="/marketplaces"
+              onClick={() => handleLinkClick("marketplaces")}
+              className={`${
+                activeLink === "marketplaces" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
+              Marketplaces
             </Link>
           </div>
 

@@ -7,28 +7,28 @@ const TypeWriter = () => {
     <div>
       <h1 className="text-primary text-[#ffffff]">
         <span className="font-bold uppercase text-[#ffffff]">
-          <span className="text-[#FFFF]">Transform</span> Your Buy & Sell
-          Experience With
+          We Are the <span className="text-[#FFFF]">First Ever</span> in the
+          Global Market — Why?
         </span>
         <br />
         <span className="  text-3xl uppercase text-[#ffffff]">
           <Typewriter
             words={[
-              "Safe & Secure",
-              "Smart & Scalable",
-              "Seamless & Reliable",
-              "Fast & Future-Ready",
-              "Custom-Built Solutions",
-              "User-Centered Design",
-              "High-Performance Tech",
-              "Marketplace Innovation",
+              "Secure Transactions",
+              "Verified Sellers",
+              "24/7 Support",
+              "Fast Delivery",
+              "No Hidden Fees",
+              "Modern Tech",
+              "Top-Rated Platform",
+              "Trust Comes First",
             ]}
             loop={0}
             cursor
             cursorStyle="|"
-            typeSpeed={120}
-            deleteSpeed={80}
-            delaySpeed={1000}
+            typeSpeed={100}
+            deleteSpeed={60}
+            delaySpeed={1200}
           />
         </span>
       </h1>

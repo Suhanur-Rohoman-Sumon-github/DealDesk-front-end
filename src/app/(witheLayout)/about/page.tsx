@@ -13,8 +13,8 @@ import { ourStoryImages } from "@/data/data";
 const AboutUs = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 text-gray-800 py-32">
-      <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
-      <div className="absolute top-40 -left-40 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
+      <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+      <div className="absolute top-40 -left-40 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
 
       {/* Header Section with Background Gradient */}
       <div className="relative text-center mb-12">
@@ -39,7 +39,7 @@ const AboutUs = () => {
           </p>
         </div>
         <Image
-          src="https://media.licdn.com/dms/image/v2/D4E12AQHgMxo-g7BYsw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1658422953944?e=2147483647&v=beta&t=Z2tA86SPCvcG9ieACH8jr4SSL47dclFPchqYJIPI4gY"
+          src="https://t4.ftcdn.net/jpg/00/96/54/53/360_F_96545306_cX6N4Fv2TTVRMKahA3aoCvxlUOGm2KkV.jpg"
           alt="Our Mission"
           className="rounded-lg shadow-lg md:mx-0 mx-auto"
           width={500}

@@ -2,6 +2,9 @@
 import Image from "next/image";
 import Title from "../title/Title";
 
+import leftDecor from "../../../public/assets/stats--purple.svg";
+import rightDecor from "../../../public/assets/stats--purple.svg";
+
 const teamMembers = [
   {
     id: 1,
@@ -44,11 +47,25 @@ const teamMembers = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrjoobWvPl8PyYEZlBTl_HzOzCLpd1MxD_eg&s",
   },
+  {
+    id: 7,
+    name: "Leila Haddad",
+    title: "Customer Success Manager",
+    image:
+      "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?crop=faces&fit=crop&h=200&w=200",
+  },
+  {
+    id: 8,
+    name: "Carlos Mendoza",
+    title: "DevOps Engineer",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbiiNG6IfM82l7Meq_VmzGTi_OWNI1jAYQVg&s",
+  },
 ];
 
 const OurTeam = () => {
   return (
-    <div className="max-w-7xl mx-auto py-10 text-white text-center">
+    <div className="relative max-w-7xl mx-auto py-10 text-white text-center overflow-hidden">
       <Title
         title="Meet Our Team"
         subTitle=" Our team consists of experienced web developers, digital marketing
@@ -56,20 +73,37 @@ const OurTeam = () => {
           your business succeed in the digital landscape."
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 relative z-10">
         {teamMembers.map((member) => (
           <div
             key={member.id}
             className="relative backdrop-blur-3xl bg-white/5 border border-white/30 p-6 rounded-lg shadow-lg transition-all hover:scale-105"
           >
-            <Image
-              src={member.image}
-              alt={member.name}
-              width={200}
-              height={200}
-              className="w-32 h-32 mx-auto rounded-full object-cover border-4 border-white"
-            />
-            <h3 className="mt-4 text-xl font-bold">{member.name}</h3>
+            {/* Decorative Images Left and Right of Profile */}
+            <div className="relative flex items-center justify-center">
+              <Image
+                src={leftDecor}
+                alt="Left"
+                width={15}
+                height={80}
+                className="absolute left-0 -translate-x-1/2 top-0"
+              />
+              <Image
+                src={member.image}
+                alt={member.name}
+                width={200}
+                height={200}
+                className="w-32 h-32 mx-auto rounded-full object-cover border-4 border-white"
+              />
+              <Image
+                src={rightDecor}
+                alt="Right"
+                width={15}
+                height={80}
+                className="absolute right-0 translate-x-1/2 top-0"
+              />
+            </div>
+            <h3 className="mt-6 text-xl font-bold">{member.name}</h3>
             <p className="text-sm text-gray-300">{member.title}</p>
           </div>
         ))}

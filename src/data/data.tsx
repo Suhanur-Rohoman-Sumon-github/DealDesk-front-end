@@ -54,29 +54,39 @@ export const stats = [
 
 export const services = [
   {
-    name: "E-Commerce development",
+    name: "All Type Go2 Bank",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-DNDjDo4BcJ8v7tLleCjGJXsfu-e0YbiEFw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh-MnwX0RWeN7cbihnXNGmM6O0ZH2M2yJVbg&s",
   },
   {
-    name: "Digital Marketing",
+    name: "All Type Chime Bank",
     image:
-      "https://0qw52hln.cdn.imgeng.in/content/cms/images/blog/benefits-of-a-digital-marketing-agency.jpg",
+      "https://yt3.googleusercontent.com/ytc/AIdro_kS8n4f2hVpjUOy8RgQYogEHnVAzMIMP45jw5tNnlqRF2Q=s900-c-k-c0x00ffffff-no-rj",
   },
   {
-    name: "Buy & Sell",
+    name: "All Type Chime Verify Service",
     image:
-      "https://static.vecteezy.com/system/resources/previews/007/749/082/non_2x/buy-sell-forex-trade-sign-free-vector.jpg",
+      "https://miro.medium.com/v2/resize:fit:1400/1*N6Gtlz4V2WFOUXwsWVpDYg.png", // checkmark icon or verification
   },
   {
-    name: "SEO & Growth",
+    name: "Real DL for Webull and Coinbase",
     image:
-      "https://searchengineland.com/wp-content/seloads/2014/08/seo-idea-lightbulbs-ss-1920.jpg",
+      "https://tvblog-static.tradingview.com/uploads/2024/02/webull-joins-tradingview-as-integrated-broker-preview.jpg",
   },
   {
-    name: "Custom Software",
+    name: "All IP and Proxy Load Loaded Account",
     image:
-      "https://ideamaker.agency/wp-content/uploads/2023/12/10-Best-Examples-of-Custom-Software.png",
+      "https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHHFT949fUipzkiFOBH3fAiZZUCdYojwUyX2aTonS1aIwMrx6NUIsHfUHSLzjGJFxxppz8vfA1y.0jXdNsW3rx3o1i8G624bUSKTY2F_DYpKk6DGioEdfTxPeQkjjFA_wUg_sfjJlBxuM.Z2e.2XulTA-&format=source", // proxy/network icon
+  },
+  {
+    name: "SSN Panel Load & Loaded Account",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuKecs0xwrdGzhwT7WHuL4Ni0oRvtDceLLjQ&s", // ID/SSN type icon
+  },
+  {
+    name: "Number Panel Load & Loaded Account",
+    image:
+      "https://site-images.similarcdn.com/image?url=daisysms.com&t=4&s=1&h=e55bdb0012f1293818442817a4b2da10c99adfc57fc1d6bc52746bde0c7f0065", // phone panel icon
   },
 ];
 

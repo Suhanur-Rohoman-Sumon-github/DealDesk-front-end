@@ -21,10 +21,6 @@ const ClientReviews = () => {
         title="Client Testimonials"
       />
 
-      <div className="absolute top-[1800px] right-0 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
-
-      <div className="absolute top-[2000px] left-0 w-80 h-80 rounded-full bg-indigo-400 opacity-20 blur-3xl"></div>
-
       <div className="relative mx-auto max-w-7xl">
         <ReactPlayer
           url={selectedVideo}

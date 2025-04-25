@@ -5,12 +5,13 @@ import { Typewriter } from "react-simple-typewriter";
 const TypeWriter = () => {
   return (
     <div>
-      <h1 className="text-2xl md:w-full sm:w-10/12 mx-auto sm:text-4xl lg:text-4xl xl:text-5xl md:text-3xl text-[#ffffff] ">
-        <span className="font-bold">
-          Transform Your Buy & Sell Experience With
+      <h1 className="text-primary text-[#ffffff]">
+        <span className="font-bold uppercase text-[#ffffff]">
+          <span className="text-[#8b33d6]">Transform</span> Your Buy & Sell
+          Experience With
         </span>
         <br />
-        <span className="  ">
+        <span className="  text-3xl uppercase text-[#ffffff]">
           <Typewriter
             words={[
               "Safe & Secure",

@@ -21,6 +21,10 @@ const FAQ = () => {
         />
       </div>
 
+      <div className="absolute top-[3900px] right-0 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+
+      <div className="absolute top-[3900px] left-0 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 px-4">
         {faqData.map((faq) => (
           <div key={faq.id} className="rounded-lg shadow-md  overflow-hidden">

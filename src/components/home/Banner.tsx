@@ -6,6 +6,7 @@ import TypeWriter from "./TypeWriter";
 import Link from "next/link";
 import { FaEthereum, FaQuestionCircle } from "react-icons/fa";
 import { SiBitcoin } from "react-icons/si";
+import { VscStarFull } from "react-icons/vsc";
 const Banner = () => {
   return (
     <div className="relative h-screen flex items-center justify-center text-white overflow-hidden">
@@ -38,11 +39,20 @@ const Banner = () => {
         <div className="absolute bottom-[20%] right-[5%] animate-floating-slow w-10 h-10 bg-[#0dd8e3] backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-lg z-10">
           <FaDollarSign />
         </div>
-        <div className="absolute top-[50px] left-0 w-96 h-80 rounded-full float-fast bg-[#8c33d6] opacity-20 blur-3xl"></div>
+
         {/* Bottom-Right */}
         <div className="absolute bottom-[10%] right-[25%] animate-floating-medium w-10 h-10 bg-[#b32c7d] backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-md z-10">
           <LiaHandHoldingUsdSolid />
         </div>
+      </div>
+      <div>
+        <VscStarFull className="text-[#59dee7] text-xl animate-pulse pulse 3s ease-in-out infinit absolute top-96 left-24 transition " />
+        <VscStarFull className="text-[#b32c7d] text-xl animate-pulse absolute bottom-24 left-[300px]" />
+        <VscStarFull className="text-[#b32c7d] text-xl animate-pulse absolute top-24 left-80" />
+
+        <VscStarFull className="text-[#fe778d] text-xl animate-pulse absolute top-24 right-[300px]" />
+        <VscStarFull className="text-[#fe778d] text-xl animate-pulse absolute bottom-28 right-[300px]" />
+        <VscStarFull className="text-[#fe778d] text-xl animate-pulse absolute bottom-72 right-[100px]" />
       </div>
 
       {/* Main Content */}

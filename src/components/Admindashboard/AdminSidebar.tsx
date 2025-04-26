@@ -81,17 +81,17 @@ const AdminSidebar = () => {
                 {
                   icon: <TrendingUp />,
                   label: "Sales Analytics",
-                  path: "/analytics/sales",
+                  path: "/admin/dashboard/analytics/sales",
                 },
                 {
                   icon: <PieChart />,
                   label: "Traffic Sources",
-                  path: "/analytics/traffic",
+                  path: "/admin/dashboard/analytics/traffic",
                 },
                 {
                   icon: <BarChartHorizontal />,
                   label: "Customer Behavior",
-                  path: "/analytics/behavior",
+                  path: "/admin/dashboard/analytics/behavior",
                 },
               ].map(({ icon, label, path }) => (
                 <SidebarMenuItem key={path}>
@@ -126,17 +126,26 @@ const AdminSidebar = () => {
                   label: "Categories",
                   path: "/admin/dashboard/products/category",
                 },
-                { label: "Inventory", path: "/products/inventory" },
+                {
+                  label: "Inventory",
+                  path: "admin/dashboard/products/inventory",
+                },
               ]}
             />
             <DropdownMenu
               icon={<Tags className="h-5 w-5 mr-3" />}
               label="Catalog"
               items={[
-                { label: "Collections", path: "/catalog/collections" },
-                { label: "Attributes", path: "/catalog/attributes" },
-                { label: "Tags", path: "/catalog/tags" },
-                { label: "Brands", path: "/catalog/brands" },
+                {
+                  label: "Collections",
+                  path: "/admin/dashboard/catalog/collections",
+                },
+                {
+                  label: "Attributes",
+                  path: "/admin/dashboard/catalog/attributes",
+                },
+                { label: "Tags", path: "/dashboard/admin/catalog/tags" },
+                { label: "Brands", path: "/dashboard/admin/catalog/brands" },
               ]}
             />
           </SidebarGroupContent>
@@ -153,10 +162,19 @@ const AdminSidebar = () => {
                   label: "All Orders",
                   path: "/admin/dashboard/orders/orderList",
                 },
-                { label: "Pending", path: "/orders/pending" },
-                { label: "Processing", path: "/orders/processing" },
-                { label: "Completed", path: "/orders/completed" },
-                { label: "Cancelled", path: "/orders/cancelled" },
+                { label: "Pending", path: "/admin/dashboard/orders/pending" },
+                {
+                  label: "Processing",
+                  path: "/admin/dashboard/orders/processing",
+                },
+                {
+                  label: "Completed",
+                  path: "/admin/dashboard/orders/completed",
+                },
+                {
+                  label: "Cancelled",
+                  path: "/admin/dashboard/orders/cancelled",
+                },
               ]}
             />
             <SidebarMenu>
@@ -166,6 +184,11 @@ const AdminSidebar = () => {
                   icon: <CreditCard />,
                   label: "Payments",
                   path: "/admin/dashboard/PaymentPage",
+                },
+                {
+                  icon: <CreditCard />,
+                  label: "Recharge Requests",
+                  path: "/admin/dashboard/recharge",
                 },
               ].map(({ icon, label, path }) => (
                 <SidebarMenuItem key={path}>
@@ -193,14 +216,20 @@ const AdminSidebar = () => {
                   label: "Add New User",
                   path: "/admin/dashboard/user/new-user",
                 },
-                { label: "User Roles", path: "/users/roles" },
-                { label: "Permissions", path: "/users/permissions" },
+                { label: "User Roles", path: "/admin/dashboard/users/roles" },
+                {
+                  label: "Permissions",
+                  path: "/admin/dashboard/users/permissions",
+                },
               ]}
             />
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href="/reviews" className="flex items-center">
+                  <Link
+                    href="admin/dashboard/reviews"
+                    className="flex items-center"
+                  >
                     <MessageSquare className="h-5 w-5 mr-3" />
                     <span>Reviews</span>
                   </Link>
@@ -218,17 +247,17 @@ const AdminSidebar = () => {
                 {
                   icon: <Percent />,
                   label: "Discounts",
-                  path: "/marketing/discounts",
+                  path: "/admin/dashboard/marketing/discounts",
                 },
                 {
                   icon: <Flag />,
                   label: "Campaigns",
-                  path: "/marketing/campaigns",
+                  path: "/admin/dashboard/marketing/campaigns",
                 },
                 {
                   icon: <Gift />,
                   label: "Gift Cards",
-                  path: "/marketing/gift-cards",
+                  path: "/admin/dashboard/marketing/gift-cards",
                 },
               ].map(({ icon, label, path }) => (
                 <SidebarMenuItem key={path}>

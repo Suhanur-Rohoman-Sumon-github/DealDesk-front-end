@@ -9,8 +9,8 @@ const Category: React.FC<CategoryProps> = ({ name }) => {
     <div className="flex items-center justify-center max-w-7xl relative gap-4 ">
       <div
         className={`${
-          name ? "bg-white/10" : "backdrop-blur-sm border-green-300"
-        } backdrop-blur-md bg-white/10 border border-white/20 fixed z-50 top-28 w-[950px] ml-5 p-1 text-center text-white transition duration-300`}
+          name ? "" : ""
+        }    top-9 absolute w-[950px] ml-5 p-1 text-center text-white transition duration-300`}
       >
         {name ? (
           <p className="text-gray-300 text-lg">

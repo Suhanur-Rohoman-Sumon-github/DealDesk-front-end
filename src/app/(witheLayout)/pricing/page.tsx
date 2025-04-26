@@ -38,18 +38,16 @@ export default function Pricing() {
             </Badge>
           </div>
 
-          <h2 className="text-2xl font-semibold mb-4 mt-6">Pro</h2>
+          <h2 className="text-2xl font-semibold mb-4 mt-6">Partnar</h2>
           <p className="text-gray-300 mb-8">
-            Unlock full potential with premium features
+            Unlock full potential with Partnar
           </p>
           <ul className="space-y-4 mb-8">
             <li>🚀 Unlimited access</li>
             <li>🚀 Priority support</li>
             <li>🚀 Advanced features</li>
           </ul>
-          <Button className="w-full bg-pink-500 hover:bg-pink-600">
-            Go Pro - $19.99/mo
-          </Button>
+          <Button className="button-primary w-full">Rcharge now</Button>
         </div>
       </div>
     </section>

@@ -3,13 +3,18 @@ import { useGetUserVerificationCodeQuery } from "@/hooks/User.hook";
 import React, { useState, useEffect } from "react";
 
 const VerifyEmail = () => {
-  const searchParams = new URLSearchParams(window.location.search);
-  const email = searchParams.get("email");
+  const [email, setEmail] = useState<string | null>(null);
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [isVerified, setIsVerified] = useState(false);
   const [isInvalidCode, setIsInvalidCode] = useState(false);
-   const { data: verificationCode, isLoading } =
-     useGetUserVerificationCodeQuery(email as string);
+  const { data: verificationCode, isLoading } = useGetUserVerificationCodeQuery(
+    email as string
+  );
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const emailParam = searchParams.get("email");
+    setEmail(emailParam);
+  }, []);
   useEffect(() => {
     const codeStr = code.join("").trim();
     if (codeStr.length === 6 && verificationCode?.data?.emailVerificationCode) {
@@ -22,7 +27,7 @@ const VerifyEmail = () => {
       }
     }
   }, [code, verificationCode]);
- 
+
   if (isLoading)
     return (
       <div className="flex justify-center items-center min-h-screen">

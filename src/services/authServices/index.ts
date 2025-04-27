@@ -45,6 +45,7 @@ export const loginUser = async (userData: FieldValues) => {
   }
 };
 
+
 export const logout =async () => {
   // Remove cookies client-side or via an API route
   const cookieStore = await cookies();

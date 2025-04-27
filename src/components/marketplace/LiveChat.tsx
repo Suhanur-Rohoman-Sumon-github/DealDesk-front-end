@@ -86,7 +86,7 @@ const LiveChat = () => {
         userNotifications[Math.floor(Math.random() * userNotifications.length)];
       setNotifications((prev) => {
         const updated = [randomNotification, ...prev];
-        return updated.slice(0, 4); // Keep only the top 3 notifications
+        return updated.slice(0, 2);
       });
     }, 4000);
 
@@ -162,7 +162,7 @@ const LiveChat = () => {
         </div>
 
         {/* Notification Cards */}
-        <div className="w-full  rounded-lg shadow p-4 space-y-3 ">
+        <div className="w-full   p-4 space-y-3 ">
           {notifications.map((user, index) => (
             <div
               key={index}
@@ -194,6 +194,37 @@ const LiveChat = () => {
               </div>
             </div>
           ))}
+
+          <div className="mt-auto text-xs bg-white/5 rounded-md p-2 border border-white/10">
+            <div className="font-semibold text-white mb-1">
+              Your Recent Orders
+            </div>
+            <div className="space-y-1">
+              {recentOrders?.length > 0 ? (
+                recentOrders.slice(0, 2).map((order: Order) => (
+                  <div
+                    key={order.id}
+                    className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"
+                  >
+                    <span className="truncate">{order.products.title}</span>
+                    <span className="font-semibold">
+                      {order.products.price}
+                    </span>
+                    <Link href={"/dashboard/orders"}>
+                      <Button
+                        variant="link"
+                        className="text-xs text-[#8b33d5] cursor-pointer"
+                      >
+                        View
+                      </Button>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="text-white/70">No recent orders</div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>

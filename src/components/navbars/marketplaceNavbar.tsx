@@ -104,11 +104,11 @@ const MarketplaceNavbar = () => {
             <Link className="" href="/">
               <Image
                 src={
-                  "https://i.ibb.co.com/sJMZ8zZg/Chat-GPT-Image-Apr-23-2025-09-05-47-AM-removebg-preview.png"
+                  "https://i.ibb.co.com/rGrLVCZs/Chat-GPT-Image-Apr-24-2025-02-07-44-PM-removebg-preview.png"
                 }
                 alt="logo"
-                height={100}
-                width={100}
+                height={800}
+                width={80}
               />
             </Link>
           </div>
@@ -217,7 +217,7 @@ const MarketplaceNavbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="md:hidden bg-[#060b1f]/95 backdrop-blur-md border-t border-white/10 px-4 py-2 space-y-2 text-sm mt-5">
+          <div className="md:hidden bg-[#04091d]/95 backdrop-blur-md border-t border-white/10 px-4 py-2 space-y-2 text-sm mt-5">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 h-4 w-4" />
               <Input

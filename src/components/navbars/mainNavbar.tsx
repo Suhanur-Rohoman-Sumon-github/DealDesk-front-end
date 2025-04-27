@@ -37,11 +37,11 @@ const MainNavbar = () => {
             <Link className="" href="/" onClick={() => handleLinkClick("home")}>
               <Image
                 src={
-                  "https://i.ibb.co.com/sJMZ8zZg/Chat-GPT-Image-Apr-23-2025-09-05-47-AM-removebg-preview.png"
+                  "https://i.ibb.co.com/rGrLVCZs/Chat-GPT-Image-Apr-24-2025-02-07-44-PM-removebg-preview.png"
                 }
                 alt="logo"
-                height={100}
-                width={100}
+                height={80}
+                width={80}
               />
             </Link>
           </div>
@@ -75,14 +75,15 @@ const MainNavbar = () => {
             >
               Services
             </Link>
+
             <Link
-              href="/marketplaces"
-              onClick={() => handleLinkClick("marketplaces")}
+              href="/pricing"
+              onClick={() => handleLinkClick("pricing")}
               className={`${
-                activeLink === "marketplaces" ? "text-gray-400" : "text-white"
+                activeLink === "pricing" ? "text-gray-400" : "text-white"
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
-              Marketplaces
+              Pricing
             </Link>
             <Link
               href="/contact"
@@ -92,6 +93,15 @@ const MainNavbar = () => {
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
               Contact
+            </Link>
+            <Link
+              href="/marketplaces"
+              onClick={() => handleLinkClick("marketplaces")}
+              className={`${
+                activeLink === "marketplaces" ? "text-gray-400" : "text-white"
+              } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
+            >
+              Marketplaces
             </Link>
           </div>
 
@@ -151,7 +161,7 @@ const MainNavbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col gap-5 items-center justify-center bg-[#060b1f]/90 backdrop-blur-md shadow-lg px-4 py-3 space-y-3 border-t border-white/10">
+        <div className="md:hidden flex flex-col gap-5 items-center justify-center bg-[#04091d]/90 backdrop-blur-md shadow-lg px-4 py-3 space-y-3 border-t border-white/10">
           <Link
             href="/"
             onClick={() => handleLinkClick("home")}

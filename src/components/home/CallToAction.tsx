@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 const CallToAction = () => {
   return (
@@ -23,9 +24,11 @@ const CallToAction = () => {
         </p>
 
         {/* Button */}
-        <button className="mt-6 px-6 py-3 text-white bg-gradient-to-r from-purple-600 to-indigo-500 rounded-lg shadow-md hover:from-indigo-500 hover:to-purple-600 transition-all">
-          Let’s Go 🚀
-        </button>
+        <Link href={"/marketplaces"}>
+          <button className="mt-6 px-6 py-3 text-white bg-gradient-to-r from-purple-600 to-indigo-500 rounded-lg shadow-md hover:from-indigo-500 hover:to-purple-600 transition-all">
+            Let’s Go 🚀
+          </button>
+        </Link>
       </div>
     </div>
   );

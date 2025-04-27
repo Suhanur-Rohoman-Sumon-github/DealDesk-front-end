@@ -6,7 +6,7 @@ const LiveChatSkeleton = () => {
   return (
     <>
       {/* Toggle Button Skeleton */}
-      <div className="z-10 absolute top-[50px] mt-12 right-5 text-white lg:hidden items-center gap-2 flex space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md">
+      <div className="z-10 absolute top-[50px] mt-12 right-5 text-white lg:hidden items-center gap-2 flex space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#04091d]/90 backdrop-blur-md">
         <Skeleton className="h-4 w-24 bg-white/20" />
       </div>
 

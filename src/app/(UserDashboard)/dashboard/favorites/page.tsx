@@ -34,6 +34,7 @@ const Favorites = () => {
               price={product.price}
               rating={5}
               id={product._id}
+              category={product.category}
             />
           ))}
         </div>

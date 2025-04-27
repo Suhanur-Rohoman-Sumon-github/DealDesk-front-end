@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { FaXmark } from "react-icons/fa6";
@@ -8,6 +7,7 @@ import { useUser } from "@/context/userProvider";
 import LiveChatSkeleton from "../skeleton/LiveChatSkeleton";
 import { Order } from "@/types";
 import Link from "next/link";
+import { ClockIcon } from "lucide-react";
 
 const userNotifications = [
   {
@@ -29,6 +29,36 @@ const userNotifications = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1xbRRSDONJl1zUOUVFt0ON5l3h4up8LIVg&s",
   },
   {
+    username: "user3",
+    text: "is loving the new RGB wrist rest!",
+    image:
+      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
+  },
+  {
+    username: "user19",
+    text: "is loving the new RGB wrist rest!",
+    image:
+      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
+  },
+  {
+    username: "user19",
+    text: "is loving the new RGB wrist rest!",
+    image:
+      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
+  },
+  {
+    username: "user19",
+    text: "is loving the new RGB wrist rest!",
+    image:
+      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
+  },
+  {
+    username: "user19",
+    text: "is loving the new RGB wrist rest!",
+    image:
+      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
+  },
+  {
     username: "user19",
     text: "is loving the new RGB wrist rest!",
     image:
@@ -36,22 +66,8 @@ const userNotifications = [
   },
 ];
 
-// const recentOrders = [
-//   {
-//     id: 1,
-//     name: "Custom Keyboard",
-//     price: "$129",
-//   },
-//   {
-//     id: 2,
-//     name: "RGB Wrist Rest",
-//     price: "$25",
-//   },
-// ];
-
 const LiveChat = () => {
   const { user } = useUser();
-
   const LOCAL_STORAGE_KEY = "liveChatOrders";
   const [orders, setOrders] = useState(0);
   const [notifications, setNotifications] = useState<typeof userNotifications>(
@@ -74,7 +90,6 @@ const LiveChat = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -108,13 +123,13 @@ const LiveChat = () => {
       {/* toggle button for mobile device */}
       <div
         onClick={() => setToggleLiveOrders(!toggleLiveOrders)}
-        className="z-10 cursor-pointer absolute top-[50px] mt-12 right-5 text-white lg:hidden items-center gap-2 flex space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md"
+        className="z-10 cursor-pointer absolute top-[50px] mt-12 right-5 text-white lg:hidden items-center gap-2 flex space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#04091d]/90 backdrop-blur-md"
       >
         <button
           type="button"
           className="font-bold cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
         >
-          Live Activites
+          Live Activities
         </button>
       </div>
 
@@ -134,66 +149,80 @@ const LiveChat = () => {
               <FaXmark />
             </button>
             <span className="animate-pulse font-bold">🔴 LIVE</span>
-            <span className="flex items-center  px-2 py-0.5 text-xs rounded-full font-semibold text-white">
+            <span className="flex items-center px-2 py-0.5 text-xs rounded-full font-semibold text-white">
               {`Start : ${new Date().getHours()} H${
                 new Date().getHours() !== 1 ? "" : ""
               }`}
             </span>
           </div>
-          <span className="flex items-center gap-1  py-0.5 text-xs rounded-full font-semibold text-white">
+          <span className="flex items-center gap-1 py-0.5 text-xs rounded-full font-semibold text-white">
             Orders complete: {orders}
           </span>
         </div>
 
         {/* Notification Cards */}
-        {notifications.map((user, index) => (
-          <div
-            key={index}
-            className="animate-slide-in flex flex-col items-center text-center p-4 rounded-xl bg-white/10 shadow-md transition duration-500"
-          >
-            <div className="w-50 h-25 rounded-md overflow-hidden mb-3 ">
-              <Image
-                src={user.image}
-                alt={`product-${index}`}
-                width={400}
-                height={100}
-                className="w-[900px] h-full object-cover"
-              />
-            </div>
-            <div className="text-sm font-semibold text-white">
-              @{user.username}
-            </div>
-            <div className="text-xs text-white/80 mt-1">{user.text}</div>
-          </div>
-        ))}
-
-        {/* Recent Orders Table */}
-        <div className="mt-auto text-xs bg-white/5 rounded-md p-2 border border-white/10">
-          <div className="font-semibold text-white mb-1">
-            Your Recent Orders
-          </div>
-          <div className="space-y-1">
-            {recentOrders?.length > 0 ? (
-              recentOrders.slice(0, 2).map((order: Order) => (
-                <div
-                  key={order.id}
-                  className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"
+        <div className="w-full   p-4 space-y-3 ">
+          {notifications.map((user, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-start gap-2  relative "
+            >
+              {/* Bubble with text */}
+              <div className="relative animation-class">
+                <svg
+                  viewBox="0 0 200 100"
+                  className="w-full h-auto"
+                  preserveAspectRatio="none"
                 >
-                  <span className="truncate">{order.products.title}</span>
-                  <span className="font-semibold">{order.products.price}</span>
-                  <Link href={"/dashboard/orders"}>
-                    <Button
-                      variant="link"
-                      className="text-xs text-[#8b33d5] cursor-pointer"
-                    >
-                      View
-                    </Button>
-                  </Link>
+                  <path
+                    d="M10,0 h180 a10,10 0 0 1 10,10 v60 a10,10 0 0 1 -10,10 h-140 l-20,20 v-20 h-10 a10,10 0 0 1 -10,-10 v-60 a10,10 0 0 1 10,-10 z"
+                    fill="#5f2e89"
+                  />
+                </svg>
+
+                {/* Text inside bubble */}
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center px-6 py-4">
+                  <div className="text-sm ">
+                    <span className="font-semibold">@{user.username}</span>{" "}
+                    {user.text}
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] text-gray-400 mt-1">
+                    <ClockIcon className="h-3 w-3" /> Just now
+                  </div>
                 </div>
-              ))
-            ) : (
-              <div className="text-white/70">No recent orders</div>
-            )}
+              </div>
+            </div>
+          ))}
+
+          <div className="mt-auto text-xs bg-white/5 rounded-md p-2 border border-white/10">
+            <div className="font-semibold text-white mb-1">
+              Your Recent Orders
+            </div>
+            <div className="space-y-1">
+              {recentOrders?.length > 0 ? (
+                recentOrders.slice(0, 2).map((order: Order) => (
+                  <div
+                    key={order.id}
+                    className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"
+                  >
+                    <span className="truncate">{order.products.title}</span>
+                    <span className="font-semibold">
+                      {order.products.price}
+                    </span>
+                    <Link href={"/dashboard/orders"}>
+                      <Button
+                        variant="link"
+                        className="text-xs text-[#8b33d5] cursor-pointer"
+                      >
+                        View
+                      </Button>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="text-white/70">No recent orders</div>
+              )}
+            </div>
           </div>
         </div>
       </div>

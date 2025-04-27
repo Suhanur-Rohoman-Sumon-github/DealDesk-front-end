@@ -5,7 +5,7 @@ import { FaBars, FaListAlt } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
 import CategoryList from "./CategoryList";
-import FeedbackForm from "./FeedbackForm";
+// import FeedbackForm from "./FeedbackForm";
 
 import { useGetCategoryQuery } from "@/hooks/Products.hook";
 import CategorySkeleton from "../skeleton/CategorySkeleton";
@@ -15,7 +15,11 @@ const Sidebar = () => {
   const { data: categories, isLoading } = useGetCategoryQuery();
 
   if (isLoading) {
-    return <CategorySkeleton count={20} />;
+    return (
+      <div className="mt-14 ">
+        <CategorySkeleton count={20} />
+      </div>
+    );
   }
 
   return (
@@ -23,7 +27,7 @@ const Sidebar = () => {
       {/* Mobile Toggle Button */}
       <div
         onClick={() => setToggleSidebar(true)}
-        className="cursor-pointer w-fit lg:hidden text-white mt-16 gap-2 flex items-center space-x-1 border border-white/20 rounded-full px-4 py-2 bg-[#060b1f]/90 backdrop-blur-md shadow-lg"
+        className="cursor-pointer w-fit lg:hidden text-white mt-16 gap-2 flex items-center space-x-1 border border-white/20 rounded-full px-4 py-2 bg-[#04091d]/90 backdrop-blur-md shadow-lg"
       >
         <span className="font-semibold text-sm flex items-center gap-2">
           <FaBars className="text-white" /> <span>Open Menu</span>
@@ -52,16 +56,8 @@ const Sidebar = () => {
         </div>
 
         {/* Scrollable Category List */}
-        <div
-          className="overflow-y-auto px-4 pt-4 pb-2"
-          style={{ height: "calc(100vh - 58px - 140px)" }}
-        >
+        <div className="overflow-y-auto px-4 pt-4 pb-2">
           <CategoryList categories={categories} />
-        </div>
-
-        {/* Fixed Feedback Form with Icon */}
-        <div className="">
-          <FeedbackForm />
         </div>
       </div>
     </>

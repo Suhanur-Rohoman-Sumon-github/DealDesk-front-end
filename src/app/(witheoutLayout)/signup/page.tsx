@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useUserRegistrationsMutation } from "@/hooks/Auth.hook";
+import { useRouter } from "next/navigation";
 
 // Schema
 const signupSchema = z
@@ -43,6 +44,8 @@ const signupSchema = z
 type SignupValues = z.infer<typeof signupSchema>;
 
 export default function Signup() {
+  
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { mutate: handleUserRegistration } = useUserRegistrationsMutation();
@@ -64,6 +67,7 @@ export default function Signup() {
 
   const onSubmit = (data: SignupValues) => {
     handleUserRegistration(data);
+    router.push(`/verify-email?email=${data.email}`);
   };
 
   return (
@@ -75,7 +79,7 @@ export default function Signup() {
       </div>
 
       <div className="w-full max-w-md z-10">
-        <Card className="bg-[#060b1f] border border-white/20 backdrop-blur-md shadow-xl overflow-hidden">
+        <Card className="bg-[#04091d] border border-white/20 backdrop-blur-md shadow-xl overflow-hidden">
           <CardHeader className="space-y-1 text-center">
             <CardTitle className="text-2xl font-bold tracking-tight text-white">
               Create your account

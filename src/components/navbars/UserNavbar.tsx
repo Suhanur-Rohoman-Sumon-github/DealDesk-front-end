@@ -28,11 +28,11 @@ const UserNavbar = () => {
           <Link className="" href="/">
             <Image
               src={
-                "https://i.ibb.co.com/sJMZ8zZg/Chat-GPT-Image-Apr-23-2025-09-05-47-AM-removebg-preview.png"
+                "https://i.ibb.co.com/rGrLVCZs/Chat-GPT-Image-Apr-24-2025-02-07-44-PM-removebg-preview.png"
               }
               alt="logo"
-              height={100}
-              width={100}
+              height={80}
+              width={80}
             />
           </Link>
         </div>

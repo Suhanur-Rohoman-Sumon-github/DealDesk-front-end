@@ -35,8 +35,8 @@ export const getSIngleProducts = async (productId:string) => {
   const { data } = await axiosInstance.get(`/products/${productId}`);
   return data.data; 
 };
-export const getRelatedProducts = async (categoryId:string) => {
-  const { data } = await axiosInstance.get(`/products/related-products/${categoryId}`);
+export const getRelatedProducts = async (categoryName:string) => {
+  const { data } = await axiosInstance.get(`/products/related-products/${categoryName}`);
   return data.data; 
 };
 export const getCateGory = async () => {
@@ -146,3 +146,5 @@ export const getFavoriteProducts = async (userId: string) => {
     throw new Error(error.response?.data?.message || error.message);
   }
 };
+
+

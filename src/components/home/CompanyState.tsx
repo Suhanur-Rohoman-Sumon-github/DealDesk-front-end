@@ -1,6 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { stats } from "@/data/data";
+import Image from "next/image";
+import leftDecor from "../../../public/assets/stats--purple.svg";
+import rightDecor from "../../../public/assets/stats--purple.svg";
 
 const AgencyStats = () => {
   const [counts, setCounts] = useState(stats.map(() => 0));
@@ -48,22 +51,42 @@ const AgencyStats = () => {
   }, []);
 
   return (
-    <div className="w-full p-5 flex justify-center -mt-8">
+    <div className="w-full p-5 flex justify-center relative overflow-hidden">
+      {/* Left Decorative Image */}
+
       <div
         ref={statsRef}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full z-10"
       >
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="relative p-8 rounded-md backdrop-blur-3xl bg-white/10 border border-white/20 shadow-lg text-center"
+            className="relative bg-white/5 p-8 rounded-md backdrop-blur-3xl border border-white/20 shadow-lg text-center overflow-hidden"
           >
-            {/* Stats */}
-            <h3 className="text-4xl font-bold text-white">
+            {/* Left Decorative Image inside card */}
+            <Image
+              src={leftDecor}
+              alt="Left Decoration"
+              width={15}
+              height={15}
+              className="absolute left-4 top-4 "
+            />
+
+            {/* Right Decorative Image inside card */}
+            <Image
+              src={rightDecor}
+              alt="Right Decoration"
+              width={15}
+              height={15}
+              className="absolute right-4  top-4 "
+            />
+
+            {/* Stats Text */}
+            <h3 className="text-4xl font-bold text-white relative z-10">
               {counts[index].toLocaleString()}
               {stat.suffix}
             </h3>
-            <p className="text-lg text-gray-300 mt-2">{stat.label}</p>
+            <p className="text-secondary">{stat.label}</p>
           </div>
         ))}
       </div>

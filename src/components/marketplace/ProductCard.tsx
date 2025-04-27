@@ -15,6 +15,7 @@ interface ProductCardProps {
   price: string;
   rating: number;
   id: string;
+  category: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -24,8 +25,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   description,
   price,
   rating,
+  category,
 }) => {
   const { user } = useUser();
+
+  console.log(category);
 
   const { mutate: addToFavorite } = useAddFavoritePostsMutations(id, user?.id);
 
@@ -35,7 +39,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className="group relative cursor-pointer backdrop-blur-md bg-white/5 border border-white/10 shadow-lg rounded-2xl p-3 transition-all duration-300 hover:scale-[1.015] hover:shadow-2x">
-      <Link href={`/marketplaces/${id}`}>
+      <Link
+        href={
+          category === "USA DL"
+            ? `/marketplaces/DrivingLicance`
+            : `/marketplaces/${id}`
+        }
+      >
         <div className="l">
           {/* Frosted border glow */}
           <div className="absolute inset-0 z-0 rounded-2xl border border-white/10 pointer-events-none" />

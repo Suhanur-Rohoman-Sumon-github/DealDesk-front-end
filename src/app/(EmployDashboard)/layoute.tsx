@@ -17,7 +17,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased font-poppins bg-[#060b1f]">
+      <body className="antialiased font-poppins bg-[#04091d]">
         <Providers>
           <div className="flex flex-col min-h-screen pt-4">
             {/* Layout Container */}

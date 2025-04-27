@@ -1,23 +1,23 @@
 export const ourStoryImages = [
   {
     image:
-      "https://media.licdn.com/dms/image/v2/D4E12AQHgMxo-g7BYsw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1658422953944?e=2147483647&v=beta&t=Z2tA86SPCvcG9ieACH8jr4SSL47dclFPchqYJIPI4gY",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCcTJmB-yxsrPOifgw-xh6eIh4zGA0mrEVhA&s",
   },
   {
     image:
-      "https://coworker.imgix.net/photos/united-states/texas/tyler/61900-boxer-property/AdobeStock_291543490.jpeg?w=370&h=280&q=90&auto=format,compress&fit=crop&mark=/template/img/wm_icon.png&markscale=5&markalign=center,middle",
+      "https://wallpapers.com/images/hd/sales-colorful-sales-graph-hlthgz9zkq88e9u7.jpg",
   },
   {
     image:
-      "https://www.storytellingpeople.nl/images/image/3350e28a-459f-4ce1-80ca-d9657bee884d/storytelling-tips-leider-manager-ondernemer-presentatie?v=17",
+      "https://media.istockphoto.com/id/1477778736/video/3d-bar-graph-chart-with-up-arrow.jpg?s=640x640&k=20&c=J11lP3jCXXmNm__su4mhHo2tChKwuyMN9FlUYX0uO5I=",
   },
   {
     image:
-      "https://www.corporatestory.nl/images/image/a1b10149-980d-4546-b2de-3b5af0f9a146/het-begint-met-waarom?v=19",
+      "https://c0.wallpaperflare.com/preview/960/830/338/chart-graph-business-finance.jpg",
   },
   {
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmDgnxUqsS2GCxE7NxpOnCeiFfyeUlSPEjlifL2WXMQ5EoWjhtg5ryQ8SgqTvhDojlR24&usqp=CAU",
+      "https://wallpapercg.com/download/business-4k-wallpaper-3800x2660-23620.jpg",
   },
 ];
 
@@ -54,29 +54,39 @@ export const stats = [
 
 export const services = [
   {
-    name: "E-Commerce development",
+    name: "All Type Go2 Bank",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-DNDjDo4BcJ8v7tLleCjGJXsfu-e0YbiEFw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh-MnwX0RWeN7cbihnXNGmM6O0ZH2M2yJVbg&s",
   },
   {
-    name: "Digital Marketing",
+    name: "All Type Chime Bank",
     image:
-      "https://0qw52hln.cdn.imgeng.in/content/cms/images/blog/benefits-of-a-digital-marketing-agency.jpg",
+      "https://yt3.googleusercontent.com/ytc/AIdro_kS8n4f2hVpjUOy8RgQYogEHnVAzMIMP45jw5tNnlqRF2Q=s900-c-k-c0x00ffffff-no-rj",
   },
   {
-    name: "Buy & Sell",
+    name: "All Type Chime Verify Service",
     image:
-      "https://static.vecteezy.com/system/resources/previews/007/749/082/non_2x/buy-sell-forex-trade-sign-free-vector.jpg",
+      "https://miro.medium.com/v2/resize:fit:1400/1*N6Gtlz4V2WFOUXwsWVpDYg.png", // checkmark icon or verification
   },
   {
-    name: "SEO & Growth",
+    name: "Real DL for Webull and Coinbase",
     image:
-      "https://searchengineland.com/wp-content/seloads/2014/08/seo-idea-lightbulbs-ss-1920.jpg",
+      "https://tvblog-static.tradingview.com/uploads/2024/02/webull-joins-tradingview-as-integrated-broker-preview.jpg",
   },
   {
-    name: "Custom Software",
+    name: "All IP and Proxy Load Loaded Account",
     image:
-      "https://ideamaker.agency/wp-content/uploads/2023/12/10-Best-Examples-of-Custom-Software.png",
+      "https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHHFT949fUipzkiFOBH3fAiZZUCdYojwUyX2aTonS1aIwMrx6NUIsHfUHSLzjGJFxxppz8vfA1y.0jXdNsW3rx3o1i8G624bUSKTY2F_DYpKk6DGioEdfTxPeQkjjFA_wUg_sfjJlBxuM.Z2e.2XulTA-&format=source", // proxy/network icon
+  },
+  {
+    name: "SSN Panel Load & Loaded Account",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuKecs0xwrdGzhwT7WHuL4Ni0oRvtDceLLjQ&s", // ID/SSN type icon
+  },
+  {
+    name: "Number Panel Load & Loaded Account",
+    image:
+      "https://site-images.similarcdn.com/image?url=daisysms.com&t=4&s=1&h=e55bdb0012f1293818442817a4b2da10c99adfc57fc1d6bc52746bde0c7f0065", // phone panel icon
   },
 ];
 
@@ -110,63 +120,63 @@ export const videoData = [
 export const faqData = [
   {
     id: 1,
-    question: "What services do you offer?",
+    question: "What is Deal Desk and how does it work?",
     answer:
-      "We offer web development, digital marketing, SEO, and custom software solutions.",
+      "Deal Desk is a modern Buy & Sell marketplace designed to connect trusted buyers and sellers. You can list, browse, and securely trade products with ease.",
   },
   {
     id: 2,
-    question: "How can I get started with your services?",
+    question: "Is Deal Desk safe to use for transactions?",
     answer:
-      "Simply click on the 'Get Started' button, and we’ll guide you through the process.",
+      "Absolutely! Deal Desk uses secure payment systems, verified user accounts, and built-in fraud protection to ensure safe and trustworthy transactions.",
   },
   {
     id: 3,
-    question: "Do you provide support after project completion?",
+    question: "How do I list a product for sale on Deal Desk?",
     answer:
-      "Yes, we offer ongoing support and maintenance after the project is completed.",
+      "After signing up, simply go to your dashboard and click on 'Create Listing'. Add your product details, images, and pricing to start selling.",
   },
   {
     id: 4,
-    question: "What is the cost of your services?",
+    question: "Are there any fees for using Deal Desk?",
     answer:
-      "The cost varies based on the scope of the project. Contact us for a personalized quote.",
+      "Deal Desk offers free basic listings, with optional premium features at competitive rates to boost your visibility and sales.",
   },
   {
     id: 5,
-    question: "How long will it take to complete a project?",
+    question: "How do I make a purchase on Deal Desk?",
     answer:
-      "Project timelines depend on the complexity of the work, but we always aim to deliver on time.",
+      "Browse or search for products, add items to your cart, and proceed to checkout. We support multiple secure payment methods.",
   },
   {
     id: 6,
-    question: "What is your refund policy?",
+    question: "Can I track my orders on Deal Desk?",
     answer:
-      "We offer a refund policy for specific situations. Please contact our support team for details.",
+      "Yes, once your order is placed, you can track its status and shipment from your account dashboard in real time.",
   },
   {
     id: 7,
-    question: "Can you handle large-scale projects?",
+    question: "Does Deal Desk offer support after a purchase?",
     answer:
-      "Absolutely! We specialize in scalable solutions for businesses of all sizes.",
+      "Yes, our support team is here to assist you with any post-purchase issues or questions you may have.",
   },
   {
     id: 8,
-    question: "How do you ensure the quality of your work?",
+    question: "Can I sell digital products on Deal Desk?",
     answer:
-      "We follow industry best practices, conduct regular reviews, and prioritize testing to ensure quality.",
+      "Yes! Deal Desk supports both physical and digital product listings, making it a flexible platform for all types of sellers.",
   },
   {
     id: 9,
-    question: "Do you work with international clients?",
+    question: "Is Deal Desk available in my country?",
     answer:
-      "Yes, we have clients from all over the world and are experienced in managing remote projects.",
+      "Deal Desk is available internationally. You can sign up and start buying or selling from anywhere with internet access.",
   },
   {
     id: 10,
-    question: "Can I see examples of your previous work?",
+    question: "Can I view examples of top-selling listings?",
     answer:
-      "Definitely! Check out our portfolio for case studies and examples of our work.",
+      "Yes, check out our featured section or explore trending categories to see what’s currently popular on Deal Desk.",
   },
 ];
 

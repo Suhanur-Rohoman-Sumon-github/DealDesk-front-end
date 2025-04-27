@@ -127,13 +127,19 @@ body {
 
 @layer components {
   .button-primary {
-    @apply px-8 py-2 text-[#ffffff] rounded-md cursor-pointer bg-gradient-to-r gap-2 from-[#572c7c] to-[#9133df] mt-4 flex items-center justify-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300;
+    @apply px-8 py-2 text-[#ffffff] rounded-md cursor-pointer bg-gradient-to-r gap-2 uppercase from-[#572c7c] to-[#9133df] mt-4 flex items-center justify-center hover:from-[#9133df] hover:to-[#572c7c] transition duration-300;
   }
   .button-secondary {
-    @apply px-8 py-2 rounded-md border cursor-pointer border-[#5f5d72] text-[#ffffff] bg-transparent  hover:border-[#9133df] transition duration-300;
+    @apply px-8 py-2 rounded-md border cursor-pointer flex items-center gap-4 border-[#5f5d72] text-[#ffffff] bg-transparent  hover:border-[#9133df] transition duration-300;
   }
   .button-icon {
     @apply bg-[#7C3FFF]  gap-2 text-white font-bold py-[10px] ml-2 transition-all duration-200  px-[15px] rounded hover:bg-[#7C3FFF];
+  }
+  .text-secondary {
+    @apply md:w-full sm:w-10/12 mx-auto text-gray-600 py-4 leading-relaxed;
+  }
+  .text-primary {
+    @apply text-xl mx-auto sm:text-4xl lg:text-4xl xl:text-4xl md:text-3xl  uppercase;
   }
 }
 
@@ -148,4 +154,42 @@ body {
 
 .animate-progress-bar {
   animation: progressBarAnimation 2s ease-out forwards;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+@keyframes float-medium {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes float-fast {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-floating-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+.animate-floating-medium {
+  animation: float-medium 4s ease-in-out infinite;
+}
+.animate-floating-fast {
+  animation: float-fast 3s ease-in-out infinite;
 }

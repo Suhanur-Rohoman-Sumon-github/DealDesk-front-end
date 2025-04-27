@@ -1,42 +1,69 @@
 import React from "react";
-import { Briefcase, Code, Phone, Rocket } from "lucide-react";
+import {
+  Briefcase,
+  ClipboardCheck,
+  Code,
+  Globe,
+  Phone,
+  Rocket,
+  ShieldCheck,
+  Star,
+} from "lucide-react";
 import Title from "@/components/title/Title";
 import ClientReviews from "@/components/home/ClientReviews";
 import CallToAction from "@/components/home/CallToAction";
+import { FaBullhorn } from "react-icons/fa";
+import Link from "next/link";
 
 const services = [
   {
-    icon: <Briefcase size={30} />,
-    title: "Business Strategy",
-    description:
-      "We help you craft winning strategies for your business with market insights and innovation.",
+    icon: <Rocket size={28} />,
+    title: "Chime Bank Integration",
+    desc: "We offer seamless integration with Chime Bank, making transactions faster and more secure for your business.",
   },
   {
-    icon: <Code size={30} />,
+    icon: <Briefcase size={28} />,
+    title: "Go2 Bank Integration",
+    desc: "Expand your payment options with Go2 Bank integration, providing flexible solutions for your buy-sell business.",
+  },
+  {
+    icon: <Phone size={28} />,
+    title: "USA DL Verification",
+    desc: "Ensure the validity of your customer's identity with USA DL verification, streamlining the buying and selling process.",
+  },
+  {
+    icon: <Code size={28} />,
+    title: "Number Panel",
+    desc: "Our Number Panel service offers reliable and secure phone number management for verification and customer support.",
+  },
+  {
+    icon: <Phone size={28} />,
+    title: "SSN Panel",
+    desc: "We offer SSN Panel services for secure identity verification, ensuring a safe and trustworthy transaction experience.",
+  },
+  {
+    icon: <Globe size={28} />, // Updated icon for web development
     title: "Web Development",
-    description:
-      "From design to deployment, we build scalable and responsive web solutions tailored for you.",
+    desc: "Our web development services offer scalable and responsive websites to make your buy-sell business thrive online.",
   },
   {
-    icon: <Phone size={30} />,
-    title: "App Development",
-    description:
-      "We design high-performing mobile apps that engage users and drive growth across all platforms.",
-  },
-  {
-    icon: <Rocket size={30} />,
+    icon: <FaBullhorn size={28} />, // Updated icon for digital marketing
     title: "Digital Marketing",
-    description:
-      "Boost your brand's reach and engagement with our data-driven marketing solutions.",
+    desc: "Boost your visibility and sales with our targeted digital marketing campaigns that drive results.",
+  },
+  {
+    icon: <ShieldCheck size={28} />,
+    title: "Proxy Services",
+    desc: "Enhance security and privacy for both buyers and sellers with our Proxy services, protecting data and maintaining anonymity.",
   },
 ];
 
 const OurServicesPage = () => {
   return (
-    <div className="min-h-screen bg-[#060b1f] text-white px-6 py-32">
-      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
-      <div className="absolute top-40 -right-40 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
-      <div className="absolute -bottom-40 right-20 w-80 h-80 rounded-full bg-indigo-400 opacity-20 blur-3xl"></div>
+    <div className="min-h-screen  text-white px-6 py-32">
+      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+      <div className="absolute top-40 -right-40 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+      <div className="absolute -bottom-40 right-20 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
       {/* Hero Section */}
       <section className="mb-20">
         <Title
@@ -54,40 +81,61 @@ const OurServicesPage = () => {
           >
             <div className="mb-4 text-[#6EE7B7]">{service.icon}</div>
             <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-            <p className="text-gray-300 text-sm">{service.description}</p>
+            <p className="text-gray-300 text-sm">{service.desc}</p>
           </div>
         ))}
+        <Link className="float-right" href={"/marketplaces"}>
+          <button className="button-primary ">Visit More</button>
+        </Link>
       </section>
 
       <section className="py-20 max-w-6xl mx-auto text-center">
         <Title
-          title="Why Choose Deal-Desk?"
-          subTitle="We’re more than a service provider—we're your strategic partner. Our
-          team blends creativity, technology, and business acumen to deliver
-          solutions that scale with your ambitions."
+          title="Why Choose DealDesk?"
+          subTitle="We’re more than just a platform—we're your strategic partner in the buy and sell industry. Our team blends creativity, technology, and market insights to deliver solutions that grow your business."
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
           {[
             {
               icon: <Rocket size={28} />,
-              title: "Innovative Approach",
-              desc: "We bring fresh ideas and cutting-edge technology to every project.",
+              title: "Fast Transactions",
+              desc: "Our platform ensures fast and seamless transactions, allowing you to buy and sell with ease.",
             },
             {
               icon: <Briefcase size={28} />,
-              title: "Experienced Team",
-              desc: "Our experts have years of experience across industries and technologies.",
+              title: "Secure Payments",
+              desc: "We prioritize the security of your payments and ensure safe transactions for both buyers and sellers.",
             },
             {
               icon: <Phone size={28} />,
-              title: "24/7 Support",
-              desc: "We’re always here to help you, anytime you need us.",
+              title: "24/7 Customer Support",
+              desc: "Our dedicated customer support team is available around the clock to assist you with any concerns or questions.",
             },
             {
               icon: <Code size={28} />,
               title: "Custom Solutions",
-              desc: "Every solution is tailored to your unique business goals.",
+              desc: "We offer tailored solutions that meet your specific business needs, making sure you have the tools for success.",
+            },
+            {
+              icon: <ShieldCheck size={28} />,
+              title: "Fraud Protection",
+              desc: "Our platform incorporates fraud protection features to ensure that your transactions are safe and reliable.",
+            },
+            {
+              icon: <ClipboardCheck size={28} />,
+              title: "Reliable Tracking",
+              desc: "Easily track your transactions, orders, and status updates with our user-friendly dashboard.",
+            },
+            {
+              icon: <Globe size={28} />,
+              title: "Global Reach",
+              desc: "Expand your business globally with our platform, connecting buyers and sellers from all over the world.",
+            },
+            {
+              icon: <Star size={28} />,
+              title: "Trusted by Many",
+              desc: "Join a growing community of businesses and individuals who trust BuySell for their buying and selling needs.",
             },
           ].map((item, i) => (
             <div
@@ -144,12 +192,12 @@ const OurServicesPage = () => {
       </section>
 
       {/* Testimonials */}
-      <section className=" lg:py-20">
+      <section className=" ">
         <ClientReviews />
       </section>
 
       {/* Call to Action */}
-      <section className=" md:py-12  lg:py-20">
+      <section className="">
         <CallToAction />
       </section>
     </div>

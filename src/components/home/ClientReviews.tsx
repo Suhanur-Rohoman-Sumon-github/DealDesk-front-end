@@ -16,7 +16,10 @@ const ClientReviews = () => {
 
   return (
     <div className="w-full py-10">
-      <Title subTitle="what our client say" title="testimonials" />
+      <Title
+        subTitle="Hear from our satisfied clients about how our marketplace solutions helped them grow and succeed."
+        title="Client Testimonials"
+      />
 
       <div className="relative mx-auto max-w-7xl">
         <ReactPlayer

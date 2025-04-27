@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+"use client";
 import { FaArrowUp } from "react-icons/fa";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -34,7 +34,7 @@ const ProductsBanner: FC<Props> = ({
   console.log(searchTerm);
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between w-full gap-3 text-white z-50 mb-4 -mt-3.5 bg-white/5 border border-white/10 backdrop-blur-md py-2 px-4 md:h-14">
+    <div className="flex flex-col md:flex-row fixed z-50 top-14 w-[950px]   justify-between gap-3 text-white mb-4 bg-white/5 border border-white/10 backdrop-blur-md py-2 px-4 md:h-14 mx-auto">
       {/* 🏆 Left Section - Top Voted Product */}
       <div className="flex items-center justify-between gap-3 text-xs md:text-sm text-white ">
         <div className="flex items-center gap-2">

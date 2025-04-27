@@ -1,7 +1,5 @@
 import React from "react";
-import Image from "next/image";
 import { Product } from "@/types";
-import ProductCard from "../ProductCard";
 import TrendingProductsCard from "./TrendingProductsCard";
 
 type TrendingProductsProps = {
@@ -21,7 +19,7 @@ const TrendingProducts: React.FC<TrendingProductsProps> = ({ products }) => {
             price={product.price}
             rating={product.numReviews}
             id={product._id}
-            category={product.category.name}
+            category={product.category}
           />
         ))}
       </div>

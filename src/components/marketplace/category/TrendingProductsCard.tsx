@@ -5,9 +5,8 @@ import { useAddFavoritePostsMutations } from "@/hooks/Products.hook";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaArrowRight } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
-import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
 
 interface ProductCardProps {
   image: string;

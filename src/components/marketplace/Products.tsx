@@ -2,14 +2,14 @@
 
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import ProductCard from "./ProductCard";
+// import ProductCard from "./ProductCard";
 import ProductsBanner from "./ProductsBanner";
 import { useGetAllProductsQuery } from "@/hooks/Products.hook";
 import ProductCardSkeleton from "../skeleton/ProductCardSkeleton";
 import CustomPagination from "./products/CustomPgination";
-import { Product } from "@/types";
+// import { Product } from "@/types";
 import Image from "next/image";
-import Categories from "@/app/(AdminDashboard)/admin/dashboard/products/category/page";
+// import Categories from "@/app/(AdminDashboard)/admin/dashboard/products/category/page";
 import Category from "./products/Category";
 import TrendingProducts from "./category/TrendingProducts";
 

@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { FaXmark } from "react-icons/fa6";

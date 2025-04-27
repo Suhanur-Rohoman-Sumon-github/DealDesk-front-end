@@ -5,7 +5,7 @@ import { FaBars, FaListAlt } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
 import CategoryList from "./CategoryList";
-import FeedbackForm from "./FeedbackForm";
+// import FeedbackForm from "./FeedbackForm";
 
 import { useGetCategoryQuery } from "@/hooks/Products.hook";
 import CategorySkeleton from "../skeleton/CategorySkeleton";

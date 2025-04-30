@@ -9,12 +9,11 @@ import { addFavoriteProducts, createCategory, createProduct, getALlProducts, get
 
 export const useGetAllProductsQuery = (queryParams: {
   category?: string;
+  categoryId?: string;
   rating?: number | "";
   sort?: string | "";
-  searchTerm?:string|""
-}) => {
-
-  
+  searchTerm?: string | "";
+}, ) => {
   
   const { data, refetch, isLoading, isError } = useQuery<any, Error>({
     

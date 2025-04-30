@@ -1,8 +1,6 @@
-import { FaArrowRightLong } from "react-icons/fa6";
+"use client";
 import Title from "../title/Title";
-
-import PopularServicesCarosal from "./PopularServicesCarosal";
-import Link from "next/link";
+import OurServices from "../marketplace/services/OurServices";
 
 const PopularServices = () => {
   return (
@@ -14,12 +12,7 @@ const PopularServices = () => {
       <div className="absolute top-[1200px] right-0 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
 
       <div className="absolute top-[1200px] left-0 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
-      <PopularServicesCarosal />
-      <Link href={"/marketplaces"}>
-        <button className="button-primary float-right">
-          Visit marketplace <FaArrowRightLong />
-        </button>
-      </Link>
+      <OurServices />
     </div>
   );
 };

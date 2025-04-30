@@ -8,16 +8,17 @@ import axios from "axios";
 export const getALlProducts = async (queryParams: {
   
   category?: string;
- 
-  sort?: string | "";
+ categoryId?:string
+sort?: string | "";
   searchTerm?: string | "";
 }) => {
   try {
-    const { category, sort,searchTerm } =
+    const { category, sort,searchTerm,categoryId } =
       queryParams;
 
     const query = new URLSearchParams();
     if (category) query.append("category", category);
+    if (categoryId) query.append("categoryId", categoryId);
     if (sort) query.append("sort", sort);
     if (searchTerm) query.append("searchTerm", searchTerm);
 

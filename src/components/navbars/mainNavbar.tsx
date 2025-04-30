@@ -101,7 +101,7 @@ const MainNavbar = () => {
                 activeLink === "marketplaces" ? "text-gray-400" : "text-white"
               } hover:bg-gradient-to-r hover:text-gray-500 hover:bg-clip-text transition`}
             >
-              Marketplaces
+              Marketplace
             </Link>
           </div>
 

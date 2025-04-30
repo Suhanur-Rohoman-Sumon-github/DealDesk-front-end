@@ -6,6 +6,7 @@ import React from "react";
 
 const ProductPage = () => {
   const { productId } = useParams();
+  console.log(productId);
 
   const productIdString = Array.isArray(productId) ? productId[0] : productId;
 

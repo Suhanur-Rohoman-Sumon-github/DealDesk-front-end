@@ -24,7 +24,8 @@ const mockData = [
   { country: "USA", zip: "21201", bank: "KEYBANK", price: "16.00$" },
 ];
 
-export default function Page() {
+export default function DrivingLicense() {
+  const [customZip, setCustomZip] = useState("");
   const [filters, setFilters] = useState({
     priceFrom: "",
     priceTo: "",
@@ -125,7 +126,9 @@ export default function Page() {
                 <td className="p-3">
                   <Link
                     className="w-full"
-                    href={`/marketplaces/buy?productId=${"6809af0b7a6ceb2b1e6b9fff"}`}
+                    href={`/marketplaces/buy?productId=${"680d4536a986e84c27c2f119"}&zip=${
+                      item.zip
+                    }`}
                   >
                     <button className="w-full button-primary">
                       <MdShoppingCart /> Buy
@@ -137,7 +140,23 @@ export default function Page() {
             {filteredData.length === 0 && (
               <tr>
                 <td colSpan={5} className="p-4 text-center text-gray-400">
-                  No results found
+                  <div className="flex flex-col items-center gap-4">
+                    <p>No results found for this ZIP code.</p>
+                    <Input
+                      placeholder="Enter your ZIP code"
+                      value={customZip}
+                      onChange={(e) => setCustomZip(e.target.value)}
+                      className="max-w-xs"
+                    />
+                    <Link
+                      className=""
+                      href={`/marketplaces/buy?productId=${"680d4536a986e84c27c2f119"}&zip=${customZip}`}
+                    >
+                      <button className="button-primary">
+                        <MdShoppingCart /> Buy with Custom ZIP
+                      </button>
+                    </Link>
+                  </div>
                 </td>
               </tr>
             )}

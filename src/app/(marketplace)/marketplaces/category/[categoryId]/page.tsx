@@ -8,6 +8,7 @@ import DrivingLicense from "../../DrivingLicance/page";
 import { Product } from "@/types";
 import ProductCardSkeleton from "@/components/skeleton/ProductCardSkeleton";
 import Image from "next/image";
+import SocialService from "@/components/marketplace/socialService/SocialService";
 
 // const demoProducts = [
 //   {
@@ -68,11 +69,17 @@ const Page = () => {
     return <ProductCardSkeleton />;
   }
 
+  if (categoryId === "680d4117a986e84c27c2f0f6") {
+    return <DrivingLicense />;
+  }
+
+  if (categoryId === "680d4220a986e84c27c2f109") {
+    return <SocialService />;
+  }
+
   return (
     <section className="">
       <div className="">
-        {categoryId === "680d4117a986e84c27c2f0f6" && <DrivingLicense />}
-
         <div className="">
           {data.data.length === 0 ? (
             <div className="col-span-full text-center text-white flex items-center justify-center">

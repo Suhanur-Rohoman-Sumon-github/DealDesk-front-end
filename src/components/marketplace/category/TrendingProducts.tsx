@@ -23,7 +23,8 @@ const TrendingProducts: React.FC<TrendingProductsProps> = ({ products }) => {
     "paid subscriptions": 60,
     "token store": 50,
     "digital marketing": 50,
-    "paid subscriptions": 50,
+    "crypto services": 50,
+    "money orders": 50,
     paypal: 50,
     textnow: 50,
   };
@@ -38,7 +39,7 @@ const TrendingProducts: React.FC<TrendingProductsProps> = ({ products }) => {
       const mapped = products
         .map((product) => {
           const basePriority =
-            categoryPriority[product.title.toLowerCase()] || 40;
+            categoryPriority[product.category.toLowerCase()] || 40;
           return {
             ...product,
             percent: basePriority + parseFloat((Math.random() * 5).toFixed(2)),

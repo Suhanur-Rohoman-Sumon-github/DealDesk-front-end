@@ -67,7 +67,7 @@ export default function Signup() {
 
   const onSubmit = (data: SignupValues) => {
     handleUserRegistration(data);
-    router.push(`/verify-email?email=${data.email}`);
+    router.push(`/login`);
   };
 
   return (

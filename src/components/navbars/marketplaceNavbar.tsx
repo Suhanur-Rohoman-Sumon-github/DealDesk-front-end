@@ -181,11 +181,6 @@ const MarketplaceNavbar = () => {
                       </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-40 mt-2">
-                      <DropdownMenuItem
-                        onClick={() => (location.href = "/profile")}
-                      >
-                        Profile
-                      </DropdownMenuItem>
                       <DropdownMenuItem onClick={handleLogout}>
                         Logout
                       </DropdownMenuItem>

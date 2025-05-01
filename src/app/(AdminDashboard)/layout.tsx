@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Providers } from "../providers";
 import "../../styels/globals.css"; // 🔥 Fixed typo: styles instead of styels
-import UserNavbar from "@/components/navbars/UserNavbar";
 import UserFooter from "@/components/Userdashboard/UserFooter";
 import AdminSidebar from "@/components/Admindashboard/AdminSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -27,8 +26,6 @@ export default function RootLayout({
 
               {/* Main content */}
               <div className="flex-1 flex flex-col   ">
-                <UserNavbar />
-
                 {/* Main content area */}
                 <main className="flex-1">{children}</main>
                 <UserFooter />

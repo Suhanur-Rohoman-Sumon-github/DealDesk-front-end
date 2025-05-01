@@ -57,9 +57,8 @@ export const createOrder = async (orderData: {
 export const updateOrder = async (
   orderId: string,
   updateData: {
-    status?: string; // PENDING, COMPLETED, CANCELLED
-    shippingAddress?: string;
-    contactNumber?: string;
+    status?: string; 
+    
   }
 ) => {
   try {

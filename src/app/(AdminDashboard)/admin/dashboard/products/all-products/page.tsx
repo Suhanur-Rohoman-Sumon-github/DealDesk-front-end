@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Table,
@@ -13,51 +13,25 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
-import { useGetAllProductsQuery } from "@/hooks/Products.hook";
-
-const mockProducts = [
-  {
-    id: 1,
-    name: "Premium Headphones",
-    sku: "HD-100",
-    price: 129.99,
-    stock: 45,
-    status: "In Stock",
-  },
-  {
-    id: 2,
-    name: "Wireless Keyboard",
-    sku: "KB-200",
-    price: 79.99,
-    stock: 28,
-    status: "In Stock",
-  },
-  {
-    id: 3,
-    name: "Gaming Mouse",
-    sku: "MS-300",
-    price: 59.99,
-    stock: 13,
-    status: "Low Stock",
-  },
-  {
-    id: 4,
-    name: "4K Monitor",
-    sku: "MN-400",
-    price: 349.99,
-    stock: 0,
-    status: "Out of Stock",
-  },
-  {
-    id: 5,
-    name: "Bluetooth Speaker",
-    sku: "SP-500",
-    price: 89.99,
-    stock: 32,
-    status: "In Stock",
-  },
-];
+import { Button } from "@/components/ui/button";
+import { Search, MoreVertical } from "lucide-react";
+import {
+  useGetAllProductsQuery,
+  useUpdateProductMutation,
+} from "@/hooks/Products.hook";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { FaBars } from "react-icons/fa";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -77,13 +51,52 @@ const ProductTable = () => {
     sort: "",
     searchTerm: "",
   });
-  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredProducts = mockProducts.filter(
-    (product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const { mutate: updateProductMutation } = useUpdateProductMutation();
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
+  
+  const [productName, setProductName] = useState<string>("");
+  const [price, setPrice] = useState<number | "">("");
+  const [stock, setStock] = useState<number | "">("");
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setProductName(selectedProduct.title || "");
+      setPrice(selectedProduct.price || "");
+      setStock(selectedProduct.stock || "");
+    } else {
+      setProductName("");
+      setPrice("");
+      setStock("");
+    }
+  }, [selectedProduct]);
+
+  const filteredProducts = allProduct?.data?.filter((product: any) => {
+    return (
+      product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.sku.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+    );
+  });
+
+  const handleUpdateClick = (product: any) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    const productId = selectedProduct?._id;
+    console.log("Product ID:", productId);
+    const newPrice = price ? Number(price) : 0;
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+    setProductName("");
+    setPrice("");
+    setStock("");
+    updateProductMutation({ productId, updateData: { newPrice } });
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -118,30 +131,52 @@ const ProductTable = () => {
                 <TableHead>Price</TableHead>
                 <TableHead>Stock</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {allProduct?.map((product: any) => (
+              {filteredProducts?.map((product: any) => (
                 <TableRow key={product.id}>
                   <TableCell className="font-medium">{product.title}</TableCell>
                   <TableCell>{product.sku}</TableCell>
                   <TableCell>${product.price.toFixed(2)}</TableCell>
                   <TableCell>{product.stock}</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              ))}
-              {filteredProducts.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={5} className="text-center py-4">
-                    No products found.
+                  <TableCell>
+                    <Badge
+                      className={getStatusColor(product.status)}
+                      variant="outline"
+                    >
+                      {product.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                          <MoreVertical className="w-4 h-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem
+                          onClick={() => handleUpdateClick(product)}
+                        >
+                          Update
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="text-red-600"
+                          onClick={() => console.log("Delete", product.id)}
+                        >
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
         </TabsContent>
 
-        {/* Filtered Tab: In Stock */}
         <TabsContent value="in-stock">
           <Table className="border rounded-md">
             <TableHeader>
@@ -151,15 +186,16 @@ const ProductTable = () => {
                 <TableHead>Price</TableHead>
                 <TableHead>Stock</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredProducts
-                .filter((p) => p.status === "In Stock")
-                .map((product) => (
+                ?.filter((p: any) => p.status === "In Stock")
+                .map((product: any) => (
                   <TableRow key={product.id}>
                     <TableCell className="font-medium">
-                      {product.name}
+                      {product.title}
                     </TableCell>
                     <TableCell>{product.sku}</TableCell>
                     <TableCell>${product.price.toFixed(2)}</TableCell>
@@ -172,14 +208,66 @@ const ProductTable = () => {
                         {product.status}
                       </Badge>
                     </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <FaBars className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem
+                            onClick={() => handleUpdateClick(product)}
+                          >
+                            Update
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            className="text-red-600"
+                            onClick={() => console.log("Delete", product.id)}
+                          >
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
           </Table>
         </TabsContent>
-
-        {/* More filtered tabs (Low Stock, Out of Stock) can be added similarly */}
       </Tabs>
+
+      {/* Modal for Updating Product */}
+      <Dialog
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) handleCloseModal();
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Update Product</DialogTitle>
+          </DialogHeader>
+          <Input
+            placeholder="Product Name"
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+          />
+          <Input
+            placeholder="Price"
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
+          />
+          <Input
+            placeholder="Stock"
+            type="number"
+            value={stock}
+            onChange={(e) => setStock(Number(e.target.value))}
+          />
+          <Button onClick={handleCloseModal}>Close</Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

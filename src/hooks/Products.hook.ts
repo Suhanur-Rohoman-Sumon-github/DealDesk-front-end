@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 import { FieldValues } from "react-hook-form";
-import { addFavoriteProducts, createCategory, createProduct, getALlProducts, getCateGory, getFavoriteProducts, getRelatedProducts, getSIngleProducts } from "@/services/products";
+import { addFavoriteProducts, createCategory, createProduct, getALlProducts, getCateGory, getFavoriteProducts, getRelatedProducts, getSIngleProducts, updateProductPrice } from "@/services/products";
 
 export const useGetAllProductsQuery = (queryParams: {
   category?: string;
@@ -195,4 +195,19 @@ export const useGetAllFavoriteProductQuery = (userId: string) => {
   });
 
   return { data, refetch, isLoading };
+};
+
+export const useUpdateProductMutation = () => {
+  return useMutation<any, Error, { productId: string; updateData: FieldValues }>({
+    mutationKey: ["update-product"],
+    mutationFn: async ({ productId, updateData }) => {
+      await updateProductPrice(productId, updateData);
+    },
+    onSuccess: () => {
+      toast.success("product updated successfully!");
+    },
+    onError: (error) => {
+      toast.error(error.message || "product update failed.");
+    },
+  });
 };

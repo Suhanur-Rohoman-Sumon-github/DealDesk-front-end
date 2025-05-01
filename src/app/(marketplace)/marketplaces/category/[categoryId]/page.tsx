@@ -9,6 +9,7 @@ import { Product } from "@/types";
 import ProductCardSkeleton from "@/components/skeleton/ProductCardSkeleton";
 import Image from "next/image";
 import SocialService from "@/components/marketplace/socialService/SocialService";
+import { ProxyTables } from "@/components/marketplace/ProxyServices/ProxyServices";
 
 // const demoProducts = [
 //   {
@@ -75,6 +76,9 @@ const Page = () => {
 
   if (categoryId === "680d4220a986e84c27c2f109") {
     return <SocialService />;
+  }
+  if (categoryId === "680d4183a986e84c27c2f0fe") {
+    return <ProxyTables />;
   }
 
   return (

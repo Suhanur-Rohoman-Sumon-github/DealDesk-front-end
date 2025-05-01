@@ -3,9 +3,8 @@
 import { useUser } from "@/context/userProvider";
 import { useAddFavoritePostsMutations } from "@/hooks/Products.hook";
 import Image from "next/image";
-import Link from "next/link";
+
 import React from "react";
-import { FaArrowRight } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
 interface ProductCardProps {
@@ -23,9 +22,8 @@ const SocialServiceCard: React.FC<ProductCardProps> = ({
   image,
   title,
   description,
-  price,
+
   rating,
-  category,
 }) => {
   const { user } = useUser();
 

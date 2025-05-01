@@ -17,7 +17,6 @@ const Products = () => {
   const [sortOption, setSortOption] = useState("default");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 12;
 
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
@@ -29,10 +28,10 @@ const Products = () => {
   const { data, isLoading } = useGetAllProductsQuery({
     sort: sortOption,
     searchTerm,
-    category: category ?? undefined,
+    categoryId: "680d40f9a986e84c27c2f0f4",
   });
 
-  const totalPages = Math.ceil((data?.meta?.total || 0) / itemsPerPage);
+
 
   return (
     <div className="xl:w-11/12 mx-auto lg:px-5 2xl:w-full px-2">
@@ -73,7 +72,7 @@ const Products = () => {
       {data?.data?.length === 12 ? (
         <div className="mt-6">
           <CustomPagination
-            totalPages={totalPages}
+            totalPages={data?.meta.totalPages}
             currentPage={currentPage}
             onPageChange={handlePageChange}
           />

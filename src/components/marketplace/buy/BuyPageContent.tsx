@@ -23,6 +23,9 @@ import StepIndicator from "@/components/marketplace/buy/StepIndicator";
 const BuyPageContent = () => {
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");
+  const zip = searchParams.get("zip");
+  console.log(zip + "zip");
+  console.log(productId + "productId");
   const [step, setStep] = useState(1);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
@@ -68,6 +71,7 @@ const BuyPageContent = () => {
   };
 
   const handleConfirmOrder = () => {
+      console.log("Button clicked");
     if (transactionId && user?.id && productId) {
       const orderData = {
         userId: user.id,
@@ -76,8 +80,10 @@ const BuyPageContent = () => {
         paymentType: selectedCrypto,
         transactionId,
         productId,
+        ZipCode:zip,
       };
       addOrders(orderData);
+      console.log("Order data:", orderData);
       setStep(3);
     }
   };

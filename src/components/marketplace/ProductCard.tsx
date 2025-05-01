@@ -29,8 +29,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const { user } = useUser();
 
-  console.log(category);
-
   const { mutate: addToFavorite } = useAddFavoritePostsMutations(id, user?.id);
 
   const handleAddfavorite = () => {

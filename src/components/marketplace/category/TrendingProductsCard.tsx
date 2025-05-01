@@ -1,12 +1,11 @@
 "use client";
 
-import { useUser } from "@/context/userProvider";
-import { useAddFavoritePostsMutations } from "@/hooks/Products.hook";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { MdFavorite } from "react-icons/md";
-import { FaArrowUp } from "react-icons/fa";
+import { useUser } from "@/context/userProvider";
+import { useAddFavoritePostsMutations } from "@/hooks/Products.hook";
 
 interface ProductCardProps {
   image: string;
@@ -16,6 +15,8 @@ interface ProductCardProps {
   rating: number;
   id: string;
   category: string;
+  percent: number;
+  subCategory?: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -23,12 +24,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   image,
   title,
   description,
-  price,
   rating,
-  category,
+  percent,
+  subCategory,
 }) => {
   const { user } = useUser();
-
   const { mutate: addToFavorite } = useAddFavoritePostsMutations(id, user?.id);
 
   const handleAddfavorite = () => {
@@ -37,17 +37,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className="group relative cursor-pointer backdrop-blur-md bg-white/5 border border-white/10 shadow-lg rounded-2xl p-3 transition-all duration-300 hover:scale-[1.015] hover:shadow-2x">
-      <Link
-        href={
-          category === "USA DL"
-            ? `/marketplaces/DrivingLicance`
-            : `/marketplaces/${id}`
-        }
-      >
+      <Link href={`/marketplaces/category/${subCategory}`}>
         <div className="l">
-          {/* Frosted border glow */}
           <div className="absolute inset-0 z-0 rounded-2xl border border-white/10 pointer-events-none" />
-
           <Image
             width={300}
             height={200}
@@ -55,13 +47,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
             alt={title}
             className="w-full h-48 object-cover rounded-xl"
           />
-
           <div className="pt-2 space-y-2 z-10 relative">
             <h3 className="text-lg font-semibold text-white">{title}</h3>
             <p className="text-sm text-gray-200">{description}</p>
-
             <div className="flex justify-between items-center">
-              <span className="text-xl font-bold text-white">{` $${price}`}</span>
               <div className="flex items-center">
                 {[...Array(5)].map((_, index) => (
                   <svg
@@ -87,20 +76,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
           onClick={() => handleAddfavorite()}
           className="flex items-center gap-1 rounded-full text-white text-xs bg-white/10 border border-white/20 p-2 hover:bg-white/20 transition cursor-pointer"
         >
-          <MdFavorite className="text-sm text-pink-500" />
+          {percent > 45 ? (
+            <FaArrowUp className="text-green-300 animate-bounce " />
+          ) : (
+            <FaArrowDown className="text-red-400 animate-bounce" />
+          )}
         </button>
 
-        <div className="">
-          {/* <button className="text-red-500 hover:text-red-700">
-            <FaArrowDown />
-          </button> */}
-          <div className="flex items-center gap-2 text-green-300 bg-green-600/20 p-2 rounded-full shadow-inner ">
-            <FaArrowUp className="animate-bounce" />
+        <div className="flex items-center gap-2  p-1 rounded-full shadow-inner">
+          <div className="flex items-center gap-2 bg-green-600/20 p-2 rounded-full shadow-inner">
+            <span className="text-white text-xs">{percent?.toFixed(2)}%</span>
           </div>
         </div>
       </div>
-
-      {/* Trending Arrows at the bottom */}
     </div>
   );
 };

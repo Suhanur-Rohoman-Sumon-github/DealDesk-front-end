@@ -120,6 +120,7 @@ export type Product = {
   numReviews:number
   categoryProps:string
   category:string
+  subCategory:string
 };
 
 export type Order = {

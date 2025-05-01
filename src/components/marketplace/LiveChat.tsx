@@ -1,79 +1,79 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import { FaXmark } from "react-icons/fa6";
-import { useGetMyOrderQuery } from "@/hooks/Order.hooks";
-import { useUser } from "@/context/userProvider";
-import LiveChatSkeleton from "../skeleton/LiveChatSkeleton";
-import { Order } from "@/types";
 import Link from "next/link";
-import { ClockIcon } from "lucide-react";
+import React, { useEffect, useState } from "react";
+
+import { FaXmark } from "react-icons/fa6";
+
+import { LineChart, Line, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
 const userNotifications = [
-  {
-    username: "user12",
-    text: "made a recent purchase",
-    image:
-      "https://www.go2bank.com/retail_debit_card_today/_jcr_content/root/responsivegrid/layout_container/col2Tile1/content_card/image.coreimg.svg/1708077696133/need-a-card-hero.svg",
-  },
-  {
-    username: "user8",
-    text: "just grabbed a new custom keyboard!",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ56Rcp_cI2hTMRf51_qWNpPwcZ6zfwQvM53w&s",
-  },
-  {
-    username: "user5",
-    text: "added a cable set to their cart!",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1xbRRSDONJl1zUOUVFt0ON5l3h4up8LIVg&s",
-  },
-  {
-    username: "user3",
-    text: "is loving the new RGB wrist rest!",
-    image:
-      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
-  },
-  {
-    username: "user19",
-    text: "is loving the new RGB wrist rest!",
-    image:
-      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
-  },
-  {
-    username: "user19",
-    text: "is loving the new RGB wrist rest!",
-    image:
-      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
-  },
-  {
-    username: "user19",
-    text: "is loving the new RGB wrist rest!",
-    image:
-      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
-  },
-  {
-    username: "user19",
-    text: "is loving the new RGB wrist rest!",
-    image:
-      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
-  },
-  {
-    username: "user19",
-    text: "is loving the new RGB wrist rest!",
-    image:
-      "https://www.gobank.com/assets/img/home/gobank-meet-go2bank-517x517.png",
-  },
+  { text: "Go2 Bank available, unlimited stock.", tag: "Go2" },
+  { text: "Chime available, unlimited stock.", tag: "Chime" },
+  { text: "IP panel load available.", tag: "IP Panel" },
+  { text: "Number panel load available.", tag: "Number" },
+  { text: "SSN service available.", tag: "SSN" },
+  { text: "USA real person DL available.", tag: "DL" },
+  { text: "Shopify store setup service available.", tag: "Shopify" },
+  { text: "Ecommerce development services available.", tag: "Ecommerce" },
 ];
 
+const sellValues = [
+  5, 8, 6, 12, 9, 15, 11, 18, 10, 14, 7, 13, 9, 15, 11, 17, 8, 14, 10, 16, 12,
+  9, 7, 5,
+];
+
+const initialGraphData = sellValues.map((sell, index) => ({
+  name: `${24 - index} min ago`,
+  sell,
+}));
+
 const LiveChat = () => {
-  const { user } = useUser();
   const LOCAL_STORAGE_KEY = "liveChatOrders";
+  const LOCAL_STORAGE_DATE_KEY = "liveChatOrdersDate";
   const [orders, setOrders] = useState(0);
   const [notifications, setNotifications] = useState<typeof userNotifications>(
     []
   );
+  const [graphData, setGraphData] = useState(initialGraphData);
   const [toggleLiveOrders, setToggleLiveOrders] = useState(false);
+
+  useEffect(() => {
+    const today = new Date().toDateString();
+    const storedDate = localStorage.getItem(LOCAL_STORAGE_DATE_KEY);
+
+    if (storedDate !== today) {
+      localStorage.setItem(LOCAL_STORAGE_DATE_KEY, today);
+      localStorage.setItem(LOCAL_STORAGE_KEY, "0");
+    }
+
+    const storedOrders = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const initial = storedOrders ? parseInt(storedOrders, 10) : 0;
+    setOrders(initial);
+
+    const interval = setInterval(() => {
+      const randomChange = Math.floor(Math.random() * 6); // Random between 0 and 5
+      setOrders((prev) => {
+        const updated = Math.max(prev + randomChange, 0);
+        localStorage.setItem(LOCAL_STORAGE_KEY, updated.toString());
+
+        setGraphData((prevGraph) => {
+          const updatedGraph = [...prevGraph];
+          const randomIndex = Math.floor(Math.random() * updatedGraph.length);
+
+          updatedGraph[randomIndex] = {
+            ...updatedGraph[randomIndex],
+            sell: Math.max(updatedGraph[randomIndex].sell + randomChange, 0),
+          };
+
+          return updatedGraph;
+        });
+
+        return updated;
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     setNotifications([
@@ -91,32 +91,6 @@ const LiveChat = () => {
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-      const initial = stored ? parseInt(stored, 10) : 42;
-      setOrders(initial);
-      if (!stored) {
-        localStorage.setItem(LOCAL_STORAGE_KEY, initial.toString());
-      }
-    }
-
-    const interval = setInterval(() => {
-      const randomIncrement = Math.floor(Math.random() * 5) + 1;
-      setOrders((prev) => {
-        const updated = prev + randomIncrement;
-        localStorage.setItem(LOCAL_STORAGE_KEY, updated.toString());
-        return updated;
-      });
-    }, 1000 * 60);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const { data: recentOrders, isLoading } = useGetMyOrderQuery(user?.id || "");
-
-  if (isLoading) return <LiveChatSkeleton />;
 
   return (
     <>
@@ -137,7 +111,7 @@ const LiveChat = () => {
       <div
         className={`transition-all duration-300 right-0 ${
           toggleLiveOrders ? "inline-block" : "hidden"
-        } lg:inline-block fixed lg:fixed h-[calc(100vh-50px)] -mt-3 z-50 space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] overflow-hidden w-full md:w-[300px] lg:w-[300px]`}
+        } lg:inline-block fixed h-[calc(100vh-50px)] -mt-3 z-50 space-y-3 p-4 backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-white top-[70px] overflow-hidden w-full md:w-[300px] lg:w-[300px]`}
       >
         {/* Header */}
         <div className="flex justify-between items-center mb-2">
@@ -150,9 +124,7 @@ const LiveChat = () => {
             </button>
             <span className="animate-pulse font-bold">🔴 LIVE</span>
             <span className="flex items-center px-2 py-0.5 text-xs rounded-full font-semibold text-white">
-              {`Start : ${new Date().getHours()} H${
-                new Date().getHours() !== 1 ? "" : ""
-              }`}
+              {`Start : ${new Date().getHours()} H`}
             </span>
           </div>
           <span className="flex items-center gap-1 py-0.5 text-xs rounded-full font-semibold text-white">
@@ -161,11 +133,11 @@ const LiveChat = () => {
         </div>
 
         {/* Notification Cards */}
-        <div className="w-full   p-4 space-y-3 ">
+        <div className="w-full p-4 space-y-3">
           {notifications.map((user, index) => (
             <div
               key={index}
-              className="flex flex-col items-start gap-2  relative "
+              className="flex flex-col items-start gap-2 relative"
             >
               {/* Bubble with text */}
               <div className="relative animation-class">
@@ -181,48 +153,52 @@ const LiveChat = () => {
                 </svg>
 
                 {/* Text inside bubble */}
-                <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center px-6 py-4">
-                  <div className="text-sm ">
-                    <span className="font-semibold">@{user.username}</span>{" "}
-                    {user.text}
-                  </div>
-                  <div className="flex items-center gap-1 text-[10px] text-gray-400 mt-1">
-                    <ClockIcon className="h-3 w-3" /> Just now
-                  </div>
+                <div className="absolute -top-4 left-0 w-full h-full flex flex-col justify-center px-6 py-4">
+                  <div className="text-sm">{user.text}</div>
+                  <div className="text-xs text-[#ccc]">{user.tag}</div>
                 </div>
               </div>
             </div>
           ))}
 
-          <div className="mt-auto text-xs bg-white/5 rounded-md p-2 border border-white/10">
-            <div className="font-semibold text-white mb-1">
-              Your Recent Orders
+          {/* Chart */}
+          <div className="mt-4 bg-white/5 rounded-md p-2 border border-white/10">
+            <div className="font-semibold text-white mb-2">
+              Todays Market Trend
             </div>
-            <div className="space-y-1">
-              {recentOrders?.length > 0 ? (
-                recentOrders.slice(0, 2).map((order: Order) => (
-                  <div
-                    key={order.id}
-                    className="flex items-center justify-between border-b border-white/10 pb-1 last:border-none"
-                  >
-                    <span className="truncate">{order.products.title}</span>
-                    <span className="font-semibold">
-                      {order.products.price}
-                    </span>
-                    <Link href={"/dashboard/orders"}>
-                      <Button
-                        variant="link"
-                        className="text-xs text-[#8b33d5] cursor-pointer"
-                      >
-                        View
-                      </Button>
-                    </Link>
-                  </div>
-                ))
-              ) : (
-                <div className="text-white/70">No recent orders</div>
-              )}
+            <div className="h-[100px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={graphData}>
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fill: "#ccc", fontSize: 10 }}
+                    axisLine={{ stroke: "#5f2e89" }}
+                    tickLine={{ stroke: "#5f2e89" }}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#5f2e89",
+                      borderColor: "transparent",
+                      borderRadius: "8px",
+                    }}
+                    cursor={{ stroke: "#5f2e89", strokeWidth: 2 }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="sell"
+                    stroke="#9333EA"
+                    strokeWidth={2}
+                    dot={false}
+                    animationDuration={1500}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
+          </div>
+          <div>
+            <Link href="/dashboard" className="w-full">
+              <button className="button-primary w-full">my dashboard</button>
+            </Link>
           </div>
         </div>
       </div>

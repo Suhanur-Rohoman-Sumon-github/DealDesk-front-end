@@ -21,11 +21,15 @@ import { Card } from "@/components/ui/card";
 import StepIndicator from "@/components/marketplace/buy/StepIndicator";
 
 const BuyPageContent = () => {
+  const cryptoAddresses: Record<string, string> = {
+    BTC: "1LXHFr2ApDzzkMByu8TX4295xW1PxLs2kH",
+    LTC: "LRyyLAbTnzp7b5fwW5StuYWYW6561JCvjV",
+    TRC20: "THBekq5yKPr5HwBhiPrHaHJ3hYkB6YB5zC",
+  };
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");
   const zip = searchParams.get("zip");
-  console.log(zip + "zip");
-  console.log(productId + "productId");
+  const [copied, setCopied] = useState(false);
   const [step, setStep] = useState(1);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
@@ -36,6 +40,17 @@ const BuyPageContent = () => {
     productId || ""
   );
   const { mutate: addOrders } = useCreateOrderMutation();
+
+  const handleCopy = async () => {
+    if (!selectedCrypto) return;
+    try {
+      await navigator.clipboard.writeText(cryptoAddresses[selectedCrypto]);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error("Failed to copy:", error);
+    }
+  };
 
   useEffect(() => {
     fetchCryptoPrice(selectedCrypto);
@@ -61,8 +76,8 @@ const BuyPageContent = () => {
     switch (symbol) {
       case "BTC":
         return "bitcoin";
-      case "ETH":
-        return "ethereum";
+      case "LTC":
+        return "litecoin";
       case "TRC20":
         return "tether";
       default:
@@ -71,7 +86,7 @@ const BuyPageContent = () => {
   };
 
   const handleConfirmOrder = () => {
-      console.log("Button clicked");
+    console.log("Button clicked");
     if (transactionId && user?.id && productId) {
       const orderData = {
         userId: user.id,
@@ -80,7 +95,7 @@ const BuyPageContent = () => {
         paymentType: selectedCrypto,
         transactionId,
         productId,
-        ZipCode:zip,
+        ZipCode: zip,
       };
       addOrders(orderData);
       console.log("Order data:", orderData);
@@ -98,6 +113,8 @@ const BuyPageContent = () => {
 
   const { images, description, name, price } = singleProducts;
   const convertedAmount = cryptoPrice ? (price / cryptoPrice).toFixed(6) : null;
+  console.log("Converted amount:", convertedAmount);
+  console.log("Crypto price:", cryptoPrice);
 
   return (
     <div className="min-h-screen py-10 px-4">
@@ -136,20 +153,27 @@ const BuyPageContent = () => {
               <SelectContent className="text-white bg-white/10 border border-white/20">
                 <SelectItem value="BTC">Bitcoin (BTC)</SelectItem>
                 <SelectItem value="TRC20">Tron (TRC20 / USDT)</SelectItem>
-                <SelectItem value="ETH">Ethereum (ETH)</SelectItem>
+                <SelectItem value="LTC">Litecoin (LTC)</SelectItem>
               </SelectContent>
             </Select>
 
-            <a
-              href={`https://coinmarketcap.com/currencies/${getCoinGeckoId(
-                selectedCrypto
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline text-purple-400 text-sm mt-2 block"
-            >
-              View live price on CoinMarketCap
-            </a>
+            <div className="mt-4">
+              <p className="text-sm text-white/80 mb-1">
+                Send your payment to:
+              </p>
+              <div className="flex items-center gap-2">
+                <p className="text-white">{cryptoAddresses[selectedCrypto]}</p>
+
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handleCopy}
+                  className="text-xs px-2 py-1"
+                >
+                  {copied ? "Copied!" : "Copy"}
+                </Button>
+              </div>
+            </div>
 
             <h2 className="text-2xl font-bold text-white mt-6 mb-4">
               Order Details
@@ -195,7 +219,7 @@ const BuyPageContent = () => {
             your product as fast as possible.
           </p>
           <a
-            href="https://t.me/+gyYVulBrJIk4N2Nl"
+            href="https://t.me"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full"

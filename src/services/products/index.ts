@@ -147,5 +147,20 @@ export const getFavoriteProducts = async (userId: string) => {
     throw new Error(error.response?.data?.message || error.message);
   }
 };
+export const updateProductPrice = async (productId: string, updateData: {
+    newPrice?: string; 
+    }) => {
+  try {
+    const { data } = await axiosInstance.patch(`/products/${productId}`, updateData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || error.message);
+  }
+};
 
 

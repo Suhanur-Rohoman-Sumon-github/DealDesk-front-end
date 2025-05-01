@@ -6,16 +6,24 @@ import { getCurrentUser } from "./services/authServices";
 const authRoutes = ["/login", "/register"];
 
 const protectedRoutes = {
-  user: ["/cart", "/wishList"],
+   user: ["/cart", "/wishList", "/marketplaces/:path*"],
+  admin: ["/admin", "/admin/dashboard", "/admin/products", "/admin/orders"],
   vendor: ["/vendor"],
   
 };
+const protectedSubPaths = ["/marketplaces/category", "/marketplaces/product"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const user = await getCurrentUser();
-
   
+
+  const isProtectedMarketplace =
+  !user && protectedSubPaths.some((route) => pathname.startsWith(route));
+
+if (isProtectedMarketplace) {
+  return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));
+}
   if (!user) {
     const isProtected = Object.values(protectedRoutes).flat().some((route) => pathname.startsWith(route));
     if (isProtected) {
@@ -32,12 +40,12 @@ export async function middleware(request: NextRequest) {
   const userRole = user?.role; 
 
   
-  // if (pathname.startsWith("/admin") && userRole !== "ADMIN") {
-  //   return NextResponse.redirect(new URL("/", request.url));
-  // }
+  if (pathname.startsWith("/admin") && userRole !== "admin") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 
   
-  if (pathname.startsWith("/vendor") && !["VENDOR", "ADMIN"].includes(userRole as string)) {
+  if (pathname.startsWith("/vendor") && !["VENDOR", "admin"].includes(userRole as string)) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
@@ -45,7 +53,7 @@ export async function middleware(request: NextRequest) {
   if (
     protectedRoutes.vendor.some((route) => pathname.startsWith(route)) &&
     userRole !== "VENDOR" &&
-    userRole !== "ADMIN"
+    userRole !== "admin"
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -61,5 +69,6 @@ export const config = {
     "/register",
     "/vendor/:path*", 
     "/admin/:path*",
+    "/marketplaces/:path*",
   ],
 };

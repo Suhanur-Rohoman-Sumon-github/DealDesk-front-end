@@ -26,12 +26,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetAllOrdersQuery } from "@/hooks/Order.hooks";
+import {
+  useGetAllOrdersQuery,
+  useUpdateOrderMutation,
+} from "@/hooks/Order.hooks";
 
 const OrdersList = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const { data: allOrder } = useGetAllOrdersQuery();
+  const { mutate: updateOrderMutation } = useUpdateOrderMutation();
+
+  const updtareOrder = (orderId: string) => {
+    updateOrderMutation({
+      orderId: orderId,
+      updateData: {
+        orderStatus: "completed",
+      },
+    });
+  };
 
   // const handleFilterAndSearch = (searchValue: string, statusValue: string) => {
   //   let filtered = [...mockOrders];
@@ -122,6 +135,8 @@ const OrdersList = () => {
               <TableHead>Items</TableHead>
               <TableHead>Total</TableHead>
               <TableHead>Status</TableHead>
+              <TableHead>Transaction ID</TableHead>
+              {allOrder?.data[0]?.ZipCode && <TableHead>Zip Code</TableHead>}
               <TableHead className="w-[80px]"></TableHead>
             </TableRow>
           </TableHeader>
@@ -135,9 +150,11 @@ const OrdersList = () => {
                   <TableCell>
                     {new Date(order.createdAt).toLocaleDateString()}
                   </TableCell>
-                  <TableCell>{order?.products?.category}</TableCell>
+                  <TableCell>{order?.products?.title}</TableCell>
                   <TableCell>${order.totalAmount}</TableCell>
                   <TableCell>{order.orderStatus}</TableCell>
+                  <TableCell>{order.transactionId}</TableCell>
+                  {order.ZipCode && <TableCell>{order.ZipCode}</TableCell>}
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -149,7 +166,11 @@ const OrdersList = () => {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>View Details</DropdownMenuItem>
-                        <DropdownMenuItem>Update Status</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => updtareOrder(order._id)}
+                        >
+                          Update Status
+                        </DropdownMenuItem>
                         <DropdownMenuItem>Print Invoice</DropdownMenuItem>
                         <DropdownMenuItem className="text-red-600">
                           Cancel Order

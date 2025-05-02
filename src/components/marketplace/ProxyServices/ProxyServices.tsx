@@ -29,9 +29,7 @@ import { Input } from "@/components/ui/input";
 import { useCreateOrderMutation } from "@/hooks/Order.hooks";
 import { useUser } from "@/context/userProvider";
 
-// 🟡 Mock user and zip (replace with your actual data)
-const mockUser = { id: "user-123" };
-const mockZip = "10001";
+
 
 // 🔵 Static proxy data
 const proxyData = [

@@ -10,15 +10,16 @@ const GoogleAnalyticsProvider = ({ children }: Props) => {
     <>
       {/* Google Analytics */}
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=G-68XQZ24D67`}
+        src={`https://www.googletagmanager.com/gtag/js?id=G-9NZLRYV3XV`}
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-68XQZ24D67');
+          wwindow.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9NZLRYV3XV');
         `}
       </Script>
       {children}

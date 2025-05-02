@@ -137,6 +137,9 @@ const OrdersList = () => {
               <TableHead>Status</TableHead>
               <TableHead>Transaction ID</TableHead>
               {allOrder?.data[0]?.ZipCode && <TableHead>Zip Code</TableHead>}
+              {allOrder?.data[0]?.proxyAddress && (
+                <TableHead>Proxy address</TableHead>
+              )}
               <TableHead className="w-[80px]"></TableHead>
             </TableRow>
           </TableHeader>
@@ -155,6 +158,9 @@ const OrdersList = () => {
                   <TableCell>{order.orderStatus}</TableCell>
                   <TableCell>{order.transactionId}</TableCell>
                   {order.ZipCode && <TableCell>{order.ZipCode}</TableCell>}
+                  {order.proxyAddress && (
+                    <TableCell>{order.proxyAddress}</TableCell>
+                  )}
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>

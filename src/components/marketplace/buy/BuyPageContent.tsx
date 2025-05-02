@@ -19,6 +19,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 
 import { Card } from "@/components/ui/card";
 import StepIndicator from "@/components/marketplace/buy/StepIndicator";
+import Link from "next/link";
 
 const BuyPageContent = () => {
   const cryptoAddresses: Record<string, string> = {
@@ -218,14 +219,10 @@ const BuyPageContent = () => {
             Please keep an eye on your Telegram channel and email. We’ll deliver
             your product as fast as possible.
           </p>
-          <a
-            href="https://t.me"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full"
-          >
-            <Button className="w-full button-primary">Go to Telegram</Button>
-          </a>
+
+          <Link href="/marketplace">
+            <Button className="button-primary">Go to Marketplace</Button>
+          </Link>
         </div>
       )}
     </div>

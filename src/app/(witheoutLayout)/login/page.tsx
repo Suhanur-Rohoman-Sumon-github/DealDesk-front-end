@@ -17,10 +17,10 @@ import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { useUserLoginMutations } from "@/hooks/Auth.hook";
-import { useRouter } from "next/navigation";
+
 
 export default function Login() {
-  const router = useRouter();
+  
   const {
     register,
     handleSubmit,
@@ -30,7 +30,6 @@ export default function Login() {
   const { mutate: handleUserLogin } = useUserLoginMutations();
   const onSubmit = (data: any) => {
     handleUserLogin(data);
-    router.push("/marketplaces");
   };
 
   return (

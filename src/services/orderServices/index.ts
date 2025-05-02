@@ -48,6 +48,7 @@ export const createOrder = async (orderData: {
     return data.data;
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
+      console.log(error.response?.data);
       throw new Error(error.response?.data.message);
     }
   }

@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useUserRegistrationsMutation } from "@/hooks/Auth.hook";
-import { useRouter } from "next/navigation";
+
 
 // Schema
 const signupSchema = z
@@ -44,8 +44,6 @@ const signupSchema = z
 type SignupValues = z.infer<typeof signupSchema>;
 
 export default function Signup() {
-  
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { mutate: handleUserRegistration } = useUserRegistrationsMutation();
@@ -67,7 +65,6 @@ export default function Signup() {
 
   const onSubmit = (data: SignupValues) => {
     handleUserRegistration(data);
-    router.push(`/login`);
   };
 
   return (

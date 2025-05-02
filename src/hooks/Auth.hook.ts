@@ -2,11 +2,14 @@ import { FieldValues } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { loginUser, registerUser } from "@/services/authServices";
+import { useRouter } from "next/navigation";
+
 
 
 
 
 export const useUserRegistrationsMutation = () => {
+  const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["user registration"],
@@ -15,6 +18,7 @@ export const useUserRegistrationsMutation = () => {
     },
     onSuccess: () => {
       toast.success("user  created successfully please login now");
+      router.push("/login");
     },
     onError: (error) => {
       toast.error(error.message)
@@ -22,6 +26,7 @@ export const useUserRegistrationsMutation = () => {
   });
 };
 export const useUserLoginMutations = () => {
+  const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["user login"],
@@ -30,6 +35,7 @@ export const useUserLoginMutations = () => {
     },
     onSuccess: () => {
       toast.success("user logged in  successfully");
+      router.push("/marketplaces");
     },
     onError: (error) => {
       toast.error(error.message);

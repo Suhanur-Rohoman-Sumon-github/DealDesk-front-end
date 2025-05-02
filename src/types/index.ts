@@ -86,7 +86,7 @@ export interface OrderData {
   totalAmount: number;
   paymentType: string;
   transactionId: string;
-  productId: string;
+  productId?: string;
 }
 
 export type ReviewData = {

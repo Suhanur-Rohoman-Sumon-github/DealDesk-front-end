@@ -220,7 +220,7 @@ const BuyPageContent = () => {
             your product as fast as possible.
           </p>
 
-          <Link href="/marketplace">
+          <Link href="/marketplaces">
             <Button className="button-primary">Go to Marketplace</Button>
           </Link>
         </div>

@@ -162,7 +162,7 @@ export function ProxyTables() {
       paymentType: selectedCrypto,
       transactionId,
       products: `680d4183a986e84c27c2f0fe`,
-      proxyAddress: selectedItem.proxyName,
+      proxyAddress: `${selectedItem.proxyName} - ${selectedItem.quantity} proxies`,
     };
 
     addOrders(orderData);

@@ -23,9 +23,9 @@ import Link from "next/link";
 
 const BuyPageContent = () => {
   const cryptoAddresses: Record<string, string> = {
-    BTC: "1LXHFr2ApDzzkMByu8TX4295xW1PxLs2kH",
-    LTC: "LRyyLAbTnzp7b5fwW5StuYWYW6561JCvjV",
-    TRC20: "THBekq5yKPr5HwBhiPrHaHJ3hYkB6YB5zC",
+    BTC: "15wQLswK6ueGvUtrNeSz3QUEkifADm9shd",
+    LTC: "LWHY9qM5F4iP7bjQoKGUqtMcjfZcDAtj6y",
+    TRC20: "TCBg11s7pfxK7gfb5pALLHTktC3Q2t5aHP",
   };
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Money Tracker Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        margin: 0;
+        padding: 20px;
+      }
+      h1,
+      h2 {
+        text-align: center;
+      }
+      .dashboard {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      .add-btn {
+        margin-top: 10px;
+        padding: 10px;
+        background: #1e90ff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>💰 Money Tracker Dashboard</h1>
+
+    <div class="dashboard">
+      <div class="card">
+        <h2>Today's Overview</h2>
+        <p>
+          <strong>Today's Total Expenses:</strong> $<span id="todayExpenses"
+            >0</span
+          >
+        </p>
+        <p>
+          <strong>Personal Bank Balance:</strong> $<span id="personalBalance"
+            >15000</span
+          >
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Business Summary</h2>
+        <p>
+          <strong>Total Expenses in Business:</strong> $<span
+            id="businessExpenses"
+            >0</span
+          >
+        </p>
+        <p>
+          <strong>Total Business Balance:</strong> $<span id="businessBalance"
+            >0</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Spending Table</h2>
+      <table id="expenseTable">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Today's Spend</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be added dynamically -->
+        </tbody>
+      </table>
+      <button class="add-btn" onclick="addNewRow()">+ Add Entry</button>
+    </div>
+
+    <script>
+      const data = [
+        { account: "Personal Bank", spend: 500, balance: 15000 },
+        { account: "Company 1", spend: 1200, balance: 45000 },
+        { account: "Company 2", spend: 950, balance: 32000 },
+        { account: "Company 3", spend: 300, balance: 27500 },
+        { account: "Company 4", spend: 650, balance: 39000 },
+        { account: "Company 5", spend: 400, balance: 22000 },
+        { account: "Company 6", spend: 700, balance: 41000 },
+        { account: "Company 7", spend: 1100, balance: 36500 },
+      ];
+
+      const tableBody = document.querySelector("#expenseTable tbody");
+
+      function loadData() {
+        let todayExpenses = 0;
+        let businessExpenses = 0;
+        let businessBalance = 0;
+
+        data.forEach((entry, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+          <td>${entry.account}</td>
+          <td>$${entry.spend}</td>
+          <td>$${entry.balance}</td>
+        `;
+          tableBody.appendChild(row);
+
+          todayExpenses += entry.spend;
+          if (index > 0) {
+            businessExpenses += entry.spend;
+            businessBalance += entry.balance;
+          }
+        });
+
+        document.getElementById("todayExpenses").textContent = todayExpenses;
+        document.getElementById("businessExpenses").textContent =
+          businessExpenses;
+        document.getElementById("businessBalance").textContent =
+          businessBalance;
+      }
+
+      function addNewRow() {
+        const account = prompt("Enter account name:");
+        const spend = parseFloat(prompt("Enter today's spending:"));
+        const balance = parseFloat(prompt("Enter current balance:"));
+        if (account && !isNaN(spend) && !isNaN(balance)) {
+          data.push({ account, spend, balance });
+          tableBody.innerHTML = "";
+          loadData();
+        }
+      }
+
+      loadData();
+    </script>
+  </body>
+</html>

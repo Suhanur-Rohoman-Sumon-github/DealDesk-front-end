@@ -21,13 +21,14 @@ import {
 interface SalesChartProps {
   data: {
     date: string;
-    sales: number;
+    amount: number;
     orders: number;
   }[];
   className?: string;
 }
 
 const SalesChart: React.FC<SalesChartProps> = ({ data, className }) => {
+  console.log(data);
   return (
     <Card className={className}>
       <CardHeader>
@@ -55,11 +56,11 @@ const SalesChart: React.FC<SalesChartProps> = ({ data, className }) => {
               <Line
                 yAxisId="left"
                 type="monotone"
-                dataKey="sales"
+                dataKey="amount"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
                 strokeWidth={2}
-                name="Revenue ($)"
+                name="Sell ($)"
               />
               <Line
                 yAxisId="right"

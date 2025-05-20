@@ -5,13 +5,15 @@ import { cn } from "@/lib/utils";
 
 interface StatsCardProps {
   title: string;
-  value: string;
+  value: string | number;
   icon: React.ReactNode;
   change?: {
     value: string;
     positive: boolean;
   };
   className?: string;
+  percentage?: number;
+  isPositive?: boolean;
 }
 
 const StatsCard: React.FC<StatsCardProps> = ({

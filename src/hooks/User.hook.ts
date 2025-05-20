@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getDashBoardData, getVerificationCode } from "@/services/userServices";
+import { getAdminDashBoardData, getDashBoardData, getVerificationCode } from "@/services/userServices";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetUserDashBoardDataQuery = (userId:string) => {
@@ -8,6 +8,18 @@ export const useGetUserDashBoardDataQuery = (userId:string) => {
     queryKey: ["get-products", userId],
     queryFn: async () => {
       const data = await getDashBoardData(userId);
+      return data;
+    },
+  });
+
+  return { data, refetch, isLoading, isError };
+};
+export const useGetAdminDashBoardDataQuery = () => {
+  const { data, refetch, isLoading, isError } = useQuery<any, Error>({
+    
+    queryKey: ["get-dash-board-data"],
+    queryFn: async () => {
+      const data = await getAdminDashBoardData();
       return data;
     },
   });

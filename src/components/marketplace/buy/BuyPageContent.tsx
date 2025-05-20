@@ -92,7 +92,7 @@ const BuyPageContent = () => {
       const orderData = {
         userId: user.id,
         products: productId,
-        totalAmount: singleProducts.price,
+        totalAmount: singleProducts.sellprice,
         paymentType: selectedCrypto,
         transactionId,
         productId,
@@ -112,8 +112,10 @@ const BuyPageContent = () => {
     );
   }
 
-  const { images, description, name, price } = singleProducts;
-  const convertedAmount = cryptoPrice ? (price / cryptoPrice).toFixed(6) : null;
+  const { images, description, name, sellprice } = singleProducts;
+  const convertedAmount = cryptoPrice
+    ? (sellprice / cryptoPrice).toFixed(6)
+    : null;
   console.log("Converted amount:", convertedAmount);
   console.log("Crypto price:", cryptoPrice);
 
@@ -134,7 +136,7 @@ const BuyPageContent = () => {
               className="mb-6 rounded-lg shadow-md"
             />
             <h2 className="text-2xl font-bold text-white mb-4">{name}</h2>
-            <p className="text-gray-300 mb-2">{`Price: $${price}`}</p>
+            <p className="text-gray-300 mb-2">{`Price: $${sellprice}`}</p>
             <p className="text-gray-300 text-center">
               {description.length > 100
                 ? description.slice(0, 100) + "..."

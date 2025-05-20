@@ -12,6 +12,15 @@ export const getDashBoardData = async (userId:string) => {
     throw new Error(error.message);
   }
 };
+export const getAdminDashBoardData = async () => {
+  try {
+    const { data } = await axiosInstance.get(`/admin/my-insights`);
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
 
 
 export const getVerificationCode = async (userEmail:string) => {

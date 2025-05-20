@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { subDays } from "date-fns";
 import {
   ShoppingBag,
@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import StatsCard from "@/components/Admindashboard/StatsCard";
 import SalesChart from "@/components/Admindashboard/SalesChart";
-import CategoryChart from "@/components/Admindashboard/CategoryChart";
-import TrafficChart from "@/components/Admindashboard/TrafficChart";
+import AccountStatement from "@/components/Admindashboard/AccountStatement";
+import { useGetAdminDashBoardDataQuery } from "@/hooks/User.hook";
 
 // Mock data for testing
 const getMockSalesData = () => {
@@ -49,97 +49,100 @@ const trafficData = [
   { source: "Paid Ads", visits: 2390, conversions: 299 },
 ];
 
-const Index = () => {
+const AdminDashboard = () => {
+  const { data, isLoading } = useGetAdminDashBoardDataQuery();
+  if (isLoading) return <div>Loading...</div>;
+  console.log("Admin Dashboard Data", data);
+
+  const {
+    todaysSellAmount,
+    todaysCompletedOrders,
+    todaysPendingOrders,
+    totalCompletedOrders,
+    lifetimeSellAmount,
+    todaysRevenue,
+    totalRevenue,
+    currentBalance,
+    graphData,
+    jabedaStatements,
+  } = data.data;
   const salesData = getMockSalesData();
 
-  return (
-    <div className=" py-4 px-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-      </div>
+  console.log("Today's Sell Amount", todaysSellAmount);
 
+  const calculatePercentage = (today: number, yesterday: number): number => {
+    if (yesterday === 0) return today === 0 ? 0 : 100;
+    return Math.round(((today - yesterday) / yesterday) * 100);
+  };
+
+  const yesterdaysSellAmount = 1000;
+
+  const yesterdaysCompletedOrders = 20;
+
+  const yesterdaysPendingOrders = 8;
+
+  const yesterdaysRevenue = 56465454;
+
+  return (
+    <div className=" py-24 px-4 ">
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard
-          title="Total Revenue"
-          value="$157,492"
+          title="Today's Sell Amount"
+          value={`$${todaysSellAmount.toLocaleString()}`}
           icon={<DollarSign />}
-          change={{ value: "12.5%", positive: true }}
+          percentage={calculatePercentage(
+            todaysSellAmount,
+            yesterdaysSellAmount
+          )}
+          isPositive={todaysSellAmount >= yesterdaysSellAmount}
+          className="bg-blue-50 border border-blue-200"
         />
         <StatsCard
-          title="Total Orders"
-          value="3,849"
+          title="Today's Completed Orders"
+          value={todaysCompletedOrders}
           icon={<ShoppingBag />}
-          change={{ value: "8.2%", positive: true }}
+          percentage={calculatePercentage(
+            todaysCompletedOrders,
+            yesterdaysCompletedOrders
+          )}
+          isPositive={todaysCompletedOrders >= yesterdaysCompletedOrders}
+          className="bg-green-50 border border-green-200"
         />
         <StatsCard
-          title="Products"
-          value="1,423"
-          icon={<Package />}
-          change={{ value: "4.1%", positive: true }}
+          title="Today's Pending Orders"
+          value={todaysPendingOrders}
+          icon={<AlarmClock />}
+          percentage={calculatePercentage(
+            todaysPendingOrders,
+            yesterdaysPendingOrders
+          )}
+          isPositive={todaysPendingOrders >= yesterdaysPendingOrders}
+          className="bg-yellow-50 border border-yellow-200"
         />
+
         <StatsCard
-          title="Customers"
-          value="5,782"
-          icon={<Users />}
-          change={{ value: "2.3%", positive: false }}
+          title="Lifetime Sell Amount"
+          value={`$${lifetimeSellAmount.toLocaleString()}`}
+          icon={<TrendingUp />}
+          className="bg-indigo-50 border border-indigo-200"
         />
       </div>
 
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
-        <SalesChart data={salesData} />
-        <div className="grid gap-6 grid-cols-1">
-          <StatsCard
-            title="Conversion Rate"
-            value="4.28%"
-            icon={<TrendingUp />}
-            change={{ value: "0.5%", positive: true }}
-            className="h-[140px]"
-          />
-          <StatsCard
-            title="Average Order Value"
-            value="$85.42"
-            icon={<DollarSign />}
-            change={{ value: "3.1%", positive: true }}
-            className="h-[140px]"
-          />
-        </div>
+      <div className="grid gap-6 w-full mt-4">
+        <SalesChart data={graphData} />
       </div>
 
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+      {/* <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
         <CategoryChart data={categoryData} />
         <TrafficChart data={trafficData} />
-      </div>
+      </div> */}
 
-      <div className="grid gap-6 grid-cols-1">
-        <div className="border rounded-lg p-6">
-          <div className="flex items-center space-x-2 mb-4">
-            <AlarmClock className="h-5 w-5 text-muted-foreground" />
-            <h3 className="text-lg font-semibold">Recent Activity</h3>
-          </div>
-          <div className="space-y-4">
-            {[1, 2, 3, 4, 5].map((item) => (
-              <div
-                key={item}
-                className="flex justify-between items-center py-2 border-b"
-              >
-                <div>
-                  <p className="text-sm font-medium">
-                    New order #{Math.floor(Math.random() * 10000) + 10000}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {Math.floor(Math.random() * 60)} minutes ago
-                  </p>
-                </div>
-                <span className="text-sm font-medium">
-                  ${(Math.random() * 200 + 50).toFixed(2)}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <AccountStatement
+        jabedaStatements={jabedaStatements}
+        startingBalance={currentBalance}
+      />
     </div>
   );
 };
 
-export default Index;
+export default AdminDashboard;

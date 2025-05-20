@@ -47,7 +47,7 @@ const getStatusColor = (status: string) => {
 };
 
 const ProductTable = () => {
-  const { data: allProduct } = useGetAllProductsQuery({
+  const { data: allProduct, refetch } = useGetAllProductsQuery({
     sort: "",
     searchTerm: "",
   });
@@ -57,20 +57,20 @@ const ProductTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
-  
+
   const [productName, setProductName] = useState<string>("");
-  const [price, setPrice] = useState<number | "">("");
-  const [stock, setStock] = useState<number | "">("");
+  const [sellPrice, setSellsPrice] = useState<number | "">("");
+  const [buyPrice, setBuyPrice] = useState<number | "">("");
 
   useEffect(() => {
     if (selectedProduct) {
       setProductName(selectedProduct.title || "");
-      setPrice(selectedProduct.price || "");
-      setStock(selectedProduct.stock || "");
+      setSellsPrice(selectedProduct.price || "");
+      setBuyPrice(selectedProduct.stock || "");
     } else {
       setProductName("");
-      setPrice("");
-      setStock("");
+      setSellsPrice("");
+      setBuyPrice("");
     }
   }, [selectedProduct]);
 
@@ -88,15 +88,23 @@ const ProductTable = () => {
 
   const handleCloseModal = () => {
     const productId = selectedProduct?._id;
-    console.log("Product ID:", productId);
-    const newPrice = price ? Number(price) : 0;
+
+    const newPrice = sellPrice ? Number(sellPrice) : 0;
+
     setIsModalOpen(false);
     setSelectedProduct(null);
     setProductName("");
-    setPrice("");
-    setStock("");
-    updateProductMutation({ productId, updateData: { newPrice } });
+    setSellsPrice("");
+    setBuyPrice("");
+    updateProductMutation({
+      productId,
+      updateData: { sellprice: newPrice, buyPrice },
+    });
   };
+
+  useEffect(() => {
+    refetch();
+  }, [allProduct, refetch]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -139,7 +147,7 @@ const ProductTable = () => {
                 <TableRow key={product.id}>
                   <TableCell className="font-medium">{product.title}</TableCell>
                   <TableCell>{product.sku}</TableCell>
-                  <TableCell>${product.price.toFixed(2)}</TableCell>
+                  <TableCell>${product?.sellprice?.toFixed(2)}</TableCell>
                   <TableCell>{product.stock}</TableCell>
                   <TableCell>
                     <Badge
@@ -198,7 +206,7 @@ const ProductTable = () => {
                       {product.title}
                     </TableCell>
                     <TableCell>{product.sku}</TableCell>
-                    <TableCell>${product.price.toFixed(2)}</TableCell>
+                    <TableCell>${product.sellprice.toFixed(2)}</TableCell>
                     <TableCell>{product.stock}</TableCell>
                     <TableCell>
                       <Badge
@@ -254,18 +262,18 @@ const ProductTable = () => {
             onChange={(e) => setProductName(e.target.value)}
           />
           <Input
-            placeholder="Price"
+            placeholder="Sell-price"
             type="number"
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            value={sellPrice}
+            onChange={(e) => setSellsPrice(Number(e.target.value))}
           />
           <Input
-            placeholder="Stock"
+            placeholder="Buy-price"
             type="number"
-            value={stock}
-            onChange={(e) => setStock(Number(e.target.value))}
+            value={buyPrice}
+            onChange={(e) => setBuyPrice(Number(e.target.value))}
           />
-          <Button onClick={handleCloseModal}>Close</Button>
+          <Button onClick={handleCloseModal}>Save</Button>
         </DialogContent>
       </Dialog>
     </div>

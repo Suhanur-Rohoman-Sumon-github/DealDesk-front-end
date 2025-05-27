@@ -120,9 +120,9 @@ export default function Signup() {
                   {...register("telegram")}
                   className="text-white"
                 />
-                {errors.tusername && (
+                {errors.telegram && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.tusername.message}
+                    {errors.telegram.message}
                   </p>
                 )}
               </div>

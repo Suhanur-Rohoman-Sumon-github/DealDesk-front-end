@@ -22,13 +22,6 @@ export default function AccountStatement({
     e.preventDefault();
     if (!form.description || !form.amount || isNaN(Number(form.amount))) return;
 
-    const newTransaction = {
-      description: form.description,
-      type: form.type,
-      amount: parseFloat(form.amount),
-      date: new Date().toLocaleString(),
-    };
-
     setForm({ description: "", type: "Debit", amount: "" });
   };
 
@@ -45,7 +38,7 @@ export default function AccountStatement({
         </div>
 
         <div className="mb-4">
-          <p className="text-sm font-semibold">Today's Starting Balance:</p>
+          <p className="text-sm font-semibold">Todays Starting Balance:</p>
           <p className="text-xl font-bold text-blue-600">
             ${startingBalance.toFixed(2)}
           </p>
@@ -65,7 +58,7 @@ export default function AccountStatement({
               </tr>
             </thead>
             <tbody>
-              {jabedaStatements.map((txn:any, index:number) => {
+              {jabedaStatements.map((txn: any, index: number) => {
                 if (txn.type === "Debit") {
                   currentBalance -= txn.amount;
                   console.log("currentBalance", currentBalance);

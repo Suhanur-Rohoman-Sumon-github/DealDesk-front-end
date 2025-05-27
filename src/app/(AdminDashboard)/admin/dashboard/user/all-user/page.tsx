@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button"; // You can use your custom button component
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import {
@@ -10,7 +10,19 @@ import {
   TableCell,
   TableHead,
   TableRow,
-} from "@/components/ui/table"; // Custom table components
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import {
+  useGetPendingUserDataQuery,
+  useUpdateMyTeligramChanelMutations,
+} from "@/hooks/User.hook";
 
 type User = {
   _id: string;
@@ -18,54 +30,40 @@ type User = {
   email: string;
   role: string;
   createdAt: string;
+  telegram: string;
 };
 
 const AllUsers = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data: PendingUserData, isLoading: isPendingLoading } =
+    useGetPendingUserDataQuery();
 
-  // Fake users data
-  const fakeUsers: User[] = [
-    {
-      _id: "1",
-      name: "John Doe",
-      email: "john.doe@example.com",
-      role: "admin",
-      createdAt: "2023-01-01T00:00:00Z",
-    },
-    {
-      _id: "2",
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      role: "user",
-      createdAt: "2023-02-01T00:00:00Z",
-    },
-    {
-      _id: "3",
-      name: "Alice Johnson",
-      email: "alice.johnson@example.com",
-      role: "user",
-      createdAt: "2023-03-01T00:00:00Z",
-    },
-  ];
+  const { mutate: updateProductMutation } =
+    useUpdateMyTeligramChanelMutations();
 
-  // Simulating a fetch call with fake data
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        // Simulating a delay like a real API call
-        setTimeout(() => {
-          setUsers(fakeUsers);
-          setLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
-        setLoading(false);
-      }
-    };
+  // Removed incorrect usage of mutate from a query hook
+  // State for managing the Telegram channel input and selected user ID
 
-    fetchUsers();
-  }, []);
+  const [telegramChannel, setTelegramChannel] = useState("");
+  const [selectUserEmail, setSelectUserEmail] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+
+  // You need to import and use the mutation hook for approving accounts
+  // For example, if you have a hook called useApproveAccountMutation:
+  // import { useApproveAccountMutation } from "@/hooks/User.hook";
+  // Uncomment and adjust the following line according to your actual hook:
+  // const [approveAccount, { isLoading: isApproving }] = useApproveAccountMutation();
+
+  // Placeholder, replace with actual hook
+
+  const handleApproveClick = (email: string) => {
+    setSelectUserEmail(email);
+    setOpen(true);
+  };
+
+  const handleApproveAccount = async () => {
+    if (!selectUserEmail || !telegramChannel) return;
+    updateProductMutation({ email: selectUserEmail, chanel: telegramChannel });
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -76,9 +74,9 @@ const AllUsers = () => {
         </Link>
       </Button>
 
-      <h1 className="text-3xl font-semibold mt-6 mb-4">All Users</h1>
+      <h1 className="text-3xl font-semibold mt-6 mb-4">Pending Users</h1>
 
-      {loading ? (
+      {isPendingLoading ? (
         <div>Loading...</div>
       ) : (
         <Table>
@@ -93,19 +91,22 @@ const AllUsers = () => {
           </TableHead>
 
           <TableBody>
-            {users.map((user) => (
+            {PendingUserData?.data?.map((user: User) => (
               <TableRow key={user._id}>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.role}</TableCell>
+                <TableCell>{user.telegram}</TableCell>
                 <TableCell>
                   {new Date(user.createdAt).toLocaleDateString()}
                 </TableCell>
                 <TableCell>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href={`/users/${user._id}`} className="text-blue-500">
-                      View Details
-                    </Link>
+                  <Button
+                    variant="default"
+                    size="sm"
+                    onClick={() => handleApproveClick(user.email)}
+                  >
+                    Approve Account
                   </Button>
                 </TableCell>
               </TableRow>
@@ -113,6 +114,31 @@ const AllUsers = () => {
           </TableBody>
         </Table>
       )}
+
+      {/* Approve Modal */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Approve User Account</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <label className="text-sm font-medium">
+              Enter Telegram Channel
+            </label>
+            <Input
+              type="text"
+              placeholder="@yourchannel"
+              value={telegramChannel}
+              onChange={(e) => setTelegramChannel(e.target.value)}
+            />
+          </div>
+          <DialogFooter className="mt-4">
+            <Button onClick={ handleApproveAccount}>
+              Approve Account
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

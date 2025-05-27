@@ -12,10 +12,11 @@ interface ProductCardProps {
   image: string;
   title: string;
   description: string;
-  price: string;
+  sellprice: string;
   rating: number;
   id: string;
   category: string;
+  price?: string | number;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -23,7 +24,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   image,
   title,
   description,
-  price,
+  sellprice,
   rating,
   category,
 }) => {
@@ -61,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <p className="text-sm text-gray-200">{description}</p>
 
             <div className="flex justify-between items-center">
-              <span className="text-xl font-bold text-white">{` $${price}`}</span>
+              <span className="text-xl font-bold text-white">{` $${sellprice}`}</span>
               <div className="flex items-center">
                 {[...Array(5)].map((_, index) => (
                   <svg

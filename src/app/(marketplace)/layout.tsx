@@ -9,6 +9,9 @@ import LiveChat from "@/components/marketplace/LiveChat";
 export const metadata: Metadata = {
   title: "Marketplace",
   description: "Live marketplace with products and live chat",
+  icons: {
+    icon: "/assets/Chat-GPT-Image-Apr-24-2025-02-07-44-PM-removebg-preview%20(2).webp",
+  },
 };
 
 export default function RootLayout({
@@ -41,12 +44,11 @@ export default function RootLayout({
             </div>
           </div>
 
-       
-<Script
-  id="tawk-to-script"
-  type="text/javascript"
-  dangerouslySetInnerHTML={{
-    __html: `
+          <Script
+            id="tawk-to-script"
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `
       var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
       (function () {
         var s1 = document.createElement("script"),
@@ -58,9 +60,8 @@ export default function RootLayout({
         s0.parentNode.insertBefore(s1, s0);
       })();
     `,
-  }}
-/>
-
+            }}
+          />
         </Providers>
       </body>
     </html>

@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useUserRegistrationsMutation } from "@/hooks/Auth.hook";
+import { useRouter } from "next/navigation";
 
 
 // Schema
@@ -24,7 +25,7 @@ const signupSchema = z
     username: z
       .string()
       .min(2, { message: "Name must be at least 2 characters" }),
-    tusername: z
+    telegram: z
       .string()
       .min(2, { message: "Name must be at least 2 characters" }),
     email: z.string().email({ message: "Please enter a valid email address" }),
@@ -47,7 +48,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { mutate: handleUserRegistration } = useUserRegistrationsMutation();
-
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -59,11 +60,14 @@ export default function Signup() {
       email: "",
       password: "",
       confirmPassword: "",
+      telegram: "",
       terms: false,
     },
   });
 
   const onSubmit = (data: SignupValues) => {
+    console.log("Form Data:", data);
+    router.push(`/AccountStatus?email=${data.email}`);
     handleUserRegistration(data);
   };
 
@@ -113,12 +117,12 @@ export default function Signup() {
                 <Input
                   type="text"
                   placeholder="Enter your teligram username"
-                  {...register("tusername")}
+                  {...register("telegram")}
                   className="text-white"
                 />
-                {errors.tusername && (
+                {errors.telegram && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.tusername.message}
+                    {errors.telegram.message}
                   </p>
                 )}
               </div>

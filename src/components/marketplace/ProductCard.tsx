@@ -16,6 +16,7 @@ interface ProductCardProps {
   rating: number;
   id: string;
   category: string;
+  price?: string | number;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({

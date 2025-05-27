@@ -106,7 +106,7 @@ const Page = () => {
                   image={product.images[0]}
                   title={product.title}
                   description={product.description}
-                  price={product.price}
+                  sellprice={product.price}
                   rating={product.numReviews}
                   category={product.category}
                 />

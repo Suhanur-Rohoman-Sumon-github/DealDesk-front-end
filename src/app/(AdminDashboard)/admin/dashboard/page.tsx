@@ -2,17 +2,20 @@
 import React, { useState } from "react";
 import { subDays } from "date-fns";
 import {
-  ShoppingBag,
-  DollarSign,
-  Users,
-  TrendingUp,
-  Package,
-  AlarmClock,
+  Wallet,
+  UserPlus,
+  PackageCheck,
+  PackageSearch,
+  Banknote,
+  CreditCard,
+  Boxes,
+  Flame,
 } from "lucide-react";
 import StatsCard from "@/components/Admindashboard/StatsCard";
 import SalesChart from "@/components/Admindashboard/SalesChart";
 import AccountStatement from "@/components/Admindashboard/AccountStatement";
 import { useGetAdminDashBoardDataQuery } from "@/hooks/User.hook";
+import Link from "next/link";
 
 // Mock data for testing
 const getMockSalesData = () => {
@@ -65,6 +68,8 @@ const AdminDashboard = () => {
     currentBalance,
     graphData,
     jabedaStatements,
+    pendingAccounts,
+    currentProducts,
   } = data.data;
   const salesData = getMockSalesData();
 
@@ -89,42 +94,83 @@ const AdminDashboard = () => {
         <StatsCard
           title="Today's Sell Amount"
           value={`$${todaysSellAmount.toLocaleString()}`}
-          icon={<DollarSign />}
+          icon={<Wallet />}
           percentage={calculatePercentage(
             todaysSellAmount,
             yesterdaysSellAmount
           )}
           isPositive={todaysSellAmount >= yesterdaysSellAmount}
-          className="bg-blue-50 border border-blue-200"
+          className="bg-rose-50 border border-rose-200"
         />
+
         <StatsCard
           title="Today's Completed Orders"
           value={todaysCompletedOrders}
-          icon={<ShoppingBag />}
+          icon={<PackageCheck />}
           percentage={calculatePercentage(
             todaysCompletedOrders,
             yesterdaysCompletedOrders
           )}
           isPositive={todaysCompletedOrders >= yesterdaysCompletedOrders}
-          className="bg-green-50 border border-green-200"
+          className="bg-emerald-50 border border-emerald-200"
         />
-        <StatsCard
-          title="Today's Pending Orders"
-          value={todaysPendingOrders}
-          icon={<AlarmClock />}
-          percentage={calculatePercentage(
-            todaysPendingOrders,
-            yesterdaysPendingOrders
-          )}
-          isPositive={todaysPendingOrders >= yesterdaysPendingOrders}
-          className="bg-yellow-50 border border-yellow-200"
-        />
+
+        <Link href={"/admin/dashboard/orders/orderList"}>
+          <StatsCard
+            title="Today's Pending Orders"
+            value={todaysPendingOrders}
+            icon={<PackageSearch />}
+            percentage={calculatePercentage(
+              todaysPendingOrders,
+              yesterdaysPendingOrders
+            )}
+            isPositive={todaysPendingOrders >= yesterdaysPendingOrders}
+            className="bg-orange-50 border border-orange-200"
+          />
+        </Link>
+
+        <Link href={"/admin/dashboard/user/all-user"}>
+          <StatsCard
+            title="New Users Today"
+            value={pendingAccounts}
+            icon={<UserPlus />}
+            percentage={calculatePercentage(
+              todaysPendingOrders,
+              yesterdaysPendingOrders
+            )}
+            isPositive={todaysPendingOrders >= yesterdaysPendingOrders}
+            className="bg-purple-50 border border-purple-200"
+          />
+        </Link>
 
         <StatsCard
           title="Lifetime Sell Amount"
           value={`$${lifetimeSellAmount.toLocaleString()}`}
-          icon={<TrendingUp />}
-          className="bg-indigo-50 border border-indigo-200"
+          icon={<Banknote />}
+          className="bg-cyan-50 border border-cyan-200"
+        />
+
+        <StatsCard
+          title="Current Balance"
+          value={currentBalance}
+          icon={<CreditCard />}
+          className="bg-lime-50 border border-lime-200"
+        />
+
+        <Link href={"/admin/dashboard/products/all-products"}>
+          <StatsCard
+            title="Current Products"
+            value={currentProducts}
+            icon={<Boxes />}
+            className="bg-fuchsia-50 border border-fuchsia-200"
+          />
+        </Link>
+
+        <StatsCard
+          title="🔥 Trending Metric"
+          value="N/A"
+          icon={<Flame />}
+          className="bg-yellow-100 border border-yellow-300"
         />
       </div>
 

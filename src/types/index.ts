@@ -97,6 +97,7 @@ export type ReviewData = {
   comment: string;
   ratings: number;
   timestamp: number;
+  
 };
 
 export type Category = {

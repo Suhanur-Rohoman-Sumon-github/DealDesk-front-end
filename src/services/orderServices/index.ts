@@ -42,7 +42,7 @@ export const createOrder = async (orderData: {
   totalAmount: number;
   paymentType: string; 
   transactionId: string; 
-  quantity: number;
+  quantity?: number;
 
 }) => {
   try {

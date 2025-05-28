@@ -87,7 +87,7 @@ export interface OrderData {
   paymentType: string;
   transactionId: string;
   productId?: string;
-  quantity: number;
+  quantity?: number;
 }
 
 export type ReviewData = {
@@ -97,7 +97,7 @@ export type ReviewData = {
   comment: string;
   ratings: number;
   timestamp: number;
-  
+
 };
 
 export type Category = {

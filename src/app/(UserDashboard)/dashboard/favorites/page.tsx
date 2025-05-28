@@ -31,7 +31,7 @@ const Favorites = () => {
               image={product.images[1]}
               title={product.title}
               description={product.description}
-              sellprice={product.buyPrice}
+              sellprice={product.sellprice}
               rating={5}
               id={product._id}
               category={product.category}

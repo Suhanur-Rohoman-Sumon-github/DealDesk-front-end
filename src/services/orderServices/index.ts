@@ -42,6 +42,8 @@ export const createOrder = async (orderData: {
   totalAmount: number;
   paymentType: string; 
   transactionId: string; 
+  quantity: number;
+
 }) => {
   try {
     const { data } = await axiosInstance.post("/orders", orderData);

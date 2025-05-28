@@ -87,6 +87,7 @@ export interface OrderData {
   paymentType: string;
   transactionId: string;
   productId?: string;
+  quantity: number;
 }
 
 export type ReviewData = {
@@ -121,7 +122,7 @@ export type Product = {
   categoryProps:string
   category:string
   subCategory:string
-  buyPrice:string ;
+  sellprice:string ;
 };
 
 export type Order = {

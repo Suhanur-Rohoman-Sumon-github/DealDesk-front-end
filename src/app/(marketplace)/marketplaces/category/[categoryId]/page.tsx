@@ -66,6 +66,8 @@ const Page = () => {
     categoryId: categoryId as string,
   });
 
+  console.log(data);
+
   if (isLoading) {
     return <ProductCardSkeleton />;
   }
@@ -106,7 +108,7 @@ const Page = () => {
                   image={product.images[0]}
                   title={product.title}
                   description={product.description}
-                  sellprice={product.price}
+                  sellprice={product.sellprice}
                   rating={product.numReviews}
                   category={product.category}
                 />

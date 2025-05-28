@@ -163,6 +163,7 @@ export function ProxyTables() {
       transactionId,
       products: `680d4183a986e84c27c2f0fe`,
       proxyAddress: `${selectedItem.proxyName} - ${selectedItem.quantity} proxies`,
+      quantity: 1,
     };
 
     addOrders(orderData);

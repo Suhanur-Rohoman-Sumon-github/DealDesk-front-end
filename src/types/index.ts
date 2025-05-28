@@ -121,7 +121,7 @@ export type Product = {
   categoryProps:string
   category:string
   subCategory:string
-  buyPrice:string ;
+  sellprice:string ;
 };
 
 export type Order = {

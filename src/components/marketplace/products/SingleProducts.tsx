@@ -65,7 +65,7 @@ const SingleProducts = ({ productId }: { productId: string }) => {
     description,
     name,
 
-    price,
+    sellprice,
 
     shippingAndReturns,
     category,
@@ -128,7 +128,7 @@ const SingleProducts = ({ productId }: { productId: string }) => {
             <h1 className="text-2xl font-bold mt-1">{name}</h1>
 
             <div className="flex justify-between items-center my-4 p-4 bg-white/10 backdrop-blur-md rounded-xl shadow border border-white/20">
-              <p className="text-xl font-semibold">${price}</p>
+              <p className="text-xl font-semibold">${sellprice}</p>
               <p className="flex items-center">
                 <FaCheck className="mr-2 text-green-400" />
                 In Stock

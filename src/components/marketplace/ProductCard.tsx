@@ -30,6 +30,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const { user } = useUser();
 
+  console.log(sellprice);
+
   const { mutate: addToFavorite } = useAddFavoritePostsMutations(id, user?.id);
 
   const handleAddfavorite = () => {

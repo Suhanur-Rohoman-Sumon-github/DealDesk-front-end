@@ -5,26 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MdShoppingCart } from "react-icons/md";
-
-const mockData = [
-  { country: "USA", zip: "10001", bank: "JPMORGAN CHASE", price: "16.00$" },
-  { country: "USA", zip: "20001", bank: "BANK OF AMERICA", price: "16.00$" },
-  { country: "USA", zip: "30301", bank: "WELLS FARGO", price: "16.00$" },
-  { country: "USA", zip: "60601", bank: "CITIBANK", price: "16.00$" },
-  { country: "USA", zip: "75201", bank: "US BANK", price: "16.00$" },
-  { country: "USA", zip: "85001", bank: "PNC BANK", price: "16.00$" },
-  { country: "USA", zip: "94101", bank: "NAVY FCU", price: "16.00$" },
-  { country: "USA", zip: "98101", bank: "CHASE BANK USA", price: "16.00$" },
-  { country: "USA", zip: "32225", bank: "REGIONS BANK", price: "16.00$" },
-  { country: "USA", zip: "40220", bank: "TRUIST", price: "16.00$" },
-  { country: "USA", zip: "73301", bank: "TD BANK", price: "16.00$" },
-  { country: "USA", zip: "48201", bank: "ALLY BANK", price: "16.00$" },
-  { country: "USA", zip: "55401", bank: "HUNTINGTON BANK", price: "16.00$" },
-  { country: "USA", zip: "33101", bank: "FIFTH THIRD BANK", price: "16.00$" },
-  { country: "USA", zip: "21201", bank: "KEYBANK", price: "16.00$" },
-];
+import { useGetSingleProductQuery } from "@/hooks/Products.hook";
 
 export default function DrivingLicense() {
+  const { data } = useGetSingleProductQuery("680d4536a986e84c27c2f119");
+  console.log(data);
   const [customZip, setCustomZip] = useState("");
   const [filters, setFilters] = useState({
     priceFrom: "",
@@ -33,6 +18,99 @@ export default function DrivingLicense() {
     zip: "",
     bank: "",
   });
+
+  const mockData = [
+    {
+      country: "USA",
+      zip: "10001",
+      bank: "JPMORGAN CHASE",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "20001",
+      bank: "BANK OF AMERICA",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "30301",
+      bank: "WELLS FARGO",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "60601",
+      bank: "CITIBANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "75201",
+      bank: "US BANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "85001",
+      bank: "PNC BANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "94101",
+      bank: "NAVY FCU",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "98101",
+      bank: "CHASE BANK USA",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "32225",
+      bank: "REGIONS BANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "40220",
+      bank: "TRUIST",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "73301",
+      bank: "TD BANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "48201",
+      bank: "ALLY BANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "55401",
+      bank: "HUNTINGTON BANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "33101",
+      bank: "FIFTH THIRD BANK",
+      price: `$ ${data?.sellprice}`,
+    },
+    {
+      country: "USA",
+      zip: "21201",
+      bank: "KEYBANK",
+      price: `$ ${data?.sellprice}`,
+    },
+  ];
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });

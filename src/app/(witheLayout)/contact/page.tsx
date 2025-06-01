@@ -1,8 +1,44 @@
 "use client";
 import Title from "@/components/title/Title";
 import Image from "next/image";
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const ContactUs = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    console.log({
+      name: formRef.current?.user_name?.value,
+      email: formRef.current?.user_email?.value,
+      message: formRef.current?.message?.value,
+    });
+
+    emailjs
+      .sendForm(
+        "service_zrde962", 
+        "template_443wx88", 
+        formRef.current!,
+        "XI8r1w3wdqbemG3mS" 
+      )
+      .then(
+        () => {
+          setSuccess("Message sent successfully!");
+          formRef.current?.reset();
+        },
+        (error) => {
+          setSuccess("Something went wrong. Please try again.");
+          console.error(error);
+        }
+      )
+      .finally(() => setLoading(false));
+  };
+
   return (
     <div className="max-w-7xl mx-auto py-16 px-6">
       <div>
@@ -12,10 +48,9 @@ const ContactUs = () => {
       </div>
       <Title title="Contact Us" subTitle="We would love to hear from you!" />
 
-      {/* Contact Information */}
       <div className="mt-16 py-12 px-6 bg-[rgba(255,255,255,0.05)] backdrop-blur-md border border-white/10 rounded-xl shadow-xl">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* Left: Text + Form */}
+          {/* Left: Form */}
           <div>
             <h2 className="text-3xl font-semibold text-white mb-4 text-center lg:text-left">
               Contact Us
@@ -26,12 +61,13 @@ const ContactUs = () => {
               <span className="text-blue-500">support@dealdesk.com</span>.
             </p>
 
-            {/* Contact Form */}
-            <form className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm text-white mb-1">Name</label>
                 <input
                   type="text"
+                  name="user_name"
+                  required
                   placeholder="Your Name"
                   className="w-full px-4 py-2 rounded-md bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-white/60"
                 />
@@ -40,6 +76,8 @@ const ContactUs = () => {
                 <label className="block text-sm text-white mb-1">Email</label>
                 <input
                   type="email"
+                  name="user_email"
+                  required
                   placeholder="you@example.com"
                   className="w-full px-4 py-2 rounded-md bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-white/60"
                 />
@@ -47,14 +85,23 @@ const ContactUs = () => {
               <div>
                 <label className="block text-sm text-white mb-1">Message</label>
                 <textarea
+                  name="message"
+                  required
                   rows={5}
                   placeholder="Your message..."
                   className="w-full px-4 py-2 rounded-md bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-white/60"
                 ></textarea>
               </div>
-              <button type="submit" className="w-full button-primary">
-                Send Message
+              <button
+                type="submit"
+                className="w-full button-primary"
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "Send Message"}
               </button>
+              {success && (
+                <p className="text-sm text-center mt-2 text-white">{success}</p>
+              )}
             </form>
           </div>
 

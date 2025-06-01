@@ -63,6 +63,7 @@ const AllUsers = () => {
   const handleApproveAccount = async () => {
     if (!selectUserEmail || !telegramChannel) return;
     updateProductMutation({ email: selectUserEmail, chanel: telegramChannel });
+    setOpen(false);
   };
 
   return (

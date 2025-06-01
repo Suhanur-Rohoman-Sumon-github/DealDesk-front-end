@@ -19,7 +19,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 
 import { Card } from "@/components/ui/card";
 import StepIndicator from "@/components/marketplace/buy/StepIndicator";
-import Link from "next/link";
+
 import { useGetMychanelQuery } from "@/hooks/User.hook";
 
 const BuyPageContent = () => {
@@ -44,7 +44,7 @@ const BuyPageContent = () => {
   );
   const { mutate: addOrders } = useCreateOrderMutation();
   const { data } = useGetMychanelQuery(user?.email || "");
-  console.log(data);
+
   const handleCopy = async () => {
     if (!selectedCrypto) return;
     try {
@@ -224,14 +224,14 @@ const BuyPageContent = () => {
           </p>
 
           <div className="">
-          
             <a
               href={data?.myChanel || "N/A"}
               target="_blank"
               rel="noopener noreferrer"
-              className="button-primary w-full text-center"
+              className="button-primary w-full text-center flex items-center"
             >
-              My Report chanel 🌱
+              visit your Report chanel{" "}
+              <FaTelegramPlane className="text-blue-400 " />
             </a>
           </div>
         </div>

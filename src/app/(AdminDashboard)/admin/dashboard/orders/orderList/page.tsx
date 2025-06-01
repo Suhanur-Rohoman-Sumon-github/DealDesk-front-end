@@ -30,6 +30,8 @@ import {
   useGetAllOrdersQuery,
   useUpdateOrderMutation,
 } from "@/hooks/Order.hooks";
+import { FaTelegramPlane } from "react-icons/fa";
+import { Badge } from "@/components/ui/badge";
 
 const OrdersList = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -129,13 +131,14 @@ const OrdersList = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Order ID</TableHead>
+              <TableHead>order id</TableHead>
               <TableHead>Customer</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Items</TableHead>
               <TableHead>Total</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Transaction ID</TableHead>
+
               {allOrder?.data[0]?.ZipCode && <TableHead>Zip Code</TableHead>}
               {allOrder?.data[0]?.proxyAddress && (
                 <TableHead>Proxy address</TableHead>
@@ -155,12 +158,37 @@ const OrdersList = () => {
                   </TableCell>
                   <TableCell>{order?.products?.title}</TableCell>
                   <TableCell>${order.totalAmount}</TableCell>
-                  <TableCell>{order.orderStatus}</TableCell>
+                  <TableCell>
+                    {(() => {
+                      const status = order.orderStatus.toLowerCase();
+                      if (status === "completed") {
+                        return (
+                          <Badge variant="secondary">{order.orderStatus}</Badge>
+                        );
+                      } else if (status === "pending") {
+                        return (
+                          <Badge variant="outline">{order.orderStatus}</Badge>
+                        );
+                      } else if (status === "cancelled") {
+                        return (
+                          <Badge variant="destructive">
+                            {order.orderStatus}
+                          </Badge>
+                        );
+                      } else {
+                        return (
+                          <Badge variant="secondary">{order.orderStatus}</Badge>
+                        );
+                      }
+                    })()}
+                  </TableCell>
                   <TableCell>{order.transactionId}</TableCell>
+
                   {order.ZipCode && <TableCell>{order.ZipCode}</TableCell>}
                   {order.proxyAddress && (
                     <TableCell>{order.proxyAddress}</TableCell>
                   )}
+
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -176,6 +204,18 @@ const OrdersList = () => {
                           onClick={() => updtareOrder(order._id)}
                         >
                           Update Status
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="">
+                          <div className="">
+                            <a
+                              href={order?.userId?.myChanel || "N/A"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-center flex items-center"
+                            >
+                              Shift order
+                            </a>
+                          </div>
                         </DropdownMenuItem>
                         <DropdownMenuItem>Print Invoice</DropdownMenuItem>
                         <DropdownMenuItem className="text-red-600">

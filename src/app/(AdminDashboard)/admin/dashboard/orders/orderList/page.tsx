@@ -30,7 +30,7 @@ import {
   useGetAllOrdersQuery,
   useUpdateOrderMutation,
 } from "@/hooks/Order.hooks";
-import { FaTelegramPlane } from "react-icons/fa";
+
 import { Badge } from "@/components/ui/badge";
 
 const OrdersList = () => {
@@ -163,11 +163,16 @@ const OrdersList = () => {
                       const status = order.orderStatus.toLowerCase();
                       if (status === "completed") {
                         return (
-                          <Badge variant="secondary">{order.orderStatus}</Badge>
+                          <Badge
+                            className="bg-green-500 text-white dark:bg-green-600"
+                            variant="secondary"
+                          >
+                            {order.orderStatus}
+                          </Badge>
                         );
                       } else if (status === "pending") {
                         return (
-                          <Badge variant="outline">{order.orderStatus}</Badge>
+                          <Badge  className="bg-blue-500 text-white dark:bg-blue-600" variant="outline">{order.orderStatus}</Badge>
                         );
                       } else if (status === "cancelled") {
                         return (

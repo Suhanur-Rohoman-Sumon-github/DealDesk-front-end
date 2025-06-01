@@ -19,7 +19,8 @@ import { FaTelegramPlane } from "react-icons/fa";
 
 import { Card } from "@/components/ui/card";
 import StepIndicator from "@/components/marketplace/buy/StepIndicator";
-import Link from "next/link";
+
+import { useGetMychanelQuery } from "@/hooks/User.hook";
 
 const BuyPageContent = () => {
   const cryptoAddresses: Record<string, string> = {
@@ -37,10 +38,12 @@ const BuyPageContent = () => {
   const [cryptoPrice, setCryptoPrice] = useState<number | null>(null);
 
   const { user } = useUser();
+
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
     productId || ""
   );
   const { mutate: addOrders } = useCreateOrderMutation();
+  const { data } = useGetMychanelQuery(user?.email || "");
 
   const handleCopy = async () => {
     if (!selectedCrypto) return;
@@ -116,8 +119,6 @@ const BuyPageContent = () => {
   const convertedAmount = cryptoPrice
     ? (sellprice / cryptoPrice).toFixed(6)
     : null;
-  console.log("Converted amount:", convertedAmount);
-  console.log("Crypto price:", cryptoPrice);
 
   return (
     <div className="min-h-screen py-10 px-4">
@@ -222,9 +223,17 @@ const BuyPageContent = () => {
             your product as fast as possible.
           </p>
 
-          <Link href="/marketplaces">
-            <Button className="button-primary">Go to Marketplace</Button>
-          </Link>
+          <div className="">
+            <a
+              href={data?.myChanel || "N/A"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-primary w-full text-center flex items-center"
+            >
+              visit your Report chanel{" "}
+              <FaTelegramPlane className="text-blue-400 " />
+            </a>
+          </div>
         </div>
       )}
     </div>

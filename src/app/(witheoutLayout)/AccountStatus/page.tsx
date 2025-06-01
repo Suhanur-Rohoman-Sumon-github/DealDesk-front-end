@@ -18,8 +18,6 @@ const AccountStatusPage = () => {
 
   const { data, isLoading } = useGetMychanelQuery(email || "");
 
-  console.log(data, "My Chanel Data");
-
   // Watch for approval state
   useEffect(() => {
     if (data && data.isPending === false) {
@@ -59,10 +57,14 @@ const AccountStatusPage = () => {
     <div className="flex flex-col justify-center items-center min-h-screen bg-[#04091d] text-white px-4">
       <div className="max-w-md w-full p-8 bg-white/10 backdrop-blur-md rounded-lg shadow-lg text-center">
         <h1 className="text-3xl font-bold mb-4">
-          {isApproved ? "Account Approved ✅" : "Account Status: Pending..."}
+          {isApproved
+            ? "Account Approved ✅"
+            : timeLeft <= 0
+            ? "Something Went Wrong ❌"
+            : "Account Status: Pending..."}
         </h1>
 
-        {!isApproved && (
+        {!isApproved && timeLeft > 0 && (
           <>
             <p className="text-lg mb-6">
               Please wait while we verify your account.
@@ -71,6 +73,16 @@ const AccountStatusPage = () => {
               {formatTime(timeLeft)}
             </div>
           </>
+        )}
+
+        {!isApproved && timeLeft <= 0 && (
+          <div className="text-red-400 text-lg mt-4">
+            Something went wrong. 😞
+            <br />
+            We couldn’t verify your credentials.
+            <br />
+            Please double-check your Telegram channel and try again.
+          </div>
         )}
 
         {isApproved && (
@@ -100,10 +112,10 @@ const AccountStatusPage = () => {
             </div>
 
             <button
-              onClick={() => router.push("/")}
-              className="w-full mt-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-md font-semibold transition-all"
+              onClick={() => router.push("/login")}
+              className="w-full button-primary mt-6"
             >
-              Back to Home
+              Back to Login
             </button>
           </div>
         )}

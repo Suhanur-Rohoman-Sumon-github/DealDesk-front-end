@@ -67,6 +67,7 @@ export const getCurrentUser = async () => {
       role: string;
       status: string;
       profilePicture: string;
+      myChanel: string;
     };
   
 
@@ -78,6 +79,7 @@ export const getCurrentUser = async () => {
       role: decodedToken.role,
       status: decodedToken.status,
       profilePicture: decodedToken.profilePicture,
+      myChanel: decodedToken.myChanel,
     };
   }
 

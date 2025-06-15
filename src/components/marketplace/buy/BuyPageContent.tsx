@@ -12,7 +12,10 @@ import {
   SelectContent,
 } from "@/components/ui/select";
 import { useSearchParams } from "next/navigation";
-import { useGetSingleProductQuery } from "@/hooks/Products.hook";
+import {
+  useGetSingleProductQuery,
+  useUpdateProductMutation,
+} from "@/hooks/Products.hook";
 import { useCreateOrderMutation } from "@/hooks/Order.hooks";
 import { useUser } from "@/context/userProvider";
 import { FaTelegramPlane } from "react-icons/fa";
@@ -24,14 +27,15 @@ import { useGetMychanelQuery } from "@/hooks/User.hook";
 
 const BuyPageContent = () => {
   const cryptoAddresses: Record<string, string> = {
-    BTC: "15wQLswK6ueGvUtrNeSz3QUEkifADm9shd",
-    LTC: "LWHY9qM5F4iP7bjQoKGUqtMcjfZcDAtj6y",
-    TRC20: "TCBg11s7pfxK7gfb5pALLHTktC3Q2t5aHP",
+    BTC: "1BtJ6AxMExuryje93vwcwpprq1J578xGS3",
+    LTC: "LTaDSKuFfb1miHB8GVAmzAjMsgGtdfbpDW",
+    TRC20: "TGhhaFQNZJochD12v3s6i36R89PcfkkqmU",
   };
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");
   const zip = searchParams.get("zip");
   const [copied, setCopied] = useState(false);
+  const [countdown, setCountdown] = useState(1800);
   const [step, setStep] = useState(1);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
@@ -42,6 +46,9 @@ const BuyPageContent = () => {
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
     productId || ""
   );
+
+  console.log("Single Product Data:", singleProducts);
+  const { mutate: updataProducts } = useUpdateProductMutation();
   const { mutate: addOrders } = useCreateOrderMutation();
   const { data } = useGetMychanelQuery(user?.email || "");
 
@@ -89,8 +96,24 @@ const BuyPageContent = () => {
     }
   };
 
+  useEffect(() => {
+    if (singleProducts?.totalPrice === 0 && countdown > 0) {
+      const interval = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [singleProducts, countdown]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
+
   const handleConfirmOrder = () => {
-    console.log("Button clicked");
     if (transactionId && user?.id && productId) {
       const orderData = {
         userId: user.id,
@@ -102,6 +125,7 @@ const BuyPageContent = () => {
         ZipCode: zip,
       };
       addOrders(orderData);
+      updataProducts({ productId, updateData: { totalPrice: 0 } });
       console.log("Order data:", orderData);
       setStep(3);
     }
@@ -115,13 +139,28 @@ const BuyPageContent = () => {
     );
   }
 
-  const { images, description, name, sellprice } = singleProducts;
+  const { images, description, name, totalPrice, status } = singleProducts;
+  console.log(status);
   const convertedAmount = cryptoPrice
-    ? (sellprice / cryptoPrice).toFixed(6)
+    ? (totalPrice / cryptoPrice).toFixed(6)
     : null;
 
   return (
     <div className="min-h-screen py-10 px-4">
+      {singleProducts?.status === "outOfStock" && (
+        <div className="absolute inset-0 z-50 bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-center justify-center text-center rounded-2xl">
+          <h2 className="text-3xl font-bold text-white mb-2">
+            Product Currently Out of Stock
+          </h2>
+          <p className="text-white/80 mb-4">
+            Please wait{" "}
+            <span className="font-semibold">{formatTime(countdown)}</span>
+          </p>
+          <p className="text-white/70 text-sm">
+            Well be back soon. Thank you for your patience.
+          </p>
+        </div>
+      )}
       <div className="">
         <StepIndicator currentStep={step} />
       </div>
@@ -137,7 +176,7 @@ const BuyPageContent = () => {
               className="mb-6 rounded-lg shadow-md"
             />
             <h2 className="text-2xl font-bold text-white mb-4">{name}</h2>
-            <p className="text-gray-300 mb-2">{`Price: $${sellprice}`}</p>
+            <p className="text-gray-300 mb-2">{`Price: $${totalPrice}`}</p>
             <p className="text-gray-300 text-center">
               {description.length > 100
                 ? description.slice(0, 100) + "..."

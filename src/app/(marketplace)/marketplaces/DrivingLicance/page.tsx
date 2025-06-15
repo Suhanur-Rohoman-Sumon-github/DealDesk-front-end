@@ -5,11 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MdShoppingCart } from "react-icons/md";
-import { useGetSingleProductQuery } from "@/hooks/Products.hook";
+import {
+  useGetSingleProductQuery,
+  useUpdateProductMutation,
+} from "@/hooks/Products.hook";
 
 export default function DrivingLicense() {
   const { data } = useGetSingleProductQuery("680d4536a986e84c27c2f119");
-  console.log(data);
+  const { mutate: updataProducts } = useUpdateProductMutation();
   const [customZip, setCustomZip] = useState("");
   const [filters, setFilters] = useState({
     priceFrom: "",
@@ -18,6 +21,17 @@ export default function DrivingLicense() {
     zip: "",
     bank: "",
   });
+
+  const updatePrice = () => {
+ 
+      updataProducts({
+        productId: "680d4536a986e84c27c2f119",
+        updateData: {
+          totalPrice: data.sellprice, // Increment price by 1 for demonstration
+        },
+      });
+    
+  };
 
   const mockData = [
     {
@@ -208,7 +222,10 @@ export default function DrivingLicense() {
                       item.zip
                     }`}
                   >
-                    <button className="w-full button-primary">
+                    <button
+                      onClick={updatePrice}
+                      className="w-full button-primary"
+                    >
                       <MdShoppingCart /> Buy
                     </button>
                   </Link>

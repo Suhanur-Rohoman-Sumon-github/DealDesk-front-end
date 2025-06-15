@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdShoppingCart } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdHome } from "react-icons/io";
@@ -11,16 +11,35 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LightGelary from "./LightGelary";
 
 import Link from "next/link";
-import { useGetSingleProductQuery } from "@/hooks/Products.hook";
+import {
+  useGetSingleProductQuery,
+  useUpdateProductMutation,
+} from "@/hooks/Products.hook";
 import SingleProductSkeleton from "@/components/skeleton/SingleProductSkeleton";
 // make sure this exists
 
 const SingleProducts = ({ productId }: { productId: string }) => {
   const [quantity, setQuantity] = useState(1);
+  const maxQuantity = 20;
+  const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 minutes in seconds
 
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
     productId ? productId : ""
   );
+  console.log("Single Product Data:", singleProducts);
+  useEffect(() => {
+    if (singleProducts?.status !== "inStock") {
+      const interval = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) clearInterval(interval);
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [singleProducts?.status]);
+
+  const { mutate: updataProducts } = useUpdateProductMutation();
 
   if (isLoading) {
     return (
@@ -60,158 +79,175 @@ const SingleProducts = ({ productId }: { productId: string }) => {
 
   // Dummy related products
 
-  const {
-    images,
-    description,
-    name,
+  const { images, description, name, sellprice, shippingAndReturns, category } =
+    singleProducts;
 
-    sellprice,
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
 
-    shippingAndReturns,
-    category,
-  } = singleProducts;
+  const totalPrice = Math.min(quantity, maxQuantity) * sellprice;
+  const updateTotalPrice = (productId: string) => {
+    updataProducts({ productId, updateData: { totalPrice } });
+  };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Product Details */}
-      <div className="flex flex-col lg:flex-row gap-8 border-b pb-8">
-        <div className="lg:w-[50%] flex flex-col items-center mt-4">
-          <div className="w-full p-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
-            <LightGelary images={images} />
-          </div>
+    <div>
+      <div className="container mx-auto px-4 py-8">
+        {/* Product Details */}
+        <div className="flex flex-col lg:flex-row gap-8 border-b pb-8">
+          <div className="lg:w-[50%] flex flex-col items-center mt-4">
+            <div className="w-full p-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
+              <LightGelary images={images} />
+            </div>
 
-          <Tabs defaultValue="description" className="w-full mt-6">
-            <TabsList className="flex space-x-4 w-full bg-transparent text-white">
-              <TabsTrigger
+            <Tabs defaultValue="description" className="w-full mt-6">
+              <TabsList className="flex space-x-4 w-full bg-transparent text-white">
+                <TabsTrigger
+                  value="description"
+                  className="w-full py-4 mt-2 border border-white flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all
+          data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#572c7c] data-[state=active]:to-[#9133df]
+          data-[state=active]:border-2 data-[state=active]:border-[#572c7c] hover:bg-gradient-to-r hover:from-[#572c7c] hover:to-[#9133df]"
+                >
+                  Product Description
+                </TabsTrigger>
+                <TabsTrigger
+                  value="shipping"
+                  className="w-full py-4 mt-2 border border-white flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all
+          data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#572c7c] data-[state=active]:to-[#9133df]
+          data-[state=active]:border-2 data-[state=active]:border-[#572c7c] hover:bg-gradient-to-r hover:from-[#572c7c] hover:to-[#9133df]"
+                >
+                  Shipping Info
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent
                 value="description"
-                className="w-full py-4 mt-2 border border-white flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all
-          data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#572c7c] data-[state=active]:to-[#9133df]
-          data-[state=active]:border-2 data-[state=active]:border-[#572c7c] hover:bg-gradient-to-r hover:from-[#572c7c] hover:to-[#9133df]"
+                className="mt-4 p-6 backdrop-blur-md bg-white/10 border border-white/20 shadow-xl rounded-2xl"
               >
-                Product Description
-              </TabsTrigger>
-              <TabsTrigger
+                <h3 className="font-bold text-xl mb-2 text-white">
+                  Product Description
+                </h3>
+                <p className="text-white/90">{description}</p>
+              </TabsContent>
+
+              <TabsContent
                 value="shipping"
-                className="w-full py-4 mt-2 border border-white flex items-center justify-center space-x-2 rounded-md text-white text-xs sm:text-sm transition-all
-          data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#572c7c] data-[state=active]:to-[#9133df]
-          data-[state=active]:border-2 data-[state=active]:border-[#572c7c] hover:bg-gradient-to-r hover:from-[#572c7c] hover:to-[#9133df]"
+                className="mt-4 p-6 backdrop-blur-md bg-white/10 border border-white/20 shadow-xl rounded-2xl"
               >
-                Shipping Info
-              </TabsTrigger>
-            </TabsList>
+                <h3 className="font-bold text-xl mb-2 text-white">
+                  Shipping Information
+                </h3>
+                <p className="text-white/90">{shippingAndReturns}</p>
+              </TabsContent>
+            </Tabs>
+          </div>
 
-            <TabsContent
-              value="description"
-              className="mt-4 p-6 backdrop-blur-md bg-white/10 border border-white/20 shadow-xl rounded-2xl"
-            >
-              <h3 className="font-bold text-xl mb-2 text-white">
-                Product Description
-              </h3>
-              <p className="text-white/90">{description}</p>
-            </TabsContent>
+          <div className="md:w-1/2 p-4 h-full text-white space-y-4">
+            <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20">
+              <p className="text-sm">{`Category : ${category}`}</p>
+              <h1 className="text-2xl font-bold mt-1">{name}</h1>
 
-            <TabsContent
-              value="shipping"
-              className="mt-4 p-6 backdrop-blur-md bg-white/10 border border-white/20 shadow-xl rounded-2xl"
-            >
-              <h3 className="font-bold text-xl mb-2 text-white">
-                Shipping Information
-              </h3>
-              <p className="text-white/90">{shippingAndReturns}</p>
-            </TabsContent>
-          </Tabs>
-        </div>
+              <div className="flex justify-between items-center my-4 p-4 bg-white/10 backdrop-blur-md rounded-xl shadow border border-white/20">
+                <p className="text-sm text-white/80">
+                  Total:{" "}
+                  <span className="font-semibold text-white">
+                    ${totalPrice}
+                  </span>
+                </p>
+                <p className="flex items-center">
+                  <FaCheck className="mr-2 text-green-400" />
+                  In Stock
+                </p>
+              </div>
 
-        <div className="md:w-1/2 p-4 h-full text-white space-y-4">
-          <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20">
-            <p className="text-sm">{`Category : ${category}`}</p>
-            <h1 className="text-2xl font-bold mt-1">{name}</h1>
+              <div className="mt-4 w-full flex items-center justify-between">
+                <p className="text-xl font-bold text-white mb-2">Quantity</p>
+                <div className="flex items-center border border-white/20 rounded-md overflow-hidden">
+                  <button
+                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                    className="px-3 py-2 text-white hover:bg-white/20 transition"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    min={1}
+                    max={maxQuantity}
+                    value={quantity}
+                    onChange={(e) =>
+                      setQuantity(
+                        Math.max(
+                          1,
+                          Math.min(maxQuantity, parseInt(e.target.value) || 1)
+                        )
+                      )
+                    }
+                    className="w-16 text-center bg-transparent text-white outline-none"
+                  />
+                  <button
+                    onClick={() =>
+                      setQuantity((prev) => Math.min(maxQuantity, prev + 1))
+                    }
+                    className="px-3 py-2 text-white hover:bg-white/20 transition"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
 
-            <div className="flex justify-between items-center my-4 p-4 bg-white/10 backdrop-blur-md rounded-xl shadow border border-white/20">
-              <p className="text-xl font-semibold">${sellprice}</p>
-              <p className="flex items-center">
-                <FaCheck className="mr-2 text-green-400" />
-                In Stock
+              <p className="mt-2 text-center border border-white/20 bg-white/10 backdrop-blur-md rounded p-2 text-xs">
+                Pay faster, and we deliver faster — your convenience is our
+                priority.
               </p>
-            </div>
 
-            <div className="mt-4 w-full flex items-center justify-between">
-              <p className="text-xl font-bold text-white mb-2">Quantity</p>
-              <div className="flex items-center w-32 rounded-xl overflow-hidden backdrop-blur-md bg-white/10 border border-white/20 shadow-sm">
-                <button
-                  onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                  className="px-3 py-2 text-white hover:bg-white/20 transition"
+              <div className="flex space-x-4 my-4">
+                <Link
+                  className="w-full"
+                  href={`/marketplaces/buy?productId=${productId}`}
                 >
-                  -
-                </button>
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={(e) =>
-                    setQuantity(
-                      Math.max(1, Math.min(99, parseInt(e.target.value) || 1))
-                    )
-                  }
-                  className="w-full text-center bg-transparent text-white outline-none py-2"
-                  min={1}
-                  max={99}
-                />
-                <button
-                  onClick={() => setQuantity((prev) => Math.min(99, prev + 1))}
-                  className="px-3 py-2 text-white hover:bg-white/20 transition"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            <p className="mt-2 text-center border border-white/20 bg-white/10 backdrop-blur-md rounded p-2 text-xs">
-              Pay faster, and we deliver faster — your convenience is our
-              priority.
-            </p>
-
-            <div className="flex space-x-4 my-4">
-              <Link
-                className="w-full"
-                href={`/marketplaces/buy?productId=${productId}`}
-              >
-                <button className="w-full button-primary">
-                  <MdShoppingCart /> Buy Now
-                </button>
-              </Link>
-            </div>
-
-            <div className="flex flex-col lg:flex-row justify-between mt-4 gap-4">
-              <div className="p-4 border border-white/20 bg-white/10 backdrop-blur-md w-full rounded-xl shadow-md">
-                <p className="font-bold flex items-center gap-2 mb-1 text-white">
-                  <FaLocationDot className="text-red-500" />
-                  Find Us
-                </p>
-                <p className="text-white/90 text-sm">
-                  Our services are available locally. Reach out to us to know if
-                  we serve your area.
-                </p>
+                  <button
+                    onClick={() => updateTotalPrice(productId)}
+                    className="w-full button-primary"
+                  >
+                    <MdShoppingCart /> Buy Now
+                  </button>
+                </Link>
               </div>
 
-              <div className="p-4 border border-white/20 bg-white/10 backdrop-blur-md w-full rounded-xl shadow-md">
-                <p className="font-bold flex items-center gap-2 mb-1 text-white">
-                  <IoMdHome className="text-red-500" />
-                  Get Service
-                </p>
-                <p className="text-white/90 text-sm">
-                  We provide personalized service directly at your doorstep or
-                  preferred location.
-                </p>
+              <div className="flex flex-col lg:flex-row justify-between mt-4 gap-4">
+                <div className="p-4 border border-white/20 bg-white/10 backdrop-blur-md w-full rounded-xl shadow-md">
+                  <p className="font-bold flex items-center gap-2 mb-1 text-white">
+                    <FaLocationDot className="text-red-500" />
+                    Find Us
+                  </p>
+                  <p className="text-white/90 text-sm">
+                    Our services are available locally. Reach out to us to know
+                    if we serve your area.
+                  </p>
+                </div>
+
+                <div className="p-4 border border-white/20 bg-white/10 backdrop-blur-md w-full rounded-xl shadow-md">
+                  <p className="font-bold flex items-center gap-2 mb-1 text-white">
+                    <IoMdHome className="text-red-500" />
+                    Get Service
+                  </p>
+                  <p className="text-white/90 text-sm">
+                    We provide personalized service directly at your doorstep or
+                    preferred location.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Description */}
-      <div className="mt-8 border-b pb-8">
-        {/* Reviews */}
-        {/* <div className="mt-8">
+        {/* Description */}
+        <div className="mt-8 border-b pb-8">
+          {/* Reviews */}
+          {/* <div className="mt-8">
           <h2 className="text-2xl font-semibold mb-4 text-white">
             Customer Reviews
           </h2>
@@ -258,15 +294,15 @@ const SingleProducts = ({ productId }: { productId: string }) => {
             </p>
           )}
         </div> */}
-      </div>
+        </div>
 
-      {/* Related Products */}
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4 text-white">
-          More you should like
-        </h2>
-        <div className="">
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Related Products */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-semibold mb-4 text-white">
+            More you should like
+          </h2>
+          <div className="">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.slice(0, 8).map((product, index) => (
               <ProductCard
                 key={index}
@@ -278,8 +314,22 @@ const SingleProducts = ({ productId }: { productId: string }) => {
               />
             ))}
           </div> */}
+          </div>
         </div>
       </div>
+      {singleProducts?.status !== "inStock" && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-md z-10 max-w-5xl mx-auto">
+          <div className="text-center bg-white/50 p-6 rounded-2xl shadow-xl backdrop-blur-xl border border-white">
+            <h2 className="text-xl font-semibold mb-2 text-gray-800">
+              We are trying to restock.
+            </h2>
+            <p className="text-gray-600 mb-4">Please wait 30 minutes.</p>
+            <div className="text-2xl font-mono button-primary p-2 rounded-md">
+              {formatTime(timeLeft)}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

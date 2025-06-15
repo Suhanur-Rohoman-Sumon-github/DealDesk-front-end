@@ -12,7 +12,6 @@ const page = () => {
     <div className=" ">
       <Banner />
       <AgencyStats />
-
       <PopularServices />
       <ClientReviews />
       <OurTeam />

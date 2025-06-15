@@ -31,7 +31,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { FaBars } from "react-icons/fa";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -47,7 +46,7 @@ const getStatusColor = (status: string) => {
 };
 
 const ProductTable = () => {
-  const { data: allProduct, refetch } = useGetAllProductsQuery({
+  const { data: allProduct } = useGetAllProductsQuery({
     sort: "",
     searchTerm: "",
   });
@@ -86,6 +85,19 @@ const ProductTable = () => {
     setIsModalOpen(true);
   };
 
+  const updateStatus = (productId: string) => {
+    updateProductMutation({
+      productId,
+      updateData: { status: "outOfStock" },
+    });
+  };
+  const restock = (productId: string) => {
+    updateProductMutation({
+      productId,
+      updateData: { status: "inStock" },
+    });
+  };
+
   const handleCloseModal = () => {
     const productId = selectedProduct?._id;
 
@@ -101,10 +113,6 @@ const ProductTable = () => {
       updateData: { sellprice: newPrice, buyPrice },
     });
   };
-
-  useEffect(() => {
-    refetch();
-  }, [allProduct, refetch]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -164,11 +172,19 @@ const ProductTable = () => {
                           <MoreVertical className="w-4 h-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align="end" className="z-50">
                         <DropdownMenuItem
                           onClick={() => handleUpdateClick(product)}
                         >
                           Update
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => restock(product._id)}>
+                          Make Restock
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => updateStatus(product._id)}
+                        >
+                          Update Stock Status
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           className="text-red-600"
@@ -181,65 +197,6 @@ const ProductTable = () => {
                   </TableCell>
                 </TableRow>
               ))}
-            </TableBody>
-          </Table>
-        </TabsContent>
-
-        <TabsContent value="in-stock">
-          <Table className="border rounded-md">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Product Name</TableHead>
-                <TableHead>SKU</TableHead>
-                <TableHead>Price</TableHead>
-                <TableHead>Stock</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredProducts
-                ?.filter((p: any) => p.status === "In Stock")
-                .map((product: any) => (
-                  <TableRow key={product.id}>
-                    <TableCell className="font-medium">
-                      {product.title}
-                    </TableCell>
-                    <TableCell>{product.sku}</TableCell>
-                    <TableCell>${product.sellprice.toFixed(2)}</TableCell>
-                    <TableCell>{product.stock}</TableCell>
-                    <TableCell>
-                      <Badge
-                        className={getStatusColor(product.status)}
-                        variant="outline"
-                      >
-                        {product.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <FaBars className="w-4 h-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem
-                            onClick={() => handleUpdateClick(product)}
-                          >
-                            Update
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            className="text-red-600"
-                            onClick={() => console.log("Delete", product.id)}
-                          >
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))}
             </TableBody>
           </Table>
         </TabsContent>

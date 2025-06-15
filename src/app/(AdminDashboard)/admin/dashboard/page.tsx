@@ -18,11 +18,6 @@ import Link from "next/link";
 
 // Mock data for testing
 
-
-
-
-
-
 const AdminDashboard = () => {
   const { data, isLoading } = useGetAdminDashBoardDataQuery();
   if (isLoading) return <div>Loading...</div>;
@@ -39,9 +34,6 @@ const AdminDashboard = () => {
     pendingAccounts,
     currentProducts,
   } = data.data;
-  
-
-  console.log("Today's Sell Amount", todaysSellAmount);
 
   const calculatePercentage = (today: number, yesterday: number): number => {
     if (yesterday === 0) return today === 0 ? 0 : 100;
@@ -54,10 +46,8 @@ const AdminDashboard = () => {
 
   const yesterdaysPendingOrders = 8;
 
-
-
   return (
-    <div className=" py-24 px-4 ">
+    <div className="  px-4 ">
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Today's Sell Amount"
@@ -134,12 +124,14 @@ const AdminDashboard = () => {
           />
         </Link>
 
-        <StatsCard
-          title="🔥 Trending Metric"
-          value="N/A"
-          icon={<Flame />}
-          className="bg-yellow-100 border border-yellow-300"
-        />
+        <Link href={"/admin/dashboard/admins"}>
+          <StatsCard
+            title="🔥 Active Admins"
+            value="2"
+            icon={<Flame />}
+            className="bg-yellow-100 border border-yellow-300"
+          />
+        </Link>
       </div>
 
       <div className="grid gap-6 w-full mt-4">

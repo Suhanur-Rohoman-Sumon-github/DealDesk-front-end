@@ -35,6 +35,7 @@ const BuyPageContent = () => {
   const productId = searchParams.get("productId");
   const zip = searchParams.get("zip");
   const [copied, setCopied] = useState(false);
+  const [countdown, setCountdown] = useState(1800);
   const [step, setStep] = useState(1);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [transactionId, setTransactionId] = useState("");
@@ -45,6 +46,8 @@ const BuyPageContent = () => {
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
     productId || ""
   );
+
+  console.log("Single Product Data:", singleProducts);
   const { mutate: updataProducts } = useUpdateProductMutation();
   const { mutate: addOrders } = useCreateOrderMutation();
   const { data } = useGetMychanelQuery(user?.email || "");
@@ -93,6 +96,23 @@ const BuyPageContent = () => {
     }
   };
 
+  useEffect(() => {
+    if (singleProducts?.totalPrice === 0 && countdown > 0) {
+      const interval = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [singleProducts, countdown]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
+
   const handleConfirmOrder = () => {
     if (transactionId && user?.id && productId) {
       const orderData = {
@@ -119,13 +139,28 @@ const BuyPageContent = () => {
     );
   }
 
-  const { images, description, name, totalPrice } = singleProducts;
+  const { images, description, name, totalPrice, status } = singleProducts;
+  console.log(status);
   const convertedAmount = cryptoPrice
     ? (totalPrice / cryptoPrice).toFixed(6)
     : null;
 
   return (
     <div className="min-h-screen py-10 px-4">
+      {singleProducts?.status === "outOfStock" && (
+        <div className="absolute inset-0 z-50 bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-center justify-center text-center rounded-2xl">
+          <h2 className="text-3xl font-bold text-white mb-2">
+            Product Currently Out of Stock
+          </h2>
+          <p className="text-white/80 mb-4">
+            Please wait{" "}
+            <span className="font-semibold">{formatTime(countdown)}</span>
+          </p>
+          <p className="text-white/70 text-sm">
+            We'll be back soon. Thank you for your patience.
+          </p>
+        </div>
+      )}
       <div className="">
         <StepIndicator currentStep={step} />
       </div>

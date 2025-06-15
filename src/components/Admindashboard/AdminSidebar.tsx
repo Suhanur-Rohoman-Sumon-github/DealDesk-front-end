@@ -2,9 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   BarChart3,
-  ShoppingBag,
   Package,
   Tags,
   Users,
@@ -49,14 +49,19 @@ import { cn } from "@/lib/utils";
 const AdminSidebar = () => {
   return (
     <Sidebar className=" border-r border border-red-50 ">
-      <SidebarHeader className="px-6 py-5 border-b flex items-center">
-        <Link
-          href="/admin/dashboard"
-          className="flex items-center gap-2 font-bold text-xl text-red-800"
-        >
-          <ShoppingBag className="h-6 w-6 " />
-          <span>Deal desk</span>
-        </Link>
+      <SidebarHeader className=" border-b flex items-center">
+        <div className="">
+          <Link className="" href="/admin/dashboard">
+            <Image
+              src={
+                "https://i.ibb.co.com/rGrLVCZs/Chat-GPT-Image-Apr-24-2025-02-07-44-PM-removebg-preview.png"
+              }
+              alt="logo"
+              height={100}
+              width={80}
+            />
+          </Link>
+        </div>
       </SidebarHeader>
 
       <SidebarContent className="">

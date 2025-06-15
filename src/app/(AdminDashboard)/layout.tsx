@@ -4,6 +4,7 @@ import "../../styels/globals.css"; // 🔥 Fixed typo: styles instead of styels
 import UserFooter from "@/components/Userdashboard/UserFooter";
 import AdminSidebar from "@/components/Admindashboard/AdminSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import AdminsNavbar from "@/components/navbars/AdminsNavbar";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -31,7 +32,10 @@ export default function RootLayout({
               {/* Main content */}
               <div className="flex-1 flex flex-col   ">
                 {/* Main content area */}
-                <main className="flex-1">{children}</main>
+                <main className="flex-1">
+                  <AdminsNavbar />
+                  {children}
+                </main>
                 <UserFooter />
               </div>
             </div>

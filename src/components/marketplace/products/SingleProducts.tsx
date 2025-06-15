@@ -23,13 +23,10 @@ const SingleProducts = ({ productId }: { productId: string }) => {
   const maxQuantity = 20;
   const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 minutes in seconds
 
-
-
-
-
   const { data: singleProducts, isLoading } = useGetSingleProductQuery(
     productId ? productId : ""
   );
+  console.log("Single Product Data:", singleProducts);
   useEffect(() => {
     if (singleProducts?.status !== "inStock") {
       const interval = setInterval(() => {
@@ -85,14 +82,11 @@ const SingleProducts = ({ productId }: { productId: string }) => {
   const { images, description, name, sellprice, shippingAndReturns, category } =
     singleProducts;
 
-    const formatTime = (seconds: number) => {
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      return `${String(mins).padStart(2, "0")}:${String(secs).padStart(
-        2,
-        "0"
-      )}`;
-    };
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
 
   const totalPrice = Math.min(quantity, maxQuantity) * sellprice;
   const updateTotalPrice = (productId: string) => {
@@ -324,7 +318,7 @@ const SingleProducts = ({ productId }: { productId: string }) => {
         </div>
       </div>
       {singleProducts?.status !== "inStock" && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white/30 backdrop-blur-md z-10">
+        <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-md z-10 max-w-5xl mx-auto">
           <div className="text-center bg-white/50 p-6 rounded-2xl shadow-xl backdrop-blur-xl border border-white">
             <h2 className="text-xl font-semibold mb-2 text-gray-800">
               We are trying to restock.

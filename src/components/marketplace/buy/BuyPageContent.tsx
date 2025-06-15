@@ -157,7 +157,7 @@ const BuyPageContent = () => {
             <span className="font-semibold">{formatTime(countdown)}</span>
           </p>
           <p className="text-white/70 text-sm">
-            We'll be back soon. Thank you for your patience.
+            Well be back soon. Thank you for your patience.
           </p>
         </div>
       )}

@@ -7,12 +7,12 @@ import Link from "next/link";
 import { MdShoppingCart } from "react-icons/md";
 import {
   useGetSingleProductQuery,
-  useUpdateProductMutation,
+  
 } from "@/hooks/Products.hook";
 
 export default function DrivingLicense() {
   const { data } = useGetSingleProductQuery("680d4536a986e84c27c2f119");
-  const { mutate: updataProducts } = useUpdateProductMutation();
+  // const { mutate: updataProducts } = useUpdateProductMutation();
   const [customZip, setCustomZip] = useState("");
   const [filters, setFilters] = useState({
     priceFrom: "",

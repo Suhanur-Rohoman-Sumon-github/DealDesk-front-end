@@ -1,251 +1,91 @@
 "use client";
 
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MdShoppingCart } from "react-icons/md";
-import {
-  useGetSingleProductQuery,
-  
-} from "@/hooks/Products.hook";
+import { useGetSingleProductQuery } from "@/hooks/Products.hook";
+import { TbBrandCoinbase } from "react-icons/tb";
+import { SiWebmoney } from "react-icons/si";
+import Image from "next/image";
+
+const COINBASE_ID = "68545fbbc8e72c978113323b";
+const WEBULL_ID = "680d4536a986e84c27c2f119";
 
 export default function DrivingLicense() {
-  const { data } = useGetSingleProductQuery("680d4536a986e84c27c2f119");
-  // const { mutate: updataProducts } = useUpdateProductMutation();
-  const [customZip, setCustomZip] = useState("");
-  const [filters, setFilters] = useState({
-    priceFrom: "",
-    priceTo: "",
-    country: "",
-    zip: "",
-    bank: "",
-  });
+  const { data: webull } = useGetSingleProductQuery("680d4536a986e84c27c2f119");
+  const { data: coinbase } = useGetSingleProductQuery(
+    "68545fbbc8e72c978113323b"
+  );
 
-
-
-  const mockData = [
+  const mainProducts = [
     {
-      country: "USA",
-      zip: "10001",
-      bank: "JPMORGAN CHASE",
-      price: `$ ${data?.sellprice}`,
+      id: COINBASE_ID,
+      name: "Coinbase DL",
+      replacement: "100% Replacement",
+      price: coinbase?.sellprice,
+      percent: 100,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF6hcTTU1A8Ymi2VldXqCsPkBu_ltAhIKiRg&s",
     },
     {
-      country: "USA",
-      zip: "20001",
-      bank: "BANK OF AMERICA",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "30301",
-      bank: "WELLS FARGO",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "60601",
-      bank: "CITIBANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "75201",
-      bank: "US BANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "85001",
-      bank: "PNC BANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "94101",
-      bank: "NAVY FCU",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "98101",
-      bank: "CHASE BANK USA",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "32225",
-      bank: "REGIONS BANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "40220",
-      bank: "TRUIST",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "73301",
-      bank: "TD BANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "48201",
-      bank: "ALLY BANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "55401",
-      bank: "HUNTINGTON BANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "33101",
-      bank: "FIFTH THIRD BANK",
-      price: `$ ${data?.sellprice}`,
-    },
-    {
-      country: "USA",
-      zip: "21201",
-      bank: "KEYBANK",
-      price: `$ ${data?.sellprice}`,
+      id: WEBULL_ID,
+      name: "Webull DL",
+      replacement: "70% Replacement",
+      price: webull?.sellprice,
+      percent: 40,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHW4iPgGU36wx8MBhKLKkbJ_o0qZKxV7X2YoQGMi8OPxXK4f6eR4cpH3mzQMPY2FRwwDs&usqp=CAU",
     },
   ];
-
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value });
-  };
-
-  const filteredData = mockData.filter((item) => {
-    return (
-      (filters.country === "" ||
-        item.country.toLowerCase().includes(filters.country.toLowerCase())) &&
-      (filters.zip === "" || item.zip.includes(filters.zip)) &&
-      (filters.bank === "" ||
-        item.bank.toLowerCase().includes(filters.bank.toLowerCase()))
-    );
-  });
+  // const { mutate: updataProducts } = useUpdateProductMutation();
 
   return (
-    <div className="max-w-7xl mx-auto p-6 text-white  min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 flex items-center gap-2">
-        🏛 Full info+DL(SNIFF)
-      </h1>
-
-      <p className="text-sm text-gray-300 mb-6 bg-gray-800 p-4 rounded-md">
-        <span className="font-bold">Description:</span> Full info BEST QUALITY
-        only in 1 hand! After buy you get: Name, Email, Birth Date, Phone, Work,
-        SSN, DL, Street, City, Country, ZIP, BANK, AN:RN, Download link. In
-        download file you get more info + photo DL both sides + (70% docs with
-        selfie/selfie with DL).
-      </p>
-
-      {/* Filters */}
-      <div className="backdrop-blur-md bg-white/5 border border-white/10 shadow-lg p-4 rounded-lg mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-          <Input
-            name="priceFrom"
-            placeholder="Price from"
-            value={filters.priceFrom}
-            onChange={handleFilterChange}
-          />
-          <Input
-            name="priceTo"
-            placeholder="Price to"
-            value={filters.priceTo}
-            onChange={handleFilterChange}
-          />
-          <Input
-            name="country"
-            placeholder="Country"
-            value={filters.country}
-            onChange={handleFilterChange}
-          />
-          <Input
-            name="zip"
-            placeholder="ZIP"
-            value={filters.zip}
-            onChange={handleFilterChange}
-          />
-          <Input
-            name="bank"
-            placeholder="Bank"
-            value={filters.bank}
-            onChange={handleFilterChange}
-          />
-        </div>
-        <div className="mt-4 text-right">
-          <Button className="button-primary">Search</Button>
-        </div>
+    <div className="max-w-7xl mx-auto p-6 text-white  min-h-screen mt-10">
+      {/* Main Product Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+        {mainProducts.map((prod) => (
+          <Link
+            key={prod.id}
+            href={`/marketplaces/${prod.id}`}
+            className="block bg-white/10 border border-white/20 rounded-xl shadow-lg p-6 hover:bg-white/20 transition group"
+          >
+            <div className="flex flex-col items-center gap-4">
+              <Image
+                width={96}
+                height={96}
+                src={prod.image}
+                alt={prod.name}
+                className="w-24 h-24 object-contain rounded-full border border-white/20 mb-2"
+              />
+              <h2 className="text-2xl font-bold mb-1 group-hover:text-purple-300">
+                {prod.name}
+              </h2>
+              <div className="text-lg font-semibold text-green-400 mb-1">
+                {prod.replacement}
+              </div>
+              <div className="text-xl font-bold mb-2">${prod.price}</div>
+              <Button className="button-primary w-full flex items-center justify-center gap-2">
+                <MdShoppingCart /> Buy Now
+              </Button>
+            </div>
+          </Link>
+        ))}
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto  rounded-md shadow">
-        <table className="min-w-full text-left">
-          <thead className="backdrop-blur-md bg-white/5 border border-white/10 shadow-lg text-gray-300">
-            <tr>
-              <th className="p-3">Country</th>
-              <th className="p-3">ZIP</th>
-              <th className="p-3">Bank</th>
-              <th className="p-3">Price</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.map((item, index) => (
-              <tr
-                key={index}
-                className="border-t border-gray-800 hover:bg-gray-800"
-              >
-                <td className="p-3">{item.country}</td>
-                <td className="p-3">{item.zip}</td>
-                <td className="p-3">{item.bank}</td>
-                <td className="p-3">{item.price}</td>
-                <td className="p-3 flex gap-2">
-                  <Link
-                    className="w-full"
-                    href={`/marketplaces/${"680d4536a986e84c27c2f119"}?zip=${
-                      item.zip
-                    }&replacement=true`}
-                  >
-                    <button className="w-full button-primary">
-                      <MdShoppingCart /> Buy with Replacement
-                    </button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-            {filteredData.length === 0 && (
-              <tr>
-                <td colSpan={5} className="p-4 text-center text-gray-400">
-                  <div className="flex flex-col items-center gap-4">
-                    <p>No results found for this ZIP code.</p>
-                    <Input
-                      placeholder="Enter your ZIP code"
-                      value={customZip}
-                      onChange={(e) => setCustomZip(e.target.value)}
-                      className="max-w-xs"
-                    />
-                    <div className="flex gap-2">
-                      <Link
-                        href={`/marketplaces/680d4536a986e84c27c2f119?zip=${customZip}&replacement=true`}
-                      >
-                        <button className="button-primary">
-                          <MdShoppingCart /> Buy with Replacement
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      {/* Centered Icons for Coinbase and Webull */}
+      <div className="flex justify-center items-center gap-12 mt-8 mb-8">
+        <div className="flex flex-col items-center">
+          <TbBrandCoinbase
+            className="text-6xl text-blue-400 mb-2"
+            title="Coinbase"
+          />
+          <span className="text-white text-lg font-semibold">Coinbase</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <SiWebmoney className="text-6xl text-green-400 mb-2" title="Webull" />
+          <span className="text-white text-lg font-semibold">Webull</span>
+        </div>
       </div>
     </div>
   );

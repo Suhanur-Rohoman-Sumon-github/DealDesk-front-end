@@ -87,7 +87,7 @@ const Page = () => {
     <section className="">
       <div className="">
         <div className="">
-          {data.data.length === 0 ? (
+          {data?.data?.length === 0 ? (
             <div className="col-span-full text-center text-white flex items-center justify-center">
               <div>
                 <Image

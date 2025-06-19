@@ -23,14 +23,12 @@ export default function DrivingLicense() {
   });
 
   const updatePrice = () => {
- 
-      updataProducts({
-        productId: "680d4536a986e84c27c2f119",
-        updateData: {
-          totalPrice: data.sellprice, // Increment price by 1 for demonstration
-        },
-      });
-    
+    updataProducts({
+      productId: "680d4536a986e84c27c2f119",
+      updateData: {
+        totalPrice: data.sellprice, // Increment price by 1 for demonstration
+      },
+    });
   };
 
   const mockData = [
@@ -215,18 +213,15 @@ export default function DrivingLicense() {
                 <td className="p-3">{item.zip}</td>
                 <td className="p-3">{item.bank}</td>
                 <td className="p-3">{item.price}</td>
-                <td className="p-3">
+                <td className="p-3 flex gap-2">
                   <Link
                     className="w-full"
-                    href={`/marketplaces/buy?productId=${"680d4536a986e84c27c2f119"}&zip=${
+                    href={`/marketplaces/${"680d4536a986e84c27c2f119"}?zip=${
                       item.zip
-                    }`}
+                    }&replacement=true`}
                   >
-                    <button
-                      onClick={updatePrice}
-                      className="w-full button-primary"
-                    >
-                      <MdShoppingCart /> Buy
+                    <button className="w-full button-primary">
+                      <MdShoppingCart /> Buy with Replacement
                     </button>
                   </Link>
                 </td>
@@ -243,14 +238,15 @@ export default function DrivingLicense() {
                       onChange={(e) => setCustomZip(e.target.value)}
                       className="max-w-xs"
                     />
-                    <Link
-                      className=""
-                      href={`/marketplaces/buy?productId=${"680d4536a986e84c27c2f119"}&zip=${customZip}`}
-                    >
-                      <button className="button-primary">
-                        <MdShoppingCart /> Buy with Custom ZIP
-                      </button>
-                    </Link>
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/marketplaces/680d4536a986e84c27c2f119?zip=${customZip}&replacement=true`}
+                      >
+                        <button className="button-primary">
+                          <MdShoppingCart /> Buy with Replacement
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </td>
               </tr>

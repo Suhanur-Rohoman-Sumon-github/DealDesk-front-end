@@ -22,14 +22,7 @@ export default function DrivingLicense() {
     bank: "",
   });
 
-  const updatePrice = () => {
-    updataProducts({
-      productId: "680d4536a986e84c27c2f119",
-      updateData: {
-        totalPrice: data.sellprice, // Increment price by 1 for demonstration
-      },
-    });
-  };
+
 
   const mockData = [
     {

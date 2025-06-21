@@ -225,7 +225,7 @@ const BuyPageContent = () => {
               <p className="text-white">{name}</p>
               {convertedAmount && (
                 <p className="text-white">
-                  You’ll pay:{" "}
+                  You&apos;ll pay:{" "}
                   <span className="font-semibold">
                     {convertedAmount} {selectedCrypto}
                   </span>
@@ -247,6 +247,22 @@ const BuyPageContent = () => {
               >
                 Confirm Order
               </Button>
+
+              {/* Support Contact Link */}
+              <div className="mt-4 text-center">
+                <p className="text-sm text-white/70 mb-2">
+                  Any payment issue? Please contact support
+                </p>
+                <a
+                  href="https://t.me/dealdeskcomunity"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center justify-center gap-1"
+                >
+                  <FaTelegramPlane size={14} />
+                  @dealdeskcomunity
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -258,8 +274,8 @@ const BuyPageContent = () => {
           <FaTelegramPlane size={48} className="text-blue-400 mb-4" />
           <h2 className="text-3xl font-bold text-white mb-2">Almost Done!</h2>
           <p className="text-white/80 mb-6">
-            Please keep an eye on your Telegram channel and email. We’ll deliver
-            your product as fast as possible.
+            Please keep an eye on your Telegram channel and email. We&apos;ll
+            deliver your product as fast as possible.
           </p>
 
           <div className="">
@@ -272,6 +288,22 @@ const BuyPageContent = () => {
               visit your Report chanel{" "}
               <FaTelegramPlane className="text-blue-400 " />
             </a>
+
+            {/* Support Contact Link */}
+            <div className="mt-4 text-center">
+              <p className="text-sm text-white/70 mb-2">
+                Any payment issue? Please contact support
+              </p>
+              <a
+                href="https://t.me/dealdeskcomunity"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center justify-center gap-1"
+              >
+                <FaTelegramPlane size={14} />
+                @dealdeskcomunity
+              </a>
+            </div>
           </div>
         </div>
       )}

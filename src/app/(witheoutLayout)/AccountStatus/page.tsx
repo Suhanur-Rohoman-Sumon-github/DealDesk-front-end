@@ -1,124 +1,58 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGetMychanelQuery } from "@/hooks/User.hook";
+
 
 const AccountStatusPage = () => {
   const router = useRouter();
-  const [email, setEmail] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState<number>(120); // 2 minutes
-  const [isApproved, setIsApproved] = useState<boolean>(false);
+  
 
-  // Grab email from URL
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const emailParam = params.get("email");
-    setEmail(emailParam);
-  }, []);
+ 
+  
 
-  const { data, isLoading } = useGetMychanelQuery(email || "");
-
-  // Watch for approval state
-  useEffect(() => {
-    if (data && data.isPending === false) {
-      setIsApproved(true);
-    }
-  }, [data]);
-
-  // Timer
-  useEffect(() => {
-    if (isApproved || timeLeft <= 0) return;
-
-    const timer = setTimeout(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [timeLeft, isApproved]);
-
-  // Format seconds to mm:ss
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
-  };
-
-  if (!email || isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-[#04091d] text-white">
-        <p>Loading...</p>
-      </div>
-    );
-  }
+ 
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-[#04091d] text-white px-4">
       <div className="max-w-md w-full p-8 bg-white/10 backdrop-blur-md rounded-lg shadow-lg text-center">
-        <h1 className="text-3xl font-bold mb-4">
-          {isApproved
-            ? "Account Approved ✅"
-            : timeLeft <= 0
-            ? "Something Went Wrong ❌"
-            : "Account Status: Pending..."}
-        </h1>
+        <h1 className="text-3xl font-bold mb-6">Please Contact Us 📞</h1>
 
-        {!isApproved && timeLeft > 0 && (
-          <>
-            <p className="text-lg mb-6">
-              Please wait while we verify your account.
-            </p>
-            <div className="text-4xl font-mono mb-8">
-              {formatTime(timeLeft)}
-            </div>
-          </>
-        )}
-
-        {!isApproved && timeLeft <= 0 && (
-          <div className="text-red-400 text-lg mt-4">
-            Something went wrong. 😞
-            <br />
-            We couldn’t verify your credentials.
-            <br />
-            Please double-check your Telegram channel and try again.
-          </div>
-        )}
-
-        {isApproved && (
-          <div className="space-y-6">
-            <div className="bg-white/20 p-4 rounded-md">
-              <h2 className="text-xl font-semibold mb-2">Community Channel</h2>
-              <a
-                href="https://t.me/+okCFY5-LKnc2MTY1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-300 underline hover:text-blue-400"
-              >
-                #Deal Desk Community 🌱
-              </a>
-            </div>
-
-            <div className="bg-white/20 p-4 rounded-md">
-              <h2 className="text-xl font-semibold mb-2">Personal Channel</h2>
-              <a
-                href={data?.myChanel || "N/A"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-300 underline hover:text-blue-400"
-              >
-                My Report chanel 🌱
-              </a>
-            </div>
-
-            <button
-              onClick={() => router.push("/login")}
-              className="w-full button-primary mt-6"
+        <div className="space-y-6">
+          <div className="bg-white/20 p-4 rounded-md">
+            <h2 className="text-xl font-semibold mb-2">Community Channel</h2>
+            <a
+              href="https://t.me/+okCFY5-LKnc2MTY1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-300 underline hover:text-blue-400"
             >
-              Back to Login
-            </button>
+              #Deal Desk Community 🌱
+            </a>
           </div>
-        )}
+
+          <div className="bg-blue-500/20 p-4 rounded-md border border-blue-400">
+            <h3 className="text-lg font-semibold mb-2 text-blue-300">
+              Customer Support
+            </h3>
+            <p className="text-blue-200 mb-2">
+              For any questions, please contact us:
+            </p>
+            <a
+              href="https://t.me/dealdeskcomunity"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-300 underline hover:text-blue-400 font-semibold"
+            >
+              @dealdeskcomunity
+            </a>
+          </div>
+
+          <button
+            onClick={() => router.push("/login")}
+            className="w-full button-primary mt-6"
+          >
+            Back to Login
+          </button>
+        </div>
       </div>
     </div>
   );

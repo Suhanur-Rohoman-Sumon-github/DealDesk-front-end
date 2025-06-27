@@ -7,9 +7,8 @@ import {
   FileText,
   Loader2,
   Download,
-  Eye,
-  EyeOff,
   ChevronDown,
+  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +21,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface FileUploaderProps {
   onFileSelect: (file: File) => void;
@@ -154,63 +167,284 @@ export const FileUploader = ({ onFileSelect, disabled }: FileUploaderProps) => {
   );
 };
 
+const usStates = [
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VT",
+  "VA",
+  "WA",
+  "WV",
+  "WI",
+  "WY",
+];
+
 interface ExtractedDataDisplayProps {
   data: ExtractedData;
-  maskData: (value: string) => string;
+  onDataChange: (field: keyof ExtractedData, value: string) => void;
+}
+
+// Address autocomplete service
+class AddressAutocompleteService {
+  static async geocodeAddress(address: string): Promise<{
+    city: string;
+    state: string;
+    zipCode: string;
+  } | null> {
+    try {
+      // Using Nominatim (OpenStreetMap) - free geocoding service
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+          address
+        )}&countrycodes=us&limit=1`
+      );
+
+      if (!response.ok) {
+        throw new Error("Geocoding service unavailable");
+      }
+
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        const result = data[0];
+        const addressParts = result.display_name.split(", ");
+
+        // Extract city, state, and zip from the address parts
+        let city = "";
+        let state = "";
+        let zipCode = "";
+
+        // Look for state and zip pattern (e.g., "CA 90210")
+        const stateZipMatch = addressParts.find((part: string) =>
+          /^[A-Z]{2}\s+\d{5}/.test(part)
+        );
+        if (stateZipMatch) {
+          const [stateCode, zip] = stateZipMatch.split(" ");
+          state = stateCode;
+          zipCode = zip;
+        }
+
+        // Find city (usually the part before state)
+        const stateIndex = addressParts.findIndex((part: string) =>
+          /^[A-Z]{2}/.test(part)
+        );
+        if (stateIndex > 0) {
+          city = addressParts[stateIndex - 1];
+        }
+
+        return { city, state, zipCode };
+      }
+
+      return null;
+    } catch (error) {
+      console.error("Address geocoding failed:", error);
+      return null;
+    }
+  }
 }
 
 export const ExtractedDataDisplay = ({
   data,
-  maskData,
+  onDataChange,
 }: ExtractedDataDisplayProps) => {
+  const [isGeocoding, setIsGeocoding] = useState(false);
+
+  const handleAddressChange = async (value: string) => {
+    onDataChange("street", value);
+
+    // Auto-geocode if address is pasted or typed
+    if (value.length > 10) {
+      setIsGeocoding(true);
+      try {
+        const geocoded = await AddressAutocompleteService.geocodeAddress(value);
+        if (geocoded) {
+          onDataChange("city", geocoded.city);
+          onDataChange("state", geocoded.state);
+          onDataChange("homeZipCode", geocoded.zipCode);
+        }
+      } catch (error) {
+        console.error("Auto-geocoding failed:", error);
+      } finally {
+        setIsGeocoding(false);
+      }
+    }
+  };
+
+  const handleManualGeocode = async () => {
+    if (!data.street) return;
+
+    setIsGeocoding(true);
+    try {
+      const geocoded = await AddressAutocompleteService.geocodeAddress(
+        data.street
+      );
+      if (geocoded) {
+        onDataChange("city", geocoded.city);
+        onDataChange("state", geocoded.state);
+        onDataChange("homeZipCode", geocoded.zipCode);
+      }
+    } catch (error) {
+      console.error("Manual geocoding failed:", error);
+    } finally {
+      setIsGeocoding(false);
+    }
+  };
+
   const sections = [
     {
       title: "Personal Information",
       fields: [
-        { label: "Name", value: data.name },
-        { label: "Birth Date", value: data.birthDate },
-        { label: "Email", value: data.email },
-        { label: "Cell Phone", value: data.cellPhone },
-        { label: "Work Phone", value: data.workPhone },
-        { label: "Social Number", value: data.socialNumber },
-        { label: "Driver License Number", value: data.driverLicenseNumber },
-        { label: "Military Service", value: data.militaryService },
+        { label: "Name", key: "name", value: data.name },
+        {
+          label: "Birth Date",
+          key: "birthDate",
+          value: data.birthDate,
+          type: "date",
+        },
+        { label: "Email", key: "email", value: data.email, type: "email" },
+        {
+          label: "Cell Phone",
+          key: "cellPhone",
+          value: data.cellPhone,
+          type: "tel",
+        },
+        {
+          label: "Work Phone",
+          key: "workPhone",
+          value: data.workPhone,
+          type: "tel",
+        },
+        {
+          label: "Social Number",
+          key: "socialNumber",
+          value: data.socialNumber,
+        },
+        {
+          label: "Driver License Number",
+          key: "driverLicenseNumber",
+          value: data.driverLicenseNumber,
+        },
+        {
+          label: "Military Service",
+          key: "militaryService",
+          value: data.militaryService,
+        },
       ],
     },
     {
       title: "Address Information",
       fields: [
-        { label: "Street", value: data.street },
-        { label: "City", value: data.city },
-        { label: "Country", value: data.country },
-        { label: "Home Zip Code", value: data.homeZipCode },
-        { label: "Years At Address", value: data.yearsAtAddress },
-        { label: "Residential Status", value: data.residentialStatus },
+        {
+          label: "Street",
+          key: "street",
+          value: data.street,
+          special: "address", // Mark for special handling
+        },
+        { label: "City", key: "city", value: data.city },
+        { label: "State", key: "state", value: data.state, type: "text" },
+        { label: "Country", key: "country", value: data.country },
+        { label: "Home Zip Code", key: "homeZipCode", value: data.homeZipCode },
+        {
+          label: "Years At Address",
+          key: "yearsAtAddress",
+          value: data.yearsAtAddress,
+        },
+        {
+          label: "Residential Status",
+          key: "residentialStatus",
+          value: data.residentialStatus,
+        },
       ],
     },
     {
       title: "Banking Information",
       fields: [
-        { label: "Bank Name", value: data.bankName },
-        { label: "Routing Number", value: data.routingNumber },
-        { label: "Account Number", value: data.accountNumber },
-        { label: "Mother Maiden Name", value: data.motherMaidenName },
-        { label: "Bank Years", value: data.bankYears },
+        { label: "Bank Name", key: "bankName", value: data.bankName },
+        {
+          label: "Routing Number",
+          key: "routingNumber",
+          value: data.routingNumber,
+        },
+        {
+          label: "Account Number",
+          key: "accountNumber",
+          value: data.accountNumber,
+        },
+        {
+          label: "Mother Maiden Name",
+          key: "motherMaidenName",
+          value: data.motherMaidenName,
+        },
+        { label: "Bank Years", key: "bankYears", value: data.bankYears },
       ],
     },
     {
       title: "Employment Information",
       fields: [
-        { label: "Employment Status", value: data.employmentStatus },
-        { label: "Job Title", value: data.jobTitle },
-        { label: "Employer Name", value: data.employerName },
+        {
+          label: "Employment Status",
+          key: "employmentStatus",
+          value: data.employmentStatus,
+        },
+        { label: "Job Title", key: "jobTitle", value: data.jobTitle },
+        {
+          label: "Employer Name",
+          key: "employerName",
+          value: data.employerName,
+        },
         {
           label: "Employment Status Length",
+          key: "employmentStatusLength",
           value: data.employmentStatusLength,
         },
-        { label: "Payment Type", value: data.paymentType },
-        { label: "How Often Get Paid", value: data.howOftenGetPaid },
-        { label: "Salary", value: data.salary },
+        { label: "Payment Type", key: "paymentType", value: data.paymentType },
+        {
+          label: "How Often Get Paid",
+          key: "howOftenGetPaid",
+          value: data.howOftenGetPaid,
+        },
+        { label: "Salary", key: "salary", value: data.salary },
       ],
     },
   ];
@@ -223,22 +457,87 @@ export const ExtractedDataDisplay = ({
             <CardTitle className="text-lg">{section.title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
+            <div className="space-y-4">
               {section.fields.map((field) => (
                 <div
                   key={field.label}
-                  className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
+                  className="grid grid-cols-1 md:grid-cols-3 items-center gap-2"
                 >
-                  <span className="text-sm font-medium text-gray-600">
+                  <label
+                    htmlFor={field.key}
+                    className="text-sm font-medium text-gray-600"
+                  >
                     {field.label}:
-                  </span>
-                  <span className="text-sm text-gray-900 font-mono">
-                    {maskData(field.value) || (
-                      <Badge variant="secondary" className="text-xs">
-                        Not found
-                      </Badge>
+                  </label>
+                  <div className="md:col-span-2 flex items-center gap-2">
+                    {field.key === "state" ? (
+                      <Select
+                        value={field.value}
+                        onValueChange={(value) =>
+                          onDataChange(field.key as keyof ExtractedData, value)
+                        }
+                      >
+                        <SelectTrigger className="font-mono text-sm">
+                          <SelectValue placeholder="Select State" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {usStates.map((state) => (
+                            <SelectItem key={state} value={state}>
+                              {state}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : field.special === "address" ? (
+                      <div className="flex-1 flex items-center gap-2">
+                        <Input
+                          id={field.key}
+                          type={field.type || "text"}
+                          className="font-mono text-sm"
+                          value={field.value}
+                          onChange={(e) => handleAddressChange(e.target.value)}
+                          placeholder={`Enter ${field.label}`}
+                        />
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={handleManualGeocode}
+                                disabled={isGeocoding || !field.value}
+                                className="px-2"
+                              >
+                                {isGeocoding ? (
+                                  <Loader2 className="h-4 w-4 animate-spin" />
+                                ) : (
+                                  <MapPin className="h-4 w-4" />
+                                )}
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Auto-fill city, state, and zip from address</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                    ) : (
+                      <Input
+                        id={field.key}
+                        type={field.type || "text"}
+                        className="font-mono text-sm"
+                        value={field.value}
+                        onChange={(e) =>
+                          onDataChange(
+                            field.key as keyof ExtractedData,
+                            e.target.value
+                          )
+                        }
+                        placeholder={`Enter ${field.label}`}
+                      />
                     )}
-                  </span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -257,7 +556,6 @@ export default function CreateDLPage() {
   );
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showSensitiveData, setShowSensitiveData] = useState(false);
   const [processingTime, setProcessingTime] = useState<number>(0);
   const [extractedText, setExtractedText] = useState<string>("");
   const [downloadSuccess, setDownloadSuccess] = useState<string>("");
@@ -273,40 +571,29 @@ export default function CreateDLPage() {
     const startTime = Date.now();
 
     try {
-      console.log("Starting document processing...");
-
-      const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(
-          () => reject(new Error("Processing timeout - please try again")),
-          30000
-        );
-      });
-
-      const result = (await Promise.race([
-        DocumentProcessingService.processDocument(file),
-        timeoutPromise,
-      ])) as { data: ExtractedData; extractedText: string };
-
-      console.log("Document processing completed successfully");
+      const result = await DocumentProcessingService.processDocument(file);
       setExtractedData(result.data);
       setExtractedText(result.extractedText);
       setProcessingTime(Date.now() - startTime);
     } catch (err) {
-      console.error("Document processing error:", err);
       const errorMessage =
         err instanceof Error
           ? err.message
           : "Failed to process document. Please try again.";
       setError(errorMessage);
-
-      if (errorMessage.includes("timeout") || errorMessage.includes("API")) {
-        setError(
-          `${errorMessage} Please check your internet connection and try again.`
-        );
-      }
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const handleDataChange = (field: keyof ExtractedData, value: string) => {
+    setExtractedData((prevData) => {
+      if (!prevData) return null;
+      return {
+        ...prevData,
+        [field]: value,
+      };
+    });
   };
 
   const clearFile = () => {
@@ -318,117 +605,129 @@ export default function CreateDLPage() {
     setDownloadSuccess("");
   };
 
-  const toggleSensitiveData = () => {
-    setShowSensitiveData(!showSensitiveData);
-  };
-
-  const maskSensitiveData = (value: string): string => {
-    if (!showSensitiveData) {
-      if (value.includes("@")) {
-        // Mask email
-        const [local, domain] = value.split("@");
-        return `${local.slice(0, 2)}***@${domain}`;
-      } else if (value.includes("-")) {
-        // Mask phone numbers and SSN
-        return value.replace(/\d/g, "*");
-      } else if (value.length > 4) {
-        // Mask other sensitive data
-        return (
-          value.slice(0, 2) + "*".repeat(value.length - 4) + value.slice(-2)
-        );
-      }
-    }
-    return value;
-  };
-
   const showDownloadSuccess = (format: string) => {
     setDownloadSuccess(`${format} file downloaded successfully!`);
     setTimeout(() => setDownloadSuccess(""), 3000);
   };
 
   const downloadJSON = () => {
-    if (!extractedData) return;
+    if (!extractedData) {
+      console.error("No extracted data available for download");
+      return;
+    }
 
-    const dataStr = JSON.stringify(extractedData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
-    link.href = url;
+    try {
+      // Export only the clean data object
+      const dataStr = JSON.stringify(extractedData, null, 2);
+      const dataBlob = new Blob([dataStr], { type: "application/json" });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement("a");
+      link.href = url;
 
-    // Create filename with timestamp
-    const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, "-");
-    const filename = `extracted_data_${timestamp}.json`;
-    link.download = filename;
+      // Create filename with timestamp
+      const timestamp = new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace(/:/g, "-");
+      const filename = `extracted_data_${timestamp}.json`;
+      link.download = filename;
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+      // Add link to DOM, click it, and remove it
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
 
-    showDownloadSuccess("JSON");
+      console.log("JSON download completed successfully");
+      showDownloadSuccess("JSON");
+    } catch (error) {
+      console.error("JSON download failed:", error);
+      alert("Download failed. Please try again.");
+    }
   };
 
   const downloadCSV = () => {
-    if (!extractedData) return;
+    if (!extractedData) {
+      console.error("No extracted data available for download");
+      return;
+    }
 
-    // Convert data to CSV format
-    const csvData = [
-      ["Field", "Value"],
-      ["Name", extractedData.name],
-      ["Birth Date", extractedData.birthDate],
-      ["Email", extractedData.email],
-      ["Cell Phone", extractedData.cellPhone],
-      ["Work Phone", extractedData.workPhone],
-      ["Social Number", extractedData.socialNumber],
-      ["Driver License Number", extractedData.driverLicenseNumber],
-      ["Military Service", extractedData.militaryService],
-      ["Street", extractedData.street],
-      ["City", extractedData.city],
-      ["Country", extractedData.country],
-      ["Home Zip Code", extractedData.homeZipCode],
-      ["Years At Address", extractedData.yearsAtAddress],
-      ["Residential Status", extractedData.residentialStatus],
-      ["Bank Name", extractedData.bankName],
-      ["Routing Number", extractedData.routingNumber],
-      ["Account Number", extractedData.accountNumber],
-      ["Mother Maiden Name", extractedData.motherMaidenName],
-      ["Bank Years", extractedData.bankYears],
-      ["Employment Status", extractedData.employmentStatus],
-      ["Job Title", extractedData.jobTitle],
-      ["Employer Name", extractedData.employerName],
-      ["Employment Status Length", extractedData.employmentStatusLength],
-      ["Payment Type", extractedData.paymentType],
-      ["How Often Get Paid", extractedData.howOftenGetPaid],
-      ["Salary", extractedData.salary],
-    ];
+    try {
+      // Convert data to CSV format
+      const csvData = [
+        ["Field", "Value"],
+        ["Name", extractedData.name],
+        ["Birth Date", extractedData.birthDate],
+        ["Email", extractedData.email],
+        ["Cell Phone", extractedData.cellPhone],
+        ["Work Phone", extractedData.workPhone],
+        ["Social Number", extractedData.socialNumber],
+        ["Driver License Number", extractedData.driverLicenseNumber],
+        ["Military Service", extractedData.militaryService],
+        ["Street", extractedData.street],
+        ["City", extractedData.city],
+        ["Country", extractedData.country],
+        ["Home Zip Code", extractedData.homeZipCode],
+        ["Years At Address", extractedData.yearsAtAddress],
+        ["Residential Status", extractedData.residentialStatus],
+        ["Bank Name", extractedData.bankName],
+        ["Routing Number", extractedData.routingNumber],
+        ["Account Number", extractedData.accountNumber],
+        ["Mother Maiden Name", extractedData.motherMaidenName],
+        ["Bank Years", extractedData.bankYears],
+        ["Employment Status", extractedData.employmentStatus],
+        ["Job Title", extractedData.jobTitle],
+        ["Employer Name", extractedData.employerName],
+        ["Employment Status Length", extractedData.employmentStatusLength],
+        ["Payment Type", extractedData.paymentType],
+        ["How Often Get Paid", extractedData.howOftenGetPaid],
+        ["Salary", extractedData.salary],
+      ];
 
-    const csvContent = csvData
-      .map((row) => row.map((field) => `"${field}"`).join(","))
-      .join("\n");
-    const csvBlob = new Blob([csvContent], { type: "text/csv" });
-    const url = URL.createObjectURL(csvBlob);
-    const link = document.createElement("a");
-    link.href = url;
+      const csvContent = csvData
+        .map((row) => row.map((field) => `"${field}"`).join(","))
+        .join("\n");
+      const csvBlob = new Blob([csvContent], { type: "text/csv" });
+      const url = URL.createObjectURL(csvBlob);
+      const link = document.createElement("a");
+      link.href = url;
 
-    // Create filename with timestamp
-    const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, "-");
-    const filename = `extracted_data_${timestamp}.csv`;
-    link.download = filename;
+      // Create filename with timestamp
+      const timestamp = new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace(/:/g, "-");
+      const filename = `extracted_data_${timestamp}.csv`;
+      link.download = filename;
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
 
-    showDownloadSuccess("CSV");
+      console.log("CSV download completed successfully");
+      showDownloadSuccess("CSV");
+    } catch (error) {
+      console.error("CSV download failed:", error);
+      alert("Download failed. Please try again.");
+    }
   };
 
   const downloadTXT = () => {
-    if (!extractedData) return;
+    if (!extractedData) {
+      console.error("No extracted data available for download");
+      return;
+    }
 
-    // Convert data to readable text format
-    const textContent = `EXTRACTED DATA REPORT
+    try {
+      // Convert data to readable text format
+      const textContent = `EXTRACTED DATA REPORT
 Generated on: ${new Date().toLocaleString()}
+
+EXTRACTION INFO:
+File Name: ${selectedFile?.name || "Unknown"}
+Processing Time: ${processingTime}ms
+Extracted Text Length: ${extractedText.length} characters
 
 PERSONAL INFORMATION:
 Name: ${extractedData.name}
@@ -464,26 +763,37 @@ Payment Type: ${extractedData.paymentType}
 How Often Get Paid: ${extractedData.howOftenGetPaid}
 Salary: ${extractedData.salary}
 
+RAW EXTRACTED TEXT:
+${extractedText}
+
 ---
 Note: This data was extracted using AI-powered document processing.
 Some fields may have been generated automatically for missing information.`;
 
-    const textBlob = new Blob([textContent], { type: "text/plain" });
-    const url = URL.createObjectURL(textBlob);
-    const link = document.createElement("a");
-    link.href = url;
+      const textBlob = new Blob([textContent], { type: "text/plain" });
+      const url = URL.createObjectURL(textBlob);
+      const link = document.createElement("a");
+      link.href = url;
 
-    // Create filename with timestamp
-    const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, "-");
-    const filename = `extracted_data_${timestamp}.txt`;
-    link.download = filename;
+      // Create filename with timestamp
+      const timestamp = new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace(/:/g, "-");
+      const filename = `extracted_data_${timestamp}.txt`;
+      link.download = filename;
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
 
-    showDownloadSuccess("Text");
+      console.log("TXT download completed successfully");
+      showDownloadSuccess("Text");
+    } catch (error) {
+      console.error("TXT download failed:", error);
+      alert("Download failed. Please try again.");
+    }
   };
 
   return (
@@ -493,9 +803,10 @@ Some fields may have been generated automatically for missing information.`;
           Document Data Extraction
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Upload a document (JPG, PNG, or PDF) to extract personal, address,
-          banking, and employment information. Our advanced AI system will
-          analyze the document and generate comprehensive data profiles.
+          Upload a document (JPG, PNG, or PDF) to extract real personal,
+          address, banking, and employment information using OCR and AI. The
+          system will extract actual data from your documents and generate
+          realistic data for missing fields.
         </p>
       </div>
 
@@ -586,33 +897,13 @@ Some fields may have been generated automatically for missing information.`;
           </div>
         )}
 
-        {/* Debug: Extracted Text */}
-        {extractedText && !isProcessing && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Extracted Text (Debug)</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                  {extractedText}
-                </p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Check browser console for detailed extraction logs and
-                  patterns found.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
         {/* Extracted Data Display */}
         {extractedData && !isProcessing && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  Extracted Data
+                  Review and Edit Extracted Data
                 </h2>
                 {processingTime > 0 && (
                   <Badge variant="outline" className="text-xs">
@@ -621,23 +912,6 @@ Some fields may have been generated automatically for missing information.`;
                 )}
               </div>
               <div className="flex space-x-2">
-                <Button
-                  onClick={toggleSensitiveData}
-                  variant="outline"
-                  size="sm"
-                >
-                  {showSensitiveData ? (
-                    <>
-                      <EyeOff className="h-4 w-4 mr-2" />
-                      Hide Sensitive Data
-                    </>
-                  ) : (
-                    <>
-                      <Eye className="h-4 w-4 mr-2" />
-                      Show Sensitive Data
-                    </>
-                  )}
-                </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" size="sm">
@@ -664,172 +938,38 @@ Some fields may have been generated automatically for missing information.`;
               </div>
             </div>
 
-            {/* SSN Highlight Section */}
-            <Card className="border-blue-200 bg-blue-50">
-              <CardHeader>
-                <CardTitle className="text-lg text-blue-900">
-                  Social Security Number Generated
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center space-x-4">
-                  <div className="bg-blue-100 p-3 rounded-lg">
-                    <span className="text-2xl font-mono font-bold text-blue-900">
-                      {maskSensitiveData(extractedData.socialNumber)}
-                    </span>
-                  </div>
-                  <div className="text-sm text-blue-700">
-                    <p>
-                      <strong>Generated from DL:</strong>{" "}
-                      {extractedData.driverLicenseNumber}
-                    </p>
-                    <p>
-                      <strong>Last 4 digits used:</strong>{" "}
-                      {extractedData.driverLicenseNumber.slice(-4)}
-                    </p>
-                    <p>
-                      <strong>Format:</strong> XXX-XX-XXXX (5 random + 4 from
-                      DL)
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <p className="text-sm text-gray-600">
+              The OCR has made its best attempt to extract the data. Please
+              review the fields below and correct any errors before downloading.
+            </p>
 
-            <ExtractedDataDisplay
-              data={extractedData}
-              maskData={maskSensitiveData}
-            />
+            <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 items-start">
+              {/* Form on the left */}
+              <ExtractedDataDisplay
+                data={extractedData}
+                onDataChange={handleDataChange}
+              />
 
-            {/* Data Source Summary */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Data Source Summary</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="font-semibold text-green-700 mb-2">
-                      ✅ Extracted from Image
-                    </h4>
-                    <ul className="text-sm space-y-1">
-                      {extractedData.name &&
-                        extractedData.name !== "Arlene Piedra" &&
-                        extractedData.name !== "John Doe" && (
-                          <li>• Name: {extractedData.name}</li>
-                        )}
-                      {extractedData.birthDate &&
-                        extractedData.birthDate !== "01/15/1985" && (
-                          <li>• Birth Date: {extractedData.birthDate}</li>
-                        )}
-                      {extractedData.email &&
-                        extractedData.email !== "john.doe@email.com" && (
-                          <li>• Email: {extractedData.email}</li>
-                        )}
-                      {extractedData.cellPhone &&
-                        extractedData.cellPhone !== "(555) 123-4567" && (
-                          <li>• Cell Phone: {extractedData.cellPhone}</li>
-                        )}
-                      {extractedData.workPhone &&
-                        extractedData.workPhone !== "(555) 987-6543" && (
-                          <li>• Work Phone: {extractedData.workPhone}</li>
-                        )}
-                      {extractedData.street &&
-                        extractedData.street !== "123 Main Street" && (
-                          <li>• Street: {extractedData.street}</li>
-                        )}
-                      {extractedData.city &&
-                        extractedData.city !== "New York" && (
-                          <li>• City: {extractedData.city}</li>
-                        )}
-                      {extractedData.homeZipCode &&
-                        extractedData.homeZipCode !== "10001" && (
-                          <li>• Zip Code: {extractedData.homeZipCode}</li>
-                        )}
-                      {extractedData.driverLicenseNumber &&
-                        extractedData.driverLicenseNumber !== "DL123456789" && (
-                          <li>
-                            • Driver License:{" "}
-                            {extractedData.driverLicenseNumber}
-                          </li>
-                        )}
-                      {extractedData.country &&
-                        extractedData.country !== "USA" && (
-                          <li>• Country: {extractedData.country}</li>
-                        )}
-                      {extractedData.bankName &&
-                        extractedData.bankName !== "Chase Bank" && (
-                          <li>• Bank Name: {extractedData.bankName}</li>
-                        )}
-                      {extractedData.routingNumber &&
-                        extractedData.routingNumber !== "021000021" && (
-                          <li>
-                            • Routing Number: {extractedData.routingNumber}
-                          </li>
-                        )}
-                      {extractedData.accountNumber &&
-                        extractedData.accountNumber !== "1234567890" && (
-                          <li>
-                            • Account Number: {extractedData.accountNumber}
-                          </li>
-                        )}
-                      {extractedData.employerName &&
-                        extractedData.employerName !== "Tech Corp" && (
-                          <li>• Employer: {extractedData.employerName}</li>
-                        )}
-                      {extractedData.jobTitle &&
-                        extractedData.jobTitle !== "Software Engineer" && (
-                          <li>• Job Title: {extractedData.jobTitle}</li>
-                        )}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-orange-700 mb-2">
-                      🎲 Generated Data
-                    </h4>
-                    <ul className="text-sm space-y-1">
-                      <li>
-                        • SSN: {extractedData.socialNumber} (from DL + random)
-                      </li>
-                      <li>
-                        • Military Service: {extractedData.militaryService}
-                      </li>
-                      <li>
-                        • Years at Address: {extractedData.yearsAtAddress}
-                      </li>
-                      <li>
-                        • Residential Status: {extractedData.residentialStatus}
-                      </li>
-                      <li>
-                        • Mother Maiden Name: {extractedData.motherMaidenName}
-                      </li>
-                      <li>• Bank Years: {extractedData.bankYears}</li>
-                      <li>
-                        • Employment Status: {extractedData.employmentStatus}
-                      </li>
-                      <li>
-                        • Employment Length:{" "}
-                        {extractedData.employmentStatusLength}
-                      </li>
-                      <li>• Payment Type: {extractedData.paymentType}</li>
-                      <li>
-                        • Payment Frequency: {extractedData.howOftenGetPaid}
-                      </li>
-                      <li>• Salary: {extractedData.salary}</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-                  <p className="text-xs text-gray-600">
-                    <strong>Note:</strong> The system extracts real data from
-                    your document and generates realistic data for missing
-                    fields. The SSN is created using the last 4 digits of the
-                    driver license number plus 5 random digits in the format
-                    XXX-XX-XXXX.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+              {/* Live JSON Preview on the right */}
+              <div className="sticky top-24">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Live JSON Preview</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="bg-gray-900 text-white p-4 rounded-lg">
+                      <pre className="text-xs whitespace-pre-wrap max-h-[70vh] overflow-auto">
+                        {JSON.stringify(extractedData, null, 2)}
+                      </pre>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      This panel shows the real-time state of your data object
+                      as you edit it.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </div>
         )}
 

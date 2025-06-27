@@ -9,6 +9,7 @@ export interface ExtractedData {
   militaryService: string;
   street: string;
   city: string;
+  state: string;
   country: string;
   homeZipCode: string;
   yearsAtAddress: string;

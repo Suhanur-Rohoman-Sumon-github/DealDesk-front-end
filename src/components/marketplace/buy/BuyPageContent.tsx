@@ -23,7 +23,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { Card } from "@/components/ui/card";
 import StepIndicator from "@/components/marketplace/buy/StepIndicator";
 
-import { useGetMychanelQuery } from "@/hooks/User.hook";
+
 
 const BuyPageContent = () => {
   const cryptoAddresses: Record<string, string> = {
@@ -50,7 +50,7 @@ const BuyPageContent = () => {
   console.log("Single Product Data:", singleProducts);
   const { mutate: updataProducts } = useUpdateProductMutation();
   const { mutate: addOrders } = useCreateOrderMutation();
-  const { data } = useGetMychanelQuery(user?.email || "");
+  
 
   const handleCopy = async () => {
     if (!selectedCrypto) return;
@@ -280,12 +280,12 @@ const BuyPageContent = () => {
 
           <div className="">
             <a
-              href={data?.myChanel || "N/A"}
+              href="https://t.me/dealdeskcomunity"
               target="_blank"
               rel="noopener noreferrer"
               className="button-primary w-full text-center flex items-center"
             >
-              visit your Report chanel{" "}
+              visit teligram
               <FaTelegramPlane className="text-blue-400 " />
             </a>
 

@@ -284,7 +284,7 @@ class AddressAutocompleteService {
   }
 }
 
-export const ExtractedDataDisplay = ({
+ const ExtractedDataDisplay = ({
   data,
   onDataChange,
 }: ExtractedDataDisplayProps) => {

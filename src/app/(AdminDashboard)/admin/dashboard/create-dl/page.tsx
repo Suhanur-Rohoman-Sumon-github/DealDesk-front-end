@@ -41,7 +41,7 @@ interface FileUploaderProps {
   disabled?: boolean;
 }
 
-export const FileUploader = ({ onFileSelect, disabled }: FileUploaderProps) => {
+ const FileUploader = ({ onFileSelect, disabled }: FileUploaderProps) => {
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 

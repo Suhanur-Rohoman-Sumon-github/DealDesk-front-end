@@ -17,7 +17,7 @@ interface Props {
   setSortOption: Dispatch<SetStateAction<string>>;
   searchTerm: string;
   setSearchTerm: any;
-  onSearchSubmit: () => void;
+  onSearchSubmit?: () => void;
 }
 
 const ProductsBanner: FC<Props> = ({
@@ -25,18 +25,31 @@ const ProductsBanner: FC<Props> = ({
   setSortOption,
   searchTerm,
   setSearchTerm,
+  onSearchSubmit,
 }) => {
   const handleSubmit = (e: FormEvent) => {
-    console.log(e);
     e.preventDefault();
+    if (onSearchSubmit) onSearchSubmit();
   };
 
-  console.log(searchTerm);
-
   return (
-    <div className="flex flex-col md:flex-row fixed z-50 top-14 w-[950px]   justify-between gap-3 text-white mb-4 bg-white/5 border border-white/10 backdrop-blur-md py-2 px-4 md:h-14 mx-auto">
+    <div
+      className="
+        fixed z-50 top-14 left-0 right-0
+        mx-auto
+        px-4
+        md:flex flex-col md:flex-row
+        items-center justify-between
+        gap-3
+        bg-white/5 border border-white/10 backdrop-blur-md
+        py-2 md:py-3
+        text-white
+        max-w-full md:max-w-[950px]
+        hidden lg:flex lg:justify-between lg:items-center
+        "
+    >
       {/* 🏆 Left Section - Top Voted Product */}
-      <div className="flex items-center justify-between gap-3 text-xs md:text-sm text-white ">
+      <div className="flex items-center justify-between gap-3 text-xs md:text-sm whitespace-nowrap">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 bg-green-500/10 border border-green-400/30 px-2 py-[2px] rounded-full">
             <FaArrowUp className="text-green-400 text-[10px]" />
@@ -51,18 +64,25 @@ const ProductsBanner: FC<Props> = ({
       </div>
 
       {/* 🔽 Sorting Dropdown */}
-      <Select value={sortOption} onValueChange={(val) => setSortOption(val)}>
-        <SelectTrigger className="w-[140px] text-xs bg-[#ffffff1a] text-white border border-white/30 rounded px-2 py-1 focus:outline-none">
-          <SelectValue placeholder="Sort by Price:">Sort by Price:</SelectValue>
-        </SelectTrigger>
-        <SelectContent className="text-xs bg-[#1a1a1a] text-white border border-white/20">
-          <SelectItem value="low-to-high">Low to High</SelectItem>
-          <SelectItem value="high-to-low">High to Low</SelectItem>
-        </SelectContent>
-      </Select>
+      <div className="min-w-[140px]">
+        <Select value={sortOption} onValueChange={(val) => setSortOption(val)}>
+          <SelectTrigger className="w-full text-xs bg-[#ffffff1a] text-white border border-white/30 rounded px-2 py-1 focus:outline-none">
+            <SelectValue placeholder="Sort by Price:">
+              Sort by Price:
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent className="text-xs bg-[#1a1a1a] text-white border border-white/20">
+            <SelectItem value="low-to-high">Low to High</SelectItem>
+            <SelectItem value="high-to-low">High to Low</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
       {/* 🔍 Search Input */}
-      <form onSubmit={handleSubmit} className="relative w-full max-w-xs">
+      <form
+        onSubmit={handleSubmit}
+        className="relative w-full max-w-xs md:max-w-sm flex-shrink-0"
+      >
         <Input
           type="text"
           placeholder="Search..."
@@ -76,6 +96,7 @@ const ProductsBanner: FC<Props> = ({
         <button
           type="submit"
           className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#ffffff1a] hover:bg-[#ffffff2a] text-white p-1 rounded-full transition"
+          aria-label="Search"
         >
           <Search size={14} />
         </button>

@@ -23,16 +23,16 @@ export const ourStoryImages = [
 
 export const stats = [
   {
-    value: 5,
-    suffix: "+ Years",
-    label: "Delivering Digital Excellence",
+    value: 120000,
+    suffix: "+",
+    label: "Books Downloaded",
     leftImage: "https://centure.volkovdesign.com/img/dodgers/dots--purple.svg",
     rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--blue.svg",
   },
   {
-    value: 5800,
+    value: 50000,
     suffix: "+",
-    label: "Businesses We’ve Helped",
+    label: "Premium Members",
     leftImage: "https://centure.volkovdesign.com/img/dodgers/dots--red.svg",
     rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--red.svg",
   },
@@ -44,9 +44,9 @@ export const stats = [
     rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--yellow.svg",
   },
   {
-    value: 100000,
-    suffix: "+",
-    label: "Marketing Budget Managed",
+    value: 10,
+    suffix: "x",
+    label: "Faster Growth in 2025",
     leftImage: "https://centure.volkovdesign.com/img/dodgers/dots--purple.svg",
     rightImage: "https://centure.volkovdesign.com/img/dodgers/dots--purple.svg",
   },
@@ -120,63 +120,63 @@ export const videoData = [
 export const faqData = [
   {
     id: 1,
-    question: "What is Deal Desk and how does it work?",
+    question: "What is BookNest and how does it work?",
     answer:
-      "Deal Desk is a modern Buy & Sell marketplace designed to connect trusted buyers and sellers. You can list, browse, and securely trade products with ease.",
+      "BookNest is a modern eBook marketplace where readers can browse, purchase, and download a wide range of digital books across multiple genres.",
   },
   {
     id: 2,
-    question: "Is Deal Desk safe to use for transactions?",
+    question: "Is BookNest safe for online purchases?",
     answer:
-      "Absolutely! Deal Desk uses secure payment systems, verified user accounts, and built-in fraud protection to ensure safe and trustworthy transactions.",
+      "Absolutely! BookNest uses secure payment gateways and encrypted transactions to ensure your information is always protected.",
   },
   {
     id: 3,
-    question: "How do I list a product for sale on Deal Desk?",
+    question: "How do I purchase an eBook on BookNest?",
     answer:
-      "After signing up, simply go to your dashboard and click on 'Create Listing'. Add your product details, images, and pricing to start selling.",
+      "Simply create an account, browse our library, add your favorite eBooks to the cart, and complete checkout using your preferred payment method.",
   },
   {
     id: 4,
-    question: "Are there any fees for using Deal Desk?",
+    question: "Can I download my eBooks on multiple devices?",
     answer:
-      "Deal Desk offers free basic listings, with optional premium features at competitive rates to boost your visibility and sales.",
+      "Yes, once purchased, your eBooks can be downloaded and accessed on any device—mobile, tablet, or desktop.",
   },
   {
     id: 5,
-    question: "How do I make a purchase on Deal Desk?",
+    question: "Are there any free eBooks available on BookNest?",
     answer:
-      "Browse or search for products, add items to your cart, and proceed to checkout. We support multiple secure payment methods.",
+      "Yes! We offer a curated collection of free eBooks for our readers. Just visit the 'Free eBooks' section to start reading.",
   },
   {
     id: 6,
-    question: "Can I track my orders on Deal Desk?",
+    question: "What formats are the eBooks available in?",
     answer:
-      "Yes, once your order is placed, you can track its status and shipment from your account dashboard in real time.",
+      "Our eBooks are available in PDF, EPUB, and MOBI formats to ensure compatibility with most devices and eReaders.",
   },
   {
     id: 7,
-    question: "Does Deal Desk offer support after a purchase?",
+    question: "Can I become a seller on BookNest?",
     answer:
-      "Yes, our support team is here to assist you with any post-purchase issues or questions you may have.",
+      "Yes! Authors and publishers can create an account and list their eBooks for sale directly on our platform.",
   },
   {
     id: 8,
-    question: "Can I sell digital products on Deal Desk?",
+    question: "How do I access my purchased eBooks?",
     answer:
-      "Yes! Deal Desk supports both physical and digital product listings, making it a flexible platform for all types of sellers.",
+      "After purchasing, your eBooks will appear in your 'My Library' section where you can download them anytime.",
   },
   {
     id: 9,
-    question: "Is Deal Desk available in my country?",
+    question: "Is BookNest available worldwide?",
     answer:
-      "Deal Desk is available internationally. You can sign up and start buying or selling from anywhere with internet access.",
+      "Yes, BookNest is accessible globally. No matter where you are, you can explore and enjoy our growing library of eBooks.",
   },
   {
     id: 10,
-    question: "Can I view examples of top-selling listings?",
+    question: "Does BookNest have a refund policy?",
     answer:
-      "Yes, check out our featured section or explore trending categories to see what’s currently popular on Deal Desk.",
+      "We offer refunds for accidental purchases within 24 hours, provided the eBook hasn’t been downloaded yet.",
   },
 ];
 

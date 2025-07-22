@@ -7,14 +7,29 @@ import { FaXmark } from "react-icons/fa6";
 import { LineChart, Line, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
 const userNotifications = [
-  { text: "Go2 Bank available, unlimited stock.", tag: "Go2" },
-  { text: "Chime available, unlimited stock.", tag: "Chime" },
-  { text: "IP panel load available.", tag: "IP Panel" },
-  { text: "Number panel load available.", tag: "Number" },
-  { text: "SSN service available.", tag: "SSN" },
-  { text: "USA real person DL available.", tag: "DL" },
-  { text: "Shopify store setup service available.", tag: "Shopify" },
-  { text: "Ecommerce development services available.", tag: "Ecommerce" },
+  { text: "New release: 'Mastering React' eBook now available.", tag: "React" },
+  { text: "50% discount on 'JavaScript Essentials' eBook.", tag: "JavaScript" },
+  {
+    text: "Exclusive interview with bestselling author Jane Doe.",
+    tag: "Author",
+  },
+  {
+    text: "Top 10 eBooks in the Self-Help category updated.",
+    tag: "Self-Help",
+  },
+  {
+    text: "Download your free sample chapter of 'Advanced TypeScript'.",
+    tag: "TypeScript",
+  },
+  {
+    text: "New audiobook version available for 'Digital Marketing 101'.",
+    tag: "Audiobook",
+  },
+  { text: "Explore curated eBook bundles for summer reading.", tag: "Bundles" },
+  {
+    text: "Ecommerce guides collection now with updated case studies.",
+    tag: "Ecommerce",
+  },
 ];
 
 const sellValues = [
@@ -95,17 +110,6 @@ const LiveChat = () => {
   return (
     <>
       {/* toggle button for mobile device */}
-      <div
-        onClick={() => setToggleLiveOrders(!toggleLiveOrders)}
-        className="z-10 cursor-pointer absolute top-[50px] mt-12 right-5 text-white lg:hidden items-center gap-2 flex space-x-1 border-2 border-white/20 rounded-full px-4 py-2 bg-[#04091d]/90 backdrop-blur-md"
-      >
-        <button
-          type="button"
-          className="font-bold cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7]"
-        >
-          Live Activities
-        </button>
-      </div>
 
       {/* live order content */}
       <div

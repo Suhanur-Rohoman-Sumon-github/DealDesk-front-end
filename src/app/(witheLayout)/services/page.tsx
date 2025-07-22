@@ -17,47 +17,51 @@ import OurServices from "@/components/marketplace/services/OurServices";
 
 const OurServicesPage = () => {
   return (
-    <div className="min-h-screen max-w-7xl mx-auto text-white px-6 ">
-      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
-      <div className="absolute top-40 -right-40 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
-      <div className="absolute -bottom-40 right-20 w-80 h-80 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+    <div className="min-h-screen max-w-7xl mx-auto text-white px-4 sm:px-6 relative pt-24">
+      {/* Background Blurs */}
+      <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+      <div className="absolute top-40 -right-20 w-60 h-60 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+      <div className="absolute -bottom-20 right-10 w-60 h-60 rounded-full bg-[#8c33d6] opacity-20 blur-3xl"></div>
+
       {/* Hero Section */}
-      <section className="mb-20">
+      <section className="mb-10 sm:mb-16 text-center">
         <Title
           title="Our Services"
           subTitle="Explore the wide range of services we offer to help your business grow and thrive in the digital era."
         />
       </section>
 
+      {/* Services Grid */}
       <OurServices />
 
-      <section className="py-20 max-w-6xl mx-auto text-center">
+      {/* Why Choose Us */}
+      <section className="py-10 sm:py-16 max-w-6xl mx-auto text-center">
         <Title
           title="Why Choose DealDesk?"
           subTitle="We’re more than just a platform—we're your strategic partner in the buy and sell industry. Our team blends creativity, technology, and market insights to deliver solutions that grow your business."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 text-left">
           {[
             {
               icon: <Rocket size={28} />,
-              title: "Fast Transactions",
-              desc: "Our platform ensures fast and seamless transactions, allowing you to buy and sell with ease.",
+              title: "Extensive eBook Library",
+              desc: "Access thousands of titles across genres and languages, from bestsellers to indie gems — all in one place.",
             },
             {
               icon: <Briefcase size={28} />,
-              title: "Secure Payments",
-              desc: "We prioritize the security of your payments and ensure safe transactions for both buyers and sellers.",
+              title: "Author Self-Publishing",
+              desc: "Empower authors to publish their eBooks easily and reach a global audience with flexible pricing and royalty options.",
             },
             {
               icon: <Phone size={28} />,
-              title: "24/7 Customer Support",
-              desc: "Our dedicated customer support team is available around the clock to assist you with any concerns or questions.",
+              title: "Secure Payment Processing",
+              desc: "We support multiple trusted payment gateways ensuring fast, safe, and hassle-free transactions for buyers and authors.",
             },
             {
               icon: <Code size={28} />,
-              title: "Custom Solutions",
-              desc: "We offer tailored solutions that meet your specific business needs, making sure you have the tools for success.",
+              title: "Personalized Recommendations",
+              desc: "Discover your next favorite read with AI-driven personalized suggestions based on your preferences and reading history.",
             },
             {
               icon: <ShieldCheck size={28} />,
@@ -66,80 +70,78 @@ const OurServicesPage = () => {
             },
             {
               icon: <ClipboardCheck size={28} />,
-              title: "Reliable Tracking",
-              desc: "Easily track your transactions, orders, and status updates with our user-friendly dashboard.",
+              title: "Seamless Reading Experience",
+              desc: "Enjoy eBooks on any device — desktop, tablet, or mobile — with built-in features like bookmarks, notes, and adjustable fonts.",
             },
             {
               icon: <Globe size={28} />,
-              title: "Global Reach",
-              desc: "Expand your business globally with our platform, connecting buyers and sellers from all over the world.",
+              title: "Marketing & Promotion Tools for Authors",
+              desc: "Boost your book visibility with promotional campaigns, featured listings, and targeted ads tailored for authors.",
             },
             {
               icon: <Star size={28} />,
-              title: "Trusted by Many",
-              desc: "Join a growing community of businesses and individuals who trust BuySell for their buying and selling needs.",
+              title: "24/7 Customer Support",
+              desc: "Dedicated support team ready to assist with purchases, downloads, account issues, or publishing inquiries anytime.",
             },
           ].map((item, i) => (
             <div
               key={i}
-              className="bg-white/10 border border-white/10 backdrop-blur-md p-6 rounded-xl transition hover:shadow-lg hover:scale-[1.02]"
+              className="bg-white/10 border border-white/10 backdrop-blur-md p-5 rounded-xl transition hover:shadow-lg hover:scale-[1.02]"
             >
-              <div className="text-[#6EE7B7] mb-4">{item.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+              <div className="text-[#6EE7B7] mb-3">{item.icon}</div>
+              <h3 className="text-lg sm:text-xl font-semibold mb-1">
+                {item.title}
+              </h3>
               <p className="text-gray-300 text-sm">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Technologies We Use */}
-      <section className=" lg:py-20 max-w-6xl mx-auto text-center">
+      {/* Categories */}
+      <section className="py-10 sm:py-16 max-w-6xl mx-auto text-center">
         <Title
-          title="  Technologies We Use"
-          subTitle=" We leverage the best technologies to build robust and scalable
-          solutions for your business. Here are the tools and technologies that
-          power our projects."
+          title="Categories We Offer"
+          subTitle="Explore a wide range of categories to suit every interest, from personal growth to entertainment and beyond."
         />
-        <div className="flex flex-wrap justify-center gap-4 text-gray-300">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-gray-300 mt-6">
           {[
-            "React",
-            "Next.js",
-            "Node.js",
-            "Express",
-            "MongoDB",
-            "Tailwind CSS",
-            "Firebase",
-            "Stripe",
-            "TypeScript",
-            "Zod",
-            "Redux Toolkit",
-            "React Query",
-            "PostgreSQL",
-            "Prisma",
-            "Docker",
-            "Vercel",
-            "GitHub Actions",
-            "Cloudinary",
-            "Jest",
-            "Figma",
-          ].map((tech) => (
+            "Self Development",
+            "Business & Entrepreneurship",
+            "Health & Fitness",
+            "Recipes & Cooking",
+            "Fiction & Literature",
+            "Children’s Books",
+            "Science & Technology",
+            "History & Culture",
+            "Travel & Adventure",
+            "Spirituality & Mindfulness",
+            "Finance & Investing",
+            "Romance",
+            "Thriller & Mystery",
+            "Educational eBooks",
+            "Audiobooks",
+            "Podcasts",
+            "Comics & Graphic Novels",
+            "Language Learning",
+          ].map((category) => (
             <span
-              key={tech}
-              className="px-4 py-2 bg-white/10 rounded-full border border-white/10 hover:bg-white/20 transition"
+              key={category}
+              className="px-3 py-2 text-sm sm:text-base bg-white/10 rounded-full border border-white/10 hover:bg-white/20 transition"
             >
-              {tech}
+              {category}
             </span>
           ))}
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className=" ">
+      <section>
         <ClientReviews />
       </section>
 
       {/* Call to Action */}
-      <section className="">
+      <section>
         <CallToAction />
       </section>
     </div>

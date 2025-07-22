@@ -83,7 +83,10 @@ const AgencyStats = () => {
 
             {/* Stats Text */}
             <h3 className="text-4xl font-bold text-white relative z-10">
-              {counts[index].toLocaleString()}
+              {counts[index] > 0
+                ? counts[index].toLocaleString()
+                : stat.value.toLocaleString()}
+
               {stat.suffix}
             </h3>
             <p className="text-secondary">{stat.label}</p>

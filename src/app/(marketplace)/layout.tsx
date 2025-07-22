@@ -21,29 +21,27 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased font-poppins bg-[#04091d]">
         <Providers>
-          <div>
-            <div className="flex flex-col min-h-screen pt-4">
-              {/* Layout Container */}
-              <div className="flex flex-col lg:flex-row gap-4 p-4">
-                {/* Sidebar */}
-                <aside className="w-full lg:w-[250px]">
-                  <Sidebar />
-                </aside>
+          <div className="flex flex-col min-h-screen">
+            {/* Navbar fixed at the top */}
+            <MarketplaceNavbar />
 
-                {/* Main Content */}
-                <section className="flex-1 w-full">
-                  <MarketplaceNavbar />
-                  <main className="mt-4">{children}</main>
-                </section>
+            <div className="flex flex-1 h-[calc(100vh-58px)]">
+              {/* Sidebar fixed */}
+              <aside className="hidden lg:block w-[250px] border-r border-white/10">
+                <Sidebar />
+              </aside>
 
-                {/* Live Chat */}
-                <aside className="w-full   lg:w-[300px]">
-                  <LiveChat />
-                </aside>
-              </div>
+              {/* Main content scrollable */}
+              <main className="flex-1 overflow-y-auto p-4">{children}</main>
+
+              {/* Live Chat fixed */}
+              <aside className="hidden lg:block w-[300px] border-l border-white/10">
+                <LiveChat />
+              </aside>
             </div>
           </div>
 
+          {/* Tawk.to chat script */}
           <Script
             id="tawk-to-script"
             type="text/javascript"

@@ -35,7 +35,7 @@ const ProductsBanner: FC<Props> = ({
   return (
     <div
       className="
-        fixed z-50 top-14 left-0 right-0
+        fixed  z-50 top-14 left-0 right-0
         mx-auto
         px-4
         md:flex flex-col md:flex-row
@@ -49,7 +49,7 @@ const ProductsBanner: FC<Props> = ({
         "
     >
       {/* 🏆 Left Section - Top Voted Product */}
-      <div className="flex items-center justify-between gap-3 text-xs md:text-sm whitespace-nowrap">
+      <div className="md:flex items-center justify-between gap-3 text-xs md:text-sm whitespace-nowrap hidden">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 bg-green-500/10 border border-green-400/30 px-2 py-[2px] rounded-full">
             <FaArrowUp className="text-green-400 text-[10px]" />
@@ -64,7 +64,7 @@ const ProductsBanner: FC<Props> = ({
       </div>
 
       {/* 🔽 Sorting Dropdown */}
-      <div className="min-w-[140px]">
+      <div className="min-w-[140px] ">
         <Select value={sortOption} onValueChange={(val) => setSortOption(val)}>
           <SelectTrigger className="w-full text-xs bg-[#ffffff1a] text-white border border-white/30 rounded px-2 py-1 focus:outline-none">
             <SelectValue placeholder="Sort by Price:">

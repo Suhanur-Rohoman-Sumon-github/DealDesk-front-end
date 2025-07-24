@@ -5,8 +5,6 @@ import { FaBars, FaListAlt } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
 import CategoryList from "./CategoryList";
-// import FeedbackForm from "./FeedbackForm";
-
 import { useGetCategoryQuery } from "@/hooks/Products.hook";
 import CategorySkeleton from "../skeleton/CategorySkeleton";
 
@@ -14,37 +12,46 @@ const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const { data: categories, isLoading } = useGetCategoryQuery();
 
+  // Loading skeleton
   if (isLoading) {
     return (
-      <div className="mt-14 ">
+      <div className="mt-14">
         <CategorySkeleton count={20} />
       </div>
     );
   }
 
   return (
-    <>
-      {/* Mobile Toggle Button */}
+    <div>
+      {/* ✅ Mobile Toggle Button */}
       <div
         onClick={() => setToggleSidebar(true)}
-        className="cursor-pointer w-fit lg:hidden text-white mt-16 gap-2 flex items-center space-x-1 border border-white/20 rounded-full px-4 py-2 bg-[#04091d]/90 backdrop-blur-md shadow-lg"
+        className="fixed top-[120px] left-0 z-[999] lg:hidden text-white flex items-center rounded-full px-4 py-2 bg-[#04091d]/90 backdrop-blur-md shadow-lg cursor-pointer transition hover:bg-[#04091d]/80"
       >
-        <span className="font-semibold text-sm flex items-center gap-2">
-          <FaBars className="text-white" /> <span>Open Menu</span>
-        </span>
+        <FaBars className="text-white mr-2" />
+        <span className="text-sm font-semibold">Category</span>
       </div>
 
-      {/* Sidebar */}
+      {/* ✅ Mobile Overlay */}
+      {toggleSidebar && (
+        <div
+          onClick={() => setToggleSidebar(false)}
+          className="fixed inset-0 bg-black/50 z-[998] lg:hidden"
+        />
+      )}
+
+      {/* ✅ Sidebar Panel */}
       <div
-        className={`fixed top-[58px] ${
-          toggleSidebar ? "left-0" : "-left-[100vw]"
-        } lg:left-0 z-50 
-        w-full sm:w-[250px] md:w-[280px] lg:w-[280px] 
+        className={`fixed md:top-[58px] top-[110px] ${
+          toggleSidebar ? "left-0" : "-left-full"
+        } lg:left-0 z-[999] 
+        w-[80%] sm:w-[250px] md:w-[280px] lg:w-[250px] 
         h-[calc(100vh-58px)] 
-        backdrop-blur-md bg-[#1f1b37]/90 lg:bg-white/5 border-r border-white/10 shadow-xl text-white 
+        bg-[#04091d]/90 lg:bg-white/5 
+        backdrop-blur-md border-r border-white/10 shadow-xl text-white 
         transition-all duration-300 flex flex-col`}
       >
-        {/* Header and Close Icon on Mobile */}
+        {/* Mobile Header */}
         <div className="flex items-center justify-between p-4 lg:hidden">
           <div className="text-lg font-semibold flex items-center gap-2">
             <FaListAlt /> <span>Categories</span>
@@ -55,12 +62,12 @@ const Sidebar = () => {
           />
         </div>
 
-        {/* Scrollable Category List */}
+        {/* Category List */}
         <div className="overflow-y-auto px-4 pt-4 pb-2">
           <CategoryList categories={categories} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

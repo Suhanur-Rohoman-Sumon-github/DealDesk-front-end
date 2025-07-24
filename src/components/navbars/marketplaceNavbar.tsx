@@ -74,7 +74,7 @@ const MarketplaceNavbar = () => {
   return (
     <>
       {/* Live Ticker for small devices */}
-      <div className="flex lg:hidden flex-wrap items-center gap-2 whitespace-nowrap animate-fade-in-down justify-center bg-[#04091d]/90 text-white py-1 px-2 border-b border-white/10 fixed top-[56px] left-0 right-0 z-40">
+      <div className="md:flex hidden lg:hidden flex-wrap items-center gap-2 whitespace-nowrap animate-fade-in-down justify-center bg-[#04091d]/90 text-white py-1 px-2 border-b border-white/10 fixed top-[56px] left-0 right-0 z-40">
         {visibleItems.map((item, index) => (
           <div key={index} className="flex items-center space-x-2 text-xs">
             <span>{item.category}</span>
@@ -142,7 +142,6 @@ const MarketplaceNavbar = () => {
           {isLoading ? (
             <div className="flex items-center justify-center h-14">
               {/* Loading state if needed */}
-              <span className="text-white">Loading...</span>
             </div>
           ) : (
             <div className="flex items-center gap-4">

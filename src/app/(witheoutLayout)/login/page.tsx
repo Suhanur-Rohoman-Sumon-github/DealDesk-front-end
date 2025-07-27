@@ -18,22 +18,46 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { useUserLoginMutations } from "@/hooks/Auth.hook";
 
-
 export default function Login() {
-  
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
+
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: handleUserLogin } = useUserLoginMutations();
+
   const onSubmit = (data: any) => {
     handleUserLogin(data);
   };
 
+  // Admin button handler: prefill and submit
+  const handleAdminLogin = () => {
+    const adminData = {
+      email: "admin@example.com",
+      password: "Admin@123",
+    };
+    setValue("email", adminData.email);
+    setValue("password", adminData.password);
+    handleUserLogin(adminData); // directly log in
+  };
+
+  // User button handler: just clears values (optional)
+  const handleUserRedirect = () => {
+   const userData = {
+     email: "user@gmail.com",
+     password: "user@123",
+   };
+   setValue("email", userData.email);
+   setValue("password", userData.password);
+   handleUserLogin(userData);
+    // do nothing else, user will use the form manually
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6   ">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-purple-400 opacity-20 blur-3xl"></div>
         <div className="absolute top-40 -left-40 w-80 h-80 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
@@ -41,7 +65,7 @@ export default function Login() {
       </div>
 
       <div className="w-full max-w-md z-10 text-white">
-        <Card className=" bg-[#04091d] border border-white/20 backdrop-blur-md   overflow-hidden">
+        <Card className=" bg-[#04091d] border border-white/20 backdrop-blur-md overflow-hidden">
           <CardHeader className="space-y-1 text-center text-white">
             <CardTitle className="text-2xl font-bold tracking-tight">
               Welcome back
@@ -51,9 +75,27 @@ export default function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Two buttons to choose login type */}
+            <div className="flex gap-3 mb-6">
+              <button
+                type="button"
+                onClick={handleAdminLogin}
+                className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg"
+              >
+                Admin Login
+              </button>
+              <button
+                type="button"
+                onClick={handleUserRedirect}
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg"
+              >
+                User Login
+              </button>
+            </div>
+
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className=" rounded-lg  w-full"
+              className="rounded-lg w-full"
             >
               {/* Email Field */}
               <div className="mb-4">
@@ -83,7 +125,7 @@ export default function Login() {
                   placeholder="Enter your password"
                   type={showPassword ? "text" : "password"}
                   id="password"
-                  className="w-full  border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+                  className="w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
                   {...register("password", {
                     required: "Password is required",
                   })}
@@ -101,6 +143,7 @@ export default function Login() {
                   </p>
                 )}
               </div>
+
               <div className="mb-4 flex items-center justify-between">
                 <label className="flex items-center text-white space-x-2">
                   <Input

@@ -4,7 +4,7 @@ import { FaArrowRightLong, FaArrowDown, FaDollarSign } from "react-icons/fa6";
 import { LiaHandHoldingUsdSolid } from "react-icons/lia";
 import TypeWriter from "./TypeWriter";
 import Link from "next/link";
-import { FaEthereum, FaQuestionCircle } from "react-icons/fa";
+import { FaBook, FaChalkboardTeacher, FaEthereum, FaGraduationCap, FaPenFancy, FaQuestionCircle } from "react-icons/fa";
 import { SiBitcoin } from "react-icons/si";
 import { VscStarFull } from "react-icons/vsc";
 
@@ -22,21 +22,24 @@ const Banner = () => {
       {/* Floating Icons */}
       <div>
         {/* Top Floating Icon */}
-        <div className="absolute top-20 left-10 md:top-[190px] md:left-[870px] animate-floating-slow w-8 h-8 md:w-10 md:h-10 bg-pink-500/70 backdrop-blur-md rounded-full flex items-center justify-center text-white text-lg md:text-xl shadow-xl z-10">
-          <SiBitcoin />
+        {/* Top Floating Icon - Book */}
+        <div className="absolute top-20 left-10 md:top-[190px] md:left-[870px] animate-floating-slow w-8 h-8 md:w-10 md:h-10 bg-indigo-500/70 backdrop-blur-md rounded-full flex items-center justify-center text-white text-lg md:text-xl shadow-xl z-10">
+          <FaBook />
         </div>
 
-        {/* Right Floating Icon */}
-        <div className="absolute top-20 right-8 md:top-[190px] md:right-[11%] animate-floating-fast w-8 h-8 md:w-10 md:h-10 bg-[#4562fe] backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-xl z-10">
-          <FaEthereum />
+        {/* Right Floating Icon - Graduation Cap */}
+        <div className="absolute top-20 right-8 md:top-[190px] md:right-[11%] animate-floating-fast w-8 h-8 md:w-10 md:h-10 bg-blue-600/70 backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-xl z-10">
+          <FaGraduationCap />
         </div>
 
-        {/* Bottom Floating Icons */}
-        <div className="absolute bottom-32 right-4 md:bottom-[20%] md:right-[5%] animate-floating-slow w-8 h-8 md:w-10 md:h-10 bg-[#0dd8e3] backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-lg z-10">
-          <FaDollarSign />
+        {/* Bottom Floating Icon - Chalkboard Teacher */}
+        <div className="absolute bottom-32 right-4 md:bottom-[20%] md:right-[5%] animate-floating-slow w-8 h-8 md:w-10 md:h-10 bg-cyan-500/70 backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-lg z-10">
+          <FaChalkboardTeacher />
         </div>
-        <div className="absolute bottom-16 right-1/4 md:bottom-[10%] md:right-[25%] animate-floating-medium w-8 h-8 md:w-10 md:h-10 bg-[#b32c7d] backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-md z-10">
-          <LiaHandHoldingUsdSolid />
+
+        {/* Bottom Floating Icon - Pen */}
+        <div className="absolute bottom-16 right-1/4 md:bottom-[10%] md:right-[25%] animate-floating-medium w-8 h-8 md:w-10 md:h-10 bg-pink-600/70 backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-md z-10">
+          <FaPenFancy />
         </div>
       </div>
 

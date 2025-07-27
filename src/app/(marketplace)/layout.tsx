@@ -27,7 +27,7 @@ export default function RootLayout({
           {/* Layout container */}
           <div className="flex h-[calc(100vh-58px)]">
             {/* Sidebar hidden on small/mobile, visible from md screens */}
-            <div className="relative md:block md:w-[250px] border-r border-white/10">
+            <div className="relative sm:block md:w-[250px] border-r border-white/10">
               <Sidebar />
             </div>
 

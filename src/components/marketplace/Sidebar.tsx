@@ -36,7 +36,7 @@ const Sidebar = () => {
       {toggleSidebar && (
         <div
           onClick={() => setToggleSidebar(false)}
-          className="fixed inset-0 bg-black/50 z-[998] lg:hidden"
+          className="fixed inset-0 bg-black/50 z-[998] md:hidden"
         />
       )}
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -22,22 +23,35 @@ export const useUserRegistrationsMutation = () => {
 };
 export const useUserLoginMutations = () => {
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["user login"],
     mutationFn: async (userData) => {
-      await loginUser(userData);
+      // This returns the data from loginUser (includes tokens & user info)
+      return await loginUser(userData);
     },
-    onSuccess: () => {
-      toast.success("user logged in  successfully");
-      router.push("/marketplaces");
+    onSuccess: (data) => {
+      toast.success("User logged in successfully");
+
+      // Make sure your backend includes the user role in this structure:
+      // data.data.user.role OR data.user.role
+      
+
+      console.log("User role:", );
+
+      if (data?.data?.role === "admin") {
+        router.push("/admin/dashboard");
+      } else {
+        router.push("/marketplaces");
+      }
     },
     onError: (error) => {
       toast.error(error.message);
-      
     },
   });
 };
+
+
 
 // Assuming you have this service function
 

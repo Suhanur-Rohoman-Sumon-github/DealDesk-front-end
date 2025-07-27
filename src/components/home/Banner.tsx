@@ -1,11 +1,9 @@
 "use client";
 
-import { FaArrowRightLong, FaArrowDown, FaDollarSign } from "react-icons/fa6";
-import { LiaHandHoldingUsdSolid } from "react-icons/lia";
+import { FaArrowRightLong, FaArrowDown,  } from "react-icons/fa6";
 import TypeWriter from "./TypeWriter";
 import Link from "next/link";
-import { FaBook, FaChalkboardTeacher, FaEthereum, FaGraduationCap, FaPenFancy, FaQuestionCircle } from "react-icons/fa";
-import { SiBitcoin } from "react-icons/si";
+import { FaBook, FaChalkboardTeacher,  FaGraduationCap, FaPenFancy, FaQuestionCircle } from "react-icons/fa";
 import { VscStarFull } from "react-icons/vsc";
 
 const Banner = () => {

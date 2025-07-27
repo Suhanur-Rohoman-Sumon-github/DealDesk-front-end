@@ -11,22 +11,30 @@ interface TrendingProduct extends Product {
 }
 
 const TrendingProducts: React.FC<TrendingProductsProps> = ({ products }) => {
+  // Assign priority for new knowledge-based categories
   const categoryPriority: { [key: string]: number } = {
-    "usa dl": 100,
-    "chime bank": 95,
-    "go2 bank": 90,
-    "cashapp tags": 85,
-    "web development": 80,
-    "number panel": 75,
-    "ssn panel": 70,
-    "all type email": 65,
-    "paid subscriptions": 60,
-    "token store": 50,
-    "digital marketing": 50,
-    "crypto services": 50,
-    "money orders": 50,
-    paypal: 50,
-    textnow: 50,
+    "personal development": 100,
+    "business & finance": 95,
+    "health & fitness": 90,
+    psychology: 88,
+    politics: 85,
+    "religion & spirituality": 83,
+    history: 80,
+    travel: 78,
+    "true crime": 76,
+    "education & teaching": 74,
+    "technology & programming": 70,
+    "science & engineering": 68,
+    law: 66,
+    medicine: 64,
+    economics: 62,
+    mathematics: 60,
+    "architecture & design": 58,
+    "marketing / sales": 56,
+    "language learning": 54,
+    "research papers & journals": 52,
+    "art & photography": 50,
+    "cooking / food & wine": 48,
   };
 
   const [trendingProducts, setTrendingProducts] = useState<TrendingProduct[]>(

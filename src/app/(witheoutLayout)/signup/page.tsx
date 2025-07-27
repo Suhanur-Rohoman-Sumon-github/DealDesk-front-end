@@ -18,16 +18,13 @@ import {
 import { useUserRegistrationsMutation } from "@/hooks/Auth.hook";
 import { useRouter } from "next/navigation";
 
-
 // Schema
 const signupSchema = z
   .object({
     username: z
       .string()
       .min(2, { message: "Name must be at least 2 characters" }),
-    telegram: z
-      .string()
-      .min(2, { message: "Name must be at least 2 characters" }),
+
     email: z.string().email({ message: "Please enter a valid email address" }),
     password: z
       .string()
@@ -48,7 +45,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { mutate: handleUserRegistration } = useUserRegistrationsMutation();
-  const router = useRouter()
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -60,14 +57,13 @@ export default function Signup() {
       email: "",
       password: "",
       confirmPassword: "",
-      telegram: "",
       terms: false,
     },
   });
 
   const onSubmit = (data: SignupValues) => {
     console.log("Form Data:", data);
-    router.push(`/AccountStatus?email=${data.email}`);
+    router.push("/login");
     handleUserRegistration(data);
   };
 
@@ -107,22 +103,6 @@ export default function Signup() {
                 {errors.username && (
                   <p className="text-red-500 text-sm mt-1">
                     {errors.username.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label className="block text-white mb-2">
-                  Teligram username
-                </label>
-                <Input
-                  type="text"
-                  placeholder="Enter your teligram username"
-                  {...register("telegram")}
-                  className="text-white"
-                />
-                {errors.telegram && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.telegram.message}
                   </p>
                 )}
               </div>

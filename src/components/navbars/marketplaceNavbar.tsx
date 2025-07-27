@@ -22,6 +22,8 @@ const MarketplaceNavbar = () => {
   const [visibleIndex, setVisibleIndex] = useState(0);
   const { user, isLoading } = useUser();
 
+  console.log(user);
+
   const handleLogout = () => {
     logout();
   };
@@ -152,7 +154,9 @@ const MarketplaceNavbar = () => {
                 </Link>
                 {user && (
                   <Link
-                    href="/dashboard"
+                    href={`${
+                      user.role === "admin" ? "/admin/dashboard" : "/dashboard"
+                    }`}
                     className="hover:text-purple-400 transition"
                   >
                     Dashboard

@@ -121,9 +121,7 @@ const BuyPageContent = () => {
             <h2 className="text-2xl font-bold text-white mb-4">Card Payment</h2>
 
             <Card className="px-4 py-6 bg-white/5 border border-white/10 rounded-xl">
-              <p className="text-white text-sm mb-4">
-                This is a placeholder for the Stripe card payment form.
-              </p>
+              <p className="text-white text-sm mb-4">Pay with your card</p>
 
               {/* Replace below with Stripe Elements if integrating */}
               <Input className="mb-4 text-white" placeholder="Card Number" />

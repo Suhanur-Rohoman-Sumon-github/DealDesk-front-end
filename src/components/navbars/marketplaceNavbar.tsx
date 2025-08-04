@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Search, ArrowUp, ArrowDown } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { IoLogInOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
-import clsx from "clsx";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
@@ -30,18 +29,18 @@ const MarketplaceNavbar = () => {
 
   // Updated mock data with book categories
   const mockData = [
-    { category: "Fiction & Literature", trend: "up", change: "+12%" },
-    { category: "Science & Technology", trend: "down", change: "-5%" },
-    { category: "Self Development", trend: "up", change: "+8%" },
-    { category: "History & Culture", trend: "down", change: "-2%" },
-    { category: "Health & Fitness", trend: "up", change: "+15%" },
-    { category: "Business & Entrepreneurship", trend: "up", change: "+6%" },
-    { category: "Children’s Books", trend: "down", change: "-3%" },
-    { category: "Travel & Adventure", trend: "up", change: "+10%" },
-    { category: "Romance", trend: "up", change: "+7%" },
-    { category: "Thriller & Mystery", trend: "down", change: "-4%" },
-    { category: "Educational eBooks", trend: "up", change: "+9%" },
-    { category: "Comics & Graphic Novels", trend: "down", change: "-1%" },
+    { category: "Fiction & Literature", buyer: "Rahim from Dhaka" },
+    { category: "Science & Technology", buyer: "Aarav from Mumbai" },
+    { category: "Self Development", buyer: "Yuki from Tokyo" },
+    { category: "History & Culture", buyer: "Tamal from Chittagong" },
+    { category: "Health & Fitness", buyer: "Priya from Delhi" },
+    { category: "Business & Entrepreneurship", buyer: "Haruto from Osaka" },
+    { category: "Children’s Books", buyer: "Fatima from Sylhet" },
+    { category: "Travel & Adventure", buyer: "Anika from Kolkata" },
+    { category: "Romance", buyer: "Kenji from Kyoto" },
+    { category: "Thriller & Mystery", buyer: "Sneha from Chennai" },
+    { category: "Educational eBooks", buyer: "Akira from Yokohama" },
+    { category: "Comics & Graphic Novels", buyer: "Hasan from Barisal" },
   ];
 
   const [itemsToShow, setItemsToShow] = useState(3);
@@ -80,20 +79,8 @@ const MarketplaceNavbar = () => {
         {visibleItems.map((item, index) => (
           <div key={index} className="flex items-center space-x-2 text-xs">
             <span>{item.category}</span>
-            <div
-              className={clsx(
-                "flex items-center gap-1 px-2 py-0.5 rounded-full font-semibold",
-                item.trend === "up"
-                  ? "bg-green-600/20 text-green-400"
-                  : "bg-red-600/20 text-red-400"
-              )}
-            >
-              {item.trend === "up" ? (
-                <ArrowUp size={14} />
-              ) : (
-                <ArrowDown size={14} />
-              )}
-              <span>{item.change}</span>
+            <div className="text-xs bg-white/10 text-white px-2 py-0.5 rounded-full font-medium">
+              {item.buyer} just purchased
             </div>
           </div>
         ))}
@@ -118,23 +105,13 @@ const MarketplaceNavbar = () => {
 
           {/* Live Ticker for large devices */}
           <div className="hidden lg:flex flex-wrap items-center gap-4 whitespace-nowrap animate-fade-in-down text-white justify-center flex-1 px-4">
-            {visibleItems.map((item, index) => (
+            {visibleItems.slice(0, 3).map((item, index) => (
               <div key={index} className="flex items-center space-x-2 text-xs">
-                <span>{item.category}</span>
                 <div
-                  className={clsx(
-                    "flex items-center gap-1 px-2 py-0.5 rounded-full font-semibold",
-                    item.trend === "up"
-                      ? "bg-green-600/20 text-green-400"
-                      : "bg-red-600/20 text-red-400"
-                  )}
+                  className="text-white px-2 py-0.5 rounded-full font-medium"
+                  style={{ backgroundColor: "#5f2e89" }}
                 >
-                  {item.trend === "up" ? (
-                    <ArrowUp size={14} />
-                  ) : (
-                    <ArrowDown size={14} />
-                  )}
-                  <span>{item.change}</span>
+                  {item.buyer} just purchased
                 </div>
               </div>
             ))}

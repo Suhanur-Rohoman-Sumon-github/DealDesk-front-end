@@ -107,7 +107,7 @@ export default function Login() {
                   id="email"
                   placeholder="Enter your mail"
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
-                  {...register("email", { required: "Email is required" })}
+                  {...register("username", { required: "Email is required" })}
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm mt-1">

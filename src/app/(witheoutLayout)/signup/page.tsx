@@ -97,7 +97,7 @@ export default function Signup() {
                 <Input
                   type="text"
                   placeholder="Enter your username"
-                  {...register("username")}
+                  {...register("email")}
                   className="text-white"
                 />
                 {errors.username && (
@@ -113,7 +113,7 @@ export default function Signup() {
                 <Input
                   type="email"
                   placeholder="Enter your email"
-                  {...register("email")}
+                  {...register("username")}
                   className="text-white"
                 />
                 {errors.email && (

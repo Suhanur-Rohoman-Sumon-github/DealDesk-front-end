@@ -36,23 +36,23 @@ export default function Login() {
   // Admin button handler: prefill and submit
   const handleAdminLogin = () => {
     const adminData = {
-      email: "admin@example.com",
+      username: "admin@example.com",
       password: "Admin@123",
     };
-    setValue("email", adminData.email);
+    setValue("email", adminData.username);
     setValue("password", adminData.password);
     handleUserLogin(adminData); // directly log in
   };
 
   // User button handler: just clears values (optional)
   const handleUserRedirect = () => {
-   const userData = {
-     email: "user@gmail.com",
-     password: "user@123",
-   };
-   setValue("email", userData.email);
-   setValue("password", userData.password);
-   handleUserLogin(userData);
+    const userData = {
+      username: "user@gmail.com",
+      password: "user@123",
+    };
+    setValue("email", userData.username);
+    setValue("password", userData.password);
+    handleUserLogin(userData);
     // do nothing else, user will use the form manually
   };
 

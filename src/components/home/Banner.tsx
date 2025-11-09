@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FaArrowDown, FaMicrophone } from "react-icons/fa6";
+import { FaArrowDown } from "react-icons/fa6";
 import Lottie from "lottie-react";
 import { motion } from "framer-motion";
 import mentorTalking from "../../../public/assets/Talking Character.json";
@@ -12,9 +12,9 @@ import {
 } from "react-icons/fa";
 import { VscStarFull } from "react-icons/vsc";
 const Banner = () => {
-  const [state, setState] = useState<"start" | "speaking" | "avatar">("start");
+  const [state] = useState<"start" | "speaking" | "avatar">("start");
 
-  const handleStart = () => setState("speaking");
+  // const handleStart = () => setState("speaking");
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center text-white overflow-hidden">

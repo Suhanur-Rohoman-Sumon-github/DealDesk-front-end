@@ -92,14 +92,14 @@ const Banner = () => {
               </motion.div>
 
               {/* Start Button */}
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleStart}
                 className="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 transition rounded-full shadow-md text-sm md:text-base mt-2"
               >
                 <FaMicrophone /> Start Talking
-              </motion.button>
+              </motion.button> */}
             </motion.div>
           )}
 
